@@ -7,7 +7,10 @@ import Profile from "./views/Profile.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
+//---| ESCORD COMPONENTS |---
 import escLanding from "./escord-components/esc-LandingPage.vue";
+import escStudDash from "./escord-components/Student/studDashboard.vue";
+import escProfDash from "./escord-components/Prof/profDashboard.vue";
 
 Vue.use(Router);
 
@@ -49,11 +52,21 @@ export default new Router({
       }
     },
 
-    //ESCORD ROUTES
+    //---| ESCORD ROUTES |----
     {
       path: "/welcome-to-escord",
       name: "Landing",
-      components: escLanding
+      component: escLanding
+    },
+    {
+      path: "/student-dashboard",
+      name: "Student Dashboard",
+      component: escStudDash
+    },
+    {
+      path: "/prof-dashboard",
+      name: "Professor Dashboard",
+      component: escProfDash
     }
   ],
   scrollBehavior: to => {

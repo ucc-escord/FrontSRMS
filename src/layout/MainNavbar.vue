@@ -197,7 +197,7 @@ export default {
     colorOnScroll: {
       type: Number,
       default: 0
-    }
+    },
   },
   data() {
     return {
@@ -265,3 +265,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  .change-bg-color {
+    background-color: #545454;
+  }
+</style>

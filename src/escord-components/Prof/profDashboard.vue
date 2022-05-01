@@ -20,36 +20,32 @@
                 </div>
 
                 <div class="name">
-                  <h3 class="title">{{studLN}}, {{studFN}} {{studMN}}</h3>
-                  <h5>{{studProg}} | {{studYr}}{{studSec}}</h5>
+                  <h3 class="title">{{profLN}}, {{profFN}} {{profMN}}</h3>
+                  <h5>{{profRank}}</h5>
                 </div>
               </div>
             </div>
           </div>
-          <div class="">
-            <h2 class="md-display-1">YOUR FILES</h2>
+          <div class="md-layout md-gutter md-alignment-center">
+            <h2 class="md-display-1 md-layout-item">GRADESHEETS</h2>
+          </div>
+
+          <div class="buttons">
+            <md-button class="md-primary md-wd" @click="classicModal = true">
+                    <md-icon class="">add</md-icon>
+                 Add Gradesheet</md-button>
+
+                <modal v-if="classicModal" @close="classicModalHide">
+                    <template slot="header">
+                        <h3 class="title">Modal Header</h3>
+                    </template>
+                </modal>
           </div>
 
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
               
-              <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100">
-                  <md-card class="md-with-hover">
-                      <md-card-content>
-                        <p class="md-title title text-center">Scholastic Record</p>
-                        <p class="text-center">Click to view your scholastic record form</p>
-                      </md-card-content>
-                  </md-card>
-                </div>
-                
-                <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100">
-                  <md-card  class="md-with-hover">
-                      <md-card-content>
-                        <p class="md-title title text-center">Summary of Grades</p>
-                        <p class="text-center">Click to view and download your evaluation form</p>
-                      </md-card-content>
-                  </md-card>
-                </div>
+              
             </div>
           </div>
         </div>
@@ -59,17 +55,23 @@
 </template>
 
 <script>
+import { Modal } from "@/components";
 
 export default {
   bodyClass: "profile-page",
+
+  components: {
+      Modal
+  },
+
   data() {
     return {
-      studLN: "DELA CRUZ",
-      studFN: "JUAN",
-      studMN: "GONZALES",
-      studProg: "Bachelor of Science in Computer Science",
-      studYr: "3",
-      studSec:"A"
+    classicModal: false,
+
+      profLN: "CRUZ",
+      profFN: "JOHN",
+      profMN: "GONZALES",
+      profRank: "Master Teacher III"
     };
   },
   props: {
@@ -79,7 +81,7 @@ export default {
     },
     img: {
       type: String,
-      default: require("@/assets/img/escord-team-pictures/stud.png")
+      default: require("@/assets/img/escord-team-pictures/prof.png")
     }
   },
   computed: {
@@ -87,6 +89,12 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
+    }
+  },
+
+  methods: {
+    classicModalHide() {
+      this.classicModal = false;
     }
   }
 };
