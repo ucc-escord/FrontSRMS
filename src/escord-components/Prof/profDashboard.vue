@@ -31,7 +31,7 @@
           </div>
 
           <div class="buttons">
-            <md-button class="md-primary md-wd" @click="classicModal = true">
+            <md-button class="md-primary md-wd md-round" @click="classicModal = true">
                     <md-icon class="">add</md-icon>
                  Add Gradesheet</md-button>
 
