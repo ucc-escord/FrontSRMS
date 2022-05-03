@@ -58,8 +58,11 @@
                   <md-autocomplete
                   md-dense
                   v-model="formData.subjDesc"
-                  :md-options="subjects1"
+                  :md-options="subjectOptions"
                   :md-fuzzy-search="false"
+                  @md-changed="getSubjectOptions"
+                  @md-opened="getSubjectOptions"
+                  @md-selected="getSelected"
                   class="has-esc-accent md-layout-item md-size-100"
                   required>
                     <label>Subject Description</label>
@@ -256,7 +259,7 @@
                   <div class="md-layout-item md-layout md-alignment-center-center">
                     <md-button class="md-esc-accent md-raised md-dense md-round md-layout-item md-size-75"
                     type="submit"
-                    @click="addtest">
+                    >
                       <md-icon>add</md-icon>
                       ADD
                     </md-button>
@@ -318,22 +321,17 @@ export default {
         error:{
         },
 
-      //subject desc and subject code
+      //subject desc, code, and units
 
-      /*----or retrieve data from db para alphabetically arranged yung mga options---
+      //----or retrieve data from db para alphabetically arranged yung mga options???---
+      subjectOptions: [],
       subjects: [
         {code: "CCS 116", units: "5", desc: "ADVANCED WEB SYSTEMS"},
         {code: "CS 108", units: "3", desc: "SOFTWARE ENGINEERING 1"},
         {code: "CS 110", units: "3", desc: "NETWORKS AND COMMUNICATIONS"},
         {code: "CSE 102", units: "3", desc: "GRAPHICS AND VISUAL COMPUTING"}
-      ],*/
-
-      subjects1: [
-        "ADVANCED WEB SYSTEMS",
-        "SOFTWARE ENGINEERING 1",
-        "NETWORKS AND COMMUNICATIONS",
-        "GRAPHICS AND VISUAL COMPUTING"
       ],
+
       semester: ["1st Semester", "2nd Semester"],
       programs: [
                   "BS in Computer Science", 
@@ -407,8 +405,36 @@ export default {
 
     classicModalHide() {
       this.classicModal = false;
-    }
-  }
+    },
+
+    //get subject desc from array
+    getSubjectOptions(searchTerm) {
+      console.log("getCustomers", searchTerm);
+      this.subjectOptions = new Promise((resolve) => {
+        if (!searchTerm) {
+          resolve(this.subjects.map((x) => x.desc));
+        }
+        else {
+          const term = searchTerm.toLowerCase();
+          this.subjectOptions = this.subjects
+          .filter(({ desc }) => {
+            return desc.toLowerCase().includes(term);
+          })
+          .map((x) => x.desc);
+        resolve(this.subjectOptions);
+        }
+      });
+    },
+
+    // bind the `units` and `code` of selected subject to input component
+    getSelected() {
+      const selectedSubjDetails = this.subjects.find(
+        (obj) => obj.desc === this.formData.subjDesc
+      );
+      this.formData.subjCode = selectedSubjDetails.code;
+      this.formData.subjUnit = selectedSubjDetails.units;
+    },
+  },
 };
 </script>
 
