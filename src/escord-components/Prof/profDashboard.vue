@@ -80,7 +80,8 @@
 
                   <!-- subj code and unit -->
                   <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
-                    <md-field class="has-esc-accent md-layout-item md-size-50" :md-counter="false" :class="getValidationClass('subjCode')"
+                    <md-field class="has-esc-accent md-layout-item md-size-50"
+                    :md-counter="false" :class="getValidationClass('subjCode')"
                     >
                       <label class="__label">Subject Code</label>
                       <md-input v-model="formData.subjCode" maxlength="10" readonly required :disabled="sending"></md-input>
@@ -88,12 +89,14 @@
                       <span class="md-error" v-if="!$v.formData.subjCode.required">Subject code is required.</span>
                     </md-field>
 
-                    <md-field class="has-esc-accent md-layout-item md-size-45" :md-counter="false"
+                    <md-field class="has-esc-accent md-layout-item md-size-45"
                     :class="getValidationClass('subjUnit')">
                       <label>Units</label>
-                      <md-input v-model="formData.subjUnit" maxlength="2" required :disabled="sending"></md-input>
+                      <md-input v-model="formData.subjUnit" required type="number" :disabled="sending"></md-input>
 
                       <span class="md-error" v-if="!$v.formData.subjUnit.required">Subject unit is required.</span>
+
+                       <span class="md-error" v-else-if="!$v.formData.subjUnit.maxLength">Maximum is 2 numbers.</span>
                     </md-field>
                   </div>
 
@@ -176,17 +179,29 @@
                     </md-autocomplete>
                     
                     <md-field
-                    class="has-esc-accent md-layout-item md-size-25">
+                    class="has-esc-accent md-layout-item md-size-25" :class="getValidationClass('subjSY_start')">
                       <label>SY Start</label>
-                      <md-input v-model="formData.subjSY_start" required>
+                      <md-input v-model="formData.subjSY_start" required type="number" :disabled="sending">
                       </md-input>
+
+                      <span class="md-error" v-if="!$v.formData.subjSY_start.required">Required.</span>
+
+                      <span class="md-error" v-else-if="!$v.formData.subjSY_start.minLength">Format is `XXXX`.</span>
+
+                      <span class="md-error" v-else-if="!$v.formData.subjSY_start.maxLength">Format is `XXXX`.</span>
                     </md-field>
 
                     <md-field
-                    class="has-esc-accent md-layout-item md-size-25">
+                    class="has-esc-accent md-layout-item md-size-25" :class="getValidationClass('subjSY_end')">
                       <label>SY End</label>
-                      <md-input v-model="formData.subjSY_end" required>
+                      <md-input v-model="formData.subjSY_end" required type="number" :disabled="sending">
                       </md-input>
+
+                      <span class="md-error" v-if="!$v.formData.subjSY_end.required">Required.</span>
+
+                      <span class="md-error" v-else-if="!$v.formData.subjSY_end.minLength">Format is `XXXX`.</span>
+
+                      <span class="md-error" v-else-if="!$v.formData.subjSY_end.maxLength">Format is `XXXX`.</span>
                     </md-field>
                   </div>
 
@@ -200,7 +215,7 @@
                     v-model="formData.classProg"
                     :md-options="programs"
                     :md-fuzzy-search="false"
-                    class="has-esc-accent md-layout-item md-size-45"
+                    class="has-esc-accent md-layout-item md-size-50"
                     required
                     :class="getValidationClass('classProg')"
                   :disabled="sending">
@@ -256,26 +271,26 @@
                   <!-- prof -->
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-                    <md-field class="has-esc-accent md-layout-item md-size-45">
+                    <md-field class="has-esc-accent md-layout-item md-size-45" :class="getValidationClass('profName')">
                       <label>Professor</label>
-                      <md-input v-model="formData.profName" required></md-input>
+                      <md-input v-model="formData.profName" required :disabled="sending"></md-input>
+
+                      <span class="md-error" v-if="!$v.formData.profName.required">Name is required.</span>
                     </md-field>
 
-                    <md-field class="has-esc-accent md-layout-item md-size-45">
+                    <md-field class="has-esc-accent md-layout-item md-size-45"
+                    :class="getValidationClass('profRank')">
                       <label>Rank/ Position</label>
-                      <md-input v-model="formData.profRank" required></md-input>
+                      <md-input v-model="formData.profRank" required :disabled="sending"></md-input>
 
-                      <!-- <span v-if="v$.formData.profRank.$error">
-                        {{v$.formData.facultyrank.$errors[0].$message}}
-                      </span> -->
+                      <span class="md-error" v-if="!$v.formData.profRank.required">Rank/ position is required.</span>
                     </md-field>
                   </div>
 
-                  <md-divider></md-divider>
+                  
 
                   <!-- modal footer -->
-                  <div class="md-layout md-gutter md-alignment-center-space-between">
-
+                  <div class="md-layout md-gutter md-alignment-center-space-between __modal-buttons">
 
                     <div class="md-layout-item md-layout md-alignment-center-center">
                         <md-button class="md-esc-darkgrey md-raised md-dense md-round md-layout-item md-size-75" @click="classicModalHide">
@@ -301,7 +316,7 @@
                 </form>
               </template>
 
-              <template slot="footer" class="modal-footer"></template>
+              <template slot="footer"></template>
             </modal>
 
             
@@ -325,7 +340,7 @@ import { Modal } from "@/components";
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, minLenght, maxLength  } from 'vuelidate/lib/validators'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
@@ -386,21 +401,23 @@ export default {
       classYr: {required},
       classSec: {required},
       subjCode:  {required},
-      subjUnit: {required},
+      subjUnit: {
+        required,
+        maxLength: maxLength(2)},
       subjDesc: {required},
       subjTime: {required},
       subjDay: {required},
       subjSem: {required},
-      // subjSY_start:  {
-      //   required,
-      //   minLenght: minLenght(4), 
-      //   maxLength: maxLength(4)},
-      // subjSY_end:  {
-      //   required, 
-      //   minLenght: minLenght(4), 
-      //   maxLength: maxLength(4)},
-      // profRank: {required},
-      // profName:  {required}
+      subjSY_start:  {
+        required,
+        minLength: minLength(4),
+        maxLength: maxLength(4)},
+      subjSY_end:  {
+        required, 
+        minLength: minLength(4),
+        maxLength: maxLength(4)},
+      profRank: {required},
+      profName:  {required}
     }
   },
 
@@ -429,14 +446,14 @@ export default {
     },
 
     /*get subject desc from `subjects` array*/
-    getSubjectOptions(searchTerm) {
-      console.log("getCustomers", searchTerm);
+    getSubjectOptions(searctherm) {
+      console.log("getCustomers", searctherm);
       this.subjectOptions = new Promise((resolve) => {
-        if (!searchTerm) {
+        if (!searctherm) {
           resolve(this.subjects.map((x) => x.desc));
         }
         else {
-          const term = searchTerm.toLowerCase();
+          const term = searctherm.toLowerCase();
           this.subjectOptions = this.subjects
           .filter(({ desc }) => {
             return desc.toLowerCase().includes(term);
@@ -474,8 +491,6 @@ export default {
         this.formData.subjTime = null
         this.formData.subjDay = null
         this.formData.subjSem = null
-        this.formData.subjSY_start = null
-        this.formData.subjSY_end = null
         this.formData.classProg = null
         this.formData.classYr = null
         this.formData.classSec = null
@@ -521,7 +536,7 @@ h3, .h3 {
   position: absolute !important;
   top: 3.07em !important;
   left: 0 !important;
-  line-height: 0.75em !important;
+  line-height: 0.95em !important;
   text-align: justify;
   font-size: .777rem !important;
 }
@@ -529,11 +544,15 @@ h3, .h3 {
 .md-subheader {
   line-height: 0.1em !important;
   min-height: 1.5em !important;
-  padding-top: 1em !important;
+  margin-top: 0.7em !important;
   padding-left: 0.025em !important;
 }
 
-.modal-footer {
-  padding: 0 !important;
+.__modal-buttons {
+  margin-top: 1em;
+}
+
+.md-input {
+  max-width: 100%;
 }
 </style>
