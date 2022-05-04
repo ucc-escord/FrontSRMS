@@ -240,7 +240,7 @@
   &.md-focused > .fas,
   &.md-focused > .fab {
 
-    color: $brand-primary !important;
+    color: $esc-accent !important; //changed from $brand_primary
   }
 
   .success.md-icon,
