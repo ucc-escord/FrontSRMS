@@ -46,7 +46,7 @@
 
               <!-- modal body -->
               <template slot="body">
-                <form @submit.prevent="" novalidate class="md-layout md-gutter md-alignment-center-left">
+                <form @submit.prevent="addValidate" novalidate class="md-layout md-gutter md-alignment-center-left">
 
                   <!-- gradesheet id 
                   <md-field class="has-esc-accent md-layout-item">
@@ -64,27 +64,36 @@
                   @md-opened="getSubjectOptions"
                   @md-selected="getSelected"
                   class="has-esc-accent md-layout-item md-size-100"
-                  required>
-                    <label>Subject Description</label>
+                  required
+                  :class="getValidationClass('subjDesc')"
+                  :disabled="sending"
+                  >
+                    <label class="__label">Subject Description</label>
 
                     <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} does not match any registered subjects.
                     </template>
 
-                    <span class="md-error">This is a required field.</span>
+                    <span class="md-error" v-if="!$v.formData.subjDesc.required">Subject description is required.</span>
                   </md-autocomplete>
 
                   <!-- subj code and unit -->
                   <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
-                    <md-field class="has-esc-accent md-layout-item md-size-50" :md-counter="false">
-                      <label>Subject Code</label>
-                      <md-input v-model="formData.subjCode" maxlength="10" readonly required></md-input>
+                    <md-field class="has-esc-accent md-layout-item md-size-50" :md-counter="false" :class="getValidationClass('subjCode')"
+                    >
+                      <label class="__label">Subject Code</label>
+                      <md-input v-model="formData.subjCode" maxlength="10" readonly required :disabled="sending"></md-input>
+
+                      <span class="md-error" v-if="!$v.formData.subjCode.required">Subject code is required.</span>
                     </md-field>
 
-                    <md-field class="has-esc-accent md-layout-item md-size-45" :md-counter="false">
+                    <md-field class="has-esc-accent md-layout-item md-size-45" :md-counter="false"
+                    :class="getValidationClass('subjUnit')">
                       <label>Units</label>
-                      <md-input v-model="formData.subjUnit" maxlength="2" required></md-input>
+                      <md-input v-model="formData.subjUnit" maxlength="2" required :disabled="sending"></md-input>
+
+                      <span class="md-error" v-if="!$v.formData.subjUnit.required">Subject unit is required.</span>
                     </md-field>
                   </div>
 
@@ -94,9 +103,12 @@
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
                     
                     <md-field
-                    class="has-esc-accent md-layout-item md-size-45">
+                    class="has-esc-accent md-layout-item md-size-45"
+                    :class="getValidationClass('subjDay')">
                     <label>Day</label>
-                      <md-input v-model="formData.subjDay" required></md-input>
+                      <md-input v-model="formData.subjDay" required :disabled="sending"></md-input>
+
+                       <span class="md-error" v-if="!$v.formData.subjDay.required">Set subject day/s.</span>
                       <!-- <label for="schedDay">Day</label>
                       
                       <md-select
@@ -132,9 +144,12 @@
                     </md-field>
 
                     <md-field
-                    class="has-esc-accent md-layout-item md-size-45">
+                    class="has-esc-accent md-layout-item md-size-45"
+                    :class="getValidationClass('subjTime')">
                       <label>Time</label>
-                      <md-input v-model="formData.subjTime" required></md-input>
+                      <md-input v-model="formData.subjTime" required :disabled="sending"></md-input>
+
+                      <span class="md-error" v-if="!$v.formData.subjTime.required">Set subject time/s.</span>
                     </md-field>
                   </div>
 
@@ -147,13 +162,17 @@
                     :md-options="semester"
                     :md-fuzzy-search="false"
                     class="has-esc-accent md-layout-item md-size-45"
-                    required>
+                    required
+                    :class="getValidationClass('subjSem')"
+                    :disabled="sending">
                       <label>Semester</label>
                       
                       <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
                     </template>
+
+                    <span class="md-error" v-if="!$v.formData.subjSem.required">Required.</span>
                     </md-autocomplete>
                     
                     <md-field
@@ -182,13 +201,17 @@
                     :md-options="programs"
                     :md-fuzzy-search="false"
                     class="has-esc-accent md-layout-item md-size-45"
-                    required>
+                    required
+                    :class="getValidationClass('classProg')"
+                  :disabled="sending">
                       <label>Program</label>
 
                       <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
                     </template>
+
+                    <span class="md-error" v-if="!$v.formData.classProg.required">Required.</span>
                     </md-autocomplete>
 
                     <md-autocomplete
@@ -197,13 +220,17 @@
                     :md-options="year"
                     :md-fuzzy-search="false"
                     class="has-esc-accent md-layout-item md-size-20"
-                    required>
+                    required
+                    :class="getValidationClass('classYr')"
+                  :disabled="sending">
                       <label>Year</label>
 
                       <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
                     </template>
+
+                    <span class="md-error" v-if="!$v.formData.classYr.required">Required.</span>
                     </md-autocomplete>
 
                     <md-autocomplete
@@ -212,13 +239,17 @@
                     :md-options="section"
                     :md-fuzzy-search="false"
                     class="has-esc-accent md-layout-item md-size-20"
-                    required>
+                    required
+                    :class="getValidationClass('classSec')"
+                  :disabled="sending">
                       <label>Section</label>
 
                       <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
                     </template>
+
+                    <span class="md-error" v-if="!$v.formData.classSec.required">Required.</span>
                     </md-autocomplete>
                   </div>
                   
@@ -239,33 +270,41 @@
                       </span> -->
                     </md-field>
                   </div>
+
+                  <md-divider></md-divider>
+
+                  <!-- modal footer -->
+                  <div class="md-layout md-gutter md-alignment-center-space-between">
+
+
+                    <div class="md-layout-item md-layout md-alignment-center-center">
+                        <md-button class="md-esc-darkgrey md-raised md-dense md-round md-layout-item md-size-75" @click="classicModalHide">
+                          CANCEL
+                        </md-button>
+                      </div>
+
+                      <div class="md-layout-item md-layout md-alignment-center-center">
+                        <md-button class="md-esc-accent md-raised md-dense md-round md-layout-item md-size-75"
+                        type="submit"
+                        :disabled="sending"
+                        >
+                          <md-icon>add</md-icon>
+                          ADD
+                        </md-button>
+                      </div>
+                  </div>
                   
+                  <md-snackbar
+                    :md-active.sync="gradesheetSaved">
+                    Gradesheet for {{addedGradesheet}} is addded.
+                  </md-snackbar>
                 </form>
-
-                <br>
-                <md-divider></md-divider>
               </template>
 
-              <!-- modal footer -->
-              <template slot="footer" class="md-layout md-gutter md-alignment-center-space-between">
-
-
-                <div class="md-layout-item md-layout md-alignment-center-center">
-                    <md-button class="md-esc-darkgrey md-raised md-dense md-round md-layout-item md-size-75" @click="classicModalHide">
-                      CANCEL
-                    </md-button>
-                  </div>
-
-                  <div class="md-layout-item md-layout md-alignment-center-center">
-                    <md-button class="md-esc-accent md-raised md-dense md-round md-layout-item md-size-75"
-                    type="submit"
-                    >
-                      <md-icon>add</md-icon>
-                      ADD
-                    </md-button>
-                  </div>
-              </template>
+              <template slot="footer" class="modal-footer"></template>
             </modal>
+
+            
           </div>
 
           <div class="profile-content">
@@ -281,49 +320,46 @@
 </template>
 
 <script>
+// modal import
 import { Modal } from "@/components";
 
-//validation
-import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
-import { mapActions} from "vuex";
+//validation imports
+import { validationMixin } from 'vuelidate'
+import { required, minLenght, maxLength  } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
-
   components: {
       Modal
   },
-
-  setup: () => ({ v$: useVuelidate() }),
-
+  mixins: [validationMixin], // for validation
   data() {
     return {
-      //modal default value on load
+      /*modal default value on load*/
       classicModal: false,
 
-      //modal--form data
+      /*modal--form data*/
       formData:{
         classProg:null,
         classYr:null,
         classSec:null,
-        subjCode: '',
-        subjUnit:'',
+        subjCode: null,
+        subjUnit:null,
         subjDesc:null,
-        subjTime:'',
-        subjDay:'',
+        subjTime:null,
+        subjDay:null,
         subjSem:null,
         subjSY_start: new Date().getFullYear(),
         subjSY_end: new Date().getFullYear() + 1,
-        profRank:'Master Teacher III',
-        profName: 'JOHN GONZALES CRUZ'
+        profRank:'Master Teacher III', //or null
+        profName: 'JOHN GONZALES CRUZ' //or null
         },
-        error:{
-        },
+        gradesheetSaved: false,
+        sending: false,
+        addedGradesheet: null,
 
-      //subject desc, code, and units
-
-      //----or retrieve data from db para alphabetically arranged yung mga options???---
+      /**   subject desc, code, and units
+       **** or retrieve data from db para alphabetically arranged yung mga options???*/
       subjectOptions: [],
       subjects: [
         {code: "CCS 116", units: "5", desc: "ADVANCED WEB SYSTEMS"},
@@ -343,24 +379,28 @@ export default {
       section: ["A", "B", "C"]
     };
   },
-
-  validations(){
-    return{
-      formData:{
-        classProg: {required},
-        classYr: {required},
-        classSec: {required},
-        subjCode: {required},
-        subjUnit: {required},
-        subjDesc: {required},
-        subjTime: {required},
-        subjDay: {required},
-        subjSem: {required},
-        subjSY_start: {required},
-        subjSY_end: {required},
-        profRank: {required},
-        profName: {required}
-        }
+  /* for validation */
+  validations: {
+    formData: {
+      classProg: {required},
+      classYr: {required},
+      classSec: {required},
+      subjCode:  {required},
+      subjUnit: {required},
+      subjDesc: {required},
+      subjTime: {required},
+      subjDay: {required},
+      subjSem: {required},
+      // subjSY_start:  {
+      //   required,
+      //   minLenght: minLenght(4), 
+      //   maxLength: maxLength(4)},
+      // subjSY_end:  {
+      //   required, 
+      //   minLenght: minLenght(4), 
+      //   maxLength: maxLength(4)},
+      // profRank: {required},
+      // profName:  {required}
     }
   },
 
@@ -379,35 +419,16 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    },
-    /*profName: {
-      get() {
-        return `${this.profFN} ${this.profMN} ${this.profLN}`
-      }
-    }*/
+    }
   },
 
   methods: {
-       ...mapActions({ addgsinfo: "addgsinfo" }),
-     addgs(){
-            this.v$.$validate()
-
-            if(!this.v$.$error){
-
-              
-      this.addgsinfo(this.formData);
-
-            }else{
-              console.log(this.v$);
-            }
-
-     },
-
+    /*modal function*/
     classicModalHide() {
       this.classicModal = false;
     },
 
-    //get subject desc from array
+    /*get subject desc from `subjects` array*/
     getSubjectOptions(searchTerm) {
       console.log("getCustomers", searchTerm);
       this.subjectOptions = new Promise((resolve) => {
@@ -426,7 +447,7 @@ export default {
       });
     },
 
-    // bind the `units` and `code` of selected subject to input component
+    /* bind the `units` and `code` of selected subject to input component */
     getSelected() {
       const selectedSubjDetails = this.subjects.find(
         (obj) => obj.desc === this.formData.subjDesc
@@ -434,6 +455,53 @@ export default {
       this.formData.subjCode = selectedSubjDetails.code;
       this.formData.subjUnit = selectedSubjDetails.units;
     },
+
+    /* validation methods */
+    getValidationClass (fieldName) {
+      const field = this.$v.formData[fieldName]
+
+      if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      clearForm () {
+        this.$v.$reset()
+        this.formData.subjDesc = null
+        this.formData.subjCode = null
+        this.formData.subjUnit = null
+        this.formData.subjTime = null
+        this.formData.subjDay = null
+        this.formData.subjSem = null
+        this.formData.subjSY_start = null
+        this.formData.subjSY_end = null
+        this.formData.classProg = null
+        this.formData.classYr = null
+        this.formData.classSec = null
+      },
+      addGradesheet () {
+        this.sending = true
+
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+          this.addedGradesheet = `${this.formData.subjCode} ${this.formData.subjDesc}`
+          this.gradesheetSaved = true
+          this.sending = false
+          this.clearForm()
+        }, 1500)
+      },
+      addValidate () {
+        this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+          this.addGradesheet()
+          console.log("Gradesheet saved and added successfully.")
+        }
+        else {
+          console.log("Failed to add and save gradesheet. Fill out required fields.");
+        }
+    }
   },
 };
 </script>
@@ -447,5 +515,25 @@ h3, .h3 {
   font-size: 1.5em !important;
   line-height: 1em !important;
   margin-bottom: 0px !important;
+}
+
+.md-error {
+  position: absolute !important;
+  top: 3.07em !important;
+  left: 0 !important;
+  line-height: 0.75em !important;
+  text-align: justify;
+  font-size: .777rem !important;
+}
+
+.md-subheader {
+  line-height: 0.1em !important;
+  min-height: 1.5em !important;
+  padding-top: 1em !important;
+  padding-left: 0.025em !important;
+}
+
+.modal-footer {
+  padding: 0 !important;
 }
 </style>
