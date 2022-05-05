@@ -14,7 +14,10 @@
 
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
+//import router from "./router";
+import router from './route'
+import VueRouter from 'vue-router'
+
 
 import store from './store'
 import axios from 'axios';
@@ -31,6 +34,7 @@ axios.defaults.withCredentials = true
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 Vue.use(MaterialKit);
+Vue.use(VueRouter);
 
 const NavbarStore = {
   showNavbar: false

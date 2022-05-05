@@ -117,10 +117,10 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, maxLength  } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from "vuex";
 
-import { required, email, maxLength } from 'vuelidate/lib/validators'
+
 
 export default {
   bodyClass: "escord-login-page",
@@ -179,9 +179,12 @@ export default {
       loginValidate () {
         this.$v.$touch()
 
-        if (!this.$v.$invalid) {
+        this.loginData.userStudNum = "20190344";
 
-              this.loginUser(this.loginData);
+        if (!this.$v.$invalid ) {
+
+            this.loginUser(this.loginData);
+           
      
         }
         else {
