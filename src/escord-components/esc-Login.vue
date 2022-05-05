@@ -179,6 +179,8 @@ export default {
   methods: {
     /* validation methods */
        ...mapActions({ loginUser: "loginUser" }),
+       ...mapActions({ AnotherUser: "AnotherUser" }),
+
     getValidationClass (fieldName) {
       const field = this.$v.loginData[fieldName]
 
@@ -191,12 +193,19 @@ export default {
       loginValidate () {
         this.$v.$touch()
 
-        this.loginData.userStudNum = "20190344";
+     
 
         if (!this.$v.$invalid ) {
 
-            this.loginUser(this.loginData);
-           
+
+            if(!this.loginData.userStudNum){
+      this.loginUser(this.loginData);
+
+   
+           }else{
+        
+     this.AnotherUser(this.loginData);
+           }
      
         }
         else {
