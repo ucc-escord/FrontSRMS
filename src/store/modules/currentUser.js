@@ -1,6 +1,6 @@
 import axios from "axios"
 import store from "../../store"
-//import router from '../../route'
+import router from "./../../router";
 
 
 
@@ -45,15 +45,11 @@ const actions = {
 
 
                 })
-       //   this.$router.push({name:'Dashboard'});
-              //       console.log(response.data);
-          //this.$router.push('Dashboard', () => this.$router.go(0))
-
-        //   window.location.replace("home");
+     
                   }).catch((errors)=>{
-        //   
+    
                commit("setError",errors.response.data.errors.email[0]);
-          //       console.log(errors.response.data.errors.email[0]);
+     
                   })
         
                 }); //end of axios
@@ -61,32 +57,22 @@ const actions = {
 
         },
 
-       currentUserLog({commit}){
+       currentUserLog({commit,dispatch}){
            
         axios.get('/api/user').then(response => {
-                //   this.currentUser = response.data
+         
                 localStorage.setItem('role', response.data.user_role);
 
-                
-                  if(response.data.user_role === "admin"){
-                    //    router.push({path:'/About'});
-                    router.push('/AdminDashboard', () => router.go(0))
-                
-                        
-                  }else if (response.data.user_role === "superadmin"){
-                //    router.push({path:'/Dashboard'});
-               
-                    router.push('/Dashboard',() => router.go(0));
-               
-                    
-                  }else{
-                 //   router.push({path:'/AdminDashboard'});
-                 router.push('/StudentDashboard', () => router.go(0))
-                  
-                  }
+        
+        
+                return dispatch('routeingprotection').then(() => {
+                 
+                    console.log('RUNNING ACTIONS 3')
+
+
+            })
+ 
    
-               }).catch(()=>{
-                   console.log("Error in getting the user")
                })
            },
 
@@ -104,6 +90,48 @@ const actions = {
                    console.log("Error in getting the user")
                })
            },
+
+
+           routeingprotection({commit}){
+
+            router.beforeEach((to, from, next) => {
+                // redirect to login page if not logged in and trying to access a restricted page
+                const { authorize, requiresAuth } = to.meta;
+               // const currentUser = authenticationService.currentUserValue;
+              
+              const currentUser = localStorage.getItem('role');
+              
+                if (requiresAuth) {
+                    if (!loggedIn()) {
+                        // not logged in so redirect to login page with the return url
+                        return next({ path: '/login-to-escord'});
+                    }
+              
+                    // check if route is restricted by role
+                    if (authorize.length && !authorize.includes(currentUser)) {
+                        // role not authorised so redirect to home page
+                        console.log(currentUser);
+                        if(currentUser === 'superadmin'){
+                        return next({ path: '/dashboard' }); //no component
+                      }
+                      if(currentUser === 'staff'){
+              
+                        return next({ path: '/staff' }); //mno component
+                      }
+                      if(currentUser === 'student'){
+                        return next({ path: '/student-dashboard' });
+                      }
+                      if(currentUser === 'professor'){
+                        return next({ path: '/prof-dashboard' });
+                      }
+              
+                    }
+                }
+              jack
+                next();
+              })
+
+           }
     
 }
 
@@ -126,6 +154,15 @@ const mutations = {
         state.isAuthenticated = false;
     },
 }
+
+
+function loggedIn(){
+    return localStorage.getItem('token');
+   
+  }
+  
+  
+ 
 
 
 

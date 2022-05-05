@@ -24,6 +24,12 @@ import MaterialKit from "./plugins/material-kit";
 
 Vue.config.productionTip = false;
 
+const token = localStorage.getItem('token');
+
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.withCredentials = true
+axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
 Vue.use(MaterialKit);
 
 const NavbarStore = {
@@ -38,7 +44,10 @@ Vue.mixin({
   }
 });
 
+
+
+
 new Vue({
-  router,
+  router,store,
   render: h => h(App)
 }).$mount("#app");

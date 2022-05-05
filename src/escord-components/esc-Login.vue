@@ -9,8 +9,10 @@
             
             <md-card>
                 <md-card-content>
+
                     <h3 class="title text-center text-esc-darkgrey">Login</h3>
 
+ <p class="text-danger" v-text="geterror"></p>
                     <form @submit.prevent="loginValidate" novalidate>
 
                         <md-field 
@@ -83,6 +85,8 @@
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import { mapActions, mapGetters } from "vuex";
+
 
 export default {
   bodyClass: "escord-login-page",
@@ -92,7 +96,8 @@ export default {
       loginData: {
           userEmail: null,
           userPassword: null,
-          rememberPass: false
+          rememberPass: false,
+          device_name: "browser",
       },
       sending: false,
     };
@@ -114,6 +119,7 @@ export default {
     }
   },
   computed: {
+      ...mapGetters({ geterror: "geterror" }),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`
@@ -123,6 +129,7 @@ export default {
 
   methods: {
     /* validation methods */
+       ...mapActions({ loginUser: "loginUser" }),
     getValidationClass (fieldName) {
       const field = this.$v.loginData[fieldName]
 
@@ -141,7 +148,9 @@ export default {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
-          console.log("Logged in successfully.")
+
+              this.loginUser(this.loginData);
+     
         }
         else {
           console.log("Failed to log in.");

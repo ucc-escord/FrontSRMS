@@ -337,6 +337,7 @@
 <script>
 // modal import
 import { Modal } from "@/components";
+import { mapActions} from "vuex";
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -355,11 +356,11 @@ export default {
 
       /*modal--form data*/
       formData:{
-        classProg:null,
-        classYr:null,
-        classSec:null,
-        subjCode: null,
-        subjUnit:null,
+        classProg:null, //course
+        classYr:null, //course year
+        classSec:null, // course sec
+        subjCode: null, //subj  code
+        subjUnit:null, //unit
         subjDesc:null,
         subjTime:null,
         subjDay:null,
@@ -383,7 +384,7 @@ export default {
         {code: "CSE 102", units: "3", desc: "GRAPHICS AND VISUAL COMPUTING"}
       ],
 
-      semester: ["1st Semester", "2nd Semester"],
+      semester: ["1", "2"],
       programs: [
                   "BS in Computer Science", 
                   "BS in Information Systems",
@@ -441,8 +442,11 @@ export default {
 
   methods: {
     /*modal function*/
+
+       ...mapActions({addgsinfo: "addgsinfo" }),
     classicModalHide() {
       this.classicModal = false;
+      this.clearForm()
     },
 
     /*get subject desc from `subjects` array*/
@@ -497,6 +501,9 @@ export default {
       },
       addGradesheet () {
         this.sending = true
+
+           this.addgsinfo(this.formData)
+     
 
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {

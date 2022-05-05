@@ -73,7 +73,8 @@ export default new Router({
     {
       path: "/prof-dashboard",
       name: "Professor Dashboard",
-      component: escProfDash
+      component: escProfDash,
+      meta: { requiresAuth: true, authorize: 'professor' }
     }
   ],
   scrollBehavior: to => {
@@ -84,3 +85,6 @@ export default new Router({
     }
   }
 });
+
+
+
