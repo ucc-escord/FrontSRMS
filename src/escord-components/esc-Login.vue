@@ -135,11 +135,23 @@ export default {
   mixins: [validationMixin], // for validation
 
    /* for validation */
-  validations: {
-      loginData: {
-          userStudNum: {required},
-          userEmail: {required, email},
-          userPassword: {required}
+  validations() {
+      if(this.showStudNumInput) {
+        return {
+          loginData: {
+            userStudNum: {required},
+            userPassword: {required}
+          }
+        }
+      }
+
+      else {
+        return {
+          loginData: {
+            userEmail: {required, email},
+            userPassword: {required}
+          }
+        }
       }
   },
 
