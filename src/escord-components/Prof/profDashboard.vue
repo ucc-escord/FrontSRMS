@@ -442,7 +442,7 @@ export default {
 
     /*get subject desc from `subjects` array*/
     getSubjectOptions(searctherm) {
-      console.log("getCustomers", searctherm);
+      console.log("getSubjects", searctherm);
       this.subjectOptions = new Promise((resolve) => {
         if (!searctherm) {
           resolve(this.subjects.map((x) => x.desc));
@@ -468,7 +468,7 @@ export default {
       this.formData.subjUnit = selectedSubjDetails.units;
     },
 
-    /* validation methods */
+    /* gradesheet validation methods */
     getValidationClass (fieldName) {
       const field = this.$v.formData[fieldName]
 

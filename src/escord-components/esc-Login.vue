@@ -41,8 +41,6 @@
                             v-model="loginData.userStudNum"></md-input>
 
                             <span class="md-error" v-if="!$v.loginData.userStudNum.required">Student number is required.</span>
-
-                            <span class="md-error" v-else-if="!$v.loginData.userStudNum.maxLength">Maximum characters accepted is 8.</span>
                         </md-field>
                       </span>
 
@@ -65,24 +63,6 @@
                             <span class="md-error" v-else-if="!$v.loginData.userEmail.email">Invalid email.</span>
                         </md-field>
                       </span>
-
-                        <!-- <md-field 
-                        class="md-form-group has-esc-accent"
-                        md-clearable
-                        :class="getValidationClass('userEmail')">
-                            <md-icon>
-                                alternate_email
-                            </md-icon>
-                            <label>Email Address</label>
-                            <md-input
-                            :disabled="sending" 
-                            v-model="loginData.userEmail"
-                            type="email"></md-input>
-
-                            <span class="md-error" v-if="!$v.loginData.userEmail.required">Email is required.</span>
-
-                            <span class="md-error" v-else-if="!$v.loginData.userEmail.email">Invalid email.</span>
-                        </md-field> -->
 
                         <md-field 
                         class="md-form-group has-esc-accent"
@@ -157,8 +137,7 @@ export default {
    /* for validation */
   validations: {
       loginData: {
-          userStudNum: {required, 
-                        maxLength: maxLength(8)},
+          userStudNum: {required},
           userEmail: {required, email},
           userPassword: {required}
       }
