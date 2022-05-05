@@ -25,6 +25,8 @@ import axios from 'axios';
 
 import MaterialKit from "./plugins/material-kit";
 
+/* eslint-disable no-new */
+
 Vue.config.productionTip = false;
 
 const token = localStorage.getItem('token');
