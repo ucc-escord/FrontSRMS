@@ -48,12 +48,7 @@
               <template slot="body">
                 <form @submit.prevent="addValidate" novalidate class="md-layout md-gutter md-alignment-center-left">
 
-                  <!-- gradesheet id 
-                  <md-field class="has-esc-accent md-layout-item">
-                    <label>Gradesheet ID</label>
-                    <md-input v-model="gsNum" readonly></md-input>
-                  </md-field>-->
-
+                
                   <!-- subj desc -->
                   <md-autocomplete
                   md-dense
@@ -356,15 +351,15 @@ export default {
 
       /*modal--form data*/
       formData:{
-        classProg:null, //course
-        classYr:null, //course year
-        classSec:null, // course sec
-        subjCode: null, //subj  code
-        subjUnit:null, //unit
-        subjDesc:null,
-        subjTime:null,
-        subjDay:null,
-        subjSem:null,
+        classProg:'',
+        classYr:'',
+        classSec:'',
+        subjCode: '',
+        subjUnit:'',
+        subjDesc:'',
+        subjTime:'',
+        subjDay:'',
+        subjSem:'',
         subjSY_start: new Date().getFullYear(),
         subjSY_end: new Date().getFullYear() + 1,
         profRank:'Master Teacher III', //or null
@@ -372,7 +367,7 @@ export default {
         },
         gradesheetSaved: false,
         sending: false,
-        addedGradesheet: null,
+        addedGradesheet: '',
 
       /**   subject desc, code, and units
        **** or retrieve data from db para alphabetically arranged yung mga options???*/
@@ -451,7 +446,7 @@ export default {
 
     /*get subject desc from `subjects` array*/
     getSubjectOptions(searctherm) {
-      console.log("getCustomers", searctherm);
+      console.log("getSubjects", searctherm);
       this.subjectOptions = new Promise((resolve) => {
         if (!searctherm) {
           resolve(this.subjects.map((x) => x.desc));
@@ -477,7 +472,7 @@ export default {
       this.formData.subjUnit = selectedSubjDetails.units;
     },
 
-    /* validation methods */
+    /* gradesheet validation methods */
     getValidationClass (fieldName) {
       const field = this.$v.formData[fieldName]
 
@@ -489,15 +484,15 @@ export default {
       },
       clearForm () {
         this.$v.$reset()
-        this.formData.subjDesc = null
-        this.formData.subjCode = null
-        this.formData.subjUnit = null
-        this.formData.subjTime = null
-        this.formData.subjDay = null
-        this.formData.subjSem = null
-        this.formData.classProg = null
-        this.formData.classYr = null
-        this.formData.classSec = null
+        this.formData.subjDesc = ""
+        this.formData.subjCode = ""
+        this.formData.subjUnit = ""
+        this.formData.subjTime = ""
+        this.formData.subjDay = ""
+        this.formData.subjSem = ""
+        this.formData.classProg = ""
+        this.formData.classYr = ""
+        this.formData.classSec = ""
       },
       addGradesheet () {
         this.sending = true

@@ -15,6 +15,38 @@
  <p class="text-danger" v-text="geterror"></p>
                     <form @submit.prevent="loginValidate" novalidate>
 
+                      <div class="md-layout md-gutter md-alignment-center-center">
+                        <md-radio
+                        :value="true"
+                        v-model="showStudNumInput">
+                        Use Student Number
+                        </md-radio>
+
+                        <md-radio
+                        :value="false"
+                        v-model="showStudNumInput">
+                        Use Email
+                        </md-radio>
+                      </div>
+
+                      <span v-if="showStudNumInput">
+                        <md-field 
+                        class="md-form-group has-esc-accent"
+                        md-clearable
+                        :class="getValidationClass('userStudNum')">
+                            <md-icon>
+                                sentiment_satisfied_alt
+                            </md-icon>
+                            <label>Student Number</label>
+                            <md-input
+                            :disabled="sending" 
+                            v-model="loginData.userStudNum"></md-input>
+
+                            <span class="md-error" v-if="!$v.loginData.userStudNum.required">Student number is required.</span>
+                        </md-field>
+                      </span>
+
+                      <span v-else>
                         <md-field 
                         class="md-form-group has-esc-accent"
                         md-clearable
@@ -32,6 +64,7 @@
 
                             <span class="md-error" v-else-if="!$v.loginData.userEmail.email">Invalid email.</span>
                         </md-field>
+                      </span>
 
                         <md-field 
                         class="md-form-group has-esc-accent"
@@ -87,6 +120,7 @@ import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from "vuex";
 
+import { required, email, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "escord-login-page",
@@ -94,12 +128,14 @@ export default {
     return {
         /* form data */
       loginData: {
+          userStudNum: null,
           userEmail: null,
           userPassword: null,
           rememberPass: false,
           device_name: "browser",
       },
       sending: false,
+      showStudNumInput: true,
     };
   },
   mixins: [validationMixin], // for validation
@@ -107,6 +143,7 @@ export default {
    /* for validation */
   validations: {
       loginData: {
+          userStudNum: {required},
           userEmail: {required, email},
           userPassword: {required}
       }
@@ -138,11 +175,6 @@ export default {
             'md-invalid': field.$invalid && field.$dirty
           }
         }
-      },
-      clearForm () {
-        this.$v.$reset()
-        this.loginData.userEmail = null
-        this.loginData.userPassword = null
       },
       loginValidate () {
         this.$v.$touch()
