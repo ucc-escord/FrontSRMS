@@ -232,8 +232,4 @@ h3.title {
   text-align: justify;
   font-size: .777rem !important;
 }
-
-.md-input {
-    text-transform: none !important;
-}
 </style>

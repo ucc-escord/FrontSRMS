@@ -380,10 +380,10 @@ export default {
 
       semester: ["1st Semester", "2nd Semester"],
       programs: [
-                  "BS in Computer Science", 
-                  "BS in Information Systems",
-                  "BS in Information Technology",
-                  "BS in Entertainment and Multimedia Computing"
+                  "BS Computer Science", 
+                  "BS Information Systems",
+                  "BS Information Technology",
+                  "BS Entertainment and Multimedia Computing"
                 ],
       year: ["1", "2", "3", "4"],
       section: ["A", "B", "C"]
@@ -548,6 +548,7 @@ h3, .h3 {
 }
 
 .md-input {
+  text-transform: uppercase !important;
   max-width: 100%;
 }
 </style>
