@@ -19,14 +19,19 @@ import router from "./router";
 import store from './store'
 import axios from 'axios';
 
-
 import MaterialKit from "./plugins/material-kit";
+
+// Md-Vuelidate
+import MdVuelidated from '@undecaf/vue-material-vuelidate'
+import '@undecaf/vue-material-vuelidate/dist/components.css'
 
 /* eslint-disable no-new */
 
 Vue.config.productionTip = false;
 
 Vue.use(MaterialKit);
+
+Vue.use(MdVuelidated)
 
 const NavbarStore = {
   showNavbar: false
