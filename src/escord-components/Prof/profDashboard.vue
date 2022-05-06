@@ -306,7 +306,7 @@
                   
                   <md-snackbar
                     :md-active.sync="gradesheetSaved">
-                    Gradesheet for {{addedGradesheet}} is addded.
+                    Gradesheet for {{addedGradesheetInfo}} is added.
                   </md-snackbar>
                 </form>
               </template>
@@ -366,7 +366,7 @@ export default {
         },
         gradesheetSaved: false,
         sending: false,
-        addedGradesheet: '',
+        addedGradesheetInfo: '',
 
       /**   subject desc, code, and units
        **** or retrieve data from db para alphabetically arranged yung mga options???*/
@@ -495,7 +495,7 @@ export default {
 
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
-          this.addedGradesheet = `${this.formData.subjCode} ${this.formData.subjDesc}`
+          this.addedGradesheetInfo = `${this.formData.subjCode} ${this.formData.subjDesc}`
           this.gradesheetSaved = true
           this.sending = false
           this.clearForm()

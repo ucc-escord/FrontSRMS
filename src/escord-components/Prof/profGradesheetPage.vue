@@ -36,7 +36,8 @@
 
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button 
-                    class="md-esc-accent md-raised md-round md-just-icon">
+                    class="md-esc-accent md-raised md-round md-just-icon"
+                    @click="classicModal = true">
                         <md-icon>person_add</md-icon>
                         <md-tooltip md-direction="bottom">Add Student</md-tooltip>
                     </md-button>
@@ -75,7 +76,7 @@
           <div class="__gradesheet-table">
 
             <md-table
-            v-model="studentList"
+              v-model="studentList"
               md-sort="studLN"
               md-sort-order="asc">
 
@@ -148,7 +149,93 @@
 
           </div>
 
-          <div class="profile-content"></div>
+          <div class="__addStudentModal">
+            <!-- modal -->
+            <modal v-if="classicModal" @close="classicModalHide">
+
+              <!-- modal header -->
+              <template slot="header">
+                  <h3 class="title text-esc-accent">Add Student</h3>
+              </template>
+
+              <!-- modal body -->
+              <template slot="body">
+                <form @submit.prevent="addValidate" novalidate class="md-layout md-gutter md-alignment-center-left">
+
+
+                  <!-- addStud modal inputs -->
+                  <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
+
+                    <md-field class="has-esc-accent"
+                    :class="getValidationClass('studNum')">
+                      <label>Student Number</label>
+                      <md-input v-model="addStud.studNum"
+                      :disabled="sending"
+                      type="number"></md-input>
+
+                      <span class="md-error" v-if="!$v.addStud.studNum.required">Student number is required.</span>
+                    </md-field>
+
+                    <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
+
+                      <md-field class="has-esc-accent md-layout-item md-size-40"
+                      :class="getValidationClass('studLN')">
+                        <label>Last Name</label>
+                        <md-input v-model="addStud.studLN"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studLN.required">Last name is required.</span>
+                      </md-field>
+
+                      <md-field class="has-esc-accent md-layout-item md-size-40"
+                      :class="getValidationClass('studFN')">
+                        <label>First Name</label>
+                        <md-input v-model="addStud.studFN"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studFN.required">First name is required.</span>
+                      </md-field>
+                      
+                      <md-field class="has-esc-accent md-layout-item md-size-15">
+                        <label>MI</label>
+                        <md-input v-model="addStud.studMI"></md-input>
+                      </md-field>
+                    </div>
+
+                    
+                  </div>
+
+                  
+                  <!-- modal footer -->
+                  <div class="md-layout md-gutter md-alignment-center-space-between __modal-buttons">
+
+                    <div class="md-layout-item md-layout md-alignment-center-center">
+                        <md-button class="md-esc-darkgrey md-raised md-dense md-round md-layout-item md-size-75" @click="classicModalHide">
+                          CANCEL
+                        </md-button>
+                      </div>
+
+                      <div class="md-layout-item md-layout md-alignment-center-center">
+                        <md-button class="md-esc-accent md-raised md-dense md-round md-layout-item md-size-75"
+                        type="submit"
+                        :disabled="sending"
+                        >
+                          <md-icon>add</md-icon>
+                          ADD
+                        </md-button>
+                      </div>
+                  </div>
+                  
+                  <md-snackbar
+                    :md-active.sync="studAdded">
+                    {{addedStudentInfo}} is added to the gradesheet.
+                  </md-snackbar>
+                </form>
+              </template>
+
+              <template slot="footer"></template>
+            </modal>
+          </div>
 
         </div>
       </div>
@@ -157,14 +244,21 @@
 </template>
 
 <script>
+// modal import
+import { Modal } from "@/components";
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
+  components: {
+      Modal
+  },
   data() {
     return {
+      /* GRADESHEET TABLE DATA */
       subjCode: "CS 108 ",
       subjUnit: "3",
       subjDesc: "SOFTWARE ENGINEERING 1",
@@ -210,7 +304,21 @@ export default {
           studRemark: "PASSED"
           
         }
-      ]
+      ],
+
+       /*modal default value on load*/
+      classicModal: false,
+
+      /*modal--form data*/
+      addStud: {
+        studNum: null,
+        studLN: null,
+        studFN: null,
+        studMI: ""
+      },
+      studAdded: false,
+      sending: false,
+      addedStudentInfo: '',
     };
   },
 
@@ -232,7 +340,13 @@ export default {
              minValue: minValue(1.00),
              maxValue: maxValue(5.00)}
          }
-       }
+       },
+
+       addStud: {
+        studNum: {required},
+        studLN: {required},
+        studFN: {required}
+      },
    },
   props: {
     header: {
@@ -251,6 +365,53 @@ export default {
       };
     }
   },
+
+  methods: {
+    /*modal function*/
+    classicModalHide() {
+      this.classicModal = false;
+    },
+
+    /* add student modal validation methods */
+    getValidationClass (fieldName) {
+      const field = this.$v.addStud[fieldName]
+
+      if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      clearForm () {
+        this.$v.$reset()
+        this.addStud.studNum = null
+        this.addStud.studLN = null
+        this.addStud.studFN = null
+        this.addStud.studMI = ""
+      },
+      addStudent () {
+        this.sending = true
+
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+          this.addedStudentInfo = `${this.addStud.studLN}, ${this.addStud.studFN} ${this.addStud.studMI}`
+          this.studAdded = true
+          this.sending = false
+          this.clearForm()
+        }, 1500)
+      },
+      addValidate () {
+        this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+          this.addStudent()
+          console.log("Student is added successfully.")
+        }
+        else {
+          console.log("Cannot add student to the gradesheet.");
+        }
+    }
+  }
 };
 </script>
 
@@ -286,5 +447,24 @@ h4 {
 
 .md-input {
   width: 0.05rem;
+  max-width: 100%;
+}
+
+.md-error {
+  position: absolute !important;
+  top: 3.07em !important;
+  left: 0 !important;
+  line-height: 0.95em !important;
+  text-align: justify;
+  font-size: .777rem !important;
+}
+
+h3, .h3 {
+  font-size: 1.5em !important;
+  line-height: 1em !important;
+  margin-bottom: 0px !important;
+}
+.__modal-buttons {
+  margin-top: 1em;
 }
 </style>
