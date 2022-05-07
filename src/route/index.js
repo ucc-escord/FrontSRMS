@@ -35,6 +35,7 @@ function loggedIn(){
             return next({ path: '/'});
         }
 
+
         // check if route is restricted by role
         if (authorize.length && !authorize.includes(currentUser)) {
             // role not authorised so redirect to home page

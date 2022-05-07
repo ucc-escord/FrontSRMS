@@ -5,62 +5,48 @@ import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 
+import NotFound from "@/layout/NotFoundPage.vue";
+
+
 //---| ESCORD COMPONENTS |---
-import escLogin from "../../escord-components/esc-Login.vue";
-import escLanding from "../../escord-components/esc-LandingPage.vue";
-import escStudDash from "../../escord-components/Student/studDashboard.vue";
-import escProfDash from "../../escord-components/Prof/profDashboard.vue";
+//import escLogin from "../../escord-components/esc-Login.vue";
+//import escLanding from "../../escord-components/esc-LandingPage.vue";
+//import escStudDash from "../../escord-components/Student/studDashboard.vue";
+//import escProfDash from "../../escord-components/Prof/profDashboard.vue";
+
+//import escProf_GSPage from "../../escord-components/Prof/profGradesheetPage.vue";
 
 
+
+
+const escLogin = () => import('../../escord-components/esc-Login.vue')
+const escLanding = () => import('../../escord-components/esc-LandingPage.vue')
+const escProfDash = () => import('../../escord-components/Prof/profDashboard.vue')
+const escProf_GSPage = () => import('../../escord-components/Prof/profGradesheetPage.vue')
+
+
+const escStudDash  = () => import('../../escord-components/Student/studDashboard.vue')
 
 
 const routes = [
-  {
-    path: "/",
-    name: "index",
-    components: { default: Index, header: MainNavbar, footer: MainFooter },
-    props: {
-      header: { colorOnScroll: 400 },
-      footer: { backgroundColor: "black" }
-    }
-  },
-  {
-    path: "/landing",
-    name: "landing",
-    components: { default: Landing, header: MainNavbar, footer: MainFooter },
-    props: {
-      header: { colorOnScroll: 400 },
-      footer: { backgroundColor: "black" }
-    }
-  },
-  {
-    path: "/login",
-    name: "login",
-    components: { default: Login, header: MainNavbar, footer: MainFooter },
-    props: {
-      header: { colorOnScroll: 400 }
-    }
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    components: { default: Profile, header: MainNavbar, footer: MainFooter },
-    props: {
-      header: { colorOnScroll: 400 },
-      footer: { backgroundColor: "black" }
-    }
-  },
 
   //---| ESCORD ROUTES |----
+
   {
-    path: "/welcome-to-escord",
+    path: "*",
+    name: "NotFound",
+    component: NotFound
+  },
+  {
+    path: "/",
     name: "Landing",
     component: escLanding
   },
   {
-    path: "/login-to-escord",
+    path: "/login",
     name: "Login",
-    component: escLogin
+    component: escLogin,
+    meta: { requiresAuth: false }
   },
   {
     path: "/student-dashboard",
@@ -72,6 +58,11 @@ const routes = [
     name: "Professor Dashboard",
     component: escProfDash,
     meta: { requiresAuth: true, authorize: 'professor' }
+  },
+  {
+    path: "/gradesheet-detail",
+    name: "Gradesheet Detail",
+    component: escProf_GSPage
   }
 
 
