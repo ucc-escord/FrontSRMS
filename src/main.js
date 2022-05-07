@@ -22,8 +22,11 @@ import VueRouter from 'vue-router'
 import store from './store'
 import axios from 'axios';
 
-
 import MaterialKit from "./plugins/material-kit";
+
+// Md-Vuelidate
+import MdVuelidated from '@undecaf/vue-material-vuelidate'
+import '@undecaf/vue-material-vuelidate/dist/components.css'
 
 /* eslint-disable no-new */
 
@@ -37,6 +40,8 @@ axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
 Vue.use(MaterialKit);
 Vue.use(VueRouter);
+
+Vue.use(MdVuelidated)
 
 const NavbarStore = {
   showNavbar: false

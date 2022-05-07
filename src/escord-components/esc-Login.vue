@@ -18,13 +18,15 @@
                       <div class="md-layout md-gutter md-alignment-center-center">
                         <md-radio
                         :value="true"
-                        v-model="showStudNumInput">
+                        v-model="showStudNumInput"
+                        @change="clearUnusedInput">
                         Use Student Number
                         </md-radio>
 
                         <md-radio
                         :value="false"
-                        v-model="showStudNumInput">
+                        v-model="showStudNumInput"
+                        @change="clearUnusedInput">
                         Use Email
                         </md-radio>
                       </div>
@@ -100,9 +102,10 @@
                             </md-button>
 
                         </div>
-
-                        
                     </form>
+                    <!-- <p>Stud Num: {{loginData.userStudNum}}</p>
+                    <p>Email: {{loginData.userEmail}}</p>
+                    <p>Password: {{loginData.userPassword}}</p> -->
                 </md-card-content>
             </md-card>
 
@@ -211,6 +214,19 @@ export default {
         else {
           console.log("Failed to log in.");
         }
+    },
+    clearUnusedInput() {
+      this.$v.$reset();
+      if(this.showStudNumInput) {
+        this.loginData.userEmail = null;
+        this.loginData.userPassword = null;
+        console.log(this.showStudNumInput)
+      }
+      else {
+        this.loginData.userStudNum = null;
+        this.loginData.userPassword = null;
+        console.log(this.showStudNumInput)
+      }
     }
   }
 };
@@ -238,14 +254,4 @@ h3.title {
   text-align: justify;
   font-size: .777rem !important;
 }
-
-.md-input {
-    text-transform: none !important;
-}
-
-// .md-checkbox {
-//   position: relative !important;
-//   top: -1.5em !important;
-//   left: 0.15rem !important;
-// }
 </style>

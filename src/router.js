@@ -15,8 +15,12 @@ import escLogin from "./escord-components/esc-Login.vue";
 import escLanding from "./escord-components/esc-LandingPage.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
+<<<<<<< HEAD
 import escStaffDash from "./escord-components/Staff/profDashboard.vue";
 
+=======
+import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
+>>>>>>> origin/trizh
 
 
 Vue.use(Router);
@@ -127,6 +131,7 @@ export default new Router({
     {
       path: "/prof-dashboard",
       name: "Professor Dashboard",
+<<<<<<< HEAD
       component: escProfDash,
       beforeEnter : guardMyroute,
       meta: { requiresAuth: true, authorize: 'professor' }
@@ -139,6 +144,15 @@ export default new Router({
     },
 
   
+=======
+      component: escProfDash
+    },
+    {
+      path: "/gradesheet-detail",
+      name: "Gradesheet Detail",
+      component: escProf_GSPage
+    }
+>>>>>>> origin/trizh
   ],
   scrollBehavior: to => {
     if (to.hash) {

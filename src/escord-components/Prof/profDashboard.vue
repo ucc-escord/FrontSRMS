@@ -310,7 +310,7 @@
                   
                   <md-snackbar
                     :md-active.sync="gradesheetSaved">
-                    Gradesheet for {{addedGradesheet}} is addded.
+                    Gradesheet for {{addedGradesheetInfo}} is added.
                   </md-snackbar>
                 </form>
               </template>
@@ -371,7 +371,7 @@ export default {
         },
         gradesheetSaved: false,
         sending: false,
-        addedGradesheet: '',
+        addedGradesheetInfo: '',
 
       /**   subject desc, code, and units
        **** or retrieve data from db para alphabetically arranged yung mga options???*/
@@ -385,10 +385,10 @@ export default {
 
       semester: ["1", "2"],
       programs: [
-                  "BS in Computer Science", 
-                  "BS in Information Systems",
-                  "BS in Information Technology",
-                  "BS in Entertainment and Multimedia Computing"
+                  "BS Computer Science", 
+                  "BS Information Systems",
+                  "BS Information Technology",
+                  "BS Entertainment and Multimedia Computing"
                 ],
       year: ["1", "2", "3", "4"],
       section: ["A", "B", "C"]
@@ -512,7 +512,7 @@ export default {
 
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
-          this.addedGradesheet = `${this.formData.subjCode} ${this.formData.subjDesc}`
+          this.addedGradesheetInfo = `${this.formData.subjCode} ${this.formData.subjDesc}`
           this.gradesheetSaved = true
           this.sending = false
           this.clearForm()
@@ -565,6 +565,7 @@ h3, .h3 {
 }
 
 .md-input {
+  text-transform: uppercase !important;
   max-width: 100%;
 }
 </style>
