@@ -36,6 +36,10 @@
                     <md-icon>add</md-icon> Add Gradesheet
             </md-button>
 
+           <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>add</md-icon>logout
+            </md-button>
+
             <!-- modal -->
             <modal v-if="classicModal" @close="classicModalHide">
 
@@ -439,6 +443,7 @@ export default {
     /*modal function*/
 
        ...mapActions({addgsinfo: "addgsinfo" }),
+          ...mapActions({ loggingOut: "loggingOut" }),
     classicModalHide() {
       this.classicModal = false;
       this.clearForm()
@@ -494,6 +499,11 @@ export default {
         this.formData.classYr = ""
         this.formData.classSec = ""
       },
+
+     loggingout(){
+              this.loggingOut()
+      },
+
       addGradesheet () {
         this.sending = true
 

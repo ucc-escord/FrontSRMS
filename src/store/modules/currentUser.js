@@ -1,6 +1,6 @@
 import axios from "axios"
 import store from "../../store"
-import router from "./../../router";
+import router from "./../../route";
 
 
 
@@ -66,10 +66,14 @@ const actions = {
         
                 if(response.data.user_role === "admin"){
                   //    router.push({path:'/About'});
-                  router.push('/login', () => router.go(0)).catch(err => {})
+                  router.push('/', () => router.go(0)).catch(err => {})
               
                       
                 }else if (response.data.user_role === "superadmin"){
+                  router.push('/login', () => router.go(0)).catch(err => {})
+
+                
+                }else if (response.data.user_role === "student"){
               //    router.push({path:'/Dashboard'});
              
               router.push('/student-dashboard', () => router.go(0)).catch(err => {})
@@ -133,6 +137,28 @@ const actions = {
                   }); //end of axios
           
   
+          },
+
+
+          loggingOut({commit}){ 
+
+            axios.post('/api/logout').then((response)=>{
+              localStorage.removeItem('role');
+              localStorage.removeItem('token');
+              
+               //  this.$router.push('/');
+
+               router.push('/login-to-escord', () => router.go(0)).catch(err => {})
+         
+                           
+              }).then(response=>{
+           console.log(response);
+
+
+                  })
+               
+   
+
           },
     
 }

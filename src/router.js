@@ -1,3 +1,6 @@
+//do not use this router
+
+
 import Vue from "vue";
 import Router from "vue-router";
 import Index from "./views/Index.vue";
@@ -12,6 +15,8 @@ import escLogin from "./escord-components/esc-Login.vue";
 import escLanding from "./escord-components/esc-LandingPage.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
+import escStaffDash from "./escord-components/Staff/profDashboard.vue";
+
 
 
 Vue.use(Router);
@@ -125,7 +130,15 @@ export default new Router({
       component: escProfDash,
       beforeEnter : guardMyroute,
       meta: { requiresAuth: true, authorize: 'professor' }
-    }
+    },
+
+    {
+      path: "/staff",
+      name: "staff",
+      component:   escStaffDash
+    },
+
+  
   ],
   scrollBehavior: to => {
     if (to.hash) {
