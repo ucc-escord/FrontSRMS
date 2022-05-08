@@ -535,6 +535,8 @@ export default {
     /* show selected gs card info */
     showGS_info(gsID) {
       this.selectedGS_infoShow === gsID ? this.selectedGS_infoShow = null: this.selectedGS_infoShow = gsID
+
+      console.log('gsID: '+ this.selectedGS_infoShow)
     },
 
      /*modal function*/
