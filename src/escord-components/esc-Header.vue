@@ -9,9 +9,9 @@
       <div class="md-toolbar-section-start">
         <!-- logo -->
         <router-link to="/welcome-to-escord">
-            <div class="__logo md-layout md-alignment-center-space-between">
-                <img src="../assets/img/escord-logo.svg" alt="escLogo" width="35rem">
-                <h3 class="md-title title">ESCORD</h3>
+            <div class="__logo md-layout md-alignment-center-center">
+                <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem">
+                <!-- <h3 class="md-title title">ESCORD</h3> -->
             </div>
         </router-link>
       </div>
@@ -157,5 +157,9 @@ export default {
 
 .md-title, img {
     margin-left: 1.25rem !important;
+}
+
+img {
+    padding-top: 0.5rem !important;
 }
 </style>
