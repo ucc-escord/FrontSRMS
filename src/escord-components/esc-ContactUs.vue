@@ -56,7 +56,7 @@
                             <div class="__btnReset md-layout-item md-size-45 md-layout md-alignment-center-center">
                                 <md-button
                                 @click="clearInput"
-                                class="md-simple md-dense md-round md-info">
+                                class="md-simple md-dense md-round md-warning">
                                     Clear Fields
                                 </md-button>
                             </div>

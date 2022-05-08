@@ -8,6 +8,7 @@ import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
 /*---| ESCORD COMPONENTS |---*/
+import escHeader from "./escord-components/esc-Header.vue";
 import escLogin from "./escord-components/esc-Login.vue";
 import escLanding from "./escord-components/esc-Landing.vue";
 import escContactUs from "./escord-components/esc-ContactUs.vue";
@@ -67,12 +68,12 @@ export default new Router({
     {
       path: "/login-to-escord",
       name: "Login",
-      component: escLogin
+      components: {default: escLogin, header: escHeader}
     },
     {
       path: "/contact-escord",
       name: "Contact Us",
-      component: escContactUs
+      components: {default: escContactUs, header: escHeader}
     },
     {
       path: "/student-dashboard",
@@ -82,7 +83,7 @@ export default new Router({
     {
       path: "/prof-dashboard",
       name: "Professor Dashboard",
-      component: escProfDash
+      components: {default: escProfDash, header: escHeader}
     },
     {
       path: "/gradesheet-detail",
