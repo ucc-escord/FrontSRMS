@@ -54,7 +54,7 @@
                 to="/login-to-escord"
                 v-if="showMenu"
               >
-                <p>Login</p>
+                <p class="__login">Login</p>
               </md-list-item>
               
             </md-list>
@@ -162,5 +162,15 @@ export default {
 
 .logo {
     padding-top: 0.5rem !important;
+}
+
+p {
+  font-size: 0.9rem !important;
+}
+
+.__login {
+  color: #ef6c00;
+  font-size: 1rem !important;
+  font-weight: bolder !important;
 }
 </style>
