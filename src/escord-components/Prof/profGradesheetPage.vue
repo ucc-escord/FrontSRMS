@@ -240,6 +240,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Gradesheet Detail"/>
   </div>
 </template>
 
@@ -252,7 +253,7 @@ import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
-  bodyClass: "escord-gradesheet-detail-page",
+  bodyClass: "profile-page",
   components: {
       Modal
   },

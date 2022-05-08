@@ -10,7 +10,8 @@
         <!-- logo -->
         <router-link to="/welcome-to-escord">
             <div class="__logo md-layout md-alignment-center-center">
-                <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem">
+                <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem"
+                class="logo">
                 <!-- <h3 class="md-title title">ESCORD</h3> -->
             </div>
         </router-link>
@@ -155,11 +156,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.md-title, img {
+.md-title, .logo {
     margin-left: 1.25rem !important;
 }
 
-img {
+.logo {
     padding-top: 0.5rem !important;
 }
 </style>

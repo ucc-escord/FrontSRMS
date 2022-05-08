@@ -8,6 +8,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="About | ESCORD"/>
   </div>
 </template>
 

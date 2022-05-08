@@ -363,6 +363,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Dashboard | PROF"/>
   </div>
 </template>
 
@@ -375,7 +376,7 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-  bodyClass: "escord-prof-dash",
+  bodyClass: "profile-page",
   components: {
       Modal
   },

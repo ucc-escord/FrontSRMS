@@ -111,6 +111,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Login | ESCORD"/>
   </div>
 </template>
 
@@ -118,7 +119,7 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email, maxLength } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "escord-login-page",

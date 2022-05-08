@@ -79,6 +79,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Contact Us | ESCORD"/>
   </div>
 </template>
 

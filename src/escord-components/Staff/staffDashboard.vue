@@ -88,13 +88,14 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Dashboard | STAFF"/>
   </div>
 </template>
 
 <script>
 
 export default {
-  bodyClass: "escord-staff-dash",
+  bodyClass: "profile-page",
   data() {
     return {
       staffLN: "DELA CRUZ",

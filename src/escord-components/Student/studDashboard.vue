@@ -55,13 +55,14 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Dashboard | STUDENT"/>
   </div>
 </template>
 
 <script>
 
 export default {
-  bodyClass: "escord-stud-dash",
+  bodyClass: "profile-page",
   data() {
     return {
       studLN: "DELA CRUZ",
