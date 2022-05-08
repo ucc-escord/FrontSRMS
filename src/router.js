@@ -12,6 +12,7 @@ import escHeader from "./escord-components/esc-Header.vue";
 import escFooter from "./escord-components/esc-Footer.vue";
 import escLogin from "./escord-components/esc-Login.vue";
 import escLanding from "./escord-components/esc-Landing.vue";
+import escAbout from "./escord-components/esc-About.vue";
 import escContactUs from "./escord-components/esc-ContactUs.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
@@ -64,17 +65,22 @@ export default new Router({
     {
       path: "/welcome-to-escord",
       name: "Landing",
-      component: escLanding
+      components: {default: escLanding, header: escHeader, footer: escFooter}
     },
     {
-      path: "/login-to-escord",
-      name: "Login",
-      components: {default: escLogin, header: escHeader, footer: escFooter}
+      path: "/about-escord",
+      name: "About",
+      components: {default: escAbout, header: escHeader, footer: escFooter}
     },
     {
       path: "/contact-escord",
       name: "Contact Us",
       components: {default: escContactUs, header: escHeader, footer: escFooter}
+    },
+    {
+      path: "/login-to-escord",
+      name: "Login",
+      components: {default: escLogin, header: escHeader, footer: escFooter}
     },
     {
       path: "/student-dashboard",

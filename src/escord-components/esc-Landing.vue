@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "Landing",
+  name: "escord-landing-page",
   data() {
     return {};
   },

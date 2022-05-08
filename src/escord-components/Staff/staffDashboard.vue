@@ -94,7 +94,7 @@
 <script>
 
 export default {
-  bodyClass: "profile-page",
+  bodyClass: "escord-staff-dash",
   data() {
     return {
       staffLN: "DELA CRUZ",

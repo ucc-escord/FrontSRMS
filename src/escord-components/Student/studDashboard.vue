@@ -61,7 +61,7 @@
 <script>
 
 export default {
-  bodyClass: "profile-page",
+  bodyClass: "escord-stud-dash",
   data() {
     return {
       studLN: "DELA CRUZ",

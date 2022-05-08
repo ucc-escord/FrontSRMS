@@ -8,10 +8,12 @@
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
         <!-- logo -->
-        <div class="__logo md-layout md-alignment-center-space-between">
-            <img src="../assets/img/escord-logo.svg" alt="escLogo" width="35rem">
-            <h3 class="md-title title">ESCORD</h3>
-        </div>
+        <router-link to="/welcome-to-escord">
+            <div class="__logo md-layout md-alignment-center-space-between">
+                <img src="../assets/img/escord-logo.svg" alt="escLogo" width="35rem">
+                <h3 class="md-title title">ESCORD</h3>
+            </div>
+        </router-link>
       </div>
       <div class="md-toolbar-section-end">
         <!-- burger button -->

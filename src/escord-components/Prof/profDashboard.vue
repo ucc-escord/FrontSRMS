@@ -375,7 +375,7 @@ import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-  bodyClass: "profile-page",
+  bodyClass: "escord-prof-dash",
   components: {
       Modal
   },

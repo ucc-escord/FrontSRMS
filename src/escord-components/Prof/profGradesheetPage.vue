@@ -252,7 +252,7 @@ import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
-  bodyClass: "profile-page",
+  bodyClass: "escord-gradesheet-detail-page",
   components: {
       Modal
   },

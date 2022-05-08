@@ -89,7 +89,7 @@ import { validationMixin } from 'vuelidate'
 import { required, email, maxLength } from 'vuelidate/lib/validators'
 
 export default {
-  bodyClass: "escord-login-page",
+  bodyClass: "escord-contact-us-page",
   data() {
     return {
         /* form data */
