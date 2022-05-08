@@ -663,4 +663,8 @@ h3, .h3 {
 .md-xsmall-size-100 {
   margin-left: 1rem !important;
 }
+
+.md-with-hover {
+  cursor: context-menu !important;
+}
 </style>
