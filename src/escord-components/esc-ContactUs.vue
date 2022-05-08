@@ -162,7 +162,7 @@ export default {
 
 h3.title {
     margin-bottom: 0.5rem !important;
-    color: #2d2d2d !important;
+    color: #363434 !important;
 }
 
 .__card-buttons {

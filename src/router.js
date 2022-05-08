@@ -25,45 +25,45 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    {
-      path: "/",
-      name: "index",
-      components: { default: Index, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
-    },
-    {
-      path: "/landing",
-      name: "landing",
-      components: { default: Landing, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
-    },
-    {
-      path: "/login",
-      name: "login",
-      components: { default: Login, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 }
-      }
-    },
-    {
-      path: "/profile",
-      name: "profile",
-      components: { default: Profile, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      }
-    },
+    // {
+    //   path: "/",
+    //   name: "index",
+    //   components: { default: Index, header: MainNavbar, footer: MainFooter },
+    //   props: {
+    //     header: { colorOnScroll: 400 },
+    //     footer: { backgroundColor: "black" }
+    //   }
+    // },
+    // {
+    //   path: "/landing",
+    //   name: "landing",
+    //   components: { default: Landing, header: MainNavbar, footer: MainFooter },
+    //   props: {
+    //     header: { colorOnScroll: 400 },
+    //     footer: { backgroundColor: "black" }
+    //   }
+    // },
+    // {
+    //   path: "/login",
+    //   name: "login",
+    //   components: { default: Login, header: MainNavbar, footer: MainFooter },
+    //   props: {
+    //     header: { colorOnScroll: 400 }
+    //   }
+    // },
+    // {
+    //   path: "/profile",
+    //   name: "profile",
+    //   components: { default: Profile, header: MainNavbar, footer: MainFooter },
+    //   props: {
+    //     header: { colorOnScroll: 400 },
+    //     footer: { backgroundColor: "black" }
+    //   }
+    // },
 
     //---| ESCORD ROUTES |----
     {
-      path: "/welcome-to-escord",
+      path: "/",/*"/welcome-to-escord",*/
       name: "Landing",
       components: {default: escLanding, header: escHeader, footer: escFooter}
     },

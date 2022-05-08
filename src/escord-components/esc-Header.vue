@@ -8,7 +8,7 @@
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
         <!-- logo -->
-        <router-link to="/welcome-to-escord">
+        <router-link to="/">
             <div class="__logo md-layout md-alignment-center-center">
                 <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem"
                 class="logo">

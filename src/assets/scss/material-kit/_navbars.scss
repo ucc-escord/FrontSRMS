@@ -158,8 +158,8 @@
   }
   /* escord */
   &.md-esc-dark{
-    @include dropdown-colors(#2D2D2D);
-    @include toolbar-colors(#2D2D2D, $white-color);
+    @include dropdown-colors(#363434);
+    @include toolbar-colors(#363434, $white-color);
   }
 
   &.navbar-transparent{
