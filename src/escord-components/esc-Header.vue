@@ -101,14 +101,9 @@ export default {
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
+      showMenu: true
     };
-  },
-  computed: {
-    showMenu  () {
-      const excludedRoutes = ["login", "landing", "profile"];
-      return excludedRoutes.every(r => r !== this.$route.name);
-    }
   },
   methods: {
     bodyClick() {
