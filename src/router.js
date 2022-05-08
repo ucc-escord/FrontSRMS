@@ -7,12 +7,13 @@ import Profile from "./views/Profile.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 
-//---| ESCORD COMPONENTS |---
+/*---| ESCORD COMPONENTS |---*/
 import escLogin from "./escord-components/esc-Login.vue";
 import escLanding from "./escord-components/esc-LandingPage.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
+import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
 
 
 Vue.use(Router);
@@ -80,6 +81,11 @@ export default new Router({
       path: "/gradesheet-detail",
       name: "Gradesheet Detail",
       component: escProf_GSPage
+    },
+    {
+      path: "/staff-dashboard",
+      name: "Staff Dashboard",
+      component: escStaffDash
     }
   ],
   scrollBehavior: to => {
