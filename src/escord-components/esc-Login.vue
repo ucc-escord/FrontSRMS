@@ -232,4 +232,8 @@ h3.title {
   text-align: justify;
   font-size: .777rem !important;
 }
+
+.md-icon {
+    color: #90a4ae !important;
+}
 </style>

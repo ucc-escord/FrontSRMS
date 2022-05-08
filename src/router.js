@@ -9,11 +9,13 @@ import MainFooter from "./layout/MainFooter.vue";
 
 /*---| ESCORD COMPONENTS |---*/
 import escLogin from "./escord-components/esc-Login.vue";
-import escLanding from "./escord-components/esc-LandingPage.vue";
+import escLanding from "./escord-components/esc-Landing.vue";
+import escContactUs from "./escord-components/esc-ContactUs.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
+
 
 
 Vue.use(Router);
@@ -66,6 +68,11 @@ export default new Router({
       path: "/login-to-escord",
       name: "Login",
       component: escLogin
+    },
+    {
+      path: "/contact-escord",
+      name: "Contact Us",
+      component: escContactUs
     },
     {
       path: "/student-dashboard",
