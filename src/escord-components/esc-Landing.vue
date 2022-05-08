@@ -9,7 +9,7 @@
       <p>Grading, evaluation, and managing in <b>one</b>.</p><br>
       <button id="learn-more" v-on:click="toAbout">Learn More →</button><br>
     </div>
-    <vue-headful title="ESCORD"/>
+    <vue-headful title="Home | ESCORD"/>
   </div>
 </template>
 

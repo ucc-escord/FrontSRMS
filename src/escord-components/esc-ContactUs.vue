@@ -35,6 +35,8 @@
                             required></md-input>
 
                             <span class="md-error" v-if="!$v.msgData.senderEmail.required">Email is required.</span>
+
+                            <span class="md-error" v-else-if="!$v.msgData.senderEmail.email">Invalid email address.</span>
                         </md-field>
 
                         <md-field
@@ -87,7 +89,7 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email, maxLength } from 'vuelidate/lib/validators'
+import { required, email } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "escord-contact-us-page",
@@ -108,7 +110,7 @@ export default {
   validations() {
       return {
           msgData: {
-          senderEmail: {required},
+          senderEmail: {required, email},
           senderMsg: {required}
         }
       }
