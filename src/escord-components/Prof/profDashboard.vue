@@ -317,12 +317,49 @@
             
           </div>
 
-          <div class="profile-content">
-            <div class="cards md-layout md-alignment-center">
-              
-              
+          <!-- GRADESHEET CARDS -->
+          <div class="profile-content"> 
+
+            <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
+
+              <md-card
+              v-for="gs in gradesheet"
+              :key="gs.id" 
+              md-with-hover
+              class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
+                  <md-card-content>
+                    <p>
+                      ID: {{gs.id}}
+                    </p>
+                    <p>
+                      Subject: {{gs.subjCode}} {{gs.subjDesc}}
+                    </p>
+                    <p>
+                      Class: {{gs.subjClassYr}}{{gs.subjClassSec}} | {{gs.subjClassProg}}
+                    </p>
+                    <p class="md-caption">
+                      {{gs.subjSem}}, SY {{gs.subjSY_start}}-{{gs.subjSY_end}}
+                    </p> 
+                    
+                    <span v-if="selectedGS_infoShow === gs.id"
+                    class="text-info">
+                      You have selected the card for {{gs.subjDesc}} with gradesheet ID of: {{gs.id}}.
+                    </span>
+                  </md-card-content>
+
+                  <md-card-actions>
+                    <md-button
+                    class="md-simple md-esc-accent"
+                    @click="showGS_info(gs.id)">
+                    SHOW DETAILS
+                    </md-button>
+                  </md-card-actions>
+              </md-card>
+
             </div>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -386,7 +423,67 @@ export default {
                   "BS Entertainment and Multimedia Computing"
                 ],
       year: ["1", "2", "3", "4"],
-      section: ["A", "B", "C"]
+      section: ["A", "B", "C"],
+
+      /* GRADESHEET ARRAY/ INFO FOR GRADEHSHEET CARDS */
+      gradesheet: [
+        {
+          id: "001",
+          subjCode: "CCS 116",
+          subjDesc: "ADVANCED WEB SYSTEMS",
+          subjClassProg: "BS Computer Science",
+          subjClassYr: "3",
+          subjClassSec: "A",
+          subjSem: "1ST SEMESTER",
+          subjSY_start: "2022",
+          subjSY_end: "2023"
+        },
+        {
+          id: "002",
+          subjCode: "CCS 116",
+          subjDesc: "ADVANCED WEB SYSTEMS",
+          subjClassProg: "BS Information Systems",
+          subjClassYr: "3",
+          subjClassSec: "B",
+          subjSem: "1ST SEMESTER",
+          subjSY_start: "2022",
+          subjSY_end: "2023"
+        },
+        {
+          id: "003",
+          subjCode: "CCS 116",
+          subjDesc: "ADVANCED WEB SYSTEMS",
+          subjClassProg: "BS Information Systems",
+          subjClassYr: "3",
+          subjClassSec: "C",
+          subjSem: "1ST SEMESTER",
+          subjSY_start: "2022",
+          subjSY_end: "2023"
+        },
+        {
+          id: "004",
+          subjCode: "CCS 116",
+          subjDesc: "ADVANCED WEB SYSTEMS",
+          subjClassProg: "BS Entertainment and Multimedia Computing",
+          subjClassYr: "3",
+          subjClassSec: "B",
+          subjSem: "1ST SEMESTER",
+          subjSY_start: "2022",
+          subjSY_end: "2023"
+        },
+        {
+          id: "005",
+          subjCode: "CCS 116",
+          subjDesc: "ADVANCED WEB SYSTEMS",
+          subjClassProg: "BS Information Technology",
+          subjClassYr: "3",
+          subjClassSec: "A",
+          subjSem: "1ST SEMESTER",
+          subjSY_start: "2022",
+          subjSY_end: "2023"
+        }
+      ],
+      selectedGS_infoShow: null,
     };
   },
   /* for validation */
@@ -431,24 +528,29 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
   },
 
   methods: {
-    /*modal function*/
+    /* show selected gs card info */
+    showGS_info(gsID) {
+      this.selectedGS_infoShow === gsID ? this.selectedGS_infoShow = null: this.selectedGS_infoShow = gsID
+    },
+
+     /*modal function*/
     classicModalHide() {
       this.classicModal = false;
     },
 
     /*get subject desc from `subjects` array*/
-    getSubjectOptions(searctherm) {
-      console.log("getSubjects", searctherm);
+    getSubjectOptions(searchterm) {
+      console.log("getSubjects", searchterm);
       this.subjectOptions = new Promise((resolve) => {
-        if (!searctherm) {
+        if (!searchterm) {
           resolve(this.subjects.map((x) => x.desc));
         }
         else {
-          const term = searctherm.toLowerCase();
+          const term = searchterm.toLowerCase();
           this.subjectOptions = this.subjects
           .filter(({ desc }) => {
             return desc.toLowerCase().includes(term);
@@ -511,7 +613,7 @@ export default {
         else {
           console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
-    }
+    },
   },
 };
 </script>
@@ -550,5 +652,13 @@ h3, .h3 {
 .md-input {
   text-transform: uppercase !important;
   max-width: 100%;
+}
+
+.md-card {
+  margin: 1rem !important;
+}
+
+.md-xsmall-size-100 {
+  margin-left: 1rem !important;
 }
 </style>
