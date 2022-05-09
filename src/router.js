@@ -11,6 +11,7 @@ import MainFooter from "./layout/MainFooter.vue";
 import escLanding from "./escord-components/esc-LandingPage.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
+import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticRecord.vue";
 
 Vue.use(Router);
 
@@ -67,6 +68,11 @@ export default new Router({
       path: "/prof-dashboard",
       name: "Professor Dashboard",
       component: escProfDash
+    },
+    {
+      path: "/Staff-scholastic-record",
+      name: "Staff Scholastic-record",
+      component: escStaffScholasticRecord
     }
   ],
   scrollBehavior: to => {

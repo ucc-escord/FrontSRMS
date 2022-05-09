@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="name">
-                  <h3 class="title">{{profLN}}, {{profFN}} {{profMN}}</h3>
+                  <h3 class="title"> {{profLN}}, {{profFN}} {{profMN}}</h3>
                   <h5>{{profRank}}</h5>
                 </div>
               </div>
