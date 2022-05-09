@@ -6,7 +6,7 @@
   >
     <div class="container">
      
-      <div class="copyright">
+      <div class="copyright mx-auto">
         &copy; {{ year }} | ESCORD
       </div>
     </div>

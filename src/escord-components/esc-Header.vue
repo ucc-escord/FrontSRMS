@@ -37,6 +37,13 @@
             <md-list>
 
               <md-list-item
+                to="/landing-og"
+                v-if="showMenu"
+              >
+                <p>Landing OG</p>
+              </md-list-item>
+
+              <md-list-item
                 to="/about-escord"
                 v-if="showMenu"
               >
