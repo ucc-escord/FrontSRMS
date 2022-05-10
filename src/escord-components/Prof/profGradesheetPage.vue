@@ -240,6 +240,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Gradesheet Detail"/>
   </div>
 </template>
 

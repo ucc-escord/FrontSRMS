@@ -4,7 +4,7 @@
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
+            class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
           >
             
             <md-card>
@@ -113,6 +113,7 @@
         </div>
       </div>
     </div>
+    <vue-headful title="Login | ESCORD"/>
   </div>
 </template>
 
@@ -120,7 +121,7 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email, maxLength  } from 'vuelidate/lib/validators'
+import { required, email  } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters } from "vuex";
 
 
@@ -253,5 +254,9 @@ h3.title {
   line-height: 0.95em !important;
   text-align: justify;
   font-size: .777rem !important;
+}
+
+.md-icon {
+    color: #90a4ae !important;
 }
 </style>
