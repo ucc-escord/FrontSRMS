@@ -58,7 +58,7 @@
               </md-list-item>
 
               <md-list-item
-                to="/login-to-escord"
+                to="/login"
                 v-if="showMenu"
               >
                 <p class="__login">Login</p>

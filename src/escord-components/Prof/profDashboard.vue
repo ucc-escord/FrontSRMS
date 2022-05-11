@@ -40,6 +40,12 @@
                     <md-icon>add</md-icon>logout
             </md-button>
 
+ <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
+                    <md-icon>show</md-icon>show data
+            </md-button>
+
+           
+
             <!-- modal -->
             <modal v-if="classicModal" @close="classicModalHide">
 
@@ -374,7 +380,7 @@
 <script>
 // modal import
 import { Modal } from "@/components";
-import { mapActions} from "vuex";
+import { mapActions, mapGetters} from "vuex";
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -542,7 +548,15 @@ export default {
 
        ...mapActions({addgsinfo: "addgsinfo" }),
           ...mapActions({ loggingOut: "loggingOut" }),
+          ...mapActions({ showDataProf: "showDataProf" }),
+
     /* show selected gs card info */
+
+  showDataProfFromEDB(){
+              this.showDataProf()
+
+  },
+
     showGS_info(gsID) {
       this.selectedGS_infoShow === gsID ? this.selectedGS_infoShow = null: this.selectedGS_infoShow = gsID
 
