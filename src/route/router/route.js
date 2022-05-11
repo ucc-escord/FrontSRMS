@@ -30,6 +30,8 @@ const escStudDash  = () => import('../../escord-components/Student/studDashboard
 
 const escAbout  = () => import('../../escord-components/esc-About.vue')
 const escContactUs  = () => import('../../escord-components/esc-ContactUs.vue')
+const escStaffScholasticRecord  = () => import('../../escord-components/Staff/StaffScholasticRecord.vue')
+
 
 
 
@@ -83,6 +85,11 @@ const routes = [
     path: "/contact-escord",
     name: "Contact Us",
     components: {default: escContactUs, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/Staff-scholastic-record",
+    name: "Staff Scholastic-record",
+      component: escStaffScholasticRecord
   },
 
 

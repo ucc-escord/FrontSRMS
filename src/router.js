@@ -20,11 +20,9 @@ import escAbout from "./escord-components/esc-About.vue";
 import escContactUs from "./escord-components/esc-ContactUs.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
-import escStaffDash from "./escord-components/Staff/profDashboard.vue";
-
+import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticRecord.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
-
 
 
 Vue.use(Router);
@@ -153,6 +151,11 @@ export default new Router({
       components: {default: escProfDash, header: escHeader, footer: escFooter}
     },
     {
+      path: "/Staff-scholastic-record",
+      name: "Staff Scholastic-record",
+      component: escStaffScholasticRecord
+    },
+    {
       path: "/gradesheet-detail",
       name: "Gradesheet Detail",
       component: escProf_GSPage
@@ -161,6 +164,7 @@ export default new Router({
       path: "/staff-dashboard",
       name: "Staff Dashboard",
       component: escStaffDash
+
     }
   ],
   scrollBehavior: to => {

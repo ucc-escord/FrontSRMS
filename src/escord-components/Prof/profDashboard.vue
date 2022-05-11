@@ -20,8 +20,10 @@
                 </div>
 
                 <div class="name">
+                
                   <h3 class="title">{{formData.profName}}</h3>
                   <h5>{{formData.profRank}}</h5>
+
                 </div>
               </div>
             </div>
