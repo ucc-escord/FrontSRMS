@@ -4,7 +4,7 @@
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
+            class="md-layout-item md-size-50 md-small-size-80 md-xsmall-size-90 md-medium-size-70 mx-auto"
           >
             
             <md-card>
@@ -114,7 +114,7 @@
                         <div class="__register-btn text-center md-layout md-gutter md-alignment-center-center">
                           <p>Already have an account?</p>
                           <p class="__link">
-                            <router-link class="md-body-2 text-esc-accent" to="/Login-to-escord">
+                            <router-link class="md-body-2 text-esc-accent" to="/login-to-escord">
                               Log in here!
                             </router-link>
                           </p>
@@ -254,15 +254,15 @@ h3.title {
   font-size: .777rem !important;
 }
 
-.md-icon {
-    color: #90a4ae !important;
-}
-
 .__link :hover {
    color: #e65100 !important;
 }
 
 .__link {
   margin-left: 0.5rem !important;
+}
+
+.md-input {
+  width: 100% !important;
 }
 </style>
