@@ -21,9 +21,10 @@
 
                 <div class="name">
                 
-                  <h3 class="title">{{formData.profName}}</h3>
+                  <h3 class="title">{{formData.profName}}
+                
+                  </h3>
                   <h5>{{formData.profRank}}</h5>
-
                 </div>
               </div>
             </div>
@@ -335,36 +336,38 @@
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
               <md-card
-              v-for="gs in gradesheet"
-              :key="gs.id" 
+              v-for="gs in getCard"
+              :key="gs.gradesheetid" 
               md-with-hover
               class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
                   <md-card-content>
                     <p>
-                      ID: {{gs.id}}
+                      ID: {{gs.gradesheetid}}
+                    </p>
+                
+                    <p>
+                      Subject: {{gs.subjectcode}} {{gs.subjectdesc}}
                     </p>
                     <p>
-                      Subject: {{gs.subjCode}} {{gs.subjDesc}}
-                    </p>
-                    <p>
-                      Class: {{gs.subjClassYr}}{{gs.subjClassSec}} | {{gs.subjClassProg}}
+                      Class: {{gs.course_year}}{{gs.course_section}} | {{gs.course_short}}
                     </p>
                     <p class="md-caption">
-                      {{gs.subjSem}}, SY {{gs.subjSY_start}}-{{gs.subjSY_end}}
+                      {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}
                     </p> 
                     
-                    <span v-if="selectedGS_infoShow === gs.id"
+                    <span v-if="selectedGS_infoShow === gs.gradesheetid"
                     class="text-info">
-                      You have selected the card for {{gs.subjDesc}} with gradesheet ID of: {{gs.id}}.
+                      You have selected the card for {{gs.subjectdesc}} with gradesheet ID of: {{gs.gradesheetid}}.
                     </span>
                   </md-card-content>
 
                   <md-card-actions>
                     <md-button
                     class="md-simple md-esc-accent"
-                    @click="showGS_info(gs.id)">
+                    @click="showGS_info(gs.gradesheetid)">
                     SHOW DETAILS
                     </md-button>
+                   <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link>
                   </md-card-actions>
               </md-card>
 
@@ -388,16 +391,23 @@ import { mapActions, mapGetters} from "vuex";
 import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
+
+
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal
+      Modal,
+  
   },
+ 
+
+ 
   mixins: [validationMixin], // for validation
   data() {
     return {
       /*modal default value on load*/
       classicModal: false,
+      UserID: this.$route.params.userID,
 
       /*modal--form data*/
       formData:{
@@ -413,7 +423,8 @@ export default {
         subjSY_start: new Date().getFullYear(),
         subjSY_end: new Date().getFullYear() + 1,
         profRank:'Master Teacher III', //or null
-        profName: 'JOHN GONZALES CRUZ' //or null
+        profName: localStorage.getItem('email'),
+    //or null
         },
         gradesheetSaved: false,
         sending: false,
@@ -441,61 +452,6 @@ export default {
 
       /* GRADESHEET ARRAY/ INFO FOR GRADEHSHEET CARDS */
       gradesheet: [
-        {
-          id: "001",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Computer Science",
-          subjClassYr: "3",
-          subjClassSec: "A",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "002",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Systems",
-          subjClassYr: "3",
-          subjClassSec: "B",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "003",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Systems",
-          subjClassYr: "3",
-          subjClassSec: "C",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "004",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Entertainment and Multimedia Computing",
-          subjClassYr: "3",
-          subjClassSec: "B",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "005",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Technology",
-          subjClassYr: "3",
-          subjClassSec: "A",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        }
       ],
       selectedGS_infoShow: null,
     };
@@ -540,23 +496,33 @@ export default {
   computed: {
     headerStyle() {
       return {
+        
         backgroundImage: `url(${this.header})`
       };
     },
+  
+    ...mapGetters({getCard: 'getCard'}),
+   
+    ...mapGetters({getcurrentUser: 'getCurrentUser'})
+   
   },
 
   methods: {
     /*modal function*/
-
+       ...mapActions({cardinfo: "cardinfo" }),
+    
        ...mapActions({addgsinfo: "addgsinfo" }),
           ...mapActions({ loggingOut: "loggingOut" }),
-          ...mapActions({ showDataProf: "showDataProf" }),
+    //      ...mapActions({ showDataProf: "showDataProf" }),
 
     /* show selected gs card info */
 
   showDataProfFromEDB(){
-              this.showDataProf()
+    // console.log(this.$store.getters.getCurrentUser.email)
+            //  this.showDataProf()
+    //this.cardinfo(this.formData.profID)
 
+    this.cardinfo(this.$route.params.userid)
   },
 
     showGS_info(gsID) {

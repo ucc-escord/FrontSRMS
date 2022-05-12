@@ -60,10 +60,12 @@ const actions = {
        currentUserLog({commit,dispatch}){
            
         axios.get('/api/user').then(response => {
-         
-                localStorage.setItem('role', response.data.user_role);
 
-        
+              commit('setUser',response.data)
+                localStorage.setItem('role', response.data.user_role);
+                localStorage.setItem('email',response.data.email);
+
+                console.log(response.data.id);
                 if(response.data.user_role === "admin"){
                   //    router.push({path:'/About'});
                   router.push('/', () => router.go(0)).catch(err => {})
@@ -81,8 +83,10 @@ const actions = {
              
                   
                 }else{
-               //   router.push({path:'/AdminDashboard'});
-               router.push('/prof-dashboard', () => router.go(0)).catch(err => {})
+
+               router.push({name:'Professor Dashboard', params:{userid: response.data.id }})
+             //  router.push({path:'/prof-dashboard'});
+             //  router.push('/prof-dashboard', () => router.go(0)).catch(err => {})
                 
                 }
  

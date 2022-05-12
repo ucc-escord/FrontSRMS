@@ -1,4 +1,6 @@
 import axios from "axios"
+import router from "./../../route";
+
 
 
 //SHOWING ALL ARCHIEVE FILES IN SRMS
@@ -69,6 +71,46 @@ const actions = {
       //       console.log('error in adding');
              })
      },
+
+
+     downloadpdfgradesheet(){
+
+       
+        axios.get('/api/archieveschol',
+                 {responseType: 'arraybuffer'})
+             .then(response => {
+                var fileURL = window.URL.createObjectURL(new Blob([response.data], {type: 'application/pdf'}));
+                  var fileLink = document.createElement('a');
+                  fileLink.href = fileURL;
+                  fileLink.setAttribute('download', 'file.pdf');
+                 document.body.appendChild(fileLink);
+                 fileLink.click();
+              })
+         
+     },
+
+     archgradesheet({route}){
+
+        console.log(this.$route.params.gradeshid);
+      /*   axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
+            status_archieve: '1', }).then((response)=>{
+          
+       
+                  console.log('archieve successfull');
+                  
+                  console.log(response.data);
+       
+    
+    }).catch((errors)=>{
+           //   this.errors = errors.response.data.errors
+                // this.error =  errors.response.data;
+                 console.log('error in archeiveing');
+    
+          
+       
+                 })  */
+    
+     }
     
     
  

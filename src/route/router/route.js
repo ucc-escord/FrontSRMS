@@ -65,16 +65,19 @@ const routes = [
     component: escStudDash
   },
   {
-    path: "/prof-dashboard",
+    path: "/prof-dashboard/:userid",
     name: "Professor Dashboard",
     component: escProfDash,
-    meta: { requiresAuth: true, authorize: 'professor' } 
+  
+   meta: { requiresAuth: true, authorize: 'professor' } ,
   //uncomment this to have a login validation
+
   },
   {
-    path: "/gradesheet-detail",
+    path: "/gradesheet-detail/:userid/:gradeshid",
     name: "Gradesheet Detail",
-    component: escProf_GSPage
+    component: escProf_GSPage,
+ 
   },
   {
     path: "/about-escord",

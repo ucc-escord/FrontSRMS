@@ -15,6 +15,8 @@
                 <h4>
                     <strong>{{subjCode}}</strong>
                     {{subjDesc}}
+
+                
                 </h4>
             </div>
             
@@ -52,7 +54,7 @@
                 </div>
 
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
+                    <md-button  @click="archievebtn"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>inventory</md-icon>
                         <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
@@ -221,7 +223,7 @@
                         :disabled="sending"
                         >
                           <md-icon>add</md-icon>
-                          ADD
+                          ADD 
                         </md-button>
                       </div>
                   </div>
@@ -247,6 +249,8 @@
 <script>
 // modal import
 import { Modal } from "@/components";
+import { mapActions, mapGetters} from "vuex";
+import axios from "axios"
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -273,6 +277,7 @@ export default {
       classSec: "A",
       profName: "JOEMEN BARRIOS",
       profRank: "MASTER TEACHER III",
+    
 
       studentList: [
         {
@@ -320,6 +325,8 @@ export default {
       studAdded: false,
       sending: false,
       addedStudentInfo: '',
+   
+     
     };
   },
 
@@ -369,6 +376,8 @@ export default {
 
   methods: {
     /*modal function*/
+          ...mapActions({ archgradesheet: "archgradesheet" }),
+
     classicModalHide() {
       this.classicModal = false;
     },
@@ -411,7 +420,30 @@ export default {
         else {
           console.log("Cannot add student to the gradesheet.");
         }
-    }
+    },
+
+      archievebtn(){
+         
+        
+        axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
+            status_archieve: '1', }).then((response)=>{
+          
+       
+                  console.log('archieve successfull');
+                  
+                //add notification time out here 
+
+       
+    
+    }).catch((errors)=>{
+          
+                 console.log('error in archeiveing');
+    
+          
+       
+                 })  
+
+           },
   }
 };
 </script>

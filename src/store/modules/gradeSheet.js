@@ -5,6 +5,7 @@ const state = {
   specifiedGS: {},
   row : [],
   route : "",
+  card : [],
 
 }
 const getters = {
@@ -19,6 +20,9 @@ const getters = {
 
 getroute: state => {
   return state.route
+},
+getCard: state => {
+  return state.card
 },
       
 }
@@ -81,6 +85,21 @@ const actions = {
    
      },
 
+
+    cardinfo({commit,state},userid){
+
+      axios.get('/api/perprofcard/'+ userid).then(response => {
+        //   this.currentUser = response.data
+   
+        commit('setCard',response.data)
+           console.log(response.data);
+
+       }).catch(()=>{
+           console.log("Error in getting the user")
+       }) 
+   
+     },
+
    
 
 }
@@ -97,6 +116,10 @@ const mutations = {
 
 setRoute(state,data){
   return state.route = data;
+},
+
+setCard(state,data){
+  return state.card = data;
 },
 
 }
