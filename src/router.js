@@ -14,6 +14,7 @@ import MainFooter from "./layout/MainFooter.vue";
 import escHeader from "./escord-components/esc-Header.vue";
 import escFooter from "./escord-components/esc-Footer.vue";
 import escLogin from "./escord-components/esc-Login.vue";
+import escRegister from "./escord-components/esc-Register.vue";
 import escLanding from "./escord-components/esc-Landing.vue";
 import escLanding2 from "./escord-components/esc-Landing-2.vue";
 import escAbout from "./escord-components/esc-About.vue";
@@ -141,6 +142,11 @@ export default new Router({
       components: {default: escLogin, header: escHeader, footer: escFooter}
     },
     {
+      path: "/register-to-escord",
+      name: "Register",
+      components: {default: escRegister, header: escHeader, footer: escFooter}
+    },
+    {
       path: "/student-dashboard",
       name: "Student Dashboard",
       component: escStudDash
@@ -151,8 +157,14 @@ export default new Router({
       components: {default: escProfDash, header: escHeader, footer: escFooter}
     },
     {
-      path: "/Staff-scholastic-record",
-      name: "Staff Scholastic-record",
+      path: "/staff-dashboard",
+      name: "Staff Dashboard",
+      component: escStaffDash
+
+    },
+    {
+      path: "/scholastic-record-detail",
+      name: "Staff Scholastic Record",
       component: escStaffScholasticRecord
     },
     {
@@ -160,12 +172,7 @@ export default new Router({
       name: "Gradesheet Detail",
       component: escProf_GSPage
     },
-    {
-      path: "/staff-dashboard",
-      name: "Staff Dashboard",
-      component: escStaffDash
-
-    }
+    
   ],
   scrollBehavior: to => {
     if (to.hash) {

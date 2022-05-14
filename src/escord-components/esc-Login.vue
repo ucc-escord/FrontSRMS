@@ -88,6 +88,17 @@
                         Remember my password
                         </md-checkbox>
 
+                        <div class="__register-btn text-center md-layout md-gutter md-alignment-center-center">
+                          <p>Dont have an account?</p>
+                          <p class="__link">
+                            <router-link class="md-body-2 text-esc-accent" to="/register-to-escord">
+                              Register here!
+                            </router-link>
+                          </p>
+                        </div>
+
+                        <md-divider></md-divider>
+
                         <div class="__card-buttons md-layout md-gutter md-alignment-center-space-between">
                             <md-button
                             class="md-layout-item md-size-45 md-simple md-dense md-round md-info">
@@ -239,8 +250,8 @@ h3.title {
     margin-bottom: 2rem !important;
 }
 
-.__card-buttons {
-    margin-top: 1.5rem !important;
+.__card-buttons, .__register-btn {
+    margin-top: 0.75rem !important;
 }
 
 .md-field {
@@ -258,5 +269,13 @@ h3.title {
 
 .md-icon {
     color: #90a4ae !important;
+}
+
+.__link :hover {
+   color: #e65100 !important;
+}
+
+.__link {
+  margin-left: 0.5rem !important;
 }
 </style>
