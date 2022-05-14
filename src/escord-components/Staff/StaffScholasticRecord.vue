@@ -8,7 +8,7 @@
         <div class="container">
           <div class="md-layout">
             <div class="md-layout-item" align="left">
-              <md-button class="md-primary"><md-icon >arrow_back_ios</md-icon> RETURN TO MAIN MENU</md-button>
+              <router-link  to="/staff-dashboard">  <md-button class="md-primary"><md-icon >arrow_back_ios</md-icon> RETURN TO MAIN MENU</md-button> </router-link>
             </div>
 
             <div class="md-layout-item" align="right">

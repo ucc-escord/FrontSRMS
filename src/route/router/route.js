@@ -21,6 +21,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 
 
 
+const escStaffDash = () => import("../../escord-components/Staff/staffDashboard.vue");
 
 const escLogin = () => import('../../escord-components/esc-Login.vue')
 const escLanding = () => import('../../escord-components/esc-Landing-2.vue')
@@ -34,6 +35,7 @@ const escAbout  = () => import('../../escord-components/esc-About.vue')
 const escContactUs  = () => import('../../escord-components/esc-ContactUs.vue')
 const escStaffScholasticRecord  = () => import('../../escord-components/Staff/StaffScholasticRecord.vue')
 
+const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 
 
@@ -54,6 +56,12 @@ const routes = [
     components: {default: escLanding, header: escHeader, footer: escFooter},
 
   },
+  {
+    path: "/register",
+    name: "Register",
+    components: {default: escRegister, header: escHeader, footer: escFooter}
+  },
+
   {
     path: "/login",
     name: "Login",
@@ -95,6 +103,12 @@ const routes = [
     path: "/Staff-scholastic-record",
     name: "Staff Scholastic-record",
       component: escStaffScholasticRecord
+  },
+  {
+    path: "/staff-dashboard",
+    name: "Staff Dashboard",
+    component: escStaffDash
+
   },
 
 

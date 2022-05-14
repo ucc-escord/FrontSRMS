@@ -44,7 +44,7 @@
             </md-button>
 
  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
-                    <md-icon>show</md-icon>Refresh Card
+                    <md-icon>show</md-icon>Refresh Card 
             </md-button>
 
            
@@ -329,9 +329,12 @@
 
             
           </div>
-
+ <div v-if='loadingStatus'>
+            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
+          
+          </div>
           <!-- GRADESHEET CARDS -->
-          <div class="profile-content"> 
+          <div v-else class="profile-content"> 
 
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
@@ -504,6 +507,9 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
+     loadingStatus(){
+      return this.$store.getters.loadingStatus
+    },
   
     ...mapGetters({getCard: 'getCard'}),
    
@@ -601,7 +607,7 @@ export default {
 
            this.addgsinfo(this.formData)
      
-
+      
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
           this.addedGradesheetInfo = `${this.formData.subjCode} ${this.formData.subjDesc}`
@@ -609,6 +615,8 @@ export default {
           this.sending = false
           this.clearForm()
         }, 1500)
+
+        this.showDataProfFromEDB()
       },
       addValidate () {
         this.$v.$touch()

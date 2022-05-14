@@ -6,6 +6,7 @@ const state = {
   row : [],
   route : "",
   card : [],
+  loadingStat: false,
 
 }
 const getters = {
@@ -24,6 +25,10 @@ getroute: state => {
 getCard: state => {
   return state.card
 },
+
+loadingStatus: state => {
+    return state.loadingStat
+}
       
 }
 const actions = {
@@ -31,12 +36,12 @@ const actions = {
         axios.post('/api/gradesheetinfo', formData).then((response)=>{
         
 
-            var elements = document.getElementsByTagName("input");
+          /*   var elements = document.getElementsByTagName("input");
             for (var ii=0; ii < elements.length; ii++) {
               if (elements[ii].type == "text") {
                 elements[ii].value = "";
               }
-            }
+            } */
             console.log('adding successful' , response.data);
 
             
@@ -87,10 +92,11 @@ const actions = {
 
 
     cardinfo({commit,state},userid){
+      commit('setLoading',true)
 
-      axios.get('/api/perprofcard/'+ userid).then(response => {
+      return axios.get('/api/perprofcard/'+ userid).then(response => {
         //   this.currentUser = response.data
-   
+        commit('setLoading',false)
         commit('setCard',response.data)
           
 
@@ -99,6 +105,25 @@ const actions = {
        }) 
    
      },
+
+
+
+     addStudGradesheet({commit},addStud){
+
+      commit('setLoading',true)
+   
+      return  axios.post('api/gradesheetstudent/', addStud).then((response)=>{
+        //   this.currentUser = response.data
+        commit('setLoading',false)
+        console.log('adding successful' , response.data);
+          
+
+       }).catch(()=>{
+           console.log("Error in getting the user")
+       })  
+   
+     },
+
 
    
 
@@ -122,6 +147,9 @@ setCard(state,data){
   return state.card = data;
 },
 
+setLoading(state,data){
+  return state.loadingStat = data;
+}
 }
 
 

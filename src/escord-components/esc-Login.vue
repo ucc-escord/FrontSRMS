@@ -91,7 +91,7 @@
                         <div class="__register-btn text-center md-layout md-gutter md-alignment-center-center">
                           <p>Dont have an account?</p>
                           <p class="__link">
-                            <router-link class="md-body-2 text-esc-accent" to="/register-to-escord">
+                            <router-link class="md-body-2 text-esc-accent" to="/register">
                               Register here!
                             </router-link>
                           </p>

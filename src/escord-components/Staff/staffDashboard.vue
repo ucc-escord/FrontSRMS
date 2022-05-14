@@ -63,14 +63,18 @@
               
               <div class="md-layout-item md-xlarge-size-50 
               md-small-size-50 md-xsmall-size-100">
+                 <router-link  to="/Staff-scholastic-record">
                   <md-card class="md-with-hover">
                       <md-card-content
                       class="md-layout md-alignment-center-center">
                         <md-icon
                         class="md-size-5x">school</md-icon>
-                        <p class="md-title title text-center">Scholastic Record Management</p>
+                     <p class="md-title title text-center">
+                             
+                           Scholastic Record Management </p>
                       </md-card-content>
                   </md-card>
+                  </router-link>
                 </div>
                 
                 <div class="md-layout-item md-medium-size-50 md-small-size-50 md-xsmall-size-100">
@@ -137,6 +141,6 @@ export default {
 }
 
 .md-with-hover {
-    cursor: context-menu !important;
+    cursor: pointer !important;
 }
 </style>

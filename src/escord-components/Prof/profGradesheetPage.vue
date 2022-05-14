@@ -4,18 +4,19 @@
       class="section page-header header-filter"
       :style="headerStyle"
     ></parallax>
+   
 
     <div class="main main-raised">
       <div class="section profile-content">
         <div class="container">
-
+       
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
                 <h4>
                     <strong>{{getGS.subjectcode}}</strong>
                    {{getGS.subjectdesc}}
-
+ 
                 
                 </h4>
             </div>
@@ -69,15 +70,28 @@
                     </md-button>
                 </div>
 
+                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                    <md-button  @click="refreshGradesheet"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>refresh</md-icon>
+                        <md-tooltip md-direction="bottom">Refresh Gradesheet</md-tooltip>
+                    </md-button>
+                </div>
+
             </div>
 
           </div>
 
           <md-divider></md-divider>
 
-          <div class="__gradesheet-table">
+           <div v-if='loadingStatus'>
+            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
+          
+          </div>
 
-            <md-table
+          <div  v-else  class="__gradesheet-table">
+
+            <md-table 
               v-model="studentList"
               md-sort="studLN"
               md-sort-order="asc">
@@ -103,7 +117,7 @@
                 </md-table-cell>
 
                <md-table-cell>
-                  <!-- 
+              
                  <md-vuelidated
                   :key="index"
                   :messages="{
@@ -119,11 +133,11 @@
                     class="text-center"
                     v-model="getrow[index].midterm"></md-input> 
                   </md-vuelidated> 
-                  -->
+               
                 </md-table-cell>
 
                 <md-table-cell>
-                     <!-- 
+                
                  <md-vuelidated
                   :key="index"
                   :messages="{
@@ -139,7 +153,7 @@
                     class="text-center"
                     v-model="getrow[index].finalgrade"></md-input>
                   </md-vuelidated> 
-                    -->
+                 
                 </md-table-cell>
 
                 <md-table-cell>
@@ -270,7 +284,7 @@ export default {
           let studentrow = this.$store.getters.getrow;
 
           studentrow.forEach(student => this.studentList = student);
-      console.log(this.studentList)
+     // console.log(this.studentList)
           
       },
   data() {
@@ -300,10 +314,15 @@ export default {
 
       /*modal--form data*/
       addStud: {
-        studNum: null,
-        studLN: null,
-        studFN: null,
-        studMI: ""
+        studNum: '',
+        studLN: '',
+        studFN: '',
+        studMI: '',
+        midterm:1,
+        finalterm:1,
+        finalgrade:1,
+        gradesheetid: this.$route.params.gradeshid,
+
       },
       studAdded: false,
       sending: false,
@@ -317,15 +336,15 @@ export default {
 
    /* for validation */
    validations: {
-       studentList: {
+       getrow: {
          $each: {
-           studMG: {
+           midterm: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
              maxValue: maxValue(5.00)},
 
-           studFG: {
+           finalgrade: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
@@ -355,6 +374,9 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
+    loadingStatus(){
+      return this.$store.getters.loadingStatus
+    },
        ...mapGetters({getrow : 'getrow'}),
      ...mapGetters({getGS : 'getGS'}),
 
@@ -363,9 +385,16 @@ export default {
   methods: {
     /*modal function*/
           ...mapActions({ archgradesheet: "archgradesheet" }),
+          ...mapActions({ refreshGS: "showgsinfo" }),
+
+          ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
 
     classicModalHide() {
       this.classicModal = false;
+    },
+
+    refreshGradesheet(){
+        this.refreshGS({ route: this.$route.params.gradeshid })
     },
 
     /* add student modal validation methods */
@@ -387,20 +416,28 @@ export default {
       },
       addStudent () {
         this.sending = true
-
+     
+     this.addStudGradesheet(this.addStud)
+       
+        
+      
         // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
+      window.setTimeout(() => {
           this.addedStudentInfo = `${this.addStud.studLN}, ${this.addStud.studFN} ${this.addStud.studMI}`
           this.studAdded = true
           this.sending = false
           this.clearForm()
-        }, 1500)
+        }, 1500) 
+
+        this.refreshGradesheet();
       },
       addValidate () {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
+  
           this.addStudent()
+            
           console.log("Student is added successfully.")
         }
         else {
@@ -409,9 +446,9 @@ export default {
     },
 
       archievebtn(){
-         
+       
         
-        axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
+      axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
             status_archieve: '1', }).then((response)=>{
           
        
@@ -428,7 +465,7 @@ export default {
           
        
                  })  
-
+ 
            },
   }
 };
