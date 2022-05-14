@@ -14,7 +14,7 @@ export default router;
 
 function loggedIn(){
     return localStorage.getItem('token')
-   
+  
    
   }
 
@@ -25,16 +25,18 @@ function loggedIn(){
 
  router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
-    const { authorize, requiresAuth } = to.meta;
+    const { authorize, requiresAuth,requiresVisitor } = to.meta;
    // const currentUser = authenticationService.currentUserValue;
 
   const currentUser = localStorage.getItem('role');
+
+  const isAuthenticated = store.state.currentUser.isAuthenticated;
     if (requiresAuth) {
         if (!loggedIn()) {
             // not logged in so redirect to login page with the return url
             return next({ path: '/'});
         }
-
+     
 
         // check if route is restricted by role
         if (authorize.length && !authorize.includes(currentUser)) {
@@ -55,4 +57,17 @@ function loggedIn(){
     }
 
     next();
+
 })
+
+
+
+/* beforeEnter: async (to, from, next) => {
+  const isAuthenticated = store.state.currentUser.isAuthenticated;
+
+  if (isAuthenticated) {
+      return next("/prof-dashboard/:userid");
+  }
+
+  next();
+}, */

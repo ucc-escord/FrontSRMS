@@ -77,7 +77,7 @@ const actions = {
         //   this.currentUser = response.data
    
         commit('setDataRow',response.data)
-           console.log(response.data);
+        
 
        }).catch(()=>{
            console.log("Error in getting the user")
@@ -92,7 +92,7 @@ const actions = {
         //   this.currentUser = response.data
    
         commit('setCard',response.data)
-           console.log(response.data);
+          
 
        }).catch(()=>{
            console.log("Error in getting the user")

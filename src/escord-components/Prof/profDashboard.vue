@@ -44,7 +44,7 @@
             </md-button>
 
  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
-                    <md-icon>show</md-icon>show data
+                    <md-icon>show</md-icon>Refresh Card
             </md-button>
 
            
@@ -400,14 +400,17 @@ export default {
   
   },
  
-
+  mounted() {
+          this.$store.dispatch('cardinfo',this.$route.params.userid);
+               
+      },
  
   mixins: [validationMixin], // for validation
   data() {
     return {
       /*modal default value on load*/
       classicModal: false,
-      UserID: this.$route.params.userID,
+   
 
       /*modal--form data*/
       formData:{
@@ -424,6 +427,7 @@ export default {
         subjSY_end: new Date().getFullYear() + 1,
         profRank:'Master Teacher III', //or null
         profName: localStorage.getItem('email'),
+        profID:  this.$route.params.userid,
     //or null
         },
         gradesheetSaved: false,

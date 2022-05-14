@@ -91,7 +91,7 @@ const actions = {
 
      archgradesheet({route}){
 
-        console.log(this.$route.params.gradeshid);
+       
       /*   axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
             status_archieve: '1', }).then((response)=>{
           

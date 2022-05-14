@@ -84,7 +84,7 @@ const actions = {
                   
                 }else{
 
-               router.push({name:'Professor Dashboard', params:{userid: response.data.id }})
+               router.push({name:'Professor Dashboard', params:{userid: response.data.id }}, () => router.go(0)).catch(err => {})
              //  router.push({path:'/prof-dashboard'});
              //  router.push('/prof-dashboard', () => router.go(0)).catch(err => {})
                 
@@ -149,10 +149,11 @@ const actions = {
             axios.post('/api/logout').then((response)=>{
               localStorage.removeItem('role');
               localStorage.removeItem('token');
+              localStorage.removeItem('email');
               
                //  this.$router.push('/');
 
-               router.push('/login-to-escord', () => router.go(0)).catch(err => {})
+               router.push('/login', () => router.go(0)).catch(err => {})
          
                            
               }).then(response=>{

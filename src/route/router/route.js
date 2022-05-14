@@ -1,4 +1,6 @@
 import Index from "@/views/Index.vue";
+import store from '../../store';
+
 import Landing from "@/views/Landing.vue";
 import Login from "@/views/Login.vue";
 import Profile from "@/views/Profile.vue";
@@ -57,7 +59,7 @@ const routes = [
     name: "Login",
     component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
-    meta: { requiresAuth: false }
+    onlyGuest:true,
   },
   {
     path: "/student-dashboard",

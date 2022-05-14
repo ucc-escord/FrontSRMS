@@ -13,8 +13,8 @@
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
                 <h4>
-                    <strong>{{subjCode}}</strong>
-                    {{subjDesc}}
+                    <strong>{{getGS.subjectcode}}</strong>
+                   {{getGS.subjectdesc}}
 
                 
                 </h4>
@@ -23,13 +23,13 @@
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
                     <h5 class="md-subheading">
-                        {{classYr}}{{classSec}} | {{classProg}}
+                        {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}}
                     </h5>
                     <p class="md-caption __top-md-caption">
-                        {{subjDay}}, {{subjTime}}
+                        {{getGS.day}} , {{getGS.time}}
                     </p>
                     <p class="md-caption">
-                        {{subjSem}},  SY. {{subjSY_start}}-{{subjSY_end}}
+                        {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}}
                     </p>
 
             </div>
@@ -91,19 +91,20 @@
               </md-table-row>
 
               <md-table-row
-              v-for="(_, index) in studentList"
+              v-for="(_, index) in getrow"
               :key="index">
                 
                 <md-table-cell class="text-center">
-                  {{studentList[index].studNum}}
+                  {{getrow[index].student_number}}
                 </md-table-cell>
 
                 <md-table-cell>
-                  {{studentList[index].studLN}}, {{studentList[index].studFN}} {{studentList[index].studMI}}
+               {{getrow[index].studentname}}
                 </md-table-cell>
 
                <md-table-cell>
-                  <md-vuelidated
+                  <!-- 
+                 <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -113,15 +114,17 @@
                   }" 
                   field="md-field" 
                   class="has-esc-accent">
-                    <md-input
+                   <md-input
                     type="number"
                     class="text-center"
-                    v-model="studentList[index].studMG"></md-input>
-                  </md-vuelidated>
+                    v-model="getrow[index].midterm"></md-input> 
+                  </md-vuelidated> 
+                  -->
                 </md-table-cell>
 
                 <md-table-cell>
-                  <md-vuelidated
+                     <!-- 
+                 <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -134,14 +137,15 @@
                     <md-input
                     type="number"
                     class="text-center"
-                    v-model="studentList[index].studFG"></md-input>
-                  </md-vuelidated>
+                    v-model="getrow[index].finalgrade"></md-input>
+                  </md-vuelidated> 
+                    -->
                 </md-table-cell>
 
                 <md-table-cell>
                   <md-field class="has-esc-accent">
-                    <md-input
-                    v-model="studentList[index].studRemark"></md-input>
+                  <md-input
+                    v-model="getrow[index].finalgrade"></md-input>
                   </md-field>
                 </md-table-cell>                
                 
@@ -261,6 +265,14 @@ export default {
   components: {
       Modal
   },
+  mounted() {
+          this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
+          let studentrow = this.$store.getters.getrow;
+
+          studentrow.forEach(student => this.studentList = student);
+      console.log(this.studentList)
+          
+      },
   data() {
     return {
       /* GRADESHEET TABLE DATA */
@@ -280,36 +292,7 @@ export default {
     
 
       studentList: [
-        {
-          studNum: 20190001,
-          studLN: "LUCAS",
-          studFN: "TRIZHALYN",
-          studMI: "L",
-          studMG: "5",
-          studFG: "5",
-          studRemark: "PASSED"
-          
-        },
-        {
-          studNum: 20190002,
-          studLN: "MAGLANGIT",
-          studFN: "TRIZHA",
-          studMI: "F",
-          studMG: "2",
-          studFG: "5",
-          studRemark: "PASSED"
-          
-        },
-        {
-          studNum: 20190003,
-          studLN: "FRANCISCO",
-          studFN: "TRIZH",
-          studMI: "M",
-          studMG: "3",
-          studFG: "3",
-          studRemark: "PASSED"
-          
-        }
+    
       ],
 
        /*modal default value on load*/
@@ -371,7 +354,10 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+       ...mapGetters({getrow : 'getrow'}),
+     ...mapGetters({getGS : 'getGS'}),
+
   },
 
   methods: {
