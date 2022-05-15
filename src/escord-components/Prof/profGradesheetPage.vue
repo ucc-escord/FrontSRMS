@@ -151,7 +151,7 @@
                     <md-input
                     type="number"
                     class="text-center"
-                    v-model="getrow[index].finalgrade"></md-input>
+                    v-model="getrow[index].finalterm"></md-input>
                   </md-vuelidated> 
                  
                 </md-table-cell>
@@ -159,7 +159,7 @@
                 <md-table-cell>
                   <md-field class="has-esc-accent">
                   <md-input
-                    v-model="getrow[index].finalgrade"></md-input>
+                    v-model="getrow[index].finalterm"></md-input> <!---edit this var--->
                   </md-field>
                 </md-table-cell>                
                 
@@ -222,6 +222,30 @@
                       </md-field>
                     </div>
 
+
+                    <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studMG')">
+                        <label>Midterm Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studMG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studMG.required">Midterm grade is required.</span>
+                      </md-field>
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studFG')">
+                        <label>Final Term Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studFG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studFG.required">Final term grade is required.</span>
+                      </md-field>
+                    </div>
+
                     
                   </div>
 
@@ -247,6 +271,7 @@
                   </div>
                   
                   <md-snackbar
+                    md-position="left"
                     :md-active.sync="studAdded">
                     {{addedStudentInfo}} is added to the gradesheet.
                   </md-snackbar>
@@ -314,15 +339,14 @@ export default {
 
       /*modal--form data*/
       addStud: {
-        studNum: '',
-        studLN: '',
-        studFN: '',
-        studMI: '',
-        midterm:1,
-        finalterm:1,
-        finalgrade:1,
+        studNum: null,
+        studLN: null,
+        studFN: null,
+        studMI: null,
+        studMG: null,
+        studFG: null,
         gradesheetid: this.$route.params.gradeshid,
-
+        finalgrade: 1, //this is for testing only
       },
       studAdded: false,
       sending: false,
@@ -344,7 +368,7 @@ export default {
              minValue: minValue(1.00),
              maxValue: maxValue(5.00)},
 
-           finalgrade: {
+           finalterm: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
@@ -355,7 +379,9 @@ export default {
        addStud: {
         studNum: {required},
         studLN: {required},
-        studFN: {required}
+        studFN: {required},
+        studMG: {required},
+        studFG: {required}
       },
    },
   props: {
@@ -412,14 +438,16 @@ export default {
         this.addStud.studNum = null
         this.addStud.studLN = null
         this.addStud.studFN = null
-        this.addStud.studMI = ""
+        this.addStud.studMI = null
+        this.addStud.studMG = null
+        this.addStud.studFG = null
       },
       addStudent () {
         this.sending = true
      
-     this.addStudGradesheet(this.addStud)
+   this.addStudGradesheet(this.addStud)
        
-        
+   
       
         // Instead of this timeout, here you can call your API
       window.setTimeout(() => {
@@ -427,7 +455,7 @@ export default {
           this.studAdded = true
           this.sending = false
           this.clearForm()
-        }, 1500) 
+        }, 1500)  
 
         this.refreshGradesheet();
       },

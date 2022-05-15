@@ -27,7 +27,7 @@
           </p>
           <p class="md-body-1">
             <md-icon>email</md-icon>
-            ucc-escord.bscs2019@gmail.com 
+            ucc.escord@gmail.com 
           </p>
         </div>
 
@@ -36,20 +36,20 @@
           <h5 class="title">Be Updated</h5>
           
           <md-button
-          href=""
-          class="md-just-icon md-round md-facebook">
+          href="https://www.facebook.com/ESCORD-113005448074793"
+          class="md-just-icon md-round md-facebook text-center">
             <i class="fab fa-facebook-f"></i>
           </md-button>
 
           <md-button
-          href=""
-          class="md-just-icon md-round md-twitter">
+          href="https://twitter.com/ucc_escord"
+          class="md-just-icon md-round md-twitter text-center">
             <i class="fab fa-twitter"></i>
           </md-button>
 
           <md-button
-          href=""
-          class="md-just-icon md-round md-insta">
+          href="https://www.instagram.com/"
+          class="md-just-icon md-round md-insta text-center">
             <i class="fab fa-instagram"></i>
           </md-button>
           
@@ -113,6 +113,10 @@ a:hover {
 }
 
 .md-insta {
+  background-color: #8331b7 !important;
+}
+
+.md-insta :hover {
   background-color: #8331b7 !important;
 }
 

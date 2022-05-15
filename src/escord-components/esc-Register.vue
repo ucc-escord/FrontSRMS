@@ -217,6 +217,7 @@ export default {
 
           this.createProfessor(this.registerData);
           console.log("Logged in successfully.")
+          this.clearInputFields();
         }
         else {
           console.log("Failed to log in.");

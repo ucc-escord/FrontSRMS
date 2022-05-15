@@ -21,7 +21,7 @@ import escAbout from "./escord-components/esc-About.vue";
 import escContactUs from "./escord-components/esc-ContactUs.vue";
 import escStudDash from "./escord-components/Student/studDashboard.vue";
 import escProfDash from "./escord-components/Prof/profDashboard.vue";
-import escStaffScholasticRecord from "./escord-components/Staff/StaffScholasticRecord.vue";
+import escStaff_SRPage from "./escord-components/Staff/staffScholasticRecordDetail.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
 
@@ -79,10 +79,10 @@ const currentUser = localStorage.getItem('role');
 
 export default new Router({
   routes: [
-    // {
-    //   path: "/",
-    //   name: "index",
-    //   components: { default: Index, header: MainNavbar, footer: MainFooter },
+    {
+      path: "/index",
+      name: "index",
+      components: { default: Index, header: MainNavbar, footer: MainFooter }},
     //   props: {
     //     header: { colorOnScroll: 400 },
     //     footer: { backgroundColor: "black" }
@@ -164,8 +164,8 @@ export default new Router({
     },
     {
       path: "/scholastic-record-detail",
-      name: "Staff Scholastic Record",
-      component: escStaffScholasticRecord
+      name: "Scholastic Record Detail",
+      components: {default: escStaff_SRPage, footer: escFooter}
     },
     {
       path: "/gradesheet-detail",
