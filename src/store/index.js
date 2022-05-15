@@ -6,6 +6,8 @@ import gradeSheet from './modules/gradeSheet'
 import ArchieveFile from './modules/ArchieveFile'
 import ShowUser from './modules/ShowUser'
 import Profdata from './modules/professorDataEDB'
+import createAcc from './modules/createAccounts'
+
 
 
 
@@ -16,6 +18,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     modules:{
         currentUser,
-        gradeSheet,ArchieveFile,ShowUser,Profdata
+        gradeSheet,ArchieveFile,ShowUser,Profdata,createAcc
     }
 })

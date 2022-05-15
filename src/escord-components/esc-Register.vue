@@ -153,9 +153,15 @@
 
 <script>
 
+
+
+
+   
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, email, sameAs, minLength } from 'vuelidate/lib/validators'
+import { mapActions} from "vuex";
 
 export default {
   bodyClass: "escord-login-page",
@@ -194,6 +200,7 @@ export default {
 
  methods: {
     /* validation methods */
+     ...mapActions({createProfessor: 'createProfessor'}),
     getValidationClass (fieldName) {
       const field = this.$v.registerData[fieldName]
 
@@ -207,6 +214,8 @@ export default {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
+
+          this.createProfessor(this.registerData);
           console.log("Logged in successfully.")
         }
         else {
