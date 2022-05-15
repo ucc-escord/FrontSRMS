@@ -202,6 +202,30 @@
                       </md-field>
                     </div>
 
+
+                    <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studMG')">
+                        <label>Midterm Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studMG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studMG.required">Midterm grade is required.</span>
+                      </md-field>
+
+                      <md-field class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('studFG')">
+                        <label>Final Term Grade</label>
+                        <md-input
+                        type="number" v-model="addStud.studFG"
+                        :disabled="sending"></md-input>
+
+                        <span class="md-error" v-if="!$v.addStud.studFG.required">Final term grade is required.</span>
+                      </md-field>
+                    </div>
+
                     
                   </div>
 
@@ -227,6 +251,7 @@
                   </div>
                   
                   <md-snackbar
+                    md-position="left"
                     :md-active.sync="studAdded">
                     {{addedStudentInfo}} is added to the gradesheet.
                   </md-snackbar>
@@ -315,7 +340,9 @@ export default {
         studNum: null,
         studLN: null,
         studFN: null,
-        studMI: ""
+        studMI: null,
+        studMG: null,
+        studFG: null
       },
       studAdded: false,
       sending: false,
@@ -346,7 +373,9 @@ export default {
        addStud: {
         studNum: {required},
         studLN: {required},
-        studFN: {required}
+        studFN: {required},
+        studMG: {required},
+        studFG: {required}
       },
    },
   props: {
@@ -388,7 +417,9 @@ export default {
         this.addStud.studNum = null
         this.addStud.studLN = null
         this.addStud.studFN = null
-        this.addStud.studMI = ""
+        this.addStud.studMI = null
+        this.addStud.studMG = null
+        this.addStud.studFG = null
       },
       addStudent () {
         this.sending = true

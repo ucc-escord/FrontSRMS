@@ -307,6 +307,7 @@
                   </div>
                   
                   <md-snackbar
+                    md-position="left"
                     :md-active.sync="gradesheetSaved">
                     Gradesheet for {{addedGradesheetInfo}} is added.
                   </md-snackbar>
