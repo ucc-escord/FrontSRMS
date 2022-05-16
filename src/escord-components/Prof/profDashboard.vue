@@ -276,7 +276,7 @@
                     </md-autocomplete>
                   </div>
                   
-                  <!-- prof -->
+                  <!-- prof 
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
                     <md-field class="has-esc-accent md-layout-item md-size-45" :class="getValidationClass('profName')">
@@ -293,7 +293,7 @@
 
                       <span class="md-error" v-if="!$v.formData.profRank.required">Rank/ position is required.</span>
                     </md-field>
-                  </div>
+                  </div>-->
 
                   
 
