@@ -30,55 +30,9 @@ const actions = {
 
      //student
 
-     updateAccountStudent({commit},route,formData){
-        axios.put('/api/updateStudent/'+route, formData).then((response)=>{
-        
-
-            console.log('create professor accounts' , response.data);
-
-            
-             }).catch((errors)=>{
-  
-             this.error =  errors.response.data;
-   
-             })
-
-     },
-
      //staff
 
-     updateAccountStaff({commit},route,formData){
-        axios.put('/api/updateAdmin/'+route, formData).then((response)=>{
-        
-
-            console.log('create professor accounts' , response.data);
-
-            
-             }).catch((errors)=>{
-  
-             this.error =  errors.response.data;
-   
-             })
-
-            },
-
-
-            //prof
-
-            updateAccountProf({commit},route,formData){
-                axios.put('/api/updateProf/'+route, formData).then((response)=>{
-                
-        
-                    console.log('create professor accounts' , response.data);
-        
-                    
-                     }).catch((errors)=>{
-          
-                     this.error =  errors.response.data;
-           
-                     })
-        
-                    },
+    
 
 
                     //Manager

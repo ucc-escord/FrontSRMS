@@ -111,10 +111,10 @@
               :key="index">
 
                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button @click.prevent="sendArrayofData(getrow[index].id)"
+                    <md-button @click.prevent="sendArrayofData(getrow[index])"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>download</md-icon>
-                        <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
+                        <md-icon>save</md-icon>
+                        <md-tooltip md-direction="bottom">save</md-tooltip>
                     </md-button>
                 </div>
 
@@ -321,13 +321,13 @@ export default {
   mounted() {
           this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
           let studentrow = this.$store.getters.getrow;
- this.studentGrade = this.$store.getters.getrow;
+
         //  studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
           
       },
       created(){
-         
+          this.studentGrade = this.$store.getters.getrow;
       },
   data() {
     return {
@@ -435,14 +435,25 @@ export default {
           ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
           ...mapActions({ updateGradesheetData: "updateGradesheetData" }),
 
-  ...mapMutations(['setspeciGS']),
+ // ...mapMutations(['setspeciGS']),
     sendArrayofData(index){
 
-        console.log(this.studentList);
-  /*    axios.put(`api/addgs/${index}`, data)
-             .then(response => {
-                 console.log(response);
-             }); */
+        console.log(index);
+
+   // this.updateGradesheetData({route:index.id}, this.index);
+
+  
+        axios.put('/api/addgs/'+index.id, index).then((response)=>{
+        
+
+            console.log('create professor accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
     },
 
     classicModalHide() {

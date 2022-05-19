@@ -123,9 +123,23 @@ const actions = {
        })  
    
      },
-     updateGradesheetData({ commit }, payload){
+     updateGradesheetData({ commit }, route, formData){
 
-      console.log(payload);
+  
+        axios.put('/api/addgs/'+route, formData).then((response)=>{
+        
+
+            console.log('create professor accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+       
+
      }
 
 
