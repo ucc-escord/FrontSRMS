@@ -1,49 +1,68 @@
 <template>
 <div>
- <form>
-          <md-card-content>
-          <div class="md-layout md-gutter">
+ <form   @submit.prevent="UpdateStaff">
+        <md-card-content>
+            <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('firstName')">
-                <label for="first-name">Student Number</label> <!---this is not edited-->
-                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
+              <md-field :class="getValidationClass('stdNum')">
+                <label for="student-number">Student Number</label> <!---this is not edited-->
+                <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.student_number" :disabled="sending" />
+           
+             <!---    <span class="md-error" v-else-if="!$v.staffAcc.stdNum.minlength">Invalid first name</span>-->
               </md-field>
             </div>
 
             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">Confirm Password</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+              <md-field :class="getValidationClass('stdName')">
+                <label for="std-name">Firstname </label>
+                <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
+         
+                  <!---       <span class="md-error" v-else-if="!$v.staffAcc.stdPassword.minlength">Invalid last name</span>
+            -->  </md-field>
+            </div>
+
+               <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('stdName')">
+                <label for="std-name">Lastname  </label>
+                <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
+         
+                  <!---       <span class="md-error" v-else-if="!$v.staffAcc.stdPassword.minlength">Invalid last name</span>
+            -->  </md-field>
+            </div>
+
+
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('stdPassword')">
+                <label for="std-password">New Password</label>
+                <md-input name="std-password" id="std-password" autocomplete="family-name" v-model="staffAcc.stdPassword" :disabled="sending" />
+                <span class="md-error" v-if="!$v.staffAcc.stdPassword.required">The last name is required</span>
+                <span class="md-error" v-else-if="!$v.staffAcc.stdPassword.minlength">Invalid last name</span>
               </md-field>
             </div>
             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">New Password</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+              <md-field :class="getValidationClass('stdConfirmPass')">
+                <label for="confirm-pass">Confirm Password</label>
+                <md-input name="confirm-pass" id="confirm-pass" autocomplete="family-name" v-model="staffAcc.stdConfirmPass" :disabled="sending" />
+                <span class="md-error" v-if="!$v.staffAcc.stdConfirmPass.required">The last name is required</span>
+                <span class="md-error" v-else-if="!$v.staffAcc.stdConfirmPass.minlength">Invalid last name</span>
               </md-field>
             </div>
           </div>
 
-          <md-field :class="getValidationClass('email')">
-            <label for="email">Email</label>
-            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+          <md-field :class="getValidationClass('stdEmail')">
+            <label for="std-email">Email</label>
+            <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
+        
           </md-field>
         </md-card-content>
 
                 <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Update Staff</md-button>
+          <md-button type="submit" class="md-primary" :disabled="sending">Update Student Account</md-button>
         </md-card-actions>
       
+      
 
-      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+  <!--    <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar> -->
         </form>
         </div>
 </template>
@@ -51,6 +70,9 @@
 
 <script>
  import { validationMixin } from 'vuelidate'
+import axios from "axios"
+import { mapActions, mapGetters} from "vuex";
+
   import {
     required,
     email,
@@ -61,6 +83,12 @@
   export default {
     name: 'FormValidation',
     mixins: [validationMixin],
+      mounted(){
+   this.$store.dispatch('displayuser');
+
+   
+    },
+
     data: () => ({
       form: {
         firstName: null,
@@ -69,6 +97,13 @@
         age: null,
         email: null,
       },
+       staffAcc: {
+     
+        stdPassword:null,
+        stdConfirmPass:null,
+    
+      },
+
       userSaved: false,
       sending: false,
       lastUser: null
@@ -94,7 +129,22 @@
           required,
           email
         }
+      },
+
+       staffAcc: {
+        stdPassword:{
+          required,
+               minLength: minLength(8)
+        },
+        stdConfirmPass:{
+          required,
+               minLength: minLength(8)
+        },
       }
+    },
+      computed:{
+ ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+  
     },
     methods: {
       getValidationClass (fieldName) {
@@ -131,7 +181,29 @@
         if (!this.$v.$invalid) {
           this.saveUser()
         }
-      }
+      },
+
+        UpdateStaff(){
+               axios.put('/api/updateAdmin/'+this.getcurrentUser.id, {
+              password : this.staffAcc.stdPassword,
+              confirmpass: this.staffAcc.stdConfirmPass,
+              student_number : this.getcurrentUser.student_number,
+              firstname : this.getcurrentUser.firstname,
+              lastname : this.getcurrentUser.lastname,
+              email: this.getcurrentUser.email,
+
+               }).then((response)=>{
+        
+
+            console.log('update staff accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+      },
     }
   }
 </script>

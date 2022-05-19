@@ -382,14 +382,23 @@
         </div>
       </div>
     </div>
+
+    <div>
+        <acc-prof/>
+  </div>
+
     <vue-headful title="Dashboard | PROF"/>
   </div>
+
+  
 </template>
 
 <script>
 // modal import
 import { Modal } from "@/components";
 import { mapActions, mapGetters} from "vuex";
+import accProf from '../Prof/AccountProf.vue'
+
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -400,7 +409,7 @@ import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal,
+      Modal,   accProf,
   
   },
  

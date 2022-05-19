@@ -94,8 +94,14 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
+
+    <div>
+        <acc-staff/>
+  </div>
+
     <vue-headful title="Dashboard | STAFF"/>
   </div>
 </template>
@@ -103,10 +109,15 @@
 <script>
 
 import { mapActions, mapGetters} from "vuex";
+import accStaff from '../Staff/AccountStaff.vue'
 
 
 export default {
   bodyClass: "profile-page",
+
+   components: {
+    accStaff,
+   },
   data() {
     return {
       staffLN: "DELA CRUZ",

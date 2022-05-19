@@ -63,10 +63,6 @@
         <acc-stud/>
   </div>
 
-<div>
-        <acc-staff/>
-  </div>
-
   <div>
         <acc-man/>
   </div>
@@ -90,7 +86,6 @@
 
 import { mapActions, mapGetters} from "vuex";
 import accStud from './AccountStudent.vue'
-import accStaff from '../Staff/AccountStaff.vue'
 import accMan from '../Manager/AccountManager.vue'
 import accProf from '../Prof/AccountProf.vue'
 import accManagement from '../Manager/AccountManage.vue'
@@ -100,7 +95,6 @@ export default {
   bodyClass: "profile-page",
  components: {
     accStud,
-    accStaff,
     accMan,
     accProf,
     accManagement,

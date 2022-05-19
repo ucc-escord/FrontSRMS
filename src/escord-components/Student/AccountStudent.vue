@@ -324,22 +324,9 @@ import axios from "axios"
           this.saveUser()
         }
       },
-       ...mapActions({updateAccStud: "updateAccountStudent" }),
 
         UpdateStudent(){
-           
- 
-      
-            let formDax = {
-              password : this.studentAcc.stdPassword,
-              confirmpass: this.studentAcc.stdConfirmPass,
-              student_number : this.getcurrentUser.student_number,
-              name : this.getcurrentUser.name,
-              email: this.getcurrentUser.email,
-  
-
-            }
-
+          
          //   console.log(this.studentAcc);
               
 //     this.updateAccStud({route:this.getcurrentUser.id}, formDax)
