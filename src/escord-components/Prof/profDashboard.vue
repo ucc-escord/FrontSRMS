@@ -21,10 +21,10 @@
 
                 <div class="name">
                 
-                  <h3 class="title">{{formData.profName}}
+                  <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}}, {{getcurrentUser.middleinitial}}
                 
                   </h3>
-                  <h5>{{formData.profRank}}</h5>
+                  <h5>{{getcurrentUser.faculty_rank}}</h5>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
             </md-button>
 
            <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
-                    <md-icon>add</md-icon>logout
+                    <md-icon>logout</md-icon>logout
             </md-button>
 
  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
@@ -405,8 +405,9 @@ export default {
   },
  
   mounted() {
+        this.$store.dispatch('displayuser');
           this.$store.dispatch('cardinfo',this.$route.params.userid);
-               
+      
       },
  
   mixins: [validationMixin], // for validation
@@ -429,8 +430,8 @@ export default {
         subjSem:'',
         subjSY_start: new Date().getFullYear(),
         subjSY_end: new Date().getFullYear() + 1,
-        profRank:'Master Teacher III', //or null
-        profName: localStorage.getItem('email'),
+    //    profRank:'Master Teacher III', //or null
+     //   profName: localStorage.getItem('email'),
         profID:  this.$route.params.userid,
     //or null
         },
@@ -486,8 +487,6 @@ export default {
         required, 
         minLength: minLength(4),
         maxLength: maxLength(4)},
-      profRank: {required},
-      profName:  {required}
     }
   },
 

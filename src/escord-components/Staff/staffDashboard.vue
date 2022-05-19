@@ -42,6 +42,10 @@
                     VIEW ARCHIVE
                 </md-button>
               </div>
+                  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>logout</md-icon>logout
+            </md-button>
+
               
               <!-- <div class="__search-bar md-layout-item md-size-60 md-xsmall-size-100">
                   <md-field
@@ -63,7 +67,7 @@
               
               <div class="md-layout-item md-xlarge-size-50 
               md-small-size-50 md-xsmall-size-100">
-                 <router-link  to="/Staff-scholastic-record">
+                 <router-link  to="/scholastic-record-detail">
                   <md-card class="md-with-hover">
                       <md-card-content
                       class="md-layout md-alignment-center-center">
@@ -98,6 +102,9 @@
 
 <script>
 
+import { mapActions, mapGetters} from "vuex";
+
+
 export default {
   bodyClass: "profile-page",
   data() {
@@ -123,6 +130,13 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
+  },
+  methods: {
+          ...mapActions({ loggingOut: "loggingOut" }),
+loggingout(){
+              this.loggingOut()
+      },
+
   }
 };
 </script>

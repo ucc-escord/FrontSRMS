@@ -123,6 +123,10 @@ const actions = {
        })  
    
      },
+     updateGradesheetData({ commit }, payload){
+
+      console.log(payload);
+     }
 
 
    

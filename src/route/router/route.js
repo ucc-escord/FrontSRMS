@@ -37,7 +37,7 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
-
+const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
 
 
 const routes = [
@@ -110,7 +110,11 @@ const routes = [
     component: escStaffDash
 
   },
-
+  {
+    path: "/scholastic-record-detail",
+    name: "Scholastic Record Detail",
+    components: {default: escStaff_SRPage, footer: escFooter}
+  },
 
 ]
 

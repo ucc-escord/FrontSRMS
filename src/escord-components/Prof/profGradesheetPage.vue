@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
+                    <md-button @click="sendArrayofData"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>save</md-icon>
                         <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
@@ -70,13 +70,13 @@
                     </md-button>
                 </div>
 
-                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+              <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="refreshGradesheet"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>refresh</md-icon>
                         <md-tooltip md-direction="bottom">Refresh Gradesheet</md-tooltip>
                     </md-button>
-                </div>
+                </div> -->
 
             </div>
 
@@ -97,20 +97,33 @@
               md-sort-order="asc">
 
               <md-table-row class="title">
+                 <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Name</md-table-head>
                 <md-table-head class="text-center">Midterm</md-table-head>
                 <md-table-head class="text-center">Final Term</md-table-head>
                 <md-table-head class="text-center">Remarks</md-table-head>
+                
               </md-table-row>
 
               <md-table-row
               v-for="(_, index) in getrow"
               :key="index">
+
+               <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                    <md-button @click.prevent="sendArrayofData(getrow[index].id)"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>download</md-icon>
+                        <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
+                    </md-button>
+                </div>
+
                 
                 <md-table-cell class="text-center">
                   {{getrow[index].student_number}}
                 </md-table-cell>
+
+
 
                 <md-table-cell>
                {{getrow[index].studentname}}
@@ -128,10 +141,11 @@
                   }" 
                   field="md-field" 
                   class="has-esc-accent">
-                   <md-input
+                   <md-input 
                     type="number"
                     class="text-center"
-                    v-model="getrow[index].midterm"></md-input> 
+                     v-model="getrow[index].midterm"
+                   ></md-input> 
                   </md-vuelidated> 
                
                 </md-table-cell>
@@ -148,7 +162,7 @@
                   }" 
                   field="md-field" 
                   class="has-esc-accent">
-                    <md-input
+                    <md-input 
                     type="number"
                     class="text-center"
                     v-model="getrow[index].finalterm"></md-input>
@@ -158,7 +172,7 @@
 
                 <md-table-cell>
                   <md-field class="has-esc-accent">
-                  <md-input
+                  <md-input 
                     v-model="getrow[index].finalterm"></md-input> <!---edit this var--->
                   </md-field>
                 </md-table-cell>                
@@ -210,7 +224,7 @@
                       <md-field class="has-esc-accent md-layout-item md-size-40"
                       :class="getValidationClass('studFN')">
                         <label>First Name</label>
-                        <md-input v-model="addStud.studFN"
+                        <md-input  v-model="addStud.studFN"
                         :disabled="sending"></md-input>
 
                         <span class="md-error" v-if="!$v.addStud.studFN.required">First name is required.</span>
@@ -292,7 +306,7 @@
 <script>
 // modal import
 import { Modal } from "@/components";
-import { mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
 
 //validation imports
@@ -307,10 +321,13 @@ export default {
   mounted() {
           this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
           let studentrow = this.$store.getters.getrow;
-
-          studentrow.forEach(student => this.studentList = student);
+ this.studentGrade = this.$store.getters.getrow;
+        //  studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
           
+      },
+      created(){
+         
       },
   data() {
     return {
@@ -333,6 +350,7 @@ export default {
       studentList: [
     
       ],
+      studentGrade: [],
 
        /*modal default value on load*/
       classicModal: false,
@@ -406,6 +424,7 @@ export default {
        ...mapGetters({getrow : 'getrow'}),
      ...mapGetters({getGS : 'getGS'}),
 
+  
   },
 
   methods: {
@@ -414,6 +433,17 @@ export default {
           ...mapActions({ refreshGS: "showgsinfo" }),
 
           ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
+          ...mapActions({ updateGradesheetData: "updateGradesheetData" }),
+
+  ...mapMutations(['setspeciGS']),
+    sendArrayofData(index){
+
+        console.log(this.studentList);
+  /*    axios.put(`api/addgs/${index}`, data)
+             .then(response => {
+                 console.log(response);
+             }); */
+    },
 
     classicModalHide() {
       this.classicModal = false;

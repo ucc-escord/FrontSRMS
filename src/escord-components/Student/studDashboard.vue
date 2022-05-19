@@ -29,6 +29,10 @@
           <div class="">
             <h2 class="md-display-1">YOUR FILES</h2>
           </div>
+          
+           <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>logout</md-icon>logout
+            </md-button>
 
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
@@ -53,7 +57,11 @@
             </div>
           </div>
         </div>
+        
       </div>
+    <div>
+        <acc-stud/>
+  </div>
     </div>
     <vue-headful title="Dashboard | STUDENT"/>
   </div>
@@ -61,8 +69,14 @@
 
 <script>
 
+import { mapActions, mapGetters} from "vuex";
+import accStud from './AccountStudent.vue'
+
 export default {
   bodyClass: "profile-page",
+ components: {
+    accStud
+  },
   data() {
     return {
       studLN: "DELA CRUZ",
@@ -89,6 +103,13 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
+  },
+  methods: {
+         ...mapActions({ loggingOut: "loggingOut" }),
+loggingout(){
+              this.loggingOut()
+      },
+
   }
 };
 </script>

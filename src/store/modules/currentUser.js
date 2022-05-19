@@ -66,13 +66,13 @@ const actions = {
                 localStorage.setItem('email',response.data.email);
 
                 console.log(response.data.id);
-                if(response.data.user_role === "admin"){
+                if(response.data.user_role === "staff"){
                   //    router.push({path:'/About'});
-                  router.push('/', () => router.go(0)).catch(err => {})
+                  router.push('/staff-dashboard', () => router.go(0)).catch(err => {})
               
                       
                 }else if (response.data.user_role === "superadmin"){
-                  router.push('/login', () => router.go(0)).catch(err => {})
+                  router.push('/contact-escord', () => router.go(0)).catch(err => {})
 
                 
                 }else if (response.data.user_role === "student"){
