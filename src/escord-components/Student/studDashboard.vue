@@ -76,6 +76,11 @@
         <acc-prof/>
   </div>
 
+   <div>
+        <acc-management/>
+  </div>
+
+
     </div>
     <vue-headful title="Dashboard | STUDENT"/>
   </div>
@@ -88,6 +93,8 @@ import accStud from './AccountStudent.vue'
 import accStaff from '../Staff/AccountStaff.vue'
 import accMan from '../Manager/AccountManager.vue'
 import accProf from '../Prof/AccountProf.vue'
+import accManagement from '../Manager/AccountManage.vue'
+
 
 export default {
   bodyClass: "profile-page",
@@ -96,6 +103,7 @@ export default {
     accStaff,
     accMan,
     accProf,
+    accManagement,
   },
   data() {
     return {
