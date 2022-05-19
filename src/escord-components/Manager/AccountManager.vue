@@ -1,36 +1,146 @@
 <template>
-  <div>
-  <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-  </div>
-  <div class="form-check">
-      <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" value="">
-          Option one is this
-          <span class="form-check-sign">
-              <span class="check"></span>
-          </span>
-      </label>
-  </div>
+<div>
+ <form>
+          <md-card-content>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('firstName')">
+                <label for="first-name">Student Number</label> <!---this is not edited-->
+                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="form.firstName" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
+                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
+              </md-field>
+            </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('lastName')">
+                <label for="last-name">Confirm Password</label>
+                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
+                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('lastName')">
+                <label for="last-name">New Password</label>
+                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.lastName" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
+                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+              </md-field>
+            </div>
+          </div>
+
+          <md-field :class="getValidationClass('email')">
+            <label for="email">Email</label>
+            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
+            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
+          </md-field>
+        </md-card-content>
+
+                <md-card-actions>
+          <md-button type="submit" class="md-primary" :disabled="sending">Update Manager</md-button>
+        </md-card-actions>
+      
+
+      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+        </form>
+        </div>
 </template>
 
-<script>
-export default {
 
-}
+<script>
+ import { validationMixin } from 'vuelidate'
+  import {
+    required,
+    email,
+    minLength,
+    maxLength
+  } from 'vuelidate/lib/validators'
+
+  export default {
+    name: 'FormValidation',
+    mixins: [validationMixin],
+    data: () => ({
+      form: {
+        firstName: null,
+        lastName: null,
+        gender: null,
+        age: null,
+        email: null,
+      },
+      userSaved: false,
+      sending: false,
+      lastUser: null
+    }),
+    validations: {
+      form: {
+        firstName: {
+          required,
+          minLength: minLength(3)
+        },
+        lastName: {
+          required,
+          minLength: minLength(3)
+        },
+        age: {
+          required,
+          maxLength: maxLength(3)
+        },
+        gender: {
+          required
+        },
+        email: {
+          required,
+          email
+        }
+      }
+    },
+    methods: {
+      getValidationClass (fieldName) {
+        const field = this.$v.form[fieldName]
+
+        if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      clearForm () {
+        this.$v.$reset()
+        this.form.firstName = null
+        this.form.lastName = null
+        this.form.age = null
+        this.form.gender = null
+        this.form.email = null
+      },
+      saveUser () {
+        this.sending = true
+
+        // Instead of this timeout, here you can call your API
+        window.setTimeout(() => {
+          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
+          this.userSaved = true
+          this.sending = false
+          this.clearForm()
+        }, 1500)
+      },
+      validateUser () {
+        this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+          this.saveUser()
+        }
+      }
+    }
+  }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+  .md-progress-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+  }
 </style>

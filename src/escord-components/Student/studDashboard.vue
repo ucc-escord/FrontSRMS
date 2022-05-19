@@ -62,6 +62,20 @@
     <div>
         <acc-stud/>
   </div>
+
+<div>
+        <acc-staff/>
+  </div>
+
+  <div>
+        <acc-man/>
+  </div>
+
+  
+  <div>
+        <acc-prof/>
+  </div>
+
     </div>
     <vue-headful title="Dashboard | STUDENT"/>
   </div>
@@ -71,11 +85,17 @@
 
 import { mapActions, mapGetters} from "vuex";
 import accStud from './AccountStudent.vue'
+import accStaff from '../Staff/AccountStaff.vue'
+import accMan from '../Manager/AccountManager.vue'
+import accProf from '../Prof/AccountProf.vue'
 
 export default {
   bodyClass: "profile-page",
  components: {
-    accStud
+    accStud,
+    accStaff,
+    accMan,
+    accProf,
   },
   data() {
     return {
