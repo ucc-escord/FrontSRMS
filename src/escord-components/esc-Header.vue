@@ -38,23 +38,36 @@
 
               <md-list-item
                 to="/about-escord"
-                v-if="showMenu"
+                v-if="!showMenu"
               >
                 <p>About</p>
               </md-list-item>
              
               <md-list-item
                 to="/contact-escord"
-                v-if="showMenu"
+                v-if="!showMenu"
               >
                 <p>Contact Us</p>
               </md-list-item>
 
+      
+      <!-- LOG IN/ LOG OUT -->
+
+              <!-- isLoggedOut -->
               <md-list-item
-                to="/login"
+                to="/login-to-escord"
+                v-if="!showMenu"
+              >
+                <p class="__login">Log In</p>
+              </md-list-item>
+
+              <!-- isLoggedIn -->
+              <md-list-item
+                class="__no-bg"
+                to="/"
                 v-if="showMenu"
               >
-                <p class="__login">Login</p>
+                <p class="__login">Log Out</p>
               </md-list-item>
               
             </md-list>
@@ -104,9 +117,14 @@ export default {
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false,
-      showMenu: true
+      toggledClass: false
     };
+  },
+  computed: {
+    showMenu() {
+      const excludedRoutes = ["Landing", "About", "Contact Us", "Login", "Register"];
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
   },
   methods: {
     bodyClick() {

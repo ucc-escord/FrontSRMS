@@ -4,8 +4,10 @@
       <!-- removed .page-header from div above remove top alignment??? kapag sobrang haba ng content, sumasagad sa dulo -->
       <div class="container">
         <div
-        class="">
-            <h3 class="title"></h3>
+        class="md-layout md-alignment md-alignment-top-space-between">
+            
+            
+
         </div>
       </div>
     </div>
@@ -30,21 +32,5 @@ export default {
 h3.title {
     margin-bottom: 0.5rem !important;
     color: #2d2d2d !important;
-}
-
-.__card-buttons {
-    margin-top: 1.5rem !important;
-}
-
-.md-card-header {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    -webkit-box-shadow: none;
-    height: 5rem !important;
-    margin-bottom: 2rem !important;
-}
-
-.md-icon {
-    color: #90a4ae !important;
 }
 </style>

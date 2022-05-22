@@ -99,7 +99,7 @@
     </div>
 
     <div>
-        <acc-staff/>
+        <!-- <acc-staff/> -->
   </div>
 
     <vue-headful title="Dashboard | STAFF"/>
@@ -109,15 +109,15 @@
 <script>
 
 import { mapActions, mapGetters} from "vuex";
-import accStaff from '../Staff/AccountStaff.vue'
+//import accStaff from '../Staff/AccountStaff.vue'
 
 
 export default {
   bodyClass: "profile-page",
 
-   components: {
-    accStaff,
-   },
+  //  components: {
+  //   accStaff,
+  //  },
   data() {
     return {
       staffLN: "DELA CRUZ",
