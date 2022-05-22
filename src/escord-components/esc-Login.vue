@@ -9,8 +9,10 @@
             
             <md-card>
                 <md-card-content>
+
                     <h3 class="title text-center text-esc-darkgrey">Login</h3>
 
+ <p class="text-danger" v-text="geterror"></p>
                     <form @submit.prevent="loginValidate" novalidate>
 
                       <div class="md-layout md-gutter md-alignment-center-center">
@@ -89,7 +91,7 @@
                         <div class="__register-btn text-center md-layout md-gutter md-alignment-center-center">
                           <p>Dont have an account?</p>
                           <p class="__link">
-                            <router-link class="md-body-2 text-esc-accent" to="/register-to-escord">
+                            <router-link class="md-body-2 text-esc-accent" to="/register">
                               Register here!
                             </router-link>
                           </p>
@@ -130,7 +132,10 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email  } from 'vuelidate/lib/validators'
+import { mapActions, mapGetters } from "vuex";
+
+
 
 export default {
   bodyClass: "escord-login-page",
@@ -141,7 +146,8 @@ export default {
           userStudNum: null,
           userEmail: null,
           userPassword: null,
-          rememberPass: false
+          rememberPass: false,
+          device_name: "browser",
       },
       sending: false,
       showStudNumInput: true,
@@ -177,6 +183,7 @@ export default {
     }
   },
   computed: {
+      ...mapGetters({ geterror: "geterror" }),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`
@@ -186,6 +193,9 @@ export default {
 
   methods: {
     /* validation methods */
+       ...mapActions({ loginUser: "loginUser" }),
+       ...mapActions({ AnotherUser: "AnotherUser" }),
+
     getValidationClass (fieldName) {
       const field = this.$v.loginData[fieldName]
 
@@ -198,8 +208,20 @@ export default {
       loginValidate () {
         this.$v.$touch()
 
-        if (!this.$v.$invalid) {
-          console.log("Logged in successfully.")
+     
+
+        if (!this.$v.$invalid ) {
+
+
+            if(!this.loginData.userStudNum){
+      this.loginUser(this.loginData);
+
+   
+           }else{
+        
+     this.AnotherUser(this.loginData);
+           }
+     
         }
         else {
           console.log("Failed to log in.");

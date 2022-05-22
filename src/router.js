@@ -1,3 +1,6 @@
+//do not use this router
+
+
 import Vue from "vue";
 import Router from "vue-router";
 import Index from "./views/Index.vue";
@@ -24,6 +27,55 @@ import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
 
 
 Vue.use(Router);
+
+
+function loggedIn(){
+  return localStorage.getItem('token');
+ 
+}
+
+function guardMyroute(to, from, next){
+
+
+  // redirect to login page if not logged in and trying to access a restricted page
+const { authorize, requiresAuth } = to.meta;
+ // const currentUser = authenticationService.currentUserValue;
+
+const currentUser = localStorage.getItem('role');
+
+  if (requiresAuth) {
+      if (!loggedIn()) {
+          // not logged in so redirect to login page with the return url
+          return next({ path: '/login-to-escord'});
+      }
+
+      // check if route is restricted by role
+      if (authorize.length && !authorize.includes(currentUser)) {
+          // role not authorised so redirect to home page
+          console.log(currentUser);
+          if(currentUser === 'superadmin'){
+          return next({ path: '/dashboard' }); //no component
+        }
+        if(currentUser === 'staff'){
+
+          return next({ path: '/staff' }); //mno component
+        }
+        if(currentUser === 'student'){
+          return next({ path: '/student-dashboard' });
+        }
+        if(currentUser === 'professor'){
+          return next({ path: '/prof-dashboard' });
+        }
+
+      }
+  }
+
+
+
+
+}
+
+
 
 export default new Router({
   routes: [
@@ -130,3 +182,6 @@ export default new Router({
     }
   }
 });
+
+
+

@@ -42,6 +42,10 @@
                     VIEW ARCHIVE
                 </md-button>
               </div>
+                  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>logout</md-icon>logout
+            </md-button>
+
               
               <!-- <div class="__search-bar md-layout-item md-size-60 md-xsmall-size-100">
                   <md-field
@@ -63,14 +67,18 @@
               
               <div class="md-layout-item md-xlarge-size-50 
               md-small-size-50 md-xsmall-size-100">
+                 <router-link  to="/scholastic-record-detail">
                   <md-card class="md-with-hover">
                       <md-card-content
                       class="md-layout md-alignment-center-center">
                         <md-icon
                         class="md-size-5x">school</md-icon>
-                        <p class="md-title title text-center">Scholastic Record Management</p>
+                     <p class="md-title title text-center">
+                             
+                           Scholastic Record Management </p>
                       </md-card-content>
                   </md-card>
+                  </router-link>
                 </div>
                 
                 <div class="md-layout-item md-medium-size-50 md-small-size-50 md-xsmall-size-100">
@@ -86,16 +94,30 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
+
+    <div>
+        <acc-staff/>
+  </div>
+
     <vue-headful title="Dashboard | STAFF"/>
   </div>
 </template>
 
 <script>
 
+import { mapActions, mapGetters} from "vuex";
+import accStaff from '../Staff/AccountStaff.vue'
+
+
 export default {
   bodyClass: "profile-page",
+
+   components: {
+    accStaff,
+   },
   data() {
     return {
       staffLN: "DELA CRUZ",
@@ -119,6 +141,13 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
+  },
+  methods: {
+          ...mapActions({ loggingOut: "loggingOut" }),
+loggingout(){
+              this.loggingOut()
+      },
+
   }
 };
 </script>
@@ -137,6 +166,6 @@ export default {
 }
 
 .md-with-hover {
-    cursor: context-menu !important;
+    cursor: pointer !important;
 }
 </style>
