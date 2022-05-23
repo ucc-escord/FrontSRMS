@@ -18,7 +18,7 @@
 <script>
 
 export default {
-  bodyClass: "escord-about-page",
+  bodyClass: "escord-landing-page",
   data() {
     return {
         

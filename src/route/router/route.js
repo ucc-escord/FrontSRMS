@@ -24,7 +24,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 const escStaffDash = () => import("../../escord-components/Staff/staffDashboard.vue");
 
 const escLogin = () => import('../../escord-components/esc-Login.vue')
-const escLanding = () => import('../../escord-components/esc-Landing-2.vue')
+const escLanding = () => import('../../escord-components/esc-Landing.vue')
 const escProfDash = () => import('../../escord-components/Prof/profDashboard.vue')
 const escProf_GSPage = () => import('../../escord-components/Prof/profGradesheetPage.vue')
 
@@ -52,7 +52,7 @@ const routes = [
   {
     path: "/",
     name: "Landing",
-    component: escLanding,
+    //component: escLanding,
     components: {default: escLanding, header: escHeader, footer: escFooter},
 
   },
@@ -65,28 +65,28 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: escLogin,
+    //component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
     onlyGuest:true,
   },
   {
     path: "/student-dashboard",
     name: "Student Dashboard",
-    component: escStudDash
+    components: {default: escStudDash, header: escHeader, footer: escFooter}
   },
   {
     path: "/prof-dashboard/:userid",
     name: "Professor Dashboard",
-    component: escProfDash,
+    components: {default: escProfDash, header: escHeader, footer: escFooter},
   
-   meta: { requiresAuth: true, authorize: 'professor' } ,
+   //meta: { requiresAuth: true, authorize: 'professor' } ,
   //uncomment this to have a login validation
 
   },
   {
     path: "/gradesheet-detail/:userid/:gradeshid",
     name: "Gradesheet Detail",
-    component: escProf_GSPage,
+    components: {default: escProf_GSPage, header: escHeader, footer: escFooter}
  
   },
   {
@@ -102,23 +102,21 @@ const routes = [
   {
     path: "/Staff-scholastic-record",
     name: "Staff Scholastic-record",
-      component: escStaffScholasticRecord
+    components: {default: escStaffScholasticRecord, header: escHeader, footer: escFooter}
   },
   {
     path: "/staff-dashboard",
     name: "Staff Dashboard",
-    component: escStaffDash
+    components: {default: escStaffDash, header: escHeader, footer: escFooter}
 
   },
   {
     path: "/scholastic-record-detail",
     name: "Scholastic Record Detail",
-    components: {default: escStaff_SRPage, footer: escFooter}
+    components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
   },
 
 ]
-
-
 
 
 export default routes;

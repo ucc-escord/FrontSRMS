@@ -19,13 +19,22 @@
                   />
                 </div>
 
-                <div class="name">
-                
-                  <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}}, {{getcurrentUser.middleinitial}}
-                
-                  </h3>
+                <div class="md-layout md-alignment-center-center">
+
+                  <div class="md-layout-item md-size-100  name">
+                    <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}}, {{getcurrentUser.middleinitial}}</h3>
                   <h5>{{getcurrentUser.faculty_rank}}</h5>
+                  </div>
+
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                    class="md-simple md-dense md-esc-darkgrey"
+                    @click="updateModal = true">
+                        UPDATE ACCOUNT
+                    </md-button>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -49,7 +58,7 @@
 
            
 
-            <!-- modal -->
+            <!-- add gradesheet modal -->
             <modal v-if="classicModal" @close="classicModalHide">
 
               <!-- modal header -->
@@ -330,10 +339,12 @@
 
             
           </div>
- <div v-if='loadingStatus'>
-            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
+          
+          <div v-if='loadingStatus'>
+            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between md-warning" md-mode="indeterminate"></md-progress-spinner>
           
           </div>
+
           <!-- GRADESHEET CARDS -->
           <div v-else class="profile-content"> 
 
@@ -379,13 +390,12 @@
 
           </div>
 
+          <updateModal v-if="updateModal" @close="updateModalHide"/>
+
         </div>
       </div>
     </div>
 
-    <div>
-        <acc-prof/>
-  </div>
 
     <vue-headful title="Dashboard | PROF"/>
   </div>
@@ -397,19 +407,21 @@
 // modal import
 import { Modal } from "@/components";
 import { mapActions, mapGetters} from "vuex";
-import accProf from '../Prof/AccountProf.vue'
+import updateModal from '../Prof/AccountProf.vue'
 
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import axios from "axios"
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 
 
 
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal,   accProf,
+      Modal,
+      updateModal
   
   },
  
@@ -418,12 +430,13 @@ export default {
           this.$store.dispatch('cardinfo',this.$route.params.userid);
       
       },
- 
+  name: 'FormValidation',
   mixins: [validationMixin], // for validation
   data() {
     return {
       /*modal default value on load*/
       classicModal: false,
+      updateModal: false,
    
 
       /*modal--form data*/
@@ -472,6 +485,23 @@ export default {
       gradesheet: [
       ],
       selectedGS_infoShow: null,
+
+      form: {
+        firstName: null,
+        lastName: null,
+        gender: null,
+        age: null,
+        email: null,
+      },
+
+         profAcc: {
+     
+        stdPassword:null,
+        stdConfirmPass:null,
+    
+      },
+      userSaved: false,
+      lastUser: null
     };
   },
   /* for validation */
@@ -496,7 +526,40 @@ export default {
         required, 
         minLength: minLength(4),
         maxLength: maxLength(4)},
-    }
+    },
+
+
+    form: {
+        firstName: {
+          required,
+          minLength: minLength(3)
+        },
+        lastName: {
+          required,
+          minLength: minLength(3)
+        },
+        age: {
+          required,
+          maxLength: maxLength(3)
+        },
+        gender: {
+          required
+        },
+        email: {
+          required,
+          email
+        }
+      },
+        profAcc: {
+        stdPassword:{
+          required,
+               minLength: minLength(8)
+        },
+        stdConfirmPass:{
+          required,
+               minLength: minLength(8)
+        },
+      }
   },
 
   props: {
@@ -526,6 +589,7 @@ export default {
    
   },
 
+
   methods: {
     /*modal function*/
        ...mapActions({cardinfo: "cardinfo" }),
@@ -554,6 +618,11 @@ export default {
     classicModalHide() {
       this.classicModal = false;
       this.clearForm()
+    },
+
+     /*update modal function*/
+    updateModalHide() {
+      this.updateModal = false;
     },
 
     /*get subject desc from `subjects` array*/

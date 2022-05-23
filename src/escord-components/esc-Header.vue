@@ -55,19 +55,19 @@
 
               <!-- isLoggedOut -->
               <md-list-item
-                to="/login-to-escord"
+                to="/login"
                 v-if="!showMenu"
               >
                 <p class="__login">Log In</p>
               </md-list-item>
 
-              <!-- isLoggedIn -->
+              <!-- isLoggedIn removed to="/" replace with = @click-->
               <md-list-item
                 class="__no-bg"
-                to="/"
                 v-if="showMenu"
+                @click="loggingout"
               >
-                <p class="__login">Log Out</p>
+                <p class="__login __logout">LOG OUT</p>
               </md-list-item>
               
             </md-list>
@@ -91,6 +91,8 @@ function resizeThrottler(actualResizeHandler) {
     }, 66);
   }
 }
+/* IMPORT FOR LOGGING OUT METHOD */
+import { mapActions, mapGetters} from "vuex";
 
 import MobileMenu from "@/layout/MobileMenu";
 export default {
@@ -127,6 +129,13 @@ export default {
     }
   },
   methods: {
+    /* LOGGING OUT METHOD */
+    ...mapActions({ loggingOut: "loggingOut" }),
+loggingout(){
+              this.loggingOut()
+      },
+
+     /* COMPONENT METHODS */
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 
@@ -190,5 +199,9 @@ p {
   color: #ef6c00;
   font-size: 1rem !important;
   font-weight: bolder !important;
+}
+
+.__logout {
+  margin-bottom: 0 !important;
 }
 </style>

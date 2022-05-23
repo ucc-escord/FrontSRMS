@@ -201,6 +201,7 @@ export default {
  methods: {
     /* validation methods */
      ...mapActions({createProfessor: 'createProfessor'}),
+     
     getValidationClass (fieldName) {
       const field = this.$v.registerData[fieldName]
 
