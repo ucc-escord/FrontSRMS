@@ -97,7 +97,7 @@
               md-sort-order="asc">
 
               <md-table-row class="title">
-                 <md-table-head class="text-center">Actions</md-table-head>
+                <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Name</md-table-head>
                 <md-table-head class="text-center">Midterm</md-table-head>
@@ -320,7 +320,7 @@ export default {
   },
   mounted() {
           this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
-          let studentrow = this.$store.getters.getrow;
+         // let studentrow = this.$store.getters.getrow;
 
         //  studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
@@ -486,7 +486,7 @@ export default {
       addStudent () {
         this.sending = true
      
-   this.addStudGradesheet(this.addStud)
+       this.addStudGradesheet(this.addStud)
        
    
       

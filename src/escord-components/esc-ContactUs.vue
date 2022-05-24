@@ -90,6 +90,7 @@
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 export default {
   bodyClass: "escord-contact-us-page",
@@ -141,6 +142,8 @@ export default {
       msgValidate () {
         this.$v.$touch()
 
+        this.sendingConcern();
+
         if (!this.$v.$invalid) {
           console.log("Message sent successfully.")
         }
@@ -153,6 +156,28 @@ export default {
       this.msgData.senderName = null;
       this.msgData.senderEmail = null;
       this.msgData.senderMsg = null;
+    },
+
+    sendingConcern(){
+
+              
+           
+            axios.post('api/sendemail', this.msgData).then(response => {
+
+                    
+        
+
+              console.log(response)
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+            
+
     }
   }
 };

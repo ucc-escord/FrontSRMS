@@ -20,8 +20,8 @@
                 </div>
 
                 <div class="name">
-                  <h3 class="title">{{studLN}}, {{studFN}} {{studMN}}</h3>
-                  <h5>{{studProg}} | {{studYr}}{{studSec}}</h5>
+                  <h3 class="title">{{getcurrentUser.name}}</h3>
+                  <h5>{{getcurrentUser.student_number}} {{studProg}} | {{studYr}}{{studSec}}</h5>
                 </div>
               </div>
             </div>
@@ -60,21 +60,12 @@
         
       </div>
     <div>
-        <acc-stud/>
+      <stud-scol/>   
   </div>
 
-  <div>
-        <acc-man/>
-  </div>
 
   
-  <div>
-        <acc-prof/>
-  </div>
-
-   <div>
-        <acc-management/>
-  </div>
+  
 
 
     </div>
@@ -85,19 +76,18 @@
 <script>
 
 import { mapActions, mapGetters} from "vuex";
-import accStud from './AccountStudent.vue'
-import accMan from '../Manager/AccountManager.vue'
-import accProf from '../Prof/AccountProf.vue'
-import accManagement from '../Manager/AccountManage.vue'
+
+import studScol from './studScholastic.vue'
+
 
 
 export default {
   bodyClass: "profile-page",
  components: {
-    accStud,
-    accMan,
-    accProf,
-    accManagement,
+    studScol
+  },
+  mounted(){
+  this.$store.dispatch('displayuser');
   },
   data() {
     return {
@@ -124,7 +114,8 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+      ...mapGetters({getcurrentUser: 'getCurrentUser'}),
   },
   methods: {
          ...mapActions({ loggingOut: "loggingOut" }),

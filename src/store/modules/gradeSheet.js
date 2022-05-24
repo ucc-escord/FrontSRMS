@@ -140,6 +140,19 @@ const actions = {
 
        
 
+     },
+
+     cardwithpage({commit},route,page){
+
+    
+       axios.get(`/api/paginatecard/`+route+`?page=${page}`).then(({data})=>{
+            this.cards = data
+            console.log(data);
+        }).catch(({ response })=>{
+            console.error(response)
+        })
+  
+
      }
 
 

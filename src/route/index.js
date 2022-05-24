@@ -43,7 +43,7 @@ function loggedIn(){
             // role not authorised so redirect to home page
             
             if(currentUser === 'superadmin'){
-            return next({ path: '/login' });
+            return next({ path: '/admindash' });
           }
           if(currentUser === 'student'){
 

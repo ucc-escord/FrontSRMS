@@ -28,7 +28,24 @@
                 <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
               </md-field>
             </div>
+      <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('gender')">
+                <label for="gender">Account Create</label>
+                <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
+                  <md-option></md-option>
+                  <md-option value="Staff">Staff</md-option>
+                  <md-option value="Student">Student</md-option>
+                  <md-option value="Professor">Professor</md-option>
+                </md-select>
+                <span class="md-error">The gender is required</span>
+              </md-field>
+            </div>
+
           </div>
+
+
+        
+      
 
           <md-field :class="getValidationClass('email')">
             <label for="email">Email</label>

@@ -52,6 +52,7 @@ const actions = {
 
             commit('setArchGrade',response.data[0])
 
+
             
              }).catch((errors)=>{
        //   this.errors = errors.response.data.errors
@@ -110,7 +111,9 @@ const actions = {
        
                  })  */
     
-     }
+     },
+
+    
     
     
  

@@ -72,13 +72,13 @@ const actions = {
               
                       
                 }else if (response.data.user_role === "superadmin"){
-                  router.push('/contact-escord', () => router.go(0)).catch(err => {})
+                  router.push('/admindash', () => router.go(0)).catch(err => {})
 
                 
                 }else if (response.data.user_role === "student"){
               //    router.push({path:'/Dashboard'});
              
-              router.push('/student-dashboard', () => router.go(0)).catch(err => {})
+              router.push({name: 'Student Dashboard', params:{student_number: response.data.student_number }}, () => router.go(0)).catch(err => {})
 
              
                   

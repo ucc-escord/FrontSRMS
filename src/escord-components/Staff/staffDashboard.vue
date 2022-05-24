@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="name">
-                  <h3 class="title">{{staffLN}}, {{staffFN}} {{staffMN}}</h3>
+                  <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}} </h3>
                   <h5>MIS Staff</h5>
                 </div>
               </div>
@@ -118,6 +118,10 @@ export default {
    components: {
     accStaff,
    },
+   mounted(){
+   this.$store.dispatch('displayuser');
+
+   },
   data() {
     return {
       staffLN: "DELA CRUZ",
@@ -140,7 +144,9 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+ ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+
   },
   methods: {
           ...mapActions({ loggingOut: "loggingOut" }),

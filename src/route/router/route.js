@@ -38,6 +38,9 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
+const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
+
+const escViewArchieveGrade   = () => import("../../escord-components/Manager/viewArchieveGradesheet")
 
 
 const routes = [
@@ -56,6 +59,18 @@ const routes = [
     components: {default: escLanding, header: escHeader, footer: escFooter},
 
   },
+//this admin dash-----
+  {
+    path: "/admindash",
+    name: "AdminDash",
+    component: escAdminDash,
+    components: {default: escAdminDash, footer: escFooter},
+
+  },
+
+
+  //this is adfmin dashh
+
   {
     path: "/register",
     name: "Register",
@@ -70,7 +85,7 @@ const routes = [
     onlyGuest:true,
   },
   {
-    path: "/student-dashboard",
+    path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
     component: escStudDash
   },
@@ -115,6 +130,15 @@ const routes = [
     name: "Scholastic Record Detail",
     components: {default: escStaff_SRPage, footer: escFooter}
   },
+
+  {
+    path: "/archievegradesheet/:archievegs",
+    name: "GradesheetArchieve",
+    component: escViewArchieveGrade,
+ 
+  },
+
+  
 
 ]
 

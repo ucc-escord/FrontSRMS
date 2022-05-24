@@ -4,6 +4,7 @@
       class="section page-header header-filter"
       :style="headerStyle"
     ></parallax>
+ 
     <div class="main main-raised">
       <div class="section profile-content">
         <div class="container">
@@ -48,7 +49,7 @@
             </md-button>
 
            
-
+         
             <!-- modal -->
             <modal v-if="classicModal" @close="classicModalHide">
 
@@ -334,13 +335,20 @@
             <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
           
           </div>
-          <!-- GRADESHEET CARDS -->
+          <!-- GRADESHEET CARDS 
+-->
+
+          
           <div v-else class="profile-content"> 
+    <pagination no-arrows   :page-count="gradesheet.last_page" :value="currentpage" :total="gradesheet.total" @input="cardshowpage" />
+
+   
+ 
 
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
               <md-card
-              v-for="gs in getCard"
+              v-for="gs in gradesheet.data"
               :key="gs.gradesheetid" 
               md-with-hover
               class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
@@ -403,6 +411,9 @@ import accProf from '../Prof/AccountProf.vue'
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import {Pagination} from '@/components'
+import axios from 'axios'
+
 
 
 
@@ -410,21 +421,28 @@ export default {
   bodyClass: "profile-page",
   components: {
       Modal,   accProf,
+  Pagination,
+  
   
   },
  
   mounted() {
         this.$store.dispatch('displayuser');
           this.$store.dispatch('cardinfo',this.$route.params.userid);
+     this.cardshowpage()
+
+      },
+      created(){
       
       },
  
   mixins: [validationMixin], // for validation
   data() {
     return {
+
+      
       /*modal default value on load*/
       classicModal: false,
-   
 
       /*modal--form data*/
       formData:{
@@ -469,8 +487,12 @@ export default {
       section: ["A", "B", "C"],
 
       /* GRADESHEET ARRAY/ INFO FOR GRADEHSHEET CARDS */
-      gradesheet: [
-      ],
+      gradesheet: {
+                    type:Object,
+                    default:null
+                },
+                currentpage: 1,
+    
       selectedGS_infoShow: null,
     };
   },
@@ -522,8 +544,16 @@ export default {
   
     ...mapGetters({getCard: 'getCard'}),
    
-    ...mapGetters({getcurrentUser: 'getCurrentUser'})
-   
+    ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+    getcurrentpage : {
+      get(){
+          return 3;
+      },
+
+      set(val){
+          console.log(val)
+      }
+    }
   },
 
   methods: {
@@ -535,6 +565,22 @@ export default {
     //      ...mapActions({ showDataProf: "showDataProf" }),
 
     /* show selected gs card info */
+   
+async cardshowpage(page=1){
+           
+ 
+           await    axios.get('/api/paginatecard/'+this.$route.params.userid+'?page='+page).then(({data})=>{
+            
+                   this.gradesheet = data
+                   this.currentpage = page
+
+                
+                }).catch(({ response })=>{
+                    console.error(response)
+                })
+           
+},
+ 
 
   showDataProfFromEDB(){
     // console.log(this.$store.getters.getCurrentUser.email)
