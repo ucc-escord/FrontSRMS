@@ -19,11 +19,12 @@
                   />
                 </div>
 
+
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{studLN}}, {{studFN}} {{studMN}}</h3>
-                  <h5>{{studProg}} | {{studYr}}{{studSec}}</h5>
+                    <h3 class="title">{{getcurrentUser.name}}</h3>
+                  <h5>{{getcurrentUser.student_number}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -33,6 +34,7 @@
                         UPDATE ACCOUNT
                     </md-button>
                   </div>
+
                 </div>
                 
                 
@@ -86,23 +88,19 @@
         
       </div>
 
-      <updateModal v-if="updateModal" @close="updateModalHide"/>
-    <!--<div>
-        <acc-stud/>
-  </div>
-
-  <div>
-        <acc-man/>
-  </div>
-
+    <div> <stud-scol/> </div>
+      
+     <updateModal v-if="updateModal" @close="updateModalHide"/>
+    
   
-  <div>
-        <acc-prof/>
+  <!--<div> <acc-stud/> </div> -->
+  
+   <div>
+      <stud-eval/>   
   </div>
 
-   <div>
-        <acc-management/>
-  </div> -->
+
+   <!--<div> <acc-management/> </div>--> 
 
 
     </div>
@@ -111,13 +109,28 @@
 </template>
 
 <script>
+
+
+import { mapActions, mapGetters} from "vuex";
+
+import studScol from './studScholastic.vue'
+import studEval from './studEvaluation.vue'
+
+
 // modal import
 import updateModal from './AccountStudent.vue'
+
 
 export default {
   bodyClass: "profile-page",
  components: {
-    updateModal
+    studScol,
+    studEval,
+     updateModal
+  },
+  mounted(){
+  this.$store.dispatch('displayuser');
+
   },
   data() {
     return {
@@ -150,6 +163,8 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
+      ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+
   },
   methods: {
      /*modal function*/

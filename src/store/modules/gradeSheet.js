@@ -123,9 +123,36 @@ const actions = {
        })  
    
      },
-     updateGradesheetData({ commit }, payload){
+     updateGradesheetData({ commit }, route, formData){
 
-      console.log(payload);
+  
+        axios.put('/api/addgs/'+route, formData).then((response)=>{
+        
+
+            console.log('create professor accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+       
+
+     },
+
+     cardwithpage({commit},route,page){
+
+    
+       axios.get(`/api/paginatecard/`+route+`?page=${page}`).then(({data})=>{
+            this.cards = data
+            console.log(data);
+        }).catch(({ response })=>{
+            console.error(response)
+        })
+  
+
      }
 
 

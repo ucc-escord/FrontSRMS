@@ -4,6 +4,7 @@
       class="section page-header header-filter"
       :style="headerStyle"
     ></parallax>
+ 
     <div class="main main-raised">
       <div class="section profile-content">
         <div class="container">
@@ -40,6 +41,7 @@
           </div>
           <div class="md-layout md-gutter md-alignment-center">
             <h2 class="md-display-1 md-layout-item">GRADESHEETS</h2>
+
           </div>
 
           <div class="buttons">
@@ -56,9 +58,18 @@
                     <md-icon>show</md-icon>Refresh Card 
             </md-button>
 
-           
+                <md-button class="md-esc-accent md-wd md-round">
+                
+
+                   <router-link :to="{ name: 'ProfessorArchieve Table'}">Show..</router-link>
+
+            </md-button>
+
+
+
 
             <!-- add gradesheet modal -->
+
             <modal v-if="classicModal" @close="classicModalHide">
 
               <!-- modal header -->
@@ -345,13 +356,30 @@
           
           </div>
 
+
           <!-- GRADESHEET CARDS -->
+
           <div v-else class="profile-content"> 
+
+            <md-field>
+            <label>SEARCH BAR</label>
+            <md-input v-model="search"></md-input>
+            <span class="md-helper-text">search your card</span>
+            <md-button class="md-esc-accent" @click="cardshowpage">
+              Search
+            </md-button>
+          </md-field>
+
+
+    <pagination no-arrows   :page-count="gradesheet.last_page" :value="gradesheet.current_page" :total="gradesheet.total" @input="cardshowpage" />
+
+   
+ 
 
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
               <md-card
-              v-for="gs in getCard"
+              v-for="gs in gradesheet.data"
               :key="gs.gradesheetid" 
               md-with-hover
               class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
@@ -396,7 +424,6 @@
       </div>
     </div>
 
-
     <vue-headful title="Dashboard | PROF"/>
   </div>
 
@@ -407,35 +434,48 @@
 // modal import
 import { Modal } from "@/components";
 import { mapActions, mapGetters} from "vuex";
+
 import updateModal from '../Prof/AccountProf.vue'
+
 
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import axios from "axios"
-import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import {Pagination} from '@/components'
+import axios from 'axios'
 
 
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal,
+
+      Modal,   
+  Pagination,
       updateModal
+
   
   },
  
   mounted() {
         this.$store.dispatch('displayuser');
           this.$store.dispatch('cardinfo',this.$route.params.userid);
+     this.cardshowpage()
+
+      },
+      created(){
       
       },
   name: 'FormValidation',
   mixins: [validationMixin], // for validation
   data() {
     return {
+
+      
       /*modal default value on load*/
       classicModal: false,
+
       updateModal: false,
    
 
@@ -482,8 +522,13 @@ export default {
       section: ["A", "B", "C"],
 
       /* GRADESHEET ARRAY/ INFO FOR GRADEHSHEET CARDS */
-      gradesheet: [
-      ],
+      gradesheet: {
+                    type:Object,
+                    default:null
+                },
+                currentpage: 1,
+                search: '',
+    
       selectedGS_infoShow: null,
 
       form: {
@@ -585,8 +630,16 @@ export default {
   
     ...mapGetters({getCard: 'getCard'}),
    
-    ...mapGetters({getcurrentUser: 'getCurrentUser'})
-   
+    ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+    getcurrentpage : {
+      get(){
+          return 3;
+      },
+
+      set(val){
+          console.log(val)
+      }
+    }
   },
 
 
@@ -599,6 +652,22 @@ export default {
     //      ...mapActions({ showDataProf: "showDataProf" }),
 
     /* show selected gs card info */
+   
+async cardshowpage(page=1){
+           
+ 
+           await    axios.get('/api/paginatecard/'+this.$route.params.userid+'?page='+page+'&search='+this.search).then(({data})=>{
+            
+                   this.gradesheet = data
+                   this.currentpage = page
+
+                
+                }).catch(({ response })=>{
+                    console.error(response)
+                })
+           
+},
+ 
 
   showDataProfFromEDB(){
     // console.log(this.$store.getters.getCurrentUser.email)
@@ -707,6 +776,9 @@ export default {
           console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
+    pageofArchieve(){
+      this.$router.push( '/archievetableprof')
+    }
   },
 };
 </script>

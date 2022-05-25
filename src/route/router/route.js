@@ -39,6 +39,13 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
+const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
+
+const escViewArchieveGrade   = () => import("../../escord-components/Prof/viewArchieveGradesheet")
+
+const escProf_ArchTable   = () => import("../../escord-components/Prof/profArchieveGradesheet")
+const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
+const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
 const escAdminDash  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
 
@@ -65,6 +72,18 @@ const routes = [
     components: {default: escLanding, header: escHeader, footer: escFooter},
 
   },
+//this admin dash-----
+  {
+    path: "/admindash",
+    name: "AdminDash",
+    component: escAdminDash,
+    components: {default: escAdminDash, footer: escFooter},
+
+  },
+
+
+  //this is adfmin dashh
+
   {
     path: "/register",
     name: "Register",
@@ -79,7 +98,7 @@ const routes = [
     onlyGuest:true,
   },
   {
-    path: "/student-dashboard",
+    path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
     components: {default: escStudDash, header: escHeader, footer: escFooter}
   },
@@ -128,7 +147,6 @@ const routes = [
     path: "/manager-dashboard",
     name: "Manager Dashboard",
     components: {default: escAdminDash, header: escHeader, footer: escFooter}
-
   },
   {
     path: "/overview",
@@ -144,6 +162,32 @@ const routes = [
     path: "/audit-trail",
     name: "Audit Trail",
     component: escAdminAuditTrail
+  },
+  
+   {
+    path: "/archievegradesheet/:archievegs",
+    name: "GradesheetArchieve",
+    component: escViewArchieveGrade,
+ 
+  },
+
+  {
+    path: "/archievetableprof/:userid",
+    name: "ProfessorArchieve Table",
+    component:  escProf_ArchTable,
+ 
+  },
+
+  {
+    path: "/scholasticrecordtab",
+    name: "ScholasticRecordTab",
+    components: {default: escStaff_SRTab, header: escHeader, footer: escFooter}
+  },
+
+  {
+    path: "/staffArchieve",
+    name: "StaffArchieve",
+    components: {default:  escStaff_ArchTable,  footer: escFooter}
   },
 
 ]

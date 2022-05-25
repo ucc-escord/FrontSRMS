@@ -1,10 +1,34 @@
 <template>
-  
+    <div>
+    
+      <div>
+              <admin-acc/>
+      </div>
+
+       <div>
+              <admin-new-user/>
+      </div>
+    
+
+       
+    </div>
+
+    
+   
+
 </template>
 
 <script>
-export default {
 
+import adminAcc from './adminAccount.vue'
+import adminNewUser from './adminAddNewUser.vue'
+
+
+export default {
+        components: {
+                adminAcc,
+                adminNewUser
+        },
 }
 </script>
 
