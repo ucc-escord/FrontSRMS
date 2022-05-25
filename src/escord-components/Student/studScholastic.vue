@@ -154,7 +154,7 @@ import { mapActions, mapGetters} from "vuex";
   } from 'vuelidate/lib/validators'
 
   export default {
-    name: 'FormValidation',
+    name: 'ScholasticForm',
     mixins: [validationMixin],
     mounted(){
           //  this.$store.dispatch('displayuser');

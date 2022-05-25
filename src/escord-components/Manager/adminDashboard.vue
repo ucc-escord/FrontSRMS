@@ -6,7 +6,7 @@
       </div>
 
        <div>
-              <arch-table/>
+              <admin-new-user/>
       </div>
     
 
@@ -21,12 +21,13 @@
 <script>
 
 import adminAcc from './adminAccount.vue'
-
+import adminNewUser from './adminAddNewUser.vue'
 
 
 export default {
         components: {
                 adminAcc,
+                adminNewUser
         },
 }
 </script>

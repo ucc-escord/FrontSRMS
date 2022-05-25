@@ -63,6 +63,10 @@
       <stud-scol/>   
   </div>
 
+   <div>
+      <stud-eval/>   
+  </div>
+
 
   
   
@@ -78,13 +82,16 @@
 import { mapActions, mapGetters} from "vuex";
 
 import studScol from './studScholastic.vue'
+import studEval from './studEvaluation.vue'
+
 
 
 
 export default {
   bodyClass: "profile-page",
  components: {
-    studScol
+    studScol,
+    studEval
   },
   mounted(){
   this.$store.dispatch('displayuser');

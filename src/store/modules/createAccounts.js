@@ -35,6 +35,34 @@ const actions = {
              })
      },
 
+     createStudent({commit},formData) {
+        axios.post('/api/createaccstud', formData).then((response)=>{
+        
+
+            console.log('create student accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+     },
+
+     createStaff({commit},formData) {
+        axios.post('/api/createaccadm', formData).then((response)=>{
+        
+
+            console.log('create staff accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+     },
+
 
      //update acccount
 
