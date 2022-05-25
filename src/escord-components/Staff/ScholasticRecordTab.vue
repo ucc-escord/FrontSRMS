@@ -27,6 +27,7 @@
   <!---Evaluation Form Tab-->
   <div v-if="defaultvalbutton ==='scholastic'">
 
+
     <md-field>
             <label>SEARCH BAR</label>
             <md-input v-model="search"></md-input>
@@ -47,6 +48,7 @@
                 <md-table-head class="text-center">Program</md-table-head>
                 <md-table-head class="text-center">Year and Section</md-table-head>
                 <md-table-head class="text-center"></md-table-head>
+
 
                 
               </md-table-row>
@@ -79,10 +81,12 @@
       </md-table-row>
     <pagination no-arrows   :page-count="users.last_page" :value="users.current_page" :total="users.total" @input="scholmis" />
 
+
     </md-table>
 <!--END-->
 
   </div>
+
 
   <div  v-else>
 
@@ -143,7 +147,6 @@
 
   </div>
 
-   
 
         
         </div>
@@ -189,11 +192,13 @@ export default {
     },
 
     //showscolmis
+
     methods:{
         showscholastictable(){
             this.defaultvalbutton = 'scholastic';
            
         },
+
         showevaluationtable(){
             this.defaultvalbutton = '';
         },
@@ -231,7 +236,7 @@ export default {
                 
            
 },
- 
+
         },  
         props: {
     header: {
@@ -246,6 +251,7 @@ export default {
       };
     }
   }
+
   };
 </script>
 

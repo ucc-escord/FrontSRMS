@@ -11,6 +11,7 @@ import NotFound from "@/layout/NotFoundPage.vue";
 import escHeader from "@/escord-components/esc-Header.vue";
 import escFooter from "@/escord-components/esc-Footer.vue";
 
+
 //---| ESCORD COMPONENTS |---
 //import escLogin from "../../escord-components/esc-Login.vue";
 //import escLanding from "../../escord-components/esc-LandingPage.vue";
@@ -24,7 +25,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 const escStaffDash = () => import("../../escord-components/Staff/staffDashboard.vue");
 
 const escLogin = () => import('../../escord-components/esc-Login.vue')
-const escLanding = () => import('../../escord-components/esc-Landing-2.vue')
+const escLanding = () => import('../../escord-components/esc-Landing.vue')
 const escProfDash = () => import('../../escord-components/Prof/profDashboard.vue')
 const escProf_GSPage = () => import('../../escord-components/Prof/profGradesheetPage.vue')
 
@@ -46,6 +47,14 @@ const escProf_ArchTable   = () => import("../../escord-components/Prof/profArchi
 const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
 const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
+const escAdminDash  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
+
+/* ADMIN TABS */
+
+import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
+import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
+import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue';
+
 
 const routes = [
 
@@ -59,7 +68,7 @@ const routes = [
   {
     path: "/",
     name: "Landing",
-    component: escLanding,
+    //component: escLanding,
     components: {default: escLanding, header: escHeader, footer: escFooter},
 
   },
@@ -84,28 +93,28 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: escLogin,
+    //component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
     onlyGuest:true,
   },
   {
     path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
-    component: escStudDash
+    components: {default: escStudDash, header: escHeader, footer: escFooter}
   },
   {
     path: "/prof-dashboard/:userid",
     name: "Professor Dashboard",
-    component: escProfDash,
+    components: {default: escProfDash, header: escHeader, footer: escFooter},
   
-   meta: { requiresAuth: true, authorize: 'professor' } ,
+   //meta: { requiresAuth: true, authorize: 'professor' } ,
   //uncomment this to have a login validation
 
   },
   {
     path: "/gradesheet-detail/:userid/:gradeshid",
     name: "Gradesheet Detail",
-    component: escProf_GSPage,
+    components: {default: escProf_GSPage, header: escHeader, footer: escFooter}
  
   },
   {
@@ -121,21 +130,41 @@ const routes = [
   {
     path: "/Staff-scholastic-record",
     name: "Staff Scholastic-record",
-      component: escStaffScholasticRecord
+    components: {default: escStaffScholasticRecord, header: escHeader, footer: escFooter}
   },
   {
     path: "/staff-dashboard",
     name: "Staff Dashboard",
-    component: escStaffDash
+    components: {default: escStaffDash, header: escHeader, footer: escFooter}
 
   },
   {
     path: "/scholastic-record-detail",
     name: "Scholastic Record Detail",
-    components: {default: escStaff_SRPage, footer: escFooter}
+    components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
   },
-
   {
+    path: "/manager-dashboard",
+    name: "Manager Dashboard",
+    components: {default: escAdminDash, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/overview",
+    name: "Overview",
+    component: escAdminOverview
+  },
+  {
+    path: "/manage-account",
+    name: "Manage Account",
+    component: escAdminManageAccount
+  },
+  {
+    path: "/audit-trail",
+    name: "Audit Trail",
+    component: escAdminAuditTrail
+  },
+  
+   {
     path: "/archievegradesheet/:archievegs",
     name: "GradesheetArchieve",
     component: escViewArchieveGrade,
@@ -161,16 +190,7 @@ const routes = [
     components: {default:  escStaff_ArchTable,  footer: escFooter}
   },
 
-
-
- 
- 
-
-  
-
 ]
-
-
 
 
 export default routes;

@@ -19,32 +19,42 @@
                   />
                 </div>
 
-                <div class="name">
-                  <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}} </h3>
-                  <h5>MIS Staff</h5>
+
+
+                <div class="md-layout md-alignment-center-center">
+
+                  <div class="md-layout-item md-size-100  name">
+                    <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}} </h3>
+                    <h5>MIS Staff</h5>
+                  </div>
+
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                    class="md-simple md-dense md-esc-darkgrey"
+                    @click="updateModal = true">
+                        UPDATE ACCOUNT
+                    </md-button>
+                  </div>
+
                 </div>
+                
               </div>
             </div>
           </div>
 
-          <div class="__button-menu md-layout md-gutter md-alignment-center-left">
+          <div class="__button-menu md-layout md-gutter md-alignment-center-space-between">
 
               <div class="__button md-layout-item md-size-20 md-xsmall-size-100 md-layout md-alignment-center-center">
                 <md-button
                 class="md-raised md-esc-darkgrey">
-                    CHANGE PASSWORD
-                </md-button>
-              </div>
-
-              <div class="__button md-layout-item md-size-20 md-xsmall-size-100 md-layout md-alignment-center-center">
-                <md-button
-                class="md-raised md-esc-accent">
                     VIEW ARCHIVE
                 </md-button>
               </div>
-                  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+
+              
+                  <!-- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
                     <md-icon>logout</md-icon>logout
-            </md-button>
+            </md-button> -->
 
               
               <!-- <div class="__search-bar md-layout-item md-size-60 md-xsmall-size-100">
@@ -98,25 +108,21 @@
       </div>
     </div>
 
-    <div>
-        <acc-staff/>
-  </div>
-
+    <updateModal v-if="updateModal" @close="updateModalHide"/>
+    
     <vue-headful title="Dashboard | STAFF"/>
   </div>
 </template>
 
 <script>
-
-import { mapActions, mapGetters} from "vuex";
-import accStaff from '../Staff/AccountStaff.vue'
-
+// modal import
+import updateModal from '../Staff/AccountStaff.vue'
 
 export default {
   bodyClass: "profile-page",
 
    components: {
-    accStaff,
+    updateModal, 
    },
    mounted(){
    this.$store.dispatch('displayuser');
@@ -124,11 +130,11 @@ export default {
    },
   data() {
     return {
-      staffLN: "DELA CRUZ",
-      staffFN: "JUAN",
-      staffMN: "GONZALES"
+       /*modal default value on load*/
+      updateModal: false,
     };
   },
+
   props: {
     header: {
       type: String,
@@ -145,14 +151,16 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
+
  ...mapGetters({getcurrentUser: 'getCurrentUser'}),
 
+
   },
-  methods: {
-          ...mapActions({ loggingOut: "loggingOut" }),
-loggingout(){
-              this.loggingOut()
-      },
+ methods: {
+     /*modal function*/
+    updateModalHide() {
+      this.updateModal = false;
+    },
 
   }
 };

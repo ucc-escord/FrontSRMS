@@ -4,8 +4,30 @@
       <!-- removed .page-header from div above remove top alignment??? kapag sobrang haba ng content, sumasagad sa dulo -->
       <div class="container">
         <div
-        class="">
-            <h3 class="title"></h3>
+        class="md-layout md-alignment md-alignment-center-center __landing">
+            
+            <div class="md-layout-item md-size-50 md-medium-hide md-layout md-gutter">
+              <img src="../assets/img/escord-landing-img.svg" />
+            </div>
+
+            <div class="md-layout-item md-size-50 md-medium-size-100 md-layout md-gutter md-alignment-center-center">
+
+              <h2 class="md-layout-item md-size-100 title">A web-based scholastic record management system.</h2>
+              <p class="md-layout-item md-size-100">Grading, evaluation, and managing in <b>one</b>.</p>
+              
+
+              <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <md-button
+                class="md-esc-accent md-round md-raised"
+                to="/about-escord">
+                  Learn More <md-icon>arrow_forward</md-icon>
+                </md-button>
+
+              </div>
+
+                
+            </div>
+
         </div>
       </div>
     </div>
@@ -16,7 +38,7 @@
 <script>
 
 export default {
-  bodyClass: "escord-about-page",
+  bodyClass: "escord-landing-page",
   data() {
     return {
         
@@ -26,25 +48,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.__landing {
+  height: 500px !important;
+}
 
 h3.title {
     margin-bottom: 0.5rem !important;
     color: #2d2d2d !important;
 }
 
-.__card-buttons {
-    margin-top: 1.5rem !important;
+img {
+  width: 100%;
+  height: auto;
+  transform: translate(-10%, 10%);
+  transition: all 300ms ease;
 }
 
-.md-card-header {
-    background-color: transparent !important;
-    box-shadow: none !important;
-    -webkit-box-shadow: none;
-    height: 5rem !important;
-    margin-bottom: 2rem !important;
+p {
+  font-size: 1em !important;
+  margin-bottom: 2em !important;
 }
 
-.md-icon {
-    color: #90a4ae !important;
+@media screen and (max-width: 1279px) {
+
+  h2, p {
+    text-align: center !important;
+  }
+  
 }
 </style>

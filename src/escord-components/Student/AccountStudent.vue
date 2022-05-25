@@ -1,9 +1,95 @@
 <template>
 
-<!--this is for data in srms--->
+ <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container" v-click-outside="closeModal">
+
+          <div class="modal-header">
+            <h3 class="title text-esc-accent">Update Account</h3>
+          </div>
+
+          <div class="modal-body text-center">
+            <form @submit.prevent="UpdateStudent" novalidate class="md-layout md-gutter md-alignment-center-left">
+
+                  <!-- INPUTS -->
+                  <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter">
+                      <md-field 
+                      class="has-esc-accent">
+                        <label for="student-number">Student Number</label> 
+                        <!-- -this is not edited -->
+                        <md-input readonly name="student-number" id="student-number"  autocomplete="" v-model="getcurrentUser.student_number" :disabled="sending" />
+                      </md-field>
+                    </div>
+
+                    <div class="md-layout-item md-small-size-100 md-layout md-gutter">
+                      <md-field
+                      class="has-esc-accent" :class="getValidationClass('stdName')">
+                        <label for="std-name">Name </label>
+                        <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.name" :disabled="sending" />
+
+                        <span class="md-error" v-if="!$v.studentAcc.stdName.required">Name is required.</span>
+                     </md-field>
+                    </div>
+
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+
+                      <md-field 
+                      class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('stdPassword')">
+                        <label for="std-password">New Password</label>
+                        <md-input name="std-password" id="std-password" autocomplete="family-name" v-model="studentAcc.stdPassword" :disabled="sending" />
+
+                        <span class="md-error" v-if="!$v.studentAcc.stdPassword.required">Password is required.</span>
+                        <span class="md-error" v-else-if="!$v.studentAcc.stdPassword.minlength">Password must be at least 8 characters.</span>
+                      </md-field>
+                   
+                      <md-field 
+                      class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('stdConfirmPass')">
+                        <label for="confirm-pass">Confirm Password</label>
+                        <md-input name="confirm-pass" id="confirm-pass" autocomplete="family-name" v-model="studentAcc.stdConfirmPass" :disabled="sending" />
+
+                        <span class="md-error" v-if="!$v.studentAcc.stdConfirmPass.required">Confirm password is required.</span>
+                        <span class="md-error" v-else-if="!$v.studentAcc.stdConfirmPass.sameAsPassword">Password must match.</span>
+                      </md-field>
+                    </div>
+                    
+                    <div class="md-layout-item md-size-100 md-layout md-gutter">
+                      <md-field
+                      class="has-esc-accent" :class="getValidationClass('stdEmail')">
+                        <label for="std-email">Email</label>
+                        <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
+                        
+                        <span class="md-error" v-if="!$v.studentAcc.stdEmail.required">The email is required.</span>
+                        <span class="md-error" v-else-if="!$v.studentAcc.stdEmail.email">Invalid email.</span>
+                      </md-field>
+                    </div>
+
+                  </div>
+
+                  <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                    <md-button type="submit" class="__modal-buttons md-esc-accent md-round" :disabled="sending">Update Account</md-button>
+                  </div>
+              
+
+              <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was updated with success!</md-snackbar> 
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </transition>
+
+<!--this is for data in srms
  <div>
 
-<!--This is for update account--->
+
+---This is for update account
       <form  novalidate  class="md-layout"   @submit.prevent="validateUser" >
           <md-card-content>
           <div class="md-layout md-gutter">
@@ -13,6 +99,7 @@
                 <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.student_number" :disabled="sending" />
                 <span class="md-error" v-if="!$v.getcurrentUser.student_number.required">The student number is required</span>
              <!---    <span class="md-error" v-else-if="!$v.studentAcc.stdNum.minlength">Invalid first name</span>-->
+
               </md-field>
             </div>
 
@@ -20,9 +107,11 @@
               <md-field :class="getValidationClass('name')">
                 <label for="std-name">Name </label>
                 <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.name" :disabled="sending" />
+
                 <span class="md-error" v-if="!$v.getcurrentUser.name.required">The name is required</span>
                   <!---       <span class="md-error" v-else-if="!$v.studentAcc.stdPassword.minlength">Invalid last name</span>
             -->  </md-field>
+
             </div>
 
 
@@ -58,13 +147,16 @@
         </md-card-actions>
       
 
+
       <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was updated with success!</md-snackbar>
+
         </form>
-  </div>
+  </div> -->
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
+
+import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 import axios from "axios"
 
@@ -73,7 +165,9 @@ import axios from "axios"
     required,
     email,
     minLength,
-    maxLength, sameAs
+    maxLength,
+    sameAs
+
   } from 'vuelidate/lib/validators'
 
   export default {
@@ -82,9 +176,8 @@ import axios from "axios"
 
     mounted(){
    this.$store.dispatch('displayuser');
-
-   
     },
+
     data: () => ({
 
      
@@ -169,6 +262,10 @@ import axios from "axios"
 
         if (!this.$v.$invalid) {
           this.saveUser()
+          console.log("okay");
+        }
+        else {
+          console.log("no");
         }
       },
 
@@ -178,7 +275,7 @@ import axios from "axios"
               
 //     this.updateAccStud({route:this.getcurrentUser.id}, formDax)
 
-
+        this.validateUser();
     
         axios.put('/api/updateStudent/'+this.getcurrentUser.id, {
              password : this.studentAcc.stdPassword,
@@ -190,7 +287,9 @@ import axios from "axios"
         }).then((response)=>{
         
 
+
             console.log('update student accounts' , response.data);
+
 
             
              }).catch((errors)=>{
@@ -198,8 +297,12 @@ import axios from "axios"
              this.error =  errors.response.data;
    
              })
+        },
 
-        }
+      closeModal: function() {
+      this.$emit("close");
+      this.clearForm()
+    }
     
      
     },
@@ -218,4 +321,45 @@ import axios from "axios"
     right: 0;
     left: 0;
   }
+
+  .modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.modal-container {
+  margin-top: 4em !important;
+}
+
+.md-input {
+  width: 0.05rem;
+  max-width: 100%;
+}
+
+.md-error {
+  position: absolute !important;
+  top: 3.07em !important;
+  left: 0 !important;
+  line-height: 0.95em !important;
+  text-align: justify;
+  font-size: .777rem !important;
+}
+
+h3, .h3 {
+  font-size: 1.5em !important;
+  line-height: 1em !important;
+  margin-bottom: 0px !important;
+}
+.__modal-buttons {
+  margin-top: 1em;
+}
 </style>

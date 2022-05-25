@@ -1,14 +1,107 @@
 <template>
-<div>
- <form  novalidate  class="md-layout" @submit.prevent="validateUser">
+
+
+<transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container" v-click-outside="closeModal">
+
+          <div class="modal-header">
+            <h3 class="title text-esc-accent">Update Account</h3>
+          </div>
+
+          <div class="modal-body text-center">
+             <form @submit.prevent="UpdateProf" novalidate class="md-layout md-gutter md-alignment-center-left">
+
+               <!-- INPUTS -->
+                  <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+                       <md-field
+                      class="has-esc-accent md-layout-item md-size-40" 
+                      :class="getValidationClass('stdName')">
+                          <label for="std-name">First Name </label>
+                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
+                      </md-field>
+
+                      <md-field
+                      class="has-esc-accent md-layout-item md-size-10" 
+                      :class="getValidationClass('stdName')">
+                          <label for="std-name">MI </label>
+                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.middleinitial" :disabled="sending" />
+                      </md-field>
+
+                      <md-field
+                      class="has-esc-accent md-layout-item md-size-40" 
+                      :class="getValidationClass('stdName')">
+                          <label for="std-name">Last Name  </label>
+                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
+                      </md-field>
+                    </div>
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter">
+                      <md-field
+                      class="has-esc-accent" 
+                      :class="getValidationClass('stdNum')">
+                        <label for="student-number">Faculty Rank</label> 
+                        <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.faculty_rank" :disabled="sending" />
+                      </md-field>
+                    </div>
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+                       <md-field
+                       class="has-esc-accent md-layout-item md-size-45" 
+                       :class="getValidationClass('stdPassword')">
+                        <label for="std-password">New Password</label>
+                        <md-input name="std-password" id="std-password" autocomplete="family-name" v-model="profAcc.stdPassword" :disabled="sending" />
+
+                        <span class="md-error" v-if="!$v.profAcc.stdPassword.required">Password is required.</span>
+                        <span class="md-error" v-if="!$v.profAcc.stdPassword.minLength">Password must be at least 8 characters.</span>
+                      </md-field>
+
+                      <md-field
+                      class="has-esc-accent md-layout-item md-size-45" 
+                      :class="getValidationClass('stdConfirmPass')">
+                        <label for="confirm-pass">Confirm Password</label>
+                        <md-input name="confirm-pass" id="confirm-pass" autocomplete="family-name" v-model="profAcc.stdConfirmPass" :disabled="sending" />
+
+                        <span class="md-error" v-if="!$v.profAcc.stdConfirmPass.required">Confirm password is required.</span>
+                        <span class="md-error" v-if="!$v.profAcc.stdConfirmPass.sameAsPassword">Password must match.</span>
+                      </md-field>
+                    </div>
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter">
+                      <md-field 
+                      class="has-esc-accent"
+                      :class="getValidationClass('stdEmail')">
+                        <label for="std-email">Email</label>
+                        <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
+                      </md-field>
+                    </div>
+
+                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                    <md-button type="submit" class="__modal-buttons md-esc-accent md-round" :disabled="sending">Update Account</md-button>
+                  </div>
+                    
+                  </div>
+             </form>
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </transition>
+<!--<div>
+ <form   @submit.prevent="UpdateProf">
         <md-card-content>
             <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('faculty_rank')">
-                <label for="student-number">Faculty Rank</label> <!---this is not edited-->
+              <md-field :class="getValidationClass('stdNum')">
+                <label for="student-number">Faculty Rank</label> -this is not edited
                 <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.faculty_rank" :disabled="sending" />
            
-               <span class="md-error" v-if="!$v.getcurrentUser.faculty_rank.required">Invalid faculty rank </span>
+             -    <span class="md-error" v-else-if="!$v.profAcc.stdNum.minlength">Invalid first name</span>
 
               </md-field>
             </div>
@@ -18,7 +111,9 @@
                 <label for="std-name">Firstname </label>
                 <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
          
+
                <span class="md-error" v-if="!$v.getcurrentUser.firstname.required">Invalid first name</span>
+
              </md-field>
             </div>
 
@@ -26,9 +121,11 @@
               <md-field :class="getValidationClass('middleinitial')">
                 <label for="std-name">Middle Initial </label>
                 <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.middleinitial" :disabled="sending" />
+
                         <span class="md-error" v-if="!$v.getcurrentUser.middleinitial.required">Invalid middleinitial</span>
 
            </md-field>
+           
             </div>
 
                <div class="md-layout-item md-small-size-100">
@@ -36,8 +133,10 @@
                 <label for="std-name">Lastname  </label>
                 <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
          
+
                     <span class="md-error" v-if="!$v.getcurrentUser.lastname.required">Invalid lastname</span>
              </md-field>
+
             </div>
 
 
@@ -74,9 +173,11 @@
       
       
 
-   <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+
+     <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar> 
+
         </form>
-        </div>
+        </div>-->
 </template>
 
 
@@ -149,6 +250,7 @@ import { mapActions, mapGetters} from "vuex";
         },
         stdConfirmPass:{
           required,
+
                minLength: minLength(8),
                 sameAs: sameAs(function () { return this.profAcc.stdPassword })
 
@@ -196,11 +298,17 @@ import { mapActions, mapGetters} from "vuex";
       validateUser () {
         this.$v.$touch()
 
-        if (!this.$v.$invalid) {
+       if (!this.$v.$invalid) {
           this.saveUser()
+          console.log("okay");
+        }
+        else {
+          console.log("no");
         }
       },
       UpdateProf(){
+
+        this.validateUser();
 
               axios.put('/api/updateProf/'+this.getcurrentUser.id, {
               password : this.profAcc.stdPassword,
@@ -214,7 +322,7 @@ import { mapActions, mapGetters} from "vuex";
                }).then((response)=>{
         
 
-            console.log('update staff accounts' , response.data);
+            console.log('update prof accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -222,7 +330,12 @@ import { mapActions, mapGetters} from "vuex";
              this.error =  errors.response.data;
    
              })
-      }
+      },
+
+      closeModal: function() {
+      this.$emit("close");
+      this.clearForm()
+    }
     }
   }
 </script>
@@ -234,4 +347,45 @@ import { mapActions, mapGetters} from "vuex";
     right: 0;
     left: 0;
   }
+  
+  .modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.modal-container {
+  margin-top: 4em !important;
+}
+
+.md-input {
+  width: 0.05rem;
+  max-width: 100%;
+}
+
+.md-error {
+  position: absolute !important;
+  top: 3.07em !important;
+  left: 0 !important;
+  line-height: 0.95em !important;
+  text-align: justify;
+  font-size: .777rem !important;
+}
+
+h3, .h3 {
+  font-size: 1.5em !important;
+  line-height: 1em !important;
+  margin-bottom: 0px !important;
+}
+.__modal-buttons {
+  margin-top: 1em;
+}
 </style>

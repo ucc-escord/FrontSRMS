@@ -24,7 +24,8 @@ import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escStaff_SRPage from "./escord-components/Staff/staffScholasticRecordDetail.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
-
+import EvaluationFormTab from "./escord-components/Staff/EvaluationFormTab.vue";
+import ScholasticRecordTab from "./escord-components/Staff/ScholasticRecordTab.vue";
 
 Vue.use(Router);
 
@@ -79,10 +80,10 @@ const currentUser = localStorage.getItem('role');
 
 export default new Router({
   routes: [
-    {
-      path: "/index",
-      name: "index",
-      components: { default: Index, header: MainNavbar, footer: MainFooter }},
+    // {
+    //   path: "/index",
+    //   name: "index",
+    //   components: { default: Index, header: MainNavbar, footer: MainFooter },
     //   props: {
     //     header: { colorOnScroll: 400 },
     //     footer: { backgroundColor: "black" }
@@ -149,7 +150,7 @@ export default new Router({
     {
       path: "/student-dashboard",
       name: "Student Dashboard",
-      component: escStudDash
+      components: {default: escStudDash, header: escHeader, footer: escFooter}
     },
     {
       path: "/prof-dashboard",
@@ -159,20 +160,29 @@ export default new Router({
     {
       path: "/staff-dashboard",
       name: "Staff Dashboard",
-      component: escStaffDash
-
+      components: {default: escStaffDash, header: escHeader, footer: escFooter}
     },
     {
       path: "/scholastic-record-detail",
       name: "Scholastic Record Detail",
-      components: {default: escStaff_SRPage, footer: escFooter}
+      components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
     },
     {
       path: "/gradesheet-detail",
       name: "Gradesheet Detail",
-      component: escProf_GSPage
+      components: {default: escProf_GSPage, header: escHeader, footer: escFooter}
     },
-    
+    {
+      path: "/staff-evaluationformtab",
+      name: "EvaluationFormTab",
+      component: EvaluationFormTab
+    },
+    {
+      path: "/staff-scholasticrecordtab",
+      name: "ScholasticRecordTab",
+      component: ScholasticRecordTab
+    },
+
   ],
   scrollBehavior: to => {
     if (to.hash) {

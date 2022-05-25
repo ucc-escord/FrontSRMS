@@ -38,23 +38,36 @@
 
               <md-list-item
                 to="/about-escord"
-                v-if="showMenu"
+                v-if="!showMenu"
               >
                 <p>About</p>
               </md-list-item>
              
               <md-list-item
                 to="/contact-escord"
-                v-if="showMenu"
+                v-if="!showMenu"
               >
                 <p>Contact Us</p>
               </md-list-item>
 
+      
+      <!-- LOG IN/ LOG OUT -->
+
+              <!-- isLoggedOut -->
               <md-list-item
                 to="/login"
-                v-if="showMenu"
+                v-if="!showMenu"
               >
-                <p class="__login">Login</p>
+                <p class="__login">Log In</p>
+              </md-list-item>
+
+              <!-- isLoggedIn removed to="/" replace with = @click-->
+              <md-list-item
+                class="__no-bg"
+                v-if="showMenu"
+                @click="loggingout"
+              >
+                <p class="__login __logout">LOG OUT</p>
               </md-list-item>
               
             </md-list>
@@ -78,6 +91,8 @@ function resizeThrottler(actualResizeHandler) {
     }, 66);
   }
 }
+/* IMPORT FOR LOGGING OUT METHOD */
+import { mapActions, mapGetters} from "vuex";
 
 import MobileMenu from "@/layout/MobileMenu";
 export default {
@@ -104,11 +119,23 @@ export default {
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false,
-      showMenu: true
+      toggledClass: false
     };
   },
+  computed: {
+    showMenu() {
+      const excludedRoutes = ["Landing", "About", "Contact Us", "Login", "Register"];
+      return excludedRoutes.every(r => r !== this.$route.name);
+    }
+  },
   methods: {
+    /* LOGGING OUT METHOD */
+    ...mapActions({ loggingOut: "loggingOut" }),
+loggingout(){
+              this.loggingOut()
+      },
+
+     /* COMPONENT METHODS */
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 
@@ -172,5 +199,9 @@ p {
   color: #ef6c00;
   font-size: 1rem !important;
   font-weight: bolder !important;
+}
+
+.__logout {
+  margin-bottom: 0 !important;
 }
 </style>

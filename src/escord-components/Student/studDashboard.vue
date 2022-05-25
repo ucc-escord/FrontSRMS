@@ -19,20 +19,48 @@
                   />
                 </div>
 
-                <div class="name">
-                  <h3 class="title">{{getcurrentUser.name}}</h3>
-                  <h5>{{getcurrentUser.student_number}} {{studProg}} | {{studYr}}{{studSec}}</h5>
+
+                <div class="md-layout md-alignment-center-center">
+
+                  <div class="md-layout-item md-size-100  name">
+                    <h3 class="title">{{getcurrentUser.name}}</h3>
+                  <h5>{{getcurrentUser.student_number}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
+                  </div>
+
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                    class="md-simple md-dense md-esc-darkgrey"
+                    @click="updateModal = true">
+                        UPDATE ACCOUNT
+                    </md-button>
+                  </div>
+
                 </div>
+                
+                
               </div>
             </div>
           </div>
-          <div class="">
+          <!-- <div class="">
             <h2 class="md-display-1">YOUR FILES</h2>
+          </div> -->
+
+          <div class="md-layout md-gutter md-alignment-center-space-between">
+            <div class="md-layout-item md-size-66">
+              <h2 class="md-display-1">YOUR FILES</h2>
+            </div>
+            <!-- <div class="md-layout-item md-size-33 md-layout">
+              <md-button
+              class="md-esc-darkgrey md-dense"
+              @click="updateModal = true">
+                UPDATE ACCOUNT
+              </md-button>
+            </div> -->
           </div>
           
-           <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+           <!-- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
                     <md-icon>logout</md-icon>logout
-            </md-button>
+            </md-button> -->
 
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
@@ -59,17 +87,20 @@
         </div>
         
       </div>
-    <div>
-      <stud-scol/>   
-  </div>
 
+    <div> <stud-scol/> </div>
+      
+     <updateModal v-if="updateModal" @close="updateModalHide"/>
+    
+  
+  <!--<div> <acc-stud/> </div> -->
+  
    <div>
       <stud-eval/>   
   </div>
 
 
-  
-  
+   <!--<div> <acc-management/> </div>--> 
 
 
     </div>
@@ -79,33 +110,43 @@
 
 <script>
 
+
 import { mapActions, mapGetters} from "vuex";
 
 import studScol from './studScholastic.vue'
 import studEval from './studEvaluation.vue'
 
 
+// modal import
+import updateModal from './AccountStudent.vue'
 
 
 export default {
   bodyClass: "profile-page",
  components: {
     studScol,
-    studEval
+    studEval,
+     updateModal
   },
   mounted(){
   this.$store.dispatch('displayuser');
+
   },
   data() {
     return {
+      /*modal default value on load*/
+      updateModal: false,
+
       studLN: "DELA CRUZ",
       studFN: "JUAN",
       studMN: "GONZALES",
       studProg: "Bachelor of Science in Computer Science",
       studYr: "3",
-      studSec:"A"
+      studSec:"A",
+    
     };
   },
+
   props: {
     header: {
       type: String,
@@ -123,13 +164,13 @@ export default {
       };
     },
       ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+
   },
   methods: {
-         ...mapActions({ loggingOut: "loggingOut" }),
-loggingout(){
-              this.loggingOut()
-      },
-
+     /*modal function*/
+    updateModalHide() {
+      this.updateModal = false;
+    },
   }
 };
 </script>
