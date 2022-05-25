@@ -19,29 +19,40 @@
                   />
                 </div>
 
-                <div class="name">
-                  <h3 class="title">{{staffLN}}, {{staffFN}} {{staffMN}}</h3>
-                  <h5>MIS Staff</h5>
+                <div class="md-layout md-alignment-center-center">
+
+                  <div class="md-layout-item md-size-100  name">
+                    <h3 class="title">{{staffLN}}, {{staffFN}} {{staffMN}}</h3>
+                    <h5>MIS Staff</h5>
+                  </div>
+
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                    class="md-simple md-dense md-esc-darkgrey"
+                    @click="updateModal = true">
+                        UPDATE ACCOUNT
+                    </md-button>
+                  </div>
                 </div>
+                
               </div>
             </div>
           </div>
 
-          <div class="__button-menu md-layout md-gutter md-alignment-center-left">
+          <div class="__button-menu md-layout md-gutter md-alignment-center-space-between">
 
               <div class="__button md-layout-item md-size-20 md-xsmall-size-100 md-layout md-alignment-center-center">
                 <md-button
                 class="md-raised md-esc-darkgrey">
-                    CHANGE PASSWORD
-                </md-button>
-              </div>
-
-              <div class="__button md-layout-item md-size-20 md-xsmall-size-100 md-layout md-alignment-center-center">
-                <md-button
-                class="md-raised md-esc-accent">
                     VIEW ARCHIVE
                 </md-button>
               </div>
+
+              
+                  <!-- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>logout</md-icon>logout
+            </md-button> -->
+
               
               <!-- <div class="__search-bar md-layout-item md-size-60 md-xsmall-size-100">
                   <md-field
@@ -63,14 +74,18 @@
               
               <div class="md-layout-item md-xlarge-size-50 
               md-small-size-50 md-xsmall-size-100">
+                 <router-link  to="/scholastic-record-detail">
                   <md-card class="md-with-hover">
                       <md-card-content
                       class="md-layout md-alignment-center-center">
                         <md-icon
                         class="md-size-5x">school</md-icon>
-                        <p class="md-title title text-center">Scholastic Record Management</p>
+                     <p class="md-title title text-center">
+                             
+                           Scholastic Record Management </p>
                       </md-card-content>
                   </md-card>
+                  </router-link>
                 </div>
                 
                 <div class="md-layout-item md-medium-size-50 md-small-size-50 md-xsmall-size-100">
@@ -86,23 +101,38 @@
             </div>
           </div>
         </div>
+        
       </div>
     </div>
+
+    <updateModal v-if="updateModal" @close="updateModalHide"/>
+    
     <vue-headful title="Dashboard | STAFF"/>
   </div>
 </template>
 
 <script>
+// modal import
+import updateModal from '../Staff/AccountStaff.vue'
 
 export default {
   bodyClass: "profile-page",
+
+   components: {
+    updateModal, 
+   },
   data() {
     return {
+       /*modal default value on load*/
+      updateModal: false,
+
       staffLN: "DELA CRUZ",
       staffFN: "JUAN",
-      staffMN: "GONZALES"
+      staffMN: "GONZALES",
+
     };
   },
+
   props: {
     header: {
       type: String,
@@ -118,7 +148,15 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+
+  },
+ methods: {
+     /*modal function*/
+    updateModalHide() {
+      this.updateModal = false;
+    },
+
   }
 };
 </script>
@@ -137,6 +175,6 @@ export default {
 }
 
 .md-with-hover {
-    cursor: context-menu !important;
+    cursor: pointer !important;
 }
 </style>

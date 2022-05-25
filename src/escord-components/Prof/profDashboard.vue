@@ -19,10 +19,22 @@
                   />
                 </div>
 
-                <div class="name">
-                  <h3 class="title">{{formData.profName}}</h3>
-                  <h5>{{formData.profRank}}</h5>
+                <div class="md-layout md-alignment-center-center">
+
+                  <div class="md-layout-item md-size-100  name">
+                    <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}}, {{getcurrentUser.middleinitial}}</h3>
+                  <h5>{{getcurrentUser.faculty_rank}}</h5>
+                  </div>
+
+                  <div class="md-layout-item md-size-100 ">
+                    <md-button
+                    class="md-simple md-dense md-esc-darkgrey"
+                    @click="updateModal = true">
+                        UPDATE ACCOUNT
+                    </md-button>
+                  </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -36,7 +48,17 @@
                     <md-icon>add</md-icon> Add Gradesheet
             </md-button>
 
-            <!-- modal -->
+           <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
+                    <md-icon>logout</md-icon>logout
+            </md-button>
+
+ <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
+                    <md-icon>show</md-icon>Refresh Card 
+            </md-button>
+
+           
+
+            <!-- add gradesheet modal -->
             <modal v-if="classicModal" @close="classicModalHide">
 
               <!-- modal header -->
@@ -263,7 +285,7 @@
                     </md-autocomplete>
                   </div>
                   
-                  <!-- prof -->
+                  <!-- prof 
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
                     <md-field class="has-esc-accent md-layout-item md-size-45" :class="getValidationClass('profName')">
@@ -280,7 +302,7 @@
 
                       <span class="md-error" v-if="!$v.formData.profRank.required">Rank/ position is required.</span>
                     </md-field>
-                  </div>
+                  </div>-->
 
                   
 
@@ -305,6 +327,7 @@
                   </div>
                   
                   <md-snackbar
+                    md-position="left"
                     :md-active.sync="gradesheetSaved">
                     Gradesheet for {{addedGradesheetInfo}} is added.
                   </md-snackbar>
@@ -316,43 +339,50 @@
 
             
           </div>
+          
+          <div v-if='loadingStatus'>
+            <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between md-warning" md-mode="indeterminate"></md-progress-spinner>
+          
+          </div>
 
           <!-- GRADESHEET CARDS -->
-          <div class="profile-content"> 
+          <div v-else class="profile-content"> 
 
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
               <md-card
-              v-for="gs in gradesheet"
-              :key="gs.id" 
+              v-for="gs in getCard"
+              :key="gs.gradesheetid" 
               md-with-hover
               class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
                   <md-card-content>
                     <p>
-                      ID: {{gs.id}}
+                      ID: {{gs.gradesheetid}}
+                    </p>
+                
+                    <p>
+                      Subject: {{gs.subjectcode}} {{gs.subjectdesc}}
                     </p>
                     <p>
-                      Subject: {{gs.subjCode}} {{gs.subjDesc}}
-                    </p>
-                    <p>
-                      Class: {{gs.subjClassYr}}{{gs.subjClassSec}} | {{gs.subjClassProg}}
+                      Class: {{gs.course_year}}{{gs.course_section}} | {{gs.course_short}}
                     </p>
                     <p class="md-caption">
-                      {{gs.subjSem}}, SY {{gs.subjSY_start}}-{{gs.subjSY_end}}
+                      {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}
                     </p> 
                     
-                    <span v-if="selectedGS_infoShow === gs.id"
+                    <span v-if="selectedGS_infoShow === gs.gradesheetid"
                     class="text-info">
-                      You have selected the card for {{gs.subjDesc}} with gradesheet ID of: {{gs.id}}.
+                      You have selected the card for {{gs.subjectdesc}} with gradesheet ID of: {{gs.gradesheetid}}.
                     </span>
                   </md-card-content>
 
                   <md-card-actions>
                     <md-button
                     class="md-simple md-esc-accent"
-                    @click="showGS_info(gs.id)">
+                    @click="showGS_info(gs.gradesheetid)">
                     SHOW DETAILS
                     </md-button>
+                   <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link>
                   </md-card-actions>
               </md-card>
 
@@ -360,31 +390,54 @@
 
           </div>
 
+          <updateModal v-if="updateModal" @close="updateModalHide"/>
+
         </div>
       </div>
     </div>
+
+
     <vue-headful title="Dashboard | PROF"/>
   </div>
+
+  
 </template>
 
 <script>
 // modal import
 import { Modal } from "@/components";
+import { mapActions, mapGetters} from "vuex";
+import updateModal from '../Prof/AccountProf.vue'
+
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import axios from "axios"
+import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
+
+
 
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal
+      Modal,
+      updateModal
+  
   },
+ 
+  mounted() {
+        this.$store.dispatch('displayuser');
+          this.$store.dispatch('cardinfo',this.$route.params.userid);
+      
+      },
+  name: 'FormValidation',
   mixins: [validationMixin], // for validation
   data() {
     return {
       /*modal default value on load*/
       classicModal: false,
+      updateModal: false,
+   
 
       /*modal--form data*/
       formData:{
@@ -399,8 +452,10 @@ export default {
         subjSem:'',
         subjSY_start: new Date().getFullYear(),
         subjSY_end: new Date().getFullYear() + 1,
-        profRank:'Master Teacher III', //or null
-        profName: 'JOHN GONZALES CRUZ' //or null
+    //    profRank:'Master Teacher III', //or null
+     //   profName: localStorage.getItem('email'),
+        profID:  this.$route.params.userid,
+    //or null
         },
         gradesheetSaved: false,
         sending: false,
@@ -416,7 +471,7 @@ export default {
         {code: "CSE 102", units: "3", desc: "GRAPHICS AND VISUAL COMPUTING"}
       ],
 
-      semester: ["1st Semester", "2nd Semester"],
+      semester: ["1", "2"],
       programs: [
                   "BS Computer Science", 
                   "BS Information Systems",
@@ -428,63 +483,25 @@ export default {
 
       /* GRADESHEET ARRAY/ INFO FOR GRADEHSHEET CARDS */
       gradesheet: [
-        {
-          id: "001",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Computer Science",
-          subjClassYr: "3",
-          subjClassSec: "A",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "002",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Systems",
-          subjClassYr: "3",
-          subjClassSec: "B",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "003",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Systems",
-          subjClassYr: "3",
-          subjClassSec: "C",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "004",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Entertainment and Multimedia Computing",
-          subjClassYr: "3",
-          subjClassSec: "B",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        },
-        {
-          id: "005",
-          subjCode: "CCS 116",
-          subjDesc: "ADVANCED WEB SYSTEMS",
-          subjClassProg: "BS Information Technology",
-          subjClassYr: "3",
-          subjClassSec: "A",
-          subjSem: "1ST SEMESTER",
-          subjSY_start: "2022",
-          subjSY_end: "2023"
-        }
       ],
       selectedGS_infoShow: null,
+
+      form: {
+        firstName: null,
+        lastName: null,
+        gender: null,
+        age: null,
+        email: null,
+      },
+
+         profAcc: {
+     
+        stdPassword:null,
+        stdConfirmPass:null,
+    
+      },
+      userSaved: false,
+      lastUser: null
     };
   },
   /* for validation */
@@ -509,9 +526,40 @@ export default {
         required, 
         minLength: minLength(4),
         maxLength: maxLength(4)},
-      profRank: {required},
-      profName:  {required}
-    }
+    },
+
+
+    form: {
+        firstName: {
+          required,
+          minLength: minLength(3)
+        },
+        lastName: {
+          required,
+          minLength: minLength(3)
+        },
+        age: {
+          required,
+          maxLength: maxLength(3)
+        },
+        gender: {
+          required
+        },
+        email: {
+          required,
+          email
+        }
+      },
+        profAcc: {
+        stdPassword:{
+          required,
+               minLength: minLength(8)
+        },
+        stdConfirmPass:{
+          required,
+               minLength: minLength(8)
+        },
+      }
   },
 
   props: {
@@ -527,13 +575,39 @@ export default {
   computed: {
     headerStyle() {
       return {
+        
         backgroundImage: `url(${this.header})`
       };
     },
+     loadingStatus(){
+      return this.$store.getters.loadingStatus
+    },
+  
+    ...mapGetters({getCard: 'getCard'}),
+   
+    ...mapGetters({getcurrentUser: 'getCurrentUser'})
+   
   },
 
+
   methods: {
+    /*modal function*/
+       ...mapActions({cardinfo: "cardinfo" }),
+    
+       ...mapActions({addgsinfo: "addgsinfo" }),
+          ...mapActions({ loggingOut: "loggingOut" }),
+    //      ...mapActions({ showDataProf: "showDataProf" }),
+
     /* show selected gs card info */
+
+  showDataProfFromEDB(){
+    // console.log(this.$store.getters.getCurrentUser.email)
+            //  this.showDataProf()
+    //this.cardinfo(this.formData.profID)
+
+    this.cardinfo(this.$route.params.userid)
+  },
+
     showGS_info(gsID) {
       this.selectedGS_infoShow === gsID ? this.selectedGS_infoShow = null: this.selectedGS_infoShow = gsID
 
@@ -543,6 +617,12 @@ export default {
      /*modal function*/
     classicModalHide() {
       this.classicModal = false;
+      this.clearForm()
+    },
+
+     /*update modal function*/
+    updateModalHide() {
+      this.updateModal = false;
     },
 
     /*get subject desc from `subjects` array*/
@@ -595,9 +675,17 @@ export default {
         this.formData.classYr = ""
         this.formData.classSec = ""
       },
+
+     loggingout(){
+              this.loggingOut()
+      },
+
       addGradesheet () {
         this.sending = true
 
+           this.addgsinfo(this.formData)
+     
+      
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
           this.addedGradesheetInfo = `${this.formData.subjCode} ${this.formData.subjDesc}`
@@ -605,6 +693,8 @@ export default {
           this.sending = false
           this.clearForm()
         }, 1500)
+
+        this.showDataProfFromEDB()
       },
       addValidate () {
         this.$v.$touch()

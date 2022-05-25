@@ -9,8 +9,10 @@
             
             <md-card>
                 <md-card-content>
+
                     <h3 class="title text-center text-esc-darkgrey">Login</h3>
 
+ <p class="text-danger" v-text="geterror"></p>
                     <form @submit.prevent="loginValidate" novalidate>
 
                       <div class="md-layout md-gutter md-alignment-center-center">
@@ -86,6 +88,17 @@
                         Remember my password
                         </md-checkbox>
 
+                        <div class="__register-btn text-center md-layout md-gutter md-alignment-center-center">
+                          <p>Dont have an account?</p>
+                          <p class="__link">
+                            <router-link class="md-body-2 text-esc-accent" to="/register">
+                              Register here!
+                            </router-link>
+                          </p>
+                        </div>
+
+                        <md-divider></md-divider>
+
                         <div class="__card-buttons md-layout md-gutter md-alignment-center-space-between">
                             <md-button
                             class="md-layout-item md-size-45 md-simple md-dense md-round md-info">
@@ -119,7 +132,10 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email  } from 'vuelidate/lib/validators'
+import { mapActions, mapGetters } from "vuex";
+
+
 
 export default {
   bodyClass: "escord-login-page",
@@ -130,7 +146,8 @@ export default {
           userStudNum: null,
           userEmail: null,
           userPassword: null,
-          rememberPass: false
+          rememberPass: false,
+          device_name: "browser",
       },
       sending: false,
       showStudNumInput: true,
@@ -166,6 +183,7 @@ export default {
     }
   },
   computed: {
+      ...mapGetters({ geterror: "geterror" }),
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`
@@ -175,6 +193,9 @@ export default {
 
   methods: {
     /* validation methods */
+       ...mapActions({ loginUser: "loginUser" }),
+       ...mapActions({ AnotherUser: "AnotherUser" }),
+
     getValidationClass (fieldName) {
       const field = this.$v.loginData[fieldName]
 
@@ -187,8 +208,20 @@ export default {
       loginValidate () {
         this.$v.$touch()
 
-        if (!this.$v.$invalid) {
-          console.log("Logged in successfully.")
+     
+
+        if (!this.$v.$invalid ) {
+
+
+            if(!this.loginData.userStudNum){
+      this.loginUser(this.loginData);
+
+   
+           }else{
+        
+     this.AnotherUser(this.loginData);
+           }
+     
         }
         else {
           console.log("Failed to log in.");
@@ -217,8 +250,8 @@ h3.title {
     margin-bottom: 2rem !important;
 }
 
-.__card-buttons {
-    margin-top: 1.5rem !important;
+.__card-buttons, .__register-btn {
+    margin-top: 0.75rem !important;
 }
 
 .md-field {
@@ -236,5 +269,13 @@ h3.title {
 
 .md-icon {
     color: #90a4ae !important;
+}
+
+.__link :hover {
+   color: #e65100 !important;
+}
+
+.__link {
+  margin-left: 0.5rem !important;
 }
 </style>
