@@ -17,6 +17,7 @@
               </h4>
             </div>
 
+
             <div class="md-layout-item md-size-100
             md-layout md-gutter md-alignment-center-space-between">
               <!-- BUTTONS -->
@@ -36,6 +37,74 @@
                   </md-button>
                 </div>
 
+ <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                  <md-autocomplete
+                    md-dense
+                    v-model="classProg"
+                    :md-options="programs"
+                    :md-fuzzy-search="false"
+                    class="has-esc-accent md-layout-item md-size-50"
+                    required
+                    :class="getValidationClass('classProg')"
+                  :disabled="sending">
+                      <label>Program</label>
+
+                      <template slot="md-autocomplete-empty"
+                    slot-scope="{ term }">
+                      {{term}} is not available in the options.
+                    </template>
+
+             
+                    </md-autocomplete>
+                    </div>
+
+
+                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                  <md-autocomplete
+                    md-dense
+                    v-model="classYr"
+                    :md-options="year"
+                    :md-fuzzy-search="false"
+                    class="has-esc-accent md-layout-item md-size-50"
+                    required
+                    :class="getValidationClass('classProg')"
+                  :disabled="sending">
+                      <label>Year</label>
+
+                      <template slot="md-autocomplete-empty"
+                    slot-scope="{ term }">
+                      {{term}} is not available in the options.
+                    </template>
+
+             
+                    </md-autocomplete>
+                    </div>
+
+
+                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                  <md-autocomplete
+                    md-dense
+                    v-model="classSec"
+                    :md-options="section"
+                    :md-fuzzy-search="false"
+                    class="has-esc-accent md-layout-item md-size-50"
+                    required
+                    :class="getValidationClass('classProg')"
+                  :disabled="sending">
+                      <label>Section</label>
+
+                      <template slot="md-autocomplete-empty"
+                    slot-scope="{ term }">
+                      {{term}} is not available in the options.
+                    </template>
+
+             
+                    </md-autocomplete>
+                   <md-button @click="getStudentPerProg"
+                  class="md-danger md-round md-dense md-raised md-simple">
+                   Enter
+                  </md-button>
+                    </div>
               </div>
 
               <!-- SEARCH BAR -->
@@ -60,8 +129,10 @@
           <!-- BOTTOM SECTION >> TABLE -->
           <div class="__bottom __table">
             
+    <pagination no-arrows   :page-count="getscholperProg.last_page" :value="getscholperProg.current_page" :total="getscholperProg.total" @input="getStudentPerProg" />
+
             <md-table
-              v-model="studentList"
+              v-model="getscholperProg.data"
               md-sort="studLN"
               md-sort-order="asc">
 
@@ -74,17 +145,17 @@
               </md-table-row>
 
               <md-table-row
-              v-for="(student,index) in studentList"
+              v-for="(student,index) in getscholperProg.data"
               :key="index"
               >
 
                 <md-table-cell 
                 class="__id">
-                  {{student.studNum}}
+                  {{student.student_number}}
                 </md-table-cell>
 
                 <md-table-cell>
-                  {{student.studLN}}, {{student.studFN}} {{student.studMN}}
+                  {{student.surname}}, {{student.firstname}} {{student.middlename}}
                 </md-table-cell>
 
                 <!-- <md-table-cell
@@ -396,17 +467,27 @@
 -
 <script>
 // modal import
+
+import axios from 'axios'
+
 import { Modal } from "@/components";
 
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import {Pagination} from '@/components'
+
 
 export default {
   bodyClass: "profile-page",
    components: {
-      Modal
+      Modal,
+      Pagination,
   },
+
+   mounted() {
+this.getStudentPerProg()
+   },
   data() {
     return {
       /* MODAL DEFAULT DISPLAY STATE */
@@ -414,8 +495,27 @@ export default {
 
       /* CLASS INFO */
       classProg: "BS Computer Science",
-      classYr: "3",
+      classYr: "1",
       classSec: "A",
+      programs: [
+                  "BS Computer Science", 
+                  "BS Information Systems",
+                  "BS Information Technology",
+                  "BS Entertainment and Multimedia Computing"
+                ],
+
+     year: [
+                  "4", 
+                  "3",
+                  "2",
+                  "1"
+      ],
+      section: [
+                  "A", 
+                  "B",
+                  "C",
+                  "D"
+      ],
 
       /* STUDENT LIST */
       studentList: [
@@ -488,6 +588,12 @@ export default {
        studHighSchool: null, 
        studHighSchoolGradYr: null,
       },
+
+      getscholperProg:{
+                     type:Object,
+                    default:null
+      },
+      search: '',
       studEditted: false,
       studNotEditted: false,
       edittedStudInfo: null,
@@ -625,7 +731,29 @@ export default {
           this.studNotEditted = true
           console.log("Cannot update student info.");
         }
-    }
+    },
+
+  async getStudentPerProg(page=1){
+
+       await   axios.get('/api/studentCondition?page='+page+'&search='+this.search
+       +'&classProg='+this.classProg +'&classYr='+this.classYr +'&classSec='+this.classSec
+                ).then(({data})=>{
+        
+            this.getscholperProg = data
+
+
+
+     
+         //   console.log(this.getscholperProg)
+            
+             }).catch((errors)=>{
+    
+             this.error =  errors.response.data;
+     
+             })
+     
+    },
+
 
   }
 };
