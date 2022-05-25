@@ -11,6 +11,7 @@ import NotFound from "@/layout/NotFoundPage.vue";
 import escHeader from "@/escord-components/esc-Header.vue";
 import escFooter from "@/escord-components/esc-Footer.vue";
 
+
 //---| ESCORD COMPONENTS |---
 //import escLogin from "../../escord-components/esc-Login.vue";
 //import escLanding from "../../escord-components/esc-LandingPage.vue";
@@ -38,6 +39,14 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
+
+const escAdminDash  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
+
+/* ADMIN TABS */
+
+import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
+import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
+import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue';
 
 
 const routes = [
@@ -114,6 +123,27 @@ const routes = [
     path: "/scholastic-record-detail",
     name: "Scholastic Record Detail",
     components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/manager-dashboard",
+    name: "Manager Dashboard",
+    components: {default: escAdminDash, header: escHeader, footer: escFooter}
+
+  },
+  {
+    path: "/overview",
+    name: "Overview",
+    component: escAdminOverview
+  },
+  {
+    path: "/manage-account",
+    name: "Manage Account",
+    component: escAdminManageAccount
+  },
+  {
+    path: "/audit-trail",
+    name: "Audit Trail",
+    component: escAdminAuditTrail
   },
 
 ]

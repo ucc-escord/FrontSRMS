@@ -433,7 +433,7 @@ import axios from "axios"
         }).then((response)=>{
         
 
-            console.log('create professor accounts' , response.data);
+            console.log('create student accounts' , response.data);
 
             
              }).catch((errors)=>{

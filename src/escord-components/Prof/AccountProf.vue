@@ -306,7 +306,7 @@ import { mapActions, mapGetters} from "vuex";
                }).then((response)=>{
         
 
-            console.log('update staff accounts' , response.data);
+            console.log('update prof accounts' , response.data);
 
             
              }).catch((errors)=>{
