@@ -218,7 +218,7 @@
                                         {{activity.category}}
                                     </md-table-cell>
 
-                                    <md-table-cell class="manAcc">
+                                    <md-table-cell class="text-justify manAcc">
                                         {{activity.activityDesc}}
                                     </md-table-cell>
 
@@ -431,6 +431,6 @@ export default {
 
 .__tableMain {
     margin-top: 2em !important;
-    max-width: 600px !important;
+    max-width: 625px !important;
 }
 </style>
