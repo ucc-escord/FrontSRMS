@@ -34,7 +34,7 @@
                     <md-tabs
                     class="md-darkgrey" md-alignment="centered">
 
-                    <!-- OVERVIEW -->
+                        <!-- OVERVIEW -->
                         <md-tab id="tab-overview" md-label="Overview">
                             <div class="__wrap md-layout md-gutter"> 
 
@@ -107,7 +107,26 @@
                         <md-tab id="tab-manage-account" md-label="Manage Account">
                         <div class="__tableDiv">
 
-                            <div class="md-layout md-gutter md-alignment-center-space-between">
+                            <div class="md-layout md-gutter md-alignment-center-center">
+
+                                <div class="__addButtons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+
+                                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                                        <md-button
+                                        class="md-round md-raised md-dense md-wd md-esc-darkgrey"
+                                        @click="addNewStudent = true">
+                                            ADD STUDENT
+                                        </md-button>
+                                    </div>
+
+                                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                                        <md-button
+                                        class="md-round md-raised md-dense md-wd md-esc-darkgrey"
+                                        @click="addNewStaff = true">
+                                            ADD STAFF
+                                        </md-button>
+                                    </div>
+                                </div>
                                 
                                 <div class="md-layout-item md-size-33
                                 md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
@@ -171,8 +190,9 @@
                         </div>
                         </md-tab>
 
+                        <!-- AUDIT TRAIL -->
                         <md-tab id="tab-audit-trail" md-label="Audit Trail">
-                         <div class="__tableDiv">
+                            <div class="__tableDiv">
 
                             <div class="md-layout md-gutter md-alignment-center-center">
                                 <div class="md-layout-item md-layout md-gutter md-alignment-center-center">
@@ -230,15 +250,16 @@
                     </md-tabs>
                 </template>
             </nav-tabs-card>
-            
-                <router-view/>
-
-                
 
             </div>
                 
-
             <updateModal v-if="updateModal" @close="updateModalHide"/>
+
+            <!-- ADD NEW USER MODALS -->
+
+            <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
+            <add-new-staff-modal v-if="addNewStaff" @close="addNewStaffHide"/>
+
         </div>
       </div>
     </div>
@@ -251,14 +272,20 @@ import { NavTabsCard } from "@/components";
 import { Pagination } from "@/components";
 
 // modal import
-import updateModal from '../Manager/AccountManager.vue'
+import updateModal from '../Manager/adminAccount.vue'
+
+//add user modals
+import addNewStudentModal from "./adminCreateStudent.vue";
+import addNewStaffModal from "./adminCreateAccount.vue";
 
 export default {
   bodyClass: "profile-page",
   components: {
     updateModal, 
     NavTabsCard,
-    Pagination
+    Pagination,
+    addNewStudentModal,
+    addNewStaffModal
    },
   data() {
     return {
@@ -305,6 +332,11 @@ export default {
             /* END OF OVERVIEW DATA */
 
             /* MANAGE ACCOUNT DATA */
+
+            //default modal state
+            addNewStudent: false,
+            addNewStaff: false,
+
             manageAccountDefaultPagination: 1,
 
             userList: [
@@ -390,6 +422,14 @@ export default {
     updateModalHide() {
       this.updateModal = false;
     },
+
+    addNewStudentHide() {
+        this.addNewStudent = false;
+    },
+
+    addNewStaffHide() {
+        this.addNewStaff = false;
+    }
   }
 };
 </script>
@@ -432,5 +472,9 @@ export default {
 .__tableMain {
     margin-top: 2em !important;
     max-width: 625px !important;
+}
+
+.__addButtons {
+    margin-bottom: 2em !important;
 }
 </style>

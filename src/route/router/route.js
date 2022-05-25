@@ -39,7 +39,7 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
-const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
+const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard-2.vue")
 
 const escViewArchieveGrade   = () => import("../../escord-components/Prof/viewArchieveGradesheet")
 
@@ -47,7 +47,7 @@ const escProf_ArchTable   = () => import("../../escord-components/Prof/profArchi
 const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
 const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
-const escAdminDash  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
+//const escAdminDash2  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
 
 /* ADMIN TABS */
 
@@ -58,8 +58,9 @@ import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.
 
 const routes = [
 
-  //---| ESCORD ROUTES |----
+  /*---| ESCORD ROUTES |----*/
 
+  /* GENERAL PAGES */
   {
     path: "*",
     name: "NotFound",
@@ -70,32 +71,44 @@ const routes = [
     name: "Landing",
     //component: escLanding,
     components: {default: escLanding, header: escHeader, footer: escFooter},
-
   },
-//this admin dash-----
   {
-    path: "/admindash",
-    name: "AdminDash",
-    component: escAdminDash,
-    components: {default: escAdminDash, footer: escFooter},
-
+    path: "/contact-escord",
+    name: "Contact Us",
+    components: {default: escContactUs, header: escHeader, footer: escFooter}
   },
-
-
-  //this is adfmin dashh
-
-  {
-    path: "/register",
-    name: "Register",
-    components: {default: escRegister, header: escHeader, footer: escFooter}
-  },
-
   {
     path: "/login",
     name: "Login",
     //component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
     onlyGuest:true,
+  },
+  {
+    path: "/register",
+    name: "Register",
+    components: {default: escRegister, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/about-escord",
+    name: "About",
+    components: {default: escAbout, header: escHeader, footer: escFooter}
+  },
+  /* END OF GENERAL PAGES 
+   *
+   * -------------------------------------------------------------------------- 
+   *
+   * DASHBOARDS */
+  {
+    path: "/admin-dashboard",
+    name: "Admin Dashboard",
+    components: {default: escAdminDash, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/staff-dashboard",
+    name: "Staff Dashboard",
+    components: {default: escStaffDash, header: escHeader, footer: escFooter}
+
   },
   {
     path: "/student-dashboard/:student_number",
@@ -109,34 +122,38 @@ const routes = [
   
    //meta: { requiresAuth: true, authorize: 'professor' } ,
   //uncomment this to have a login validation
-
   },
+  /* END OF DASHBOARDS 
+   *
+   * -------------------------------------------------------------------------- 
+   *
+   * PAGES FOR PROFESSOR */
   {
     path: "/gradesheet-detail/:userid/:gradeshid",
     name: "Gradesheet Detail",
     components: {default: escProf_GSPage, header: escHeader, footer: escFooter}
+  },
+  {
+    path: "/archievegradesheet/:archievegs",
+    name: "GradesheetArchieve",
+    component: escViewArchieveGrade,
  
   },
   {
-    path: "/about-escord",
-    name: "About",
-    components: {default: escAbout, header: escHeader, footer: escFooter}
+    path: "/archievetableprof/:userid",
+    name: "ProfessorArchieve Table",
+    component:  escProf_ArchTable,
+ 
   },
-  {
-    path: "/contact-escord",
-    name: "Contact Us",
-    components: {default: escContactUs, header: escHeader, footer: escFooter}
-  },
+  /* END OF PAGES FOR PROFESSOR 
+   *
+   * -------------------------------------------------------------------------- 
+   *
+   * PAGES FOR STAFF */
   {
     path: "/Staff-scholastic-record",
     name: "Staff Scholastic-record",
     components: {default: escStaffScholasticRecord, header: escHeader, footer: escFooter}
-  },
-  {
-    path: "/staff-dashboard",
-    name: "Staff Dashboard",
-    components: {default: escStaffDash, header: escHeader, footer: escFooter}
-
   },
   {
     path: "/scholastic-record-detail",
@@ -144,10 +161,20 @@ const routes = [
     components: {default: escStaff_SRPage, header: escHeader, footer: escFooter}
   },
   {
-    path: "/manager-dashboard",
-    name: "Manager Dashboard",
-    components: {default: escAdminDash, header: escHeader, footer: escFooter}
+    path: "/scholasticrecordtab",
+    name: "ScholasticRecordTab",
+    components: {default: escStaff_SRTab, header: escHeader, footer: escFooter}
   },
+  {
+    path: "/staffArchieve",
+    name: "StaffArchieve",
+    components: {default:  escStaff_ArchTable,  footer: escFooter}
+  },
+  /* END OF PAGES FOR STAFF 
+   *
+   * -------------------------------------------------------------------------- 
+   * 
+   * ADMIN PAGES (FOR PREVIEW ONLY) */
   {
     path: "/overview",
     name: "Overview",
@@ -164,31 +191,6 @@ const routes = [
     component: escAdminAuditTrail
   },
   
-   {
-    path: "/archievegradesheet/:archievegs",
-    name: "GradesheetArchieve",
-    component: escViewArchieveGrade,
- 
-  },
-
-  {
-    path: "/archievetableprof/:userid",
-    name: "ProfessorArchieve Table",
-    component:  escProf_ArchTable,
- 
-  },
-
-  {
-    path: "/scholasticrecordtab",
-    name: "ScholasticRecordTab",
-    components: {default: escStaff_SRTab, header: escHeader, footer: escFooter}
-  },
-
-  {
-    path: "/staffArchieve",
-    name: "StaffArchieve",
-    components: {default:  escStaff_ArchTable,  footer: escFooter}
-  },
 
 ]
 

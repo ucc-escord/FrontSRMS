@@ -4,7 +4,7 @@
       <div class="modal-wrapper">
         <div class="modal-container" v-click-outside="closeModal">
           <div class="modal-header">
-           <H3 class="title text-esc-accent">Add NEW USER</H3>
+           <H3 class="title text-esc-accent">Add New Student</H3>
           </div>
 
           <div class="modal-body text-center">
@@ -15,57 +15,63 @@
             <div class="input md-layout-item md-size-100 md-layout md-gutter">
               <md-field 
               class ="has-esc-accent" :class="getValidationClass('userNo')">
-                <label for="middle-name">Student Number: </label>
-               <md-input name="user-no" id="user-no" autocomplete="user-no" v-model="form.userNo" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.userNo.required">The user no is required</span>
-                <span class="md-error" v-else-if="!$v.form.userNo.minlength">Invalid user no</span>
+                <label for="middle-name">Student Number</label>
+               <md-input name="user-no" id="user-no" autocomplete="user-no" v-model="form.userNo" :disabled="sending" type="number" />
+                <span class="md-error" v-if="!$v.form.userNo.required">Student number is required.</span>
+                <span class="md-error" v-else-if="!$v.form.userNo.minlength">Invalid student number.</span>
               </md-field>
             </div>
              <!--LAST NAME-->
              <div class="input md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
               <md-field  class ="has-esc-accent md-layout-item md-size-30" :class="getValidationClass('lastName')">
-                <label for="last-name">Last Name: </label>
+                <label for="last-name">Last Name</label>
                 <md-input name="last-name" id="last-name" v-model="form.lastName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
+                <span class="md-error" v-if="!$v.form.lastName.required">Last name is required.</span>
+                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name.</span>
               </md-field>
              <!--FIRST NAME-->
               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('firstName')">
-                <label for="first-name">First Name: </label>
+                <label for="first-name">First Name</label>
                 <md-input name="first-name" id="first-name" v-model="form.firstName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
+                <span class="md-error" v-if="!$v.form.firstName.required">First name is required.</span>
+                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name.</span>
               </md-field>
              <!--MIDDLE NAME-->
               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('middleName')">
-                <label for="middle-name">Middle Name: </label>
+                <label for="middle-name">Middle Name</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.middleName" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.middleName.required">The middle name is required</span>
-                <span class="md-error" v-else-if="!$v.form.middleName.minlength">Invalid middle name</span>
+                <span class="md-error" v-if="!$v.form.middleName.required">Middle name is required.</span>
+                <span class="md-error" v-else-if="!$v.form.middleName.minlength">Invalid middle name.</span>
               </md-field>
               </div>
              <!--EMAIL ADDRESS-->
             <div class="input md-layout-item md-small-size-100">
               <md-field  class ="has-esc-accent"  :class="getValidationClass('email')">
-                <label for="email">Email Address: </label>
+                <label for="email">Email Address</label>
                  <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The middle name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid middle name</span>
+                <span class="md-error" v-if="!$v.form.email.required">Email is required.</span>
+                <span class="md-error" v-else-if="!$v.form.email.email">Invalid email.</span>
               </md-field>
             </div>
             
              <!--DEFAULT PASSWORD-->
-            <div class="md-layout-item md-size-40">
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">
              <!-- <md-field :class="getValidationClass('DefaultPassword')">-->
-                <p class="Default">Default Password : StudentNumber ex: 2019**** </p>
+                <p class="Default"> <strong>Default Password:</strong> StudentNumber</p>
+                <p class="md-subheader">ex: 2019****</p>
                 
             </div>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <div class="buttons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-right">
-            <md-button type="submit" class="md-primary" :disabled="sending">CANCEL</md-button>
-          <md-button type="submit" class="md-primary" :disabled="sending">ADD</md-button>
+          <md-button 
+            @click="closeModal"
+            class="md-esc-darkgrey md-simple md-round md-wd __cancel __btn">CANCEL</md-button>
+          <md-button 
+          type="submit" 
+          class="md-esc-accent md-round md-wd" 
+          :disabled="sending">ADD</md-button>
         </div>
 
       <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
@@ -151,7 +157,7 @@ export default {
         this.form.firstName = null
         this.form.middleName = null
         this.form.email = null
-        this.form.DefaultPassword= null
+        //this.form.DefaultPassword= null
       },
       saveUser () {
         this.sending = true
@@ -227,4 +233,10 @@ h3, .h3 {
 .input {
   margin-bottom: 1em !important;
 }
+
+.__cancel {
+  font-weight: bold !important;
+  font-size: 0.95em !important;
+}
+
 </style>

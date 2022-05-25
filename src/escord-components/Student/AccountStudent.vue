@@ -95,10 +95,10 @@
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('student_number')">
-                <label for="student-number">Student Number</label> <!---this is not edited-->
+                <label for="student-number">Student Number</label> -this is not edited
                 <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.student_number" :disabled="sending" />
                 <span class="md-error" v-if="!$v.getcurrentUser.student_number.required">The student number is required</span>
-             <!---    <span class="md-error" v-else-if="!$v.studentAcc.stdNum.minlength">Invalid first name</span>-->
+             -    <span class="md-error" v-else-if="!$v.studentAcc.stdNum.minlength">Invalid first name</span>
 
               </md-field>
             </div>
@@ -109,8 +109,8 @@
                 <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.name" :disabled="sending" />
 
                 <span class="md-error" v-if="!$v.getcurrentUser.name.required">The name is required</span>
-                  <!---       <span class="md-error" v-else-if="!$v.studentAcc.stdPassword.minlength">Invalid last name</span>
-            -->  </md-field>
+                  -       <span class="md-error" v-else-if="!$v.studentAcc.stdPassword.minlength">Invalid last name</span>
+             </md-field>
 
             </div>
 

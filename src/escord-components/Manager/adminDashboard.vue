@@ -134,14 +134,14 @@
 
     
    
-
+  </div>
 </template>
 
 <script>
 import { NavTabsCard } from "@/components";
 
 // modal import
-import updateModal from '../Manager/AccountManager.vue'
+import updateModal from '../Manager/adminAccount.vue'
 
 import adminAcc from './adminAccount.vue'
 import adminNewUser from './adminAddNewUser.vue'
