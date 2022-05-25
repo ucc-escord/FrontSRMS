@@ -21,13 +21,12 @@
 <script>
 
 import adminAcc from './adminAccount.vue'
-import ArchTable from './adminArchieveTable.vue'
+
 
 
 export default {
         components: {
                 adminAcc,
-                ArchTable
         },
 }
 </script>

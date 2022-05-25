@@ -1,70 +1,45 @@
 <template>
-  <div>
+  <div class="wrapper">
+    <parallax
+      class="section page-header header-filter"
+      :style="headerStyle"
+    ></parallax>
+    <div class="main main-raised">
+      <div class="section profile-content">
+        <div class="container">
+</div>
 
 
-     <div>
+
+     <div class = "md-layout escord md-gutter md-alignment-center-center">
+         <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
+
   <md-button @click="showscholtable">Archieve Scholastic</md-button>
-  <md-button @click="showgradeshtable">Archieve Gradesheet</md-button>
+
+   </div>
+         <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
   <md-button @click="showevaltable">Archieve Evaluation</md-button>
-  
+      </div>
   </div>
 
 <!---gradesheet-->
-  <div v-if="defaultvalbutton ==='gradesh'">
-    <md-table v-model="getarchgradesh.data" md-sort="name" md-sort-order="asc" >
   
-    <h1 class="md-title text-center">Gradesheet</h1>
-        <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
-                <md-table-head class="text-center">Gradesheet ID</md-table-head>
-                <md-table-head class="text-center">Course</md-table-head>
-                <md-table-head class="text-center">Year</md-table-head>
-                <md-table-head class="text-center">Section</md-table-head>
-
-                
-              </md-table-row>
-
-       <md-table-row v-for="(_, index) in getarchgradesh.data" :key="index">
-
-              
- <md-table-cell class="text-center">
-               
-              <router-link :to="{ name: 'GradesheetArchieve', params: {archievegs: getarchgradesh.data[index].gradesheetid } }">VIEW</router-link>
-                 
-            </md-table-cell>
-
-
-                
-                   <md-table-cell class="text-center">
-                      {{getarchgradesh.data[index].gradesheetid}}
-                </md-table-cell>
-
-                   <md-table-cell class="text-center">
-                      {{getarchgradesh.data[index].course_short}}
-                </md-table-cell>
-
-                <md-table-cell class="text-center">
-                      {{getarchgradesh.data[index].course_year}}
-                </md-table-cell>
-              <md-table-cell class="text-center">
-                      {{getarchgradesh.data[index].course_section}}
-                </md-table-cell>
-                 
-    
-      </md-table-row>
-
-    <pagination no-arrows  :page-count="getarchgradesh.last_page" :value="currentpageGrade" :total="getarchgradesh.total" @input="gradeshowarchieve" />
-
-    </md-table>
-
-  </div>
 
   <!---gradesheet-->
 
 
 <!---scholastic-->
-  <div  v-else-if="defaultvalbutton ==='schol'">
+  <div  v-if="defaultvalbutton ==='schol'">
   
+
+   <md-field>
+            <label>SEARCH BAR</label>
+            <md-input v-model="search"></md-input>
+            <span class="md-helper-text">search your data</span>
+            <md-button class="md-esc-accent" @click="scholshowarchieve">
+              Search
+            </md-button>
+          </md-field>
 
  <md-table v-model="getarchschol.data" md-sort="name" md-sort-order="asc" >
     
@@ -106,7 +81,7 @@
       
       </md-table-row>
 
-    <pagination no-arrows  :page-count="getarchschol.last_page" :value="currentpageSchol" :total="getarchschol.total" @input="scholshowarchieve" />
+    <pagination no-arrows  :page-count="getarchschol.last_page" :value="getarchschol.current_page" :total="getarchschol.total" @input="scholshowarchieve" />
 
     </md-table>
   </div>
@@ -116,6 +91,17 @@
 
    <!---evaluation-->
    <div v-else>
+
+     <md-field>
+            <label>SEARCH BAR</label>
+            <md-input v-model="search"></md-input>
+            <span class="md-helper-text">search your data</span>
+            <md-button class="md-esc-accent" @click="evalformshowarchieve">
+              Search
+            </md-button>
+          </md-field>
+
+
  <md-table v-model="getarcheval" md-sort="name" md-sort-order="asc" >
 
  <h1 class="md-title text-center">Evaluation</h1>
@@ -150,12 +136,19 @@
 
   
       </md-table-row>
-    <pagination no-arrows  :page-count="getarcheval.last_page" :value="currentpageEval" :total="getarcheval.total" @input="evalformshowarchieve" />
+    <pagination no-arrows  :page-count="getarcheval.last_page" :value="getarcheval.current_page" :total="getarcheval.total" @input="evalformshowarchieve" />
 
     </md-table>
   </div>
+  
    <!---evaluation-->
 
+
+  
+        </div>
+      </div>
+    
+ <vue-headful title="SR Detail"/>
   </div>
 </template>
 
@@ -171,7 +164,9 @@ import {Pagination} from '@/components'
 
 
   export default {
-    name: 'archieve',
+  bodyClass: "profile-page",
+
+    name: 'staffArchieve',
     components:{
   Pagination,
 
@@ -183,7 +178,6 @@ this.$store.dispatch('evalformshowarchieve');
 this.$store.dispatch('scholshowarchieve'); 
 */
    this.evalformshowarchieve()
-   this.gradeshowarchieve()
    this.scholshowarchieve()
 
 
@@ -197,21 +191,27 @@ this.$store.dispatch('scholshowarchieve');
       getarchschol:{  
                      type:Object,
                     default:null},
-      getarchgradesh:{   
-                  type:Object,
-                    default:null},
 
-                        currentpageEval: 1,
-                        currentpageSchol: 1,
-                        currentpageGrade: 1,
+                  
+                        search:'',
+                   
 
     }),
 
+      props: {
+    header: {
+      type: String,
+      default: require("@/assets/img/bg-545454.jpg")
+    }
+  },
+
     computed: {
-/* ...mapGetters({getarch_eval: 'getarch_eval'}),
- ...mapGetters({getarchschol.data: 'getarch_schol'}),
- ...mapGetters({getarch_gradesh: 'getarch_gradesh'}), 
- */
+headerStyle() {
+      return {
+        backgroundImage: `url(${this.header})`
+      };
+    }
+  
 
     },
 
@@ -229,10 +229,10 @@ this.$store.dispatch('scholshowarchieve');
         },
 
          evalformshowarchieve(page=1) {
-        axios.get('/api/archieveevalform?page='+page).then(({data})=>{  
+        axios.get('/api/archieveevalform?page='+page+'&search='+this.search).then(({data})=>{  
    
         this.getarcheval = data
-        this.currentpageEval = page
+     
 
              }).catch((errors)=>{
   
@@ -241,22 +241,13 @@ this.$store.dispatch('scholshowarchieve');
              })
         },
 
-         gradeshowarchieve(page=1) {
-        axios.get('/api/archievegs?page='+page).then(({data})=>{
-        this.getarchgradesh = data
-          this.currentpageGrade = page
-
-             }).catch((errors)=>{
-      
-             this.error =  errors.response.data;
-             })
-     },
+       
 
      scholshowarchieve(page=1) {
-        axios.get('/api/archieveschol?page='+page).then(({data})=>{
+        axios.get('/api/archieveschol?page='+page+'&search='+this.search).then(({data})=>{
         
             this.getarchschol = data
-          this.currentpageSchol = page
+     
             
              }).catch((errors)=>{
     
@@ -270,3 +261,12 @@ this.$store.dispatch('scholshowarchieve');
     },
   }
 </script>
+
+<style lang="scss" scoped>
+.section {
+  padding: 0;
+}
+.escord{
+    margin: 1.5em 0 !important;
+}
+</style>

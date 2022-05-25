@@ -32,6 +32,7 @@
           </div>
           <div class="md-layout md-gutter md-alignment-center">
             <h2 class="md-display-1 md-layout-item">GRADESHEETS</h2>
+
           </div>
 
           <div class="buttons">
@@ -47,6 +48,17 @@
  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
                     <md-icon>show</md-icon>Refresh Card 
             </md-button>
+
+                <md-button class="md-esc-accent md-wd md-round">
+                
+
+                   <router-link :to="{ name: 'ProfessorArchieve Table'}">Show..</router-link>
+
+            </md-button>
+
+
+
+
 
            
          
@@ -340,7 +352,18 @@
 
           
           <div v-else class="profile-content"> 
-    <pagination no-arrows   :page-count="gradesheet.last_page" :value="currentpage" :total="gradesheet.total" @input="cardshowpage" />
+
+            <md-field>
+            <label>SEARCH BAR</label>
+            <md-input v-model="search"></md-input>
+            <span class="md-helper-text">search your card</span>
+            <md-button class="md-esc-accent" @click="cardshowpage">
+              Search
+            </md-button>
+          </md-field>
+
+
+    <pagination no-arrows   :page-count="gradesheet.last_page" :value="gradesheet.current_page" :total="gradesheet.total" @input="cardshowpage" />
 
    
  
@@ -391,9 +414,7 @@
       </div>
     </div>
 
-    <div>
-        <acc-prof/>
-  </div>
+   
 
     <vue-headful title="Dashboard | PROF"/>
   </div>
@@ -405,7 +426,7 @@
 // modal import
 import { Modal } from "@/components";
 import { mapActions, mapGetters} from "vuex";
-import accProf from '../Prof/AccountProf.vue'
+
 
 
 //validation imports
@@ -420,8 +441,9 @@ import axios from 'axios'
 export default {
   bodyClass: "profile-page",
   components: {
-      Modal,   accProf,
+      Modal,   
   Pagination,
+ 
   
   
   },
@@ -492,6 +514,7 @@ export default {
                     default:null
                 },
                 currentpage: 1,
+                search: '',
     
       selectedGS_infoShow: null,
     };
@@ -569,7 +592,7 @@ export default {
 async cardshowpage(page=1){
            
  
-           await    axios.get('/api/paginatecard/'+this.$route.params.userid+'?page='+page).then(({data})=>{
+           await    axios.get('/api/paginatecard/'+this.$route.params.userid+'?page='+page+'&search='+this.search).then(({data})=>{
             
                    this.gradesheet = data
                    this.currentpage = page
@@ -684,6 +707,9 @@ async cardshowpage(page=1){
           console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
+    pageofArchieve(){
+      this.$router.push( '/archievetableprof')
+    }
   },
 };
 </script>

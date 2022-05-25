@@ -40,7 +40,11 @@ const escRegister  = () => import('../../escord-components/esc-Register.vue')
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
 const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
 
-const escViewArchieveGrade   = () => import("../../escord-components/Manager/viewArchieveGradesheet")
+const escViewArchieveGrade   = () => import("../../escord-components/Prof/viewArchieveGradesheet")
+
+const escProf_ArchTable   = () => import("../../escord-components/Prof/profArchieveGradesheet")
+const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
+const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
 
 const routes = [
@@ -137,6 +141,30 @@ const routes = [
     component: escViewArchieveGrade,
  
   },
+
+  {
+    path: "/archievetableprof/:userid",
+    name: "ProfessorArchieve Table",
+    component:  escProf_ArchTable,
+ 
+  },
+
+  {
+    path: "/scholasticrecordtab",
+    name: "ScholasticRecordTab",
+    components: {default: escStaff_SRTab, header: escHeader, footer: escFooter}
+  },
+
+  {
+    path: "/staffArchieve",
+    name: "StaffArchieve",
+    components: {default:  escStaff_ArchTable,  footer: escFooter}
+  },
+
+
+
+ 
+ 
 
   
 
