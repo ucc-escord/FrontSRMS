@@ -24,7 +24,8 @@ import escProfDash from "./escord-components/Prof/profDashboard.vue";
 import escStaff_SRPage from "./escord-components/Staff/staffScholasticRecordDetail.vue";
 import escProf_GSPage from "./escord-components/Prof/profGradesheetPage.vue";
 import escStaffDash from "./escord-components/Staff/staffDashboard.vue";
-
+import EvaluationFormTab from "./escord-components/Staff/EvaluationFormTab.vue";
+import ScholasticRecordTab from "./escord-components/Staff/ScholasticRecordTab.vue";
 
 Vue.use(Router);
 
@@ -171,7 +172,17 @@ export default new Router({
       name: "Gradesheet Detail",
       components: {default: escProf_GSPage, header: escHeader, footer: escFooter}
     },
-    
+    {
+      path: "/staff-evaluationformtab",
+      name: "EvaluationFormTab",
+      component: EvaluationFormTab
+    },
+    {
+      path: "/staff-scholasticrecordtab",
+      name: "ScholasticRecordTab",
+      component: ScholasticRecordTab
+    },
+
   ],
   scrollBehavior: to => {
     if (to.hash) {
