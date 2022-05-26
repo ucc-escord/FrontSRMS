@@ -72,7 +72,7 @@ const actions = {
               
                       
                 }else if (response.data.user_role === "superadmin"){
-                  router.push('/admindash', () => router.go(0)).catch(err => {})
+                  router.push('/admin-dashboard', () => router.go(0)).catch(err => {})
 
                 
                 }else if (response.data.user_role === "student"){

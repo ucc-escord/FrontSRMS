@@ -39,7 +39,7 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
-const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard-2.vue")
+const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
 
 const escViewArchieveGrade   = () => import("../../escord-components/Prof/viewArchieveGradesheet")
 
@@ -47,13 +47,13 @@ const escProf_ArchTable   = () => import("../../escord-components/Prof/profArchi
 const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticRecordTab.vue")
 const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
-//const escAdminDash2  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
+const escAdminDash2  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
 
 /* ADMIN TABS */
 
-import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
+/* import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
 import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
-import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue';
+import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue'; */
 
 
 const routes = [
@@ -175,7 +175,7 @@ const routes = [
    * -------------------------------------------------------------------------- 
    * 
    * ADMIN PAGES (FOR PREVIEW ONLY) */
-  {
+ /*  {
     path: "/overview",
     name: "Overview",
     component: escAdminOverview
@@ -189,7 +189,7 @@ const routes = [
     path: "/audit-trail",
     name: "Audit Trail",
     component: escAdminAuditTrail
-  },
+  }, */
   
 
 ]

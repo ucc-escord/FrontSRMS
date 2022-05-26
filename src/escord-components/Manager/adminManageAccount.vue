@@ -1,6 +1,6 @@
 <template>
   <div class="">
-
+  
       <div class="__tableDiv">
 
         <div class="md-layout md-gutter md-alignment-center-space-between">
@@ -23,7 +23,7 @@
                     </md-button>
                 </div>
             </div>
-                                
+                 
             <div class="md-layout-item md-size-33
             md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                 <pagination 
@@ -82,10 +82,12 @@
 
             </md-table-row>
         </md-table>
+        
+    
     </div>
       <!-- ADD NEW USER MODALS -->
-
-      <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
+     
+    <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
       <add-new-staff-modal v-if="addNewStaff" @close="addNewStaffHide"/>
   </div>
 </template>

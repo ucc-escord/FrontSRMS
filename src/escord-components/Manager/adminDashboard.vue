@@ -74,6 +74,7 @@ import updateModal from '../Manager/adminAccount.vue'
 import admOverview from '../Manager/adminOverview.vue';
 import admManageAccount from '../Manager/adminManageAccount.vue';
 import admAuditTrail from '../Manager/adminAuditTrail.vue';
+import AccountMan from './AccountManage.vue' //this is with function
 
 export default {
   bodyClass: "profile-page",
@@ -81,8 +82,8 @@ export default {
     updateModal, 
     NavTabsCard,
     "admin-overview": admOverview,
-    "admin-manage-account": admManageAccount,
-    "admin-audit-trail": admAuditTrail
+    "admin-manage-account": AccountMan, //admin Manage Account
+    "admin-audit-trail": admAuditTrail //change this to audit trail
    },
   data() {
     return {

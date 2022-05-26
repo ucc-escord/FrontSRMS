@@ -71,8 +71,14 @@
 </template>
 
 <script>
-export default {
 
+import axios from 'axios'
+export default {
+    
+    mounted(){
+            this.countNumberofAccounts()
+            this.countNumberofStudents()
+    },
     data() {
         return {
             overviewCards: [
@@ -115,6 +121,52 @@ export default {
         totalStudents() {
             return this.studentCards.reduce((acc, item) => acc + item.total, 0);
         }
+    },
+
+    methods:{
+
+
+        async countNumberofAccounts(){
+ 
+           await    axios.get('/api/countProf').then(({data})=>{
+            
+                   this.overviewCards[0].total = data.stud
+                   this.overviewCards[1].total = data.prof
+                   this.overviewCards[2].total = data.staff
+
+
+               //    console.log(this.overviewCards[0].total)
+
+                
+                }).catch(({ response })=>{
+                    console.error(response)
+                })
+           
+},
+
+
+  async countNumberofStudents(){
+           
+ 
+           await    axios.get('/api/countStudent').then(({data})=>{
+            
+                
+
+                   this.studentCards[0].total = data.bscs
+                   this.studentCards[1].total = data.bsis
+                   this.studentCards[2].total = data.bsit
+                   this.studentCards[3].total = data.bsemc
+
+
+               //    console.log(this.overviewCards[0].total)
+
+                
+                }).catch(({ response })=>{
+                    console.error(response)
+                })
+           
+},
+
     }
 
 }

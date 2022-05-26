@@ -11,7 +11,7 @@
           </div>
 
           <div class="modal-body text-center">
-             <form @submit.prevent="UpdateProf" novalidate class="md-layout md-gutter md-alignment-center-left">
+             <form @submit.prevent="saveUser" novalidate class="md-layout md-gutter md-alignment-center-left">
 
                <!-- INPUTS -->
                   <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
@@ -19,21 +19,21 @@
                     <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
                        <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('stdName')">
+                      :class="getValidationClass('firstname')">
                           <label for="std-name">First Name </label>
                           <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
                       </md-field>
 
                       <md-field
                       class="has-esc-accent md-layout-item md-size-10" 
-                      :class="getValidationClass('stdName')">
+                      :class="getValidationClass('middleinitial')">
                           <label for="std-name">MI </label>
                           <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.middleinitial" :disabled="sending" />
                       </md-field>
 
                       <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('stdName')">
+                      :class="getValidationClass('lastname')">
                           <label for="std-name">Last Name  </label>
                           <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
                       </md-field>
@@ -42,7 +42,7 @@
                     <div class="md-layout-item md-size-100 md-layout md-gutter">
                       <md-field
                       class="has-esc-accent" 
-                      :class="getValidationClass('stdNum')">
+                      :class="getValidationClass('faculty_rank')">
                         <label for="student-number">Faculty Rank</label> 
                         <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.faculty_rank" :disabled="sending" />
                       </md-field>
@@ -73,7 +73,7 @@
                     <div class="md-layout-item md-size-100 md-layout md-gutter">
                       <md-field 
                       class="has-esc-accent"
-                      :class="getValidationClass('stdEmail')">
+                      :class="getValidationClass('email')">
                         <label for="std-email">Email</label>
                         <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
                       </md-field>
@@ -90,8 +90,11 @@
           
         </div>
       </div>
+     <md-snackbar :md-active.sync="userSaved">The account {{ lastUser }} was saved with success!</md-snackbar> 
     </div>
   </transition>
+
+  
 <!--<div>
  <form   @submit.prevent="UpdateProf">
         <md-card-content>
@@ -200,7 +203,7 @@ import { mapActions, mapGetters} from "vuex";
     mixins: [validationMixin],
 
          mounted(){
-   this.$store.dispatch('displayuser');
+   //this.$store.dispatch('displayuser');
 
    
     },
@@ -286,7 +289,7 @@ import { mapActions, mapGetters} from "vuex";
       },
       saveUser () {
         this.sending = true
-        this.UpdateProf();
+        this.UpdateProf(); //FUNCTION OF UPDATE PROF
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
           this.lastUser = `${this.getcurrentUser.firstname} ${this.getcurrentUser.lastname} ${this.getcurrentUser.email}`
@@ -308,7 +311,7 @@ import { mapActions, mapGetters} from "vuex";
       },
       UpdateProf(){
 
-        this.validateUser();
+       // this.validateUser();
 
               axios.put('/api/updateProf/'+this.getcurrentUser.id, {
               password : this.profAcc.stdPassword,

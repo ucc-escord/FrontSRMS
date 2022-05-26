@@ -54,14 +54,14 @@
                     <md-icon>logout</md-icon>logout
             </md-button>
 
- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="showDataProfFromEDB">
+ <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="cardshowpage">
                     <md-icon>show</md-icon>Refresh Card 
             </md-button>
 
                 <md-button class="md-esc-accent md-wd md-round">
                 
 
-                   <router-link :to="{ name: 'ProfessorArchieve Table'}">Show..</router-link>
+                   <router-link :to="{ name: 'ProfessorArchieve Table'}">Show Archieve..</router-link>
 
             </md-button>
 
@@ -590,10 +590,7 @@ export default {
         gender: {
           required
         },
-        email: {
-          required,
-          email
-        }
+        
       },
         profAcc: {
         stdPassword:{
