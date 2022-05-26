@@ -39,7 +39,7 @@ const escStaffScholasticRecord  = () => import('../../escord-components/Staff/St
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
 const escStaff_SRPage   = () => import("../../escord-components/Staff/staffScholasticRecordDetail.vue")
-const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard-2.vue")
+const escAdminDash   = () => import("../../escord-components/Manager/adminDashboard.vue")
 
 const escViewArchieveGrade   = () => import("../../escord-components/Prof/viewArchieveGradesheet")
 
