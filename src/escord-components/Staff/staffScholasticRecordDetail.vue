@@ -177,7 +177,7 @@
                 <md-table-cell>
                   <!-- EDIT BUTTON -->
                   <md-button
-                  @click="editStudentInfo(studentList[index])"
+                  @click="editStudentInfo(getscholperProg.data[index])"
                   class="md-simple md-info md-just-icon md-round">
                     <md-icon>edit</md-icon>
                   </md-button>
@@ -577,7 +577,7 @@ this.getStudentPerProg()
           
         }
       ],
-
+ srms_id:'',
       /* MODAL STUDENT INFO */
       modalInfo: {
        studNum: null,
@@ -611,7 +611,7 @@ this.getStudentPerProg()
 
    /* for validation */
    validations: {
-       
+      
     modalInfo: {
       studNum: {required},
       studProgram: {required},
@@ -653,25 +653,28 @@ this.getStudentPerProg()
     /* edit button in row is clicked */
     editStudentInfo(studentInfo) {
       this.classicModal = true;
-      console.log("Row is selected. \nEditing Student Info.\n\n" + 
+    /*   console.log("Row is selected. \nEditing Student Info.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
       "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+ */
 
-      this.modalInfo.studNum = studentInfo.studNum
-      this.modalInfo.studLN = studentInfo.studLN
-      this.modalInfo.studFN = studentInfo.studFN
-      this.modalInfo.studMN = studentInfo.studMN
-      this.modalInfo.studProgram = studentInfo.studProgram
-      this.modalInfo.studSection = studentInfo.studSection
 
-      this.modalInfo.studBirthday = studentInfo.studBirthday
-      this.modalInfo.studContactNum = studentInfo.studContactNum
-      this.modalInfo.studAddress = studentInfo.studAddress
+      this.srms_id =  studentInfo.srms_id
+       this.modalInfo.studNum = studentInfo.student_number
+      this.modalInfo.studLN = studentInfo.surname
+      this.modalInfo.studFN = studentInfo.firstname
+      this.modalInfo.studMN = studentInfo.middlename
+      this.modalInfo.studProgram = studentInfo.course
+      this.modalInfo.studSection = studentInfo.section
 
-      this.modalInfo.studElemSchool = studentInfo.studElemSchool
-      this.modalInfo.studElemGradYr = studentInfo.studElemGradYr
-      this.modalInfo.studHighSchool = studentInfo.studHighSchool
-      this.modalInfo.studHighSchoolGradYr = studentInfo.studHighSchoolGradYr
+      this.modalInfo.studBirthday = studentInfo.birthday
+      this.modalInfo.studContactNum = studentInfo.contact
+      this.modalInfo.studAddress = studentInfo.address
+
+      this.modalInfo.studElemSchool = studentInfo.elementary
+      this.modalInfo.studElemGradYr = studentInfo.elemyeargrad
+      this.modalInfo.studHighSchool = studentInfo.highschool
+      this.modalInfo.studHighSchoolGradYr = studentInfo.hsyeargrad 
     },
 
     /* download button in row is clicked */
@@ -700,6 +703,7 @@ this.getStudentPerProg()
     },
     clearForm () {
       this.$v.$reset()
+      
       this.modalInfo.studNum = null
       this.modalInfo.studLN = null
       this.modalInfo.studFN = null
@@ -716,7 +720,7 @@ this.getStudentPerProg()
     },
     editStudent () {
       this.sending = true
-      
+     this.UpdateSRMS();
       // Instead of this timeout, here you can call your API
       window.setTimeout(() => {
         this.edittedStudInfo = `${this.modalInfo.studLN}, ${this.modalInfo.studFN} ${this.modalInfo.studMN}`
@@ -759,6 +763,24 @@ this.getStudentPerProg()
              })
      
     },
+
+    UpdateSRMS(){
+
+         axios.put('/api/scholupdate/'+this.srms_id, this.modalInfo).then((response)=>{
+        
+
+            console.log('update srms details' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+      
+
+    },
+
 
 
   }

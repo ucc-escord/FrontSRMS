@@ -10,6 +10,11 @@ import MainFooter from "@/layout/MainFooter.vue";
 import NotFound from "@/layout/NotFoundPage.vue";
 import escHeader from "@/escord-components/esc-Header.vue";
 import escFooter from "@/escord-components/esc-Footer.vue";
+import Professor from "@/escord-components/Prof/Professor.vue"
+import ForgotPassword from "@/escord-components/ForgotPassword/esc-Forgot.vue"
+import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.vue"
+
+//const escHeader = () => import("@/escord-components/esc-Header.vue");
 
 
 //---| ESCORD COMPONENTS |---
@@ -77,13 +82,17 @@ const routes = [
     name: "Contact Us",
     components: {default: escContactUs, header: escHeader, footer: escFooter}
   },
+
+  //suggest imodal to
   {
     path: "/login",
     name: "Login",
     //component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
-    onlyGuest:true,
+   
   },
+
+
   {
     path: "/register",
     name: "Register",
@@ -102,32 +111,43 @@ const routes = [
   {
     path: "/admin-dashboard",
     name: "Admin Dashboard",
-    components: {default: escAdminDash, header: escHeader, footer: escFooter}
+    components: {default: escAdminDash, header: escHeader, footer: escFooter},
+    meta: { requiresAuth: true, authorize: 'superadmin' } ,
   },
   {
     path: "/staff-dashboard",
     name: "Staff Dashboard",
-    components: {default: escStaffDash, header: escHeader, footer: escFooter}
+    components: {default: escStaffDash, header: escHeader, footer: escFooter},
+    meta: { requiresAuth: true, authorize: 'staff' } ,
+
 
   },
   {
     path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
-    components: {default: escStudDash, header: escHeader, footer: escFooter}
+    components: {default: escStudDash, header: escHeader, footer: escFooter},
+    meta: { requiresAuth: true, authorize: 'student' } ,
+
   },
-  {
-    path: "/prof-dashboard/:userid",
-    name: "Professor Dashboard",
-    components: {default: escProfDash, header: escHeader, footer: escFooter},
-  
-   //meta: { requiresAuth: true, authorize: 'professor' } ,
-  //uncomment this to have a login validation
-  },
+ 
   /* END OF DASHBOARDS 
    *
    * -------------------------------------------------------------------------- 
    *
    * PAGES FOR PROFESSOR */
+
+  /* Professor Component
+  
+  {
+    path: "/prof-dashboard/:userid",
+    name: "Professor Dashboard",
+    components: {default: escProfDash, header: escHeader, footer: escFooter},
+  
+   meta: { requiresAuth: true, authorize: 'professor' } ,
+  
+  },
+
+
   {
     path: "/gradesheet-detail/:userid/:gradeshid",
     name: "Gradesheet Detail",
@@ -144,7 +164,7 @@ const routes = [
     name: "ProfessorArchieve Table",
     component:  escProf_ArchTable,
  
-  },
+  }, */
   /* END OF PAGES FOR PROFESSOR 
    *
    * -------------------------------------------------------------------------- 
@@ -191,6 +211,56 @@ const routes = [
     component: escAdminAuditTrail
   }, */
   
+  //DONE PROF
+  {
+    path: '/professor',
+    redirect: { name: 'Professor Dashboard' },
+    components: {default: Professor,header: escHeader, footer: escFooter },
+    children : [
+      {
+        path: "/prof-dashboard/:userid",
+        name: "Professor Dashboard",
+        components: {default: escProfDash, header: escHeader, footer: escFooter},   
+         meta: { requiresAuth: true, authorize: 'professor' } ,
+      //uncomment this to have a login validation
+      },
+
+      {
+        path: "/gradesheet-detail/:userid/:gradeshid",
+        name: "Gradesheet Detail",
+        components: {default: escProf_GSPage, header: escHeader, footer: escFooter},
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+      },
+
+      {
+        path: "/archievetableprof/:userid",
+        name: "ProfessorArchieve Table",
+        component:  escProf_ArchTable,
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+      },
+  
+  ],
+    meta: { requiresAuth: true, authorize: 'professor' } ,
+   
+  },
+
+  //expirement
+
+
+  { 
+    path: '/sendemail-forget', 
+    name: 'reset-password', 
+    component: ForgotPassword, 
+    
+  },
+  { 
+    path: '/resetpassword', 
+    name: 'reset-password-form', 
+    component: ResetPasswordForm, 
+   
+  }
+
+
 
 ]
 

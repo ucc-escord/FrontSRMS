@@ -50,10 +50,7 @@
                     <md-icon>add</md-icon> Add Gradesheet
             </md-button>
 
-           <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
-                    <md-icon>logout</md-icon>logout
-            </md-button>
-
+           
  <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="cardshowpage">
                     <md-icon>show</md-icon>Refresh Card 
             </md-button>
@@ -645,7 +642,7 @@ export default {
        ...mapActions({cardinfo: "cardinfo" }),
     
        ...mapActions({addgsinfo: "addgsinfo" }),
-          ...mapActions({ loggingOut: "loggingOut" }),
+       //   ...mapActions({ loggingOut: "loggingOut" }),
     //      ...mapActions({ showDataProf: "showDataProf" }),
 
     /* show selected gs card info */
@@ -742,9 +739,7 @@ async cardshowpage(page=1){
         this.formData.classSec = ""
       },
 
-     loggingout(){
-              this.loggingOut()
-      },
+   
 
       addGradesheet () {
         this.sending = true

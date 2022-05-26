@@ -133,8 +133,9 @@ const actions = {
                   })
        
                     }).catch((errors)=>{
-      
-                 commit("setError",errors.response.data.errors.email[0]);
+
+                  
+                 commit("setError",errors.response.data.errors.userStudNum[0]);
        
                     })
           
