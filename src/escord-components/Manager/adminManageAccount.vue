@@ -10,7 +10,7 @@
                 <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
-                    @click="addNewStudent = true">
+                    @click="addNewStudentShow">
                         ADD STUDENT
                     </md-button>
                 </div>
@@ -18,12 +18,29 @@
                 <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
-                    @click="addNewStaff = true">
+                    @click="addNewStaffShow">
                         ADD STAFF
                     </md-button>
                 </div>
+
+                 <div class="md-layout-item md-size-100" v-if="addNewStudent">
+                   
+                    <add-student/>
+                    <hr class="hr">
+
+                </div>
+
+                <div class="md-layout-item md-size-100"
+                v-else-if="addNewStaff">
+
+                        <add-staff/>
+                        <hr class="hr">
+                    
+                </div>
             </div>
-                 
+
+           
+                                
             <div class="md-layout-item md-size-33
             md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                 <pagination 
@@ -86,9 +103,9 @@
     
     </div>
       <!-- ADD NEW USER MODALS -->
-     
-    <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
-      <add-new-staff-modal v-if="addNewStaff" @close="addNewStaffHide"/>
+
+      <!-- <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
+      <add-new-staff-modal v-if="addNewStaff" @close="addNewStaffHide"/> -->
   </div>
 </template>
 
@@ -96,14 +113,19 @@
 import { Pagination } from "@/components";
 
 //add user modals
-import addNewStudentModal from "./adminCreateStudent.vue";
-import addNewStaffModal from "./adminCreateAccount.vue";
+//import addNewStudentModal from "./adminCreateStudent.vue";
+//import addNewStaffModal from "./adminCreateAccount.vue";
+
+import addNewStudentSpan from "./span_addNewStudent.vue";
+import addNewStaffSpan from "./span_addNewStaff.vue";
 
 export default {
     components: {
         Pagination,
-        addNewStudentModal,
-        addNewStaffModal
+        //addNewStudentModal,
+        //addNewStaffModal,
+        "add-student": addNewStudentSpan,
+        "add-staff": addNewStaffSpan
     },
 
     data() {
@@ -144,13 +166,38 @@ export default {
     },
     methods: {
 
-        addNewStudentHide() {
-            this.addNewStudent = false;
-        },
+         addNewStudentShow() {
+             this.addNewStudent = !this.addNewStudent;
+             this.addNewStaff = false;
+             
+             if(this.addNewStudent == true) {
+                 console.log("Add new student div is displayed.");
+             }
+             else {
+                 console.log("Add new student div is not displayed.");
+             }
+         },
 
-        addNewStaffHide() {
-            this.addNewStaff = false;
-        }
+         addNewStaffShow() {
+             this.addNewStaff = !this.addNewStaff;
+             this.addNewStudent = false;
+             
+             if(this.addNewStaff == true) {
+                 console.log("Add new staff div is displayed.");
+             }
+             else {
+                 console.log("Add new staff div is not displayed.");
+             }
+             
+         },
+
+        // addNewStudentHide() {
+        //     this.addNewStudent = false;
+        // },
+
+        // addNewStaffHide() {
+        //     this.addNewStaff = false;
+        // }
     }
 
 }
@@ -174,5 +221,11 @@ export default {
 
 .__addButtons {
     margin-bottom: 2em !important;
+}
+
+.hr {
+    border: none !important;
+    background-color: rgba(170, 170, 170, 0.63) !important;
+    height: 0.05em !important;
 }
 </style>

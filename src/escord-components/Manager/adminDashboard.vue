@@ -121,4 +121,5 @@ export default {
 .__name h3 {
     margin-bottom: 0 !important;
 }
+
 </style>
