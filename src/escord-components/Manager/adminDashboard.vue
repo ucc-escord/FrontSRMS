@@ -83,7 +83,7 @@ export default {
     NavTabsCard,
     "admin-overview": admOverview,
     "admin-manage-account": AccountMan, //admin Manage Account
-    "admin-audit-trail": admAuditTrail //change this to audit trail
+    "admin-audit-trail": admManageAccount //change this to audit trail
    },
   data() {
     return {

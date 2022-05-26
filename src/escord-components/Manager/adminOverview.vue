@@ -88,30 +88,30 @@ export default {
                 },
                 {
                     category: "Professor",
-                    total: 7
+                    total: 0
                 },
                 {
                     category: "Staff",
-                    total: 7
+                    total: 0
                 }
             ],
 
             studentCards: [
                 {
                     program: "BSCS",
-                    total: 7
+                    total: 0
                 },
                 {
                     program: "BSIS",
-                    total: 7
+                    total: 0
                 },
                 {
                     program: "BSIT",
-                    total: 7
+                    total: 0
                 },
                 {
                     program: "BSEMC",
-                    total: 7
+                    total: 0
                 }
             ]
         }
