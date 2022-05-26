@@ -45,7 +45,7 @@
             md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                 <pagination 
                 type = "esc-accent"
-                no-arrows v-model="manageAccountDefaultPagination" :page-count="5">
+               no-arrows :page-count="userList.last_page" :value="userList.current_page" :total="userList.total" @input="studentInEnrollment" >
                 </pagination>
             </div>
 
@@ -54,12 +54,12 @@
                     <md-field
                     class="has-esc-accent">
                         <label>Search..</label>
-                        <md-input></md-input>
+                        <md-input v-model="search"></md-input>
                     </md-field>
                 </div>
 
                 <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button class="md-just-icon md-round md-esc-accent md-raised">
+                    <md-button @click="studentInEnrollment" class="md-just-icon md-round md-esc-accent md-raised">
                         <md-icon>search</md-icon>
                     </md-button>
                 </div>
@@ -69,7 +69,7 @@
 
         
         <md-table 
-            v-model="userList"
+            v-model="userList.data"
             class="__tableMain mx-auto">
 
             <md-table-row class="title">
@@ -79,7 +79,7 @@
             </md-table-row>
 
             <md-table-row
-            v-for="(user, index) in userList" :key="index">
+            v-for="(user, index) in userList.data" :key="index">
 
                 <!-- <div class="md-layout md-gutter md-alignment-center-center">
                     <md-button
@@ -90,11 +90,11 @@
                 </div> -->
 
                 <md-table-cell class="text-left manAcc">
-                    {{user.name}}
+                    {{user.studentNumber}}
                 </md-table-cell>
 
                 <md-table-cell class="text-left manAcc">
-                    {{user.category}}
+                    {{user.studentType}}
                 </md-table-cell>
 
             </md-table-row>
@@ -111,7 +111,7 @@
 
 <script>
 import { Pagination } from "@/components";
-
+import axios from 'axios'
 //add user modals
 //import addNewStudentModal from "./adminCreateStudent.vue";
 //import addNewStaffModal from "./adminCreateAccount.vue";
@@ -127,41 +127,23 @@ export default {
         "add-student": addNewStudentSpan,
         "add-staff": addNewStaffSpan
     },
+    mounted(){
+        this.studentInEnrollment()
+    },
 
     data() {
         return {
             //default modal state
             addNewStudent: false,
             addNewStaff: false,
+            search: '',
             
             manageAccountDefaultPagination: 1,
 
-            userList: [
-                {
-                    name: "NIKKI E. BA-ALAN",
-                    category: "STAFF"
-                },
-                {
-                    name: "JACQUELINE C. PORRAL",
-                    category: "PROFESSOR"
-                },
-                {
-                    name: "TRIZHALYN L. MAGLANGIT",
-                    category: "STAFF"
-                },
-                {
-                    name: "GABRIELLE D. NAPOTO",
-                    category: "STAFF"
-                },
-                {
-                    name: "GERALD T. CHAVEZ",
-                    category: "PROFESSOR"
-                },
-                {
-                    name: "MIKKI GREGORIO",
-                    category: "STAFF"
-                }
-            ]
+            userList: {
+              type:Object,
+              default:null,
+            }
         };
     },
     methods: {
@@ -190,6 +172,24 @@ export default {
              }
              
          },
+
+
+          async studentInEnrollment(studpage=1){
+           
+ 
+           await    axios.get('/api/enrolldb/?page='+studpage+'&search='+this.search).then(({data})=>{
+            
+                   this.userList = data
+              //     this.currentpage = page
+
+                
+                }).catch(({ response })=>{
+                    console.error(response)
+                })
+
+           
+            },
+
 
         // addNewStudentHide() {
         //     this.addNewStudent = false;
