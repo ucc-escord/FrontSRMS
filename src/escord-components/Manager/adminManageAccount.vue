@@ -1,0 +1,176 @@
+<template>
+  <div class="">
+
+      <div class="__tableDiv">
+
+        <div class="md-layout md-gutter md-alignment-center-space-between">
+
+            <div class="__addButtons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+
+                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                    <md-button
+                    class="md-round md-raised md-dense md-wd md-esc-darkgrey"
+                    @click="addNewStudent = true">
+                        ADD STUDENT
+                    </md-button>
+                </div>
+
+                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                    <md-button
+                    class="md-round md-raised md-dense md-wd md-esc-darkgrey"
+                    @click="addNewStaff = true">
+                        ADD STAFF
+                    </md-button>
+                </div>
+            </div>
+                                
+            <div class="md-layout-item md-size-33
+            md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
+                <pagination 
+                type = "esc-accent"
+                no-arrows v-model="manageAccountDefaultPagination" :page-count="5">
+                </pagination>
+            </div>
+
+            <div class="md-layout-item md-size-66 md-xsmall-size-100 md-layout md-gutter md-alignment-center-space-between">
+                <div class="md-layout-item md-size-85">
+                    <md-field
+                    class="has-esc-accent">
+                        <label>Search..</label>
+                        <md-input></md-input>
+                    </md-field>
+                </div>
+
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button class="md-just-icon md-round md-esc-accent md-raised">
+                        <md-icon>search</md-icon>
+                    </md-button>
+                </div>
+                
+            </div>
+        </div>
+
+        
+        <md-table 
+            v-model="userList"
+            class="__tableMain mx-auto">
+
+            <md-table-row class="title">
+                <!-- <md-table-head class="text-center">Actions</md-table-head> -->
+                <md-table-head class="manAcc">Name</md-table-head>
+                <md-table-head class="manAcc">Category</md-table-head>
+            </md-table-row>
+
+            <md-table-row
+            v-for="(user, index) in userList" :key="index">
+
+                <!-- <div class="md-layout md-gutter md-alignment-center-center">
+                    <md-button
+                    class="md-danger md-raised md-simple md-just-icon">
+                        <md-icon>delete</md-icon>
+                        <md-tooltip md-direction="bottom">Remove User</md-tooltip>
+                    </md-button>
+                </div> -->
+
+                <md-table-cell class="text-left manAcc">
+                    {{user.name}}
+                </md-table-cell>
+
+                <md-table-cell class="text-left manAcc">
+                    {{user.category}}
+                </md-table-cell>
+
+            </md-table-row>
+        </md-table>
+    </div>
+      <!-- ADD NEW USER MODALS -->
+
+      <add-new-student-modal v-if="addNewStudent" @close="addNewStudentHide"/>
+      <add-new-staff-modal v-if="addNewStaff" @close="addNewStaffHide"/>
+  </div>
+</template>
+
+<script>
+import { Pagination } from "@/components";
+
+//add user modals
+import addNewStudentModal from "./adminCreateStudent.vue";
+import addNewStaffModal from "./adminCreateAccount.vue";
+
+export default {
+    components: {
+        Pagination,
+        addNewStudentModal,
+        addNewStaffModal
+    },
+
+    data() {
+        return {
+            //default modal state
+            addNewStudent: false,
+            addNewStaff: false,
+            
+            manageAccountDefaultPagination: 1,
+
+            userList: [
+                {
+                    name: "NIKKI E. BA-ALAN",
+                    category: "STAFF"
+                },
+                {
+                    name: "JACQUELINE C. PORRAL",
+                    category: "PROFESSOR"
+                },
+                {
+                    name: "TRIZHALYN L. MAGLANGIT",
+                    category: "STAFF"
+                },
+                {
+                    name: "GABRIELLE D. NAPOTO",
+                    category: "STAFF"
+                },
+                {
+                    name: "GERALD T. CHAVEZ",
+                    category: "PROFESSOR"
+                },
+                {
+                    name: "MIKKI GREGORIO",
+                    category: "STAFF"
+                }
+            ]
+        };
+    },
+    methods: {
+
+        addNewStudentHide() {
+            this.addNewStudent = false;
+        },
+
+        addNewStaffHide() {
+            this.addNewStaff = false;
+        }
+    }
+
+}
+</script>
+
+<style>
+
+.__tableDiv {
+    padding: 2em !important;
+}
+
+.manAcc {
+    padding-left: 2em !important;
+    margin: auto !important;
+}
+
+.__tableMain {
+    margin-top: 2em !important;
+    max-width: 600px !important;
+}
+
+.__addButtons {
+    margin-bottom: 2em !important;
+}
+</style>
