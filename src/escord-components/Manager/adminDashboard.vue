@@ -121,4 +121,8 @@ export default {
     margin-bottom: 0 !important;
 }
 
+.md-button {
+  margin-bottom: 1.5em !important;
+}
+
 </style>

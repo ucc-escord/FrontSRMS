@@ -22,7 +22,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 
 
 
-const escStaffDash = () => import("../../escord-components/Staff/staffDashboard.vue");
+const escStaffDash = () => import('../../escord-components/Staff/staffDashboard.vue');
 
 const escLogin = () => import('../../escord-components/esc-Login.vue')
 const escLanding = () => import('../../escord-components/esc-Landing.vue')
@@ -107,6 +107,7 @@ const routes = [
   {
     path: "/staff-dashboard",
     name: "Staff Dashboard",
+    //component: escStaffDash
     components: {default: escStaffDash, header: escHeader, footer: escFooter}
 
   },

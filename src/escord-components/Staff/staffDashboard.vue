@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters} from "vuex";
+
 // modal import
 import updateModal from '../Staff/AccountStaff.vue'
 

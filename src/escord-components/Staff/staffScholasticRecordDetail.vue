@@ -9,128 +9,151 @@
         <div class="container">
           
           <!-- TOP SECTION -->
-          <div class="__top md-layout md-gutter md-size-100 md-layout md-gutter md-alignment-center-space-between">
+          <div class="__top
+          md-layout md-gutter md-alignment-center-space-between">
 
-            <div class="md-layout-item md-size-100">
-              <h4 class="md-display-1">
+            <!-- SELECTOR -->
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+
+              <div class="md-layout-item md-size-100">
+                <p class="title text-center _inst">SELECT CLASS</p>
+              </div>
+
+              <div class="__selector md-layout md-gutter md-alignment-center-space-between">
+
+                <!-- SELECT PROGRAM -->
+                <md-autocomplete
+                  md-dense
+                  v-model="classProg"
+                  :md-options="programs"
+                  :md-fuzzy-search="false"
+                  class="has-esc-accent md-layout-item md-size-60 md-xsmall-size-100"
+                  required
+                  :class="getValidationClass('classProg')"
+                  :disabled="sending">
+                  <label>Program</label>
+
+                  <template slot="md-autocomplete-empty"
+                  slot-scope="{ term }">
+                    {{term}} is not available in the options.
+                  </template>
+                </md-autocomplete>
+
+                <!-- SELECT YEAR -->
+                <md-autocomplete
+                  md-dense
+                  v-model="classYr"
+                  :md-options="year"
+                  :md-fuzzy-search="false"
+                  class="has-esc-accent md-layout-item md-size-15 md-xsmall-size-45"
+                  required
+                  :class="getValidationClass('classProg')"
+                  :disabled="sending">
+                    <label>Year</label>
+
+                    <template slot="md-autocomplete-empty"
+                  slot-scope="{ term }">
+                    {{term}} is not available in the options.
+                  </template>
+                </md-autocomplete>
+
+                <!-- SELECT SECTION -->
+                 <md-autocomplete
+                    md-dense
+                    v-model="classSec"
+                    :md-options="section"
+                    :md-fuzzy-search="false"
+                    class="has-esc-accent md-layout-item md-size-15 md-xsmall-size-45"
+                    required
+                    :class="getValidationClass('classProg')"
+                    :disabled="sending">
+                      <label>Section</label>
+
+                    <template slot="md-autocomplete-empty"
+                    slot-scope="{ term }">
+                      {{term}} is not available in the options.
+                    </template>
+                  </md-autocomplete>
+              </div>
+
+              <!-- ENTER BUTTON -->
+              <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <md-button @click="getStudentPerProg"
+                  class="__enter md-esc-darkgrey md-dense md-wd md-simple">
+                  Enter
+                </md-button>
+              </div>
+
+            </div>
+            <!-- END OF SELECTOR -->
+          </div>
+
+            <md-divider></md-divider>
+
+          <!-- MIDDLE SECTION -->  
+          <div class="__mid">
+            <!-- DISPLAY OF SELECTED INFO -->
+            <div class="__name md-layout-item md-size-100">
+              <h4 class="md-display-1 text-center text-esc-darkgrey">
                 <strong>{{classProg}}</strong> | {{classYr}}{{classSec}}
               </h4>
             </div>
+            <!-- END OF DISPLAY OF SELECTED INFO -->
 
+            <!-- BUTTON AND SEARCH BAR -->
+            <div class="__name md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+              
+              <div class="md-layout-item md-size-45 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-center">
 
-            <div class="md-layout-item md-size-100
-            md-layout md-gutter md-alignment-center-space-between">
-              <!-- BUTTONS -->
-              <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-space-between">
-                
-                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
                   <md-button
                   class="md-success md-round md-dense md-raised md-simple">
                     Download All
                   </md-button>
                 </div>
 
-                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
                   <md-button
                   class="md-danger md-round md-dense md-raised md-simple">
                     Archive All
                   </md-button>
                 </div>
 
- <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
-                  <md-autocomplete
-                    md-dense
-                    v-model="classProg"
-                    :md-options="programs"
-                    :md-fuzzy-search="false"
-                    class="has-esc-accent md-layout-item md-size-50"
-                    required
-                    :class="getValidationClass('classProg')"
-                  :disabled="sending">
-                      <label>Program</label>
-
-                      <template slot="md-autocomplete-empty"
-                    slot-scope="{ term }">
-                      {{term}} is not available in the options.
-                    </template>
-
-             
-                    </md-autocomplete>
-                    </div>
-
-
-                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
-                  <md-autocomplete
-                    md-dense
-                    v-model="classYr"
-                    :md-options="year"
-                    :md-fuzzy-search="false"
-                    class="has-esc-accent md-layout-item md-size-50"
-                    required
-                    :class="getValidationClass('classProg')"
-                  :disabled="sending">
-                      <label>Year</label>
-
-                      <template slot="md-autocomplete-empty"
-                    slot-scope="{ term }">
-                      {{term}} is not available in the options.
-                    </template>
-
-             
-                    </md-autocomplete>
-                    </div>
-
-
-                    <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
-                  <md-autocomplete
-                    md-dense
-                    v-model="classSec"
-                    :md-options="section"
-                    :md-fuzzy-search="false"
-                    class="has-esc-accent md-layout-item md-size-50"
-                    required
-                    :class="getValidationClass('classProg')"
-                  :disabled="sending">
-                      <label>Section</label>
-
-                      <template slot="md-autocomplete-empty"
-                    slot-scope="{ term }">
-                      {{term}} is not available in the options.
-                    </template>
-
-             
-                    </md-autocomplete>
-                   <md-button @click="getStudentPerProg"
-                  class="md-danger md-round md-dense md-raised md-simple">
-                   Enter
-                  </md-button>
-                    </div>
               </div>
 
-              <!-- SEARCH BAR -->
-              <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-space-between">
-                
-                <div class="md-layout-item">
-                  <input type="text" name="" id="" placeholder="Search...">
+              <div class="md-layout-item md-size-50 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-center">
+
+                <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
+                    <md-field
+                    class="has-esc-accent">
+                        <label>Search..</label>
+                        <md-input></md-input>
+                    </md-field>
                 </div>
+
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button class="md-just-icon md-round md-esc-accent md-raised">
+                        <md-icon>search</md-icon>
+                    </md-button>
+                </div>
+
               </div>
             </div>
+            <!-- END OF BUTTON AND SEARCH BAR -->
 
-            
-
-          </div>
-
-          <md-divider></md-divider>
-
-          <!-- MIDDLE SECTION  >> SEARCH BAR & BUTTONS-->
-          <div class="__mid">
           </div>
 
           <!-- BOTTOM SECTION >> TABLE -->
           <div class="__bottom __table">
             
-    <pagination no-arrows   :page-count="getscholperProg.last_page" :value="getscholperProg.current_page" :total="getscholperProg.total" @input="getStudentPerProg" />
+            <!-- pagination -->
+            <div class="md-layout md-gutter md-alignment-center-center __paginate">
+              <pagination
+              type="esc-accent"
+              no-arrows  :page-count="getscholperProg.last_page" :value="getscholperProg.current_page" :total="getscholperProg.total" @input="getStudentPerProg" />
+            </div>
 
+            <!-- table display -->
             <md-table
               v-model="getscholperProg.data"
               md-sort="studLN"
@@ -461,7 +484,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="Scholastic Record Detail"/>
+    <vue-headful title="Scholastic Record Management"/>
   </div>
 </template>
 -
@@ -793,7 +816,7 @@ h3, .h3 {
 }
 
 .__table {
-  margin: 2rem 0 1.5rem 0 !important;
+  margin: 1.25rem 0 1.5rem 0 !important;
 }
 
 .__name {
@@ -805,4 +828,26 @@ h3, .h3 {
   overflow: auto;
 }
 
+._inst {
+  font-size: 1.15em !important;
+  line-height: 0.5em !important;
+  color: #505050 !important;
+}
+
+.__selector {
+  max-width: 45em !important;
+}
+.__enter {
+  font-weight: 700 !important;
+  font-size: 1em !important;
+  letter-spacing: 0.1em !important;
+}
+
+.__top {
+  margin-bottom: 1.25em !important;
+}
+
+.__paginate {
+  margin-bottom: 1.25em !important;
+}
 </style>
