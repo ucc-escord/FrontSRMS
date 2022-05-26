@@ -100,18 +100,24 @@
 
              
                     </md-autocomplete>
-                   <md-button @click="getStudentPerProg"
-                  class="md-danger md-round md-dense md-raised md-simple">
-                   Enter
-                  </md-button>
+                 
                     </div>
               </div>
 
               <!-- SEARCH BAR -->
-              <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-space-between">
-                
-                <div class="md-layout-item">
-                  <input type="text" name="" id="" placeholder="Search...">
+              <div class="md-layout-item md-size-66 md-xsmall-size-100 md-layout md-gutter md-alignment-center-space-between">
+           <!--      <div class="md-layout-item md-size-85">
+                    <md-field
+                    class="has-esc-accent">
+                        <label>Search..</label>
+                        <md-input v-model="search"></md-input>
+                    </md-field>
+                </div>
+ -->
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button   @click="getStudentPerProg" class="md-just-icon md-round md-esc-accent md-raised">
+                        <md-icon>search</md-icon>
+                    </md-button>
                 </div>
               </div>
             </div>

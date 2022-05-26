@@ -11,7 +11,7 @@
             <div class="md-layout md-gutter md-alignment-center-center">
 
                 <div class="__name md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                    <h3 class="title">{{ admName }}</h3>
+                    <h3 class="title">{{ getcurrentUser.name }}</h3>
                 </div>
 
                 <div class="__desc md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
@@ -69,6 +69,7 @@ import { NavTabsCard } from "@/components";
 
 // modal import
 import updateModal from '../Manager/adminAccount.vue'
+import { mapGetters} from "vuex"
 
 //tab content import
 import admOverview from '../Manager/adminOverview.vue';
@@ -84,6 +85,11 @@ export default {
     "admin-overview": admOverview,
     "admin-manage-account": AccountMan, //admin Manage Account
     "admin-audit-trail": admManageAccount //change this to audit trail
+   },
+
+   mounted(){
+        this.$store.dispatch('displayuser');
+
    },
   data() {
     return {
@@ -107,7 +113,10 @@ export default {
       return {
         backgroundImage: `url(${this.header})`
       };
-    }
+    },
+
+ ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+
   },
 
 };

@@ -52,6 +52,23 @@
             <span class="md-error" v-else-if="!$v.form.email.email">Invalid email.</span>
             </md-field>
         </div>
+
+        
+             <div class="input md-layout-item md-small-size-100">
+               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('course')">
+                <label for="middle-name">Course</label>
+                <md-input name="middle-name" id="middle-name" v-model="form.course" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.course.required">Middle name is required.</span>
+                <span class="md-error" v-else-if="!$v.form.course.minlength">Invalid middle name.</span>
+              </md-field>
+
+               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('section')">
+                <label for="middle-name">Section</label>
+                <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.section.required">Middle name is required.</span>
+                <span class="md-error" v-else-if="!$v.form.section.minlength">Invalid middle name.</span>
+              </md-field>
+            </div>
         
             <!--DEFAULT PASSWORD-->
         <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">
@@ -101,6 +118,8 @@ export default {
         firstName: null,
         middleName: null,
         email: null,
+        course: null,
+        section: null,
       },
       userSaved: false,
       sending: false,
@@ -124,6 +143,14 @@ export default {
           required,
           maxLength: maxLength(3)
         },
+         course: {
+          required,
+          maxLength: maxLength(3)
+        },
+         section: {
+          required,
+         },
+
         email: {
           required,
           email
