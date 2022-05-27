@@ -156,11 +156,13 @@ export default {
   components: {
      
   },
-  mounted() {
-          this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
-          let studentrow = this.$store.getters.getrow;
-
-        //  studentrow.forEach(student => this.studentList = student);
+ mounted() {
+       this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
+          //let studentrow = this.$store.getters.getrow;
+            
+            // this.showgsinfo({ route: this.$route.params.archievegs}); */
+   
+        // // studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
           
       },

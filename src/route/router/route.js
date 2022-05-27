@@ -231,6 +231,13 @@ const routes = [
         components: {default: escProf_GSPage, header: escHeader, footer: escFooter},
         meta: { requiresAuth: true, authorize: 'professor' } ,
       },
+      {
+        path: "/archievegradesheet/:archievegs",
+        name: "GradesheetArchieve",
+        components: {default: escViewArchieveGrade, header: escHeader, footer: escFooter},
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+     
+      },
 
       {
         path: "/archievetableprof/:userid",
@@ -238,6 +245,8 @@ const routes = [
         component:  escProf_ArchTable,
         meta: { requiresAuth: true, authorize: 'professor' } ,
       },
+
+      
   
   ],
     meta: { requiresAuth: true, authorize: 'professor' } ,
