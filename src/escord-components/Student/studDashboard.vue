@@ -66,21 +66,29 @@
             <div class="cards md-layout md-alignment-center">
               
               <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100">
+                  <router-link :to="{ name: 'Scholastic RecordStudent' }">
+                 
                   <md-card class="md-with-hover">
                       <md-card-content>
                         <p class="md-title title text-center">Scholastic Record</p>
                         <p class="text-center">Click to view your scholastic record form</p>
                       </md-card-content>
                   </md-card>
+                     </router-link>
                 </div>
                 
-                <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100">
+                <div class="md-layout-item md-medium-size-50   md-small-size-75 md-xsmall-size-100">
+                  <router-link :to="{ name: 'EscTableEval', params:{srms_id: srms_id} }">
                   <md-card  class="md-with-hover">
+                     
                       <md-card-content>
                         <p class="md-title title text-center">Summary of Grades</p>
-                        <p class="text-center">Click to view and download your evaluation form</p>
+                        <p class="text-center">Click to view and download your evaluation form </p>
                       </md-card-content>
+                       
+
                   </md-card>
+                     </router-link>
                 </div>
             </div>
           </div>
@@ -88,16 +96,15 @@
         
       </div>
 
-    <div> <stud-scol/> </div>
+    
       
      <updateModal v-if="updateModal" @close="updateModalHide"/>
     
   
   <!--<div> <acc-stud/> </div> -->
   
-   <div>
-      <stud-eval/>   
-  </div>
+   
+  
 
 
    <!--<div> <acc-management/> </div>--> 
@@ -115,28 +122,29 @@ import { mapActions, mapGetters} from "vuex";
 
 import studScol from './studScholastic.vue'
 import studEval from './studEvaluation.vue'
+import studTableEval from './studEvalTable.vue'
+
 
 
 // modal import
 import updateModal from './AccountStudent.vue'
-
+import axios from 'axios'
+import router from '../../route'
 
 export default {
   bodyClass: "profile-page",
  components: {
-    studScol,
-    studEval,
-     updateModal
+     updateModal,
   },
   mounted(){
   this.$store.dispatch('displayuser');
-
+  this.getsrms_id()
   },
   data() {
     return {
       /*modal default value on load*/
       updateModal: false,
-
+      srms_id:'',
       studLN: "DELA CRUZ",
       studFN: "JUAN",
       studMN: "GONZALES",
@@ -167,10 +175,30 @@ export default {
 
   },
   methods: {
+
+    clickEvalCard(){
+        var srms = this.srms_id
+       
+    
+    },
+    clickSRMSCard(){
+
+    },
      /*modal function*/
     updateModalHide() {
       this.updateModal = false;
     },
+    async getsrms_id(){ 
+           await axios.get('/api/getsrmsid/'+this.$route.params.student_number).then(({data})=>{
+                    this.srms_id = data[0].srms_id
+
+                    console.log(this.srms_id)
+                }).catch(({ response })=>{
+                    console.error(response)
+        })
+           
+},
+    
   }
 };
 </script>

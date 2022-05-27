@@ -62,6 +62,9 @@ const escAdminDash2  = () => import('../../escord-components/Manager/adminDashbo
 import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
 import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue'; */
 const escEval  = () => import('../../escord-components/Staff/Eval-2.vue')
+const escEvalstud =  () => import('../../escord-components/Student/studEval-2.vue')
+const escTableEval = () =>  import('../../escord-components/Student/studEvalTable.vue')
+const escScholasticStud = () =>  import('../../escord-components/Student/studScholastic.vue')
 
 
 const routes = [
@@ -271,7 +274,7 @@ const routes = [
    
   },
 
-
+//staff
   { 
     path: '/eval', 
     name: 'EscEval', 
@@ -279,6 +282,33 @@ const routes = [
    
   },
 
+
+  //student
+
+  { 
+    path: '/evalstud/:student_number/:srms_id', 
+    name: 'EscTableEval', 
+    component: escTableEval, 
+   
+  },
+
+  { 
+    path: '/evalstud/:student_number/:evalid', 
+    name: 'EscEvalstud', 
+    component: escEvalstud, 
+   
+  },
+
+  { 
+    path: '/scholastic/:student_number', 
+    name: 'Scholastic RecordStudent', 
+    component:  escScholasticStud, 
+   
+  },
+
+
+
+ 
   
 
   
