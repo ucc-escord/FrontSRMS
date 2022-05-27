@@ -6,7 +6,7 @@
     ></parallax>
    
 
-    <div class="main main-raised">
+    <div class="main main-raised" ref="DownloadComp">
       <div class="section profile-content">
         <div class="container">
        
@@ -69,7 +69,7 @@
                         <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
                     </md-button>
                 </div>
-
+       
               <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="refreshGradesheet"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
@@ -173,7 +173,7 @@
                 <md-table-cell>
                   <md-field class="has-esc-accent">
                   <md-input 
-                    v-model="getrow[index].finalterm"></md-input> <!---edit this var--->
+                    v-model="getrow[index].finalgrade"></md-input> <!---edit this var--->
                   </md-field>
                 </md-table-cell>                
                 
@@ -309,14 +309,18 @@ import { Modal } from "@/components";
 import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
 
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
+  name:'Gradesheetpage',
   components: {
-      Modal
+      Modal,
+    
+ 
   },
   mounted() {
           this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
@@ -536,6 +540,10 @@ export default {
                  })  
  
            },
+
+        
+
+     
   }
 };
 </script>

@@ -127,9 +127,8 @@
               </md-table-row>
 
             </md-table>
-
+      
           </div>
-
           <div class="__addStudentModal">
             <!-- modal -->
           </div>
@@ -147,6 +146,7 @@
 import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
 
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
@@ -154,7 +154,8 @@ import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validator
 export default {
   bodyClass: "profile-page",
   components: {
-     
+    
+
   },
  mounted() {
        this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
@@ -349,6 +350,10 @@ export default {
           console.log("Cannot add student to the gradesheet.");
         }
     },
+
+    download(){
+      
+    }
 
   }
 };

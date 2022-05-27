@@ -70,7 +70,7 @@
                 </md-table-cell>
 
                 <md-table-cell class="manAcc">
-                    {{activity.finalgrade}} <!--- change into units-->
+                    {{activity.units}} <!--- change into units-->
                 </md-table-cell>
 
             </md-table-row>
@@ -137,17 +137,10 @@ export default {
     },
 
     methods:{
-async tablefirstyear(){
-           
- 
+async tablefirstyear(){ 
            await axios.get('/api/perstudentschol/'+this.$route.params.student_number).then(({data})=>{
-        
                     this.firstsem = data.first;
                       this.secondsem = data.firstSecondSem;
-              
-              
-
-                
                 }).catch(({ response })=>{
                     console.error(response)
                 })

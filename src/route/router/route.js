@@ -13,6 +13,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 import Professor from "@/escord-components/Prof/Professor.vue"
 import ForgotPassword from "@/escord-components/ForgotPassword/esc-Forgot.vue"
 import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.vue"
+//import downloadArch from "@/escord-components/Prof/ProfDownload.vue"
 
 //const escHeader = () => import("@/escord-components/esc-Header.vue");
 
@@ -24,6 +25,7 @@ import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.
 //import escProfDash from "../../escord-components/Prof/profDashboard.vue";
 
 //import escProf_GSPage from "../../escord-components/Prof/profGradesheetPage.vue";
+//const downloadArch = () => import("../../escord-components/Prof/ProfDownload.vue");
 
 
 
@@ -267,10 +269,11 @@ const routes = [
     name: 'reset-password-form', 
     component: ResetPasswordForm, 
    
-  }
+  },
 
+  
 
-
+  
 ]
 
 
