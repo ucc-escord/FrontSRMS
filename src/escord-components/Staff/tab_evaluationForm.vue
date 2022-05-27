@@ -38,16 +38,53 @@
                
                     </md-table-cell>
 
-                    <md-table-cell  class="text-center">
-                        {{student.studNum}}
-                    </md-table-cell>
+
+                     <md-field class="has-esc-accent">
+                   <md-input 
+                 
+                    class="text-center"
+                     v-model="student.subjectcode"
+                   ></md-input> 
+                     </md-field>
+               
 
                     <md-table-cell class="text-left">
-                        {{student.studFN}} {{student.studMI}}. {{student.studLN}}
+      <md-field class="has-esc-accent">
+                          <md-input 
+                    class="text-center"
+                     v-model="student.subjectdesc"></md-input>
+                             </md-field>
+
+
                     </md-table-cell>
 
                     <md-table-cell>
-                        {{student.studStatus}}
+                        
+                <md-field class="has-esc-accent">
+                       <md-input 
+                            type="number"
+                    class="text-center"
+                     v-model="student.units"></md-input> 
+                </md-field>
+                    </md-table-cell>
+
+                     <md-table-cell>
+                       <md-field class="has-esc-accent">
+                       <md-input 
+                            type="number"
+                    class="text-center"
+                     v-model="student.finalgrade"></md-input> 
+                             </md-field>
+                    </md-table-cell>
+
+
+                     <md-table-cell>
+
+                                <md-field class="has-esc-accent">
+                       <md-input class="text-center"
+                     v-model="student.total"></md-input> 
+
+                          </md-field>
                     </md-table-cell>
 
                 </md-table-row>
@@ -61,39 +98,110 @@
 
 <script>
 
+import { validationMixin } from 'vuelidate'
+import axios from "axios"
+import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
+
+
 export default {
+    
     components: {
+        
     
     },
     data(){
         return{
-            tab_EFMS_defaultPagination: 1,
+            
+            studAdded: false,
+             sending: false,
+            addedStudentInfo: '',
 
             studentList:[
                 {
-                    studNum: "20191172",
-                    studLN: "MAGLANGIT",
-                    studFN: "TRIZHALYN",
-                    studMI: "L",
-                    studStatus: "REGULAR"
+                    subjectcode: "CSE 103",
+                    subjectdesc: "WEB DEVELOPMENT",
+                    units: "3",
+                    finalgrade: "1.26",
+                    total: "PLEASE COMPUTE AUTO HERE"
                 },
                 {
-                    studNum: "20191173",
-                    studLN: "ZARZOSO",
-                    studFN: "EDELINE",
-                    studMI: "J",
-                    studStatus: "REGULAR"
+                    subjectcode: "CSE 102",
+                    subjectdesc: "SOFTWARE ENGINEERING",
+                    units: "3",
+                    finalgrade: "1.26",
+                    total: "PLEASE COMPUTE AUTO HERE"
                 },
-                {
-                    studNum: "20191174",
-                    studLN: "LUNA",
-                    studFN: "JESSICA",
-                    studMI: "L",
-                    studStatus: "REGULAR"
-                }
+                
             ]
         };
-    }
+    },
+
+     // for validation
+  mixins: [validationMixin],
+   /* for validation */
+   validations: {
+       studentList: {
+        subjectcode: {required},
+        subjectdesc: {required},
+         units: {required},
+        finalgrade: {required},
+        total: {required}
+       },
+
+       
+      
+      
+   },
+
+   methods:{
+    getValidationClass (fieldName) {
+      const field = this.$v.studentList[fieldName]
+
+      if (field) {
+          return {
+            'md-invalid': field.$invalid && field.$dirty
+          }
+        }
+      },
+      clearForm () {
+        this.$v.$reset()
+        this.studentList.subjectcode = null
+        this.studentList.subjectdesc = null
+        this.studentList.units = null
+        this.studentList.finalgrade = null
+        this.studentList.total = null
+      
+      },
+      rowUpdated () {
+        this.sending = true
+       
+   
+      
+        // Instead of this timeout, here you can call your API
+      window.setTimeout(() => {
+          this.addedStudentInfo = `${this.studentList.subjectcode}, ${this.studentList.subjectdesc} ${this.studentList.finalgrade}`
+          this.studAdded = true
+          this.sending = false
+          this.clearForm()
+        }, 1500)  
+
+        this.refreshGradesheet();
+      },
+      addValidate () {
+        this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+  
+          this.rowUpdated()
+            
+          console.log("Student is added successfully.")
+        }
+        else {
+          console.log("Cannot add student to the gradesheet.");
+        }
+    },
+
+   }
 
 }
 </script>
