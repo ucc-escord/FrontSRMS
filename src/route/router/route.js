@@ -29,7 +29,7 @@ import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.
 
 
 
-const escStaffDash = () => import("../../escord-components/Staff/staffDashboard.vue");
+const escStaffDash = () => import('../../escord-components/Staff/staffDashboard.vue');
 
 const escLogin = () => import('../../escord-components/esc-Login.vue')
 const escLanding = () => import('../../escord-components/esc-Landing.vue')
@@ -121,7 +121,6 @@ const routes = [
     name: "Staff Dashboard",
     components: {default: escStaffDash, header: escHeader, footer: escFooter},
     meta: { requiresAuth: true, authorize: 'staff' } ,
-
 
   },
   {
