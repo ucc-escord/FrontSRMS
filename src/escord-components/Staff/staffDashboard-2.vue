@@ -63,12 +63,7 @@
                         <md-tab id="tab-srms" md-label="Scholastic Record Management">
                             <tab-srms/>
                         </md-tab>
-
                         <!-- EVALUATION FORM -->
-                        <md-tab id="tab-efms" md-label="Evaluation Form Management">
-                            <tab-efms/>
-                        </md-tab>
-
                         <!-- ARCHIVE -->
                         <md-tab id="tab-archive" md-label="ARCHIVE">
                             <tab-arch/>
@@ -109,7 +104,6 @@ export default {
     updateModal, 
     NavTabsCard,
     "tab-srms": tabSRMS,
-    "tab-efms": tabEFMS,
     "tab-arch":tabArchTable,
    },
    mounted(){

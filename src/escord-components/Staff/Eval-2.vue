@@ -15,11 +15,12 @@
             <div class="__gradesheet-subject md-layout-item md-size-100">
                 
                     <h5 class="md-subheading">
-                   SEMESTER SY: YEARSEM
+                   SEMESTER SY: YEARSEM (CHANGE THIS AS AN INPUT FIELD)
+                   
                     </h5>
                 
                 <h4>
-                    <strong>STUDENT NUMBER </strong>
+                    <strong>STUDENT NUMBER (CHANGE THIS AS AN INPUT FIELD)</strong>
                 SURNAME
  
                 
@@ -29,26 +30,22 @@
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
                     <h5 class="md-subheading">
-                   FIRST NAME
+                   FIRST NAME (CHANGE THIS AS AN INPUT FIELD)
                     </h5>
                     <p class="md-caption __top-md-caption">
-                    MIDDLE NAME
+                    MIDDLE NAME (CHANGE THIS AS AN INPUT FIELD)
                     </p>
                     <p class="md-caption">
-                   COURSE 
+                   COURSE  (CHANGE THIS AS AN INPUT FIELD)
                     </p>
                     
                     <p class="md-caption">
-                   YEAR
+                   YEAR (CHANGE THIS AS AN INPUT FIELD)
                     </p>
 
                     
                     <p class="md-caption">
-                   SECTION 
-                    </p>
-
-                      <p class="md-caption">
-                   STUDENT 
+                   SECTION  (CHANGE THIS AS AN INPUT FIELD)
                     </p>
 
             </div>
@@ -247,6 +244,9 @@ export default {
  
   },
   mounted() {
+
+            this.$store.dispatch('getScholasticRecord',this.$route.params.studnum);
+
        //   this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
          // let studentrow = this.$store.getters.getrow;
 
@@ -349,6 +349,8 @@ export default {
     loadingStatus(){
       return this.$store.getters.loadingStatus
     },
+  ...mapGetters({getScholRecord: 'getScholRecord'}),
+
     /*    ...mapGetters({getrow : 'getrow'}),
      ...mapGetters({getGS : 'getGS'}), */
 

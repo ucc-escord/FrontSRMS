@@ -59,9 +59,8 @@
 
  <md-table v-model="getarchschol.data" md-sort="name" md-sort-order="asc" >
     
-   <h1 class="md-title text-center">Scholastic</h1>
+   <!-- <h1 class="md-title text-center">Scholastic</h1> -->
        <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Scholastic ID</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Fullname</md-table-head>
@@ -72,9 +71,7 @@
       <md-table-row   v-for="(_, index) in getarchschol.data"
               :key="index">
 
-              <md-table-cell class="text-center">
-                                <label class="text-center">VIEW</label>
-              </md-table-cell>
+            
 
                   <md-table-cell class="text-center">
                       {{getarchschol.data[index].srms_id}}
@@ -140,21 +137,19 @@
 
  <md-table v-model="getarcheval" md-sort="name" md-sort-order="asc" >
 
- <h1 class="md-title text-center">Evaluation</h1>
+ <!-- <h1 class="md-title text-center">Evaluation</h1> -->
         <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
+              
                 <md-table-head class="text-center">Evaluation ID</md-table-head>
                 <md-table-head class="text-center">SRMS ID</md-table-head>
                 <md-table-head class="text-center">STATUS</md-table-head>
                 
               </md-table-row>
 
-  <md-table-row
+        <md-table-row
                v-for="(_, index) in getarcheval.data"
               :key="index">
-              <md-table-cell class="text-center">
-                                <label class="text-center">VIEW</label>
-              </md-table-cell>
+            
 
                 <md-table-cell class="text-center">
                       {{getarcheval.data[index].evalform_id}}

@@ -276,7 +276,7 @@ const routes = [
 
 //staff
   { 
-    path: '/eval', 
+    path: '/eval/:studnum', 
     name: 'EscEval', 
     component: escEval, 
    
@@ -305,8 +305,6 @@ const routes = [
     component:  escScholasticStud, 
    
   },
-
-
 
  
   

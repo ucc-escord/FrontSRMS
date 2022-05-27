@@ -120,23 +120,6 @@
 
             </div> -->
 
-            <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
-
-                <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
-                    <md-field
-                    class="has-esc-darkgrey">
-                        <label>Search..</label>
-                        <md-input></md-input>
-                    </md-field>
-                </div>
-
-                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button class="md-just-icon md-round md-esc-darkgrey md-raised">
-                        <md-icon class="md-size-4x">search</md-icon>
-                    </md-button>
-                </div>
-
-            </div>
             </div>
             <!-- END OF BUTTON AND SEARCH BAR -->
 
@@ -212,11 +195,9 @@
                     <md-icon>close</md-icon>
                 </md-button>
 
-                  <md-button
-                @click="archiveStudent(studentList[index])"
-                class="md-simple md-danger md-just-icon md-round">
-                    <md-icon>edit</md-icon>
-                </md-button>
+                           <router-link :to="{ name: 'EscEval', params:{studnum: student.student_number } }">VIEW</router-link>
+
+           
                 </md-table-cell>
 
             </md-table-row>
