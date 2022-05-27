@@ -211,6 +211,12 @@
                 class="md-simple md-danger md-just-icon md-round">
                     <md-icon>close</md-icon>
                 </md-button>
+
+                  <md-button
+                @click="archiveStudent(studentList[index])"
+                class="md-simple md-danger md-just-icon md-round">
+                    <md-icon>edit</md-icon>
+                </md-button>
                 </md-table-cell>
 
             </md-table-row>

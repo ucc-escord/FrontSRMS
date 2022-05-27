@@ -3,12 +3,7 @@
       <div class="md-layout md-gutter md-alignment-center-center">
 
           <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-            <pagination
-                type = "esc-accent"
-                no-arrows
-                v-model="tab_EFMS_defaultPagination"
-                :page-count="5">
-            </pagination>
+       
           </div>
 
           <div class="__table md-layout-item md-size-100">
@@ -20,9 +15,13 @@
 
                 <md-table-row class="title">
                     <md-table-head class="text-center">Actions</md-table-head>
-                    <md-table-head class="text-center">Student Number</md-table-head>
-                    <md-table-head class="text-center">Name</md-table-head>
-                    <md-table-head class="text-center">Status</md-table-head>
+                    <md-table-head class="text-center">Subject Code</md-table-head>
+                    <md-table-head class="text-center">Subject Description</md-table-head>
+                    <md-table-head class="text-center">Units</md-table-head>
+                    <md-table-head class="text-center">Final Grades</md-table-head>
+                    <md-table-head class="text-center">Final Grade * Units</md-table-head>
+
+
                 </md-table-row>
 
                 <md-table-row
@@ -30,10 +29,13 @@
                  :key="index">
 
                     <md-table-cell class="text-center">
-                        <md-button
-                         class="md-simple md-esc-darkgrey">
-                            VIEW
-                         </md-button>
+                   
+                    <md-button 
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>save</md-icon>
+                        <md-tooltip md-direction="bottom">save</md-tooltip>
+                    </md-button>
+               
                     </md-table-cell>
 
                     <md-table-cell  class="text-center">
@@ -58,11 +60,10 @@
 </template>
 
 <script>
-import {Pagination} from '@/components'
 
 export default {
     components: {
-        Pagination
+    
     },
     data(){
         return{

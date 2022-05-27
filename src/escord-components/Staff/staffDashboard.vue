@@ -115,10 +115,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters} from "vuex";
-
 // modal import
 import updateModal from '../Staff/AccountStaff.vue'
+import mapGetters from 'vuex'
 
 export default {
   bodyClass: "profile-page",

@@ -71,7 +71,7 @@
 
                         <!-- ARCHIVE -->
                         <md-tab id="tab-archive" md-label="ARCHIVE">
-                            
+                            <tab-arch/>
                         </md-tab>
                         
                     </md-tabs>
@@ -100,6 +100,7 @@ import updateModal from '../Staff/AccountStaff.vue'
 //tab content import
 import tabSRMS from '../Staff/tab_scholasticRecord.vue';
 import tabEFMS from '../Staff/tab_evaluationForm.vue';
+import tabArchTable from '../Staff/staffArchieveTable'
 
 export default {
   bodyClass: "profile-page",
@@ -108,7 +109,8 @@ export default {
     updateModal, 
     NavTabsCard,
     "tab-srms": tabSRMS,
-    "tab-efms": tabEFMS
+    "tab-efms": tabEFMS,
+    "tab-arch":tabArchTable,
    },
    mounted(){
    this.$store.dispatch('displayuser');

@@ -209,7 +209,7 @@
 
                   <!-- ARCHIVE BUTTON -->
                   <md-button
-                  @click="archiveStudent(studentList[index])"
+                  @click="archiveStudent(getscholperProg.data[index])"
                   class="md-simple md-danger md-just-icon md-round">
                     <md-icon>close</md-icon>
                   </md-button>
@@ -334,8 +334,8 @@
                           <md-field class="has-esc-accent"
                           :class="getValidationClass('studBirthday')">
                             <label>Birthday (readonly)</label>
-                            <md-input v-model="modalInfo.studBirthday"
-                            readonly
+           <!--read only remove--->                 <md-input v-model="modalInfo.studBirthday"
+                           
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studBirthday.required">Birthday is required.</span>
@@ -704,9 +704,9 @@ this.getStudentPerProg()
 
     /* archive button in row is clicked */
     archiveStudent(studentInfo) {
-      console.log("Row is selected. \nArchiving Student.\n\n" + 
-      "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      this.srms_id =  studentInfo.srms_id
+
+       this.ArchieveSRMS();
     },
 
     /* modal methods && validations */
@@ -798,6 +798,32 @@ this.getStudentPerProg()
       
 
     },
+
+    ArchieveSRMS(){
+
+
+       
+
+         axios.put('api/scholarch/'+ this.srms_id, { 
+            status_archieve: '1', }).then((response)=>{
+          
+       
+                  console.log('archieve successfull');
+                  
+                //add notification time out here 
+
+       
+    
+    }).catch((errors)=>{
+          
+                 console.log(errors);
+    
+          
+       
+                 })  
+ 
+           
+    }
 
 
 

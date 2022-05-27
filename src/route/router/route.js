@@ -61,6 +61,7 @@ const escAdminDash2  = () => import('../../escord-components/Manager/adminDashbo
 /* import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
 import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
 import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue'; */
+const escEval  = () => import('../../escord-components/Staff/Eval-2.vue')
 
 
 const routes = [
@@ -267,6 +268,14 @@ const routes = [
     path: '/resetpassword', 
     name: 'reset-password-form', 
     component: ResetPasswordForm, 
+   
+  },
+
+
+  { 
+    path: '/eval', 
+    name: 'EscEval', 
+    component: escEval, 
    
   },
 
