@@ -131,8 +131,38 @@
           </div>
         </md-card-content>
  <md-card-actions>
-                         <label for="age">INSERT TABLE HERE</label>
+                        
                     <!--TABLESSS---->
+                    <!--FIRST YEAR---->
+
+                      <div>
+                        <first/>
+                      </div>
+
+                       </md-card-actions>
+
+  <!--SECOND YEAR---->
+
+  <md-card-actions>
+                       <div>
+                        <second/>
+                      </div>
+<!--THIRD YEAR---->
+
+ </md-card-actions>
+ <md-card-actions>
+                      <div>
+                        <third/>
+                      </div>
+<!--FOURTH YEAR---->
+    </md-card-actions>
+
+      <md-card-actions>
+                       <div>
+                        <four/>
+                      </div>
+
+
                 </md-card-actions>
         <md-card-actions>
       
@@ -143,8 +173,17 @@
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
+import first from './table_srms/Firstyear.vue'
+import second from './table_srms/Secondyear.vue'
+import third from './table_srms/Thirdyear.vue'
+import four from './table_srms/Fouryear.vue'
+
+
+
+
+
 
   import {
     required,
@@ -156,6 +195,13 @@ import { mapActions, mapGetters} from "vuex";
   export default {
     name: 'ScholasticForm',
     mixins: [validationMixin],
+    components:{
+      first,
+      second,
+      third,
+      four
+  
+    },
     mounted(){
           //  this.$store.dispatch('displayuser');
 

@@ -53,6 +53,7 @@
                 <span class="md-error" v-else-if="!$v.form.email.email">Invalid email.</span>
               </md-field>
             </div>
+
             
              <!--DEFAULT PASSWORD-->
             <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">

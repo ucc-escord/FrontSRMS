@@ -230,6 +230,8 @@ export default {
     clearUnusedInput() {
       this.$v.$reset();
       if(this.showStudNumInput) {
+       // this.geterror = null;
+   
         this.loginData.userEmail = null;
         this.loginData.userPassword = null;
         console.log(this.showStudNumInput)

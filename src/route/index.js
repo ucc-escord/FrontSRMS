@@ -43,14 +43,17 @@ function loggedIn(){
             // role not authorised so redirect to home page
             
             if(currentUser === 'superadmin'){
-            return next({ path: '/admindash' });
+            return next({  name: "Admin Dashboard" });
           }
           if(currentUser === 'student'){
 
-            return next({ path: '/student-dashboard' });
+            return next({name: "Student Dashboard" });
           }
           if(currentUser === 'professor'){
-            return next({ path: '/prof-dashboard' });
+            return next({  name: "Professor Dashboard" });
+          }
+          if(currentUser === 'staff'){
+            return next({  name: "Staff Dashboard" });
           }
 
         }
