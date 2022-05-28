@@ -60,7 +60,7 @@ const actions = {
         
 
         
-              console.log('adding successful' , response.data);
+            //   console.log('adding successful' , response.data);
 
             
              }).catch((errors)=>{

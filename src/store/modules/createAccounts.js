@@ -25,7 +25,7 @@ const actions = {
         axios.post('/api/createaccprof', formData).then((response)=>{
         
 
-            console.log('create professor accounts' , response.data);
+            // console.log('create professor accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -39,7 +39,7 @@ const actions = {
         axios.post('/api/createaccstud', formData).then((response)=>{
         
 
-            console.log('create student accounts' , response.data);
+            // console.log('create student accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -53,7 +53,8 @@ const actions = {
         axios.post('/api/createaccadm', formData).then((response)=>{
         
 
-            console.log('create staff accounts' , response.data);
+          
+            // console.log('create staff accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -79,7 +80,7 @@ const actions = {
                         axios.put('/api/updateManager/'+route, formData).then((response)=>{
                         
                 
-                            console.log('create professor accounts' , response.data);
+                            // console.log('create professor accounts' , response.data);
                 
                             
                              }).catch((errors)=>{
@@ -99,7 +100,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
                             },
 
@@ -112,7 +113,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
 
 
@@ -127,7 +128,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
 
 

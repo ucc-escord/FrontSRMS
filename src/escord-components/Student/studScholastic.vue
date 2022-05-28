@@ -154,15 +154,13 @@
                       <div>
                         <third/>
                       </div>
-<!--FOURTH YEAR---->
-    </md-card-actions>
 
+    </md-card-actions>
+<!--FOURTH YEAR---->
       <md-card-actions>
                        <div>
                         <four/>
                       </div>
-
-
                 </md-card-actions>
         <md-card-actions>
       

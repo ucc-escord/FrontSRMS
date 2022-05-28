@@ -42,7 +42,7 @@ const actions = {
                 elements[ii].value = "";
               }
             } */
-            console.log('adding successful' , response.data);
+          //  console.log('adding successful' , response.data);
 
             
              }).catch((errors)=>{
@@ -64,13 +64,13 @@ const actions = {
         return dispatch('displaygstable').then(() => {
 
              
-          console.log('RUNNING ACTIONS 2')
+        //  console.log('RUNNING ACTIONS 2')
 
 
         })
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+         //  console.log("Error in getting the user")
        }) 
    
    
@@ -85,7 +85,7 @@ const actions = {
         
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+       //    console.log("Error in getting the user")
        }) 
    
      },
@@ -101,7 +101,7 @@ const actions = {
           
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+       //    console.log("Error in getting the user")
        }) 
    
      },
@@ -115,11 +115,11 @@ const actions = {
       return  axios.post('api/gradesheetstudent/', addStud).then((response)=>{
         //   this.currentUser = response.data
         commit('setLoading',false)
-        console.log('adding successful' , response.data);
+        //console.log('adding successful' , response.data);
           
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+        //   console.log("Error in getting the user")
        })  
    
      },
@@ -129,7 +129,7 @@ const actions = {
         axios.put('/api/addgs/'+route, formData).then((response)=>{
         
 
-            console.log('create professor accounts' , response.data);
+          //  console.log('create professor accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -147,9 +147,9 @@ const actions = {
     
        axios.get(`/api/paginatecard/`+route+`?page=${page}`).then(({data})=>{
             this.cards = data
-            console.log(data);
+         //   console.log(data);
         }).catch(({ response })=>{
-            console.error(response)
+          //  console.error(response)
         })
   
 

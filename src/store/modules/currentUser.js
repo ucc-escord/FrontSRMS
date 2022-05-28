@@ -41,7 +41,7 @@ const actions = {
                
                 return dispatch('currentUserLog').then(() => {
                  
-                        console.log('RUNNING ACTIONS 2')
+                    //    console.log('RUNNING ACTIONS 2')
 
 
                 })
@@ -65,7 +65,7 @@ const actions = {
                 localStorage.setItem('role', response.data.user_role);
                 localStorage.setItem('email',response.data.email);
 
-                console.log(response.data.id);
+              //  console.log(response.data.id);
                 if(response.data.user_role === "staff"){
                   //    router.push({path:'/About'});
                   router.push('/staff-dashboard', () => router.go(0)).catch(err => {})
@@ -91,7 +91,7 @@ const actions = {
                 }
  
              }).catch(()=>{
-                 console.log("Error in getting the user")
+             //    console.log("Error in getting the user")
              })
    
         
@@ -108,7 +108,7 @@ const actions = {
                   commit('setRole',response.data.user_role)
    
                }).catch(()=>{
-                   console.log("Error in getting the user")
+             //      console.log("Error in getting the user")
                })
            },
 
@@ -127,7 +127,7 @@ const actions = {
                  
                   return dispatch('currentUserLog').then(() => {
                    
-                          console.log('RUNNING ACTIONS 2')
+                        //  console.log('RUNNING ACTIONS 2')
   
   
                   })
@@ -158,7 +158,7 @@ const actions = {
          
                            
               }).then(response=>{
-           console.log(response);
+          // console.log(response);
 
 
                   })

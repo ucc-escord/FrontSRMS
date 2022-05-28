@@ -145,7 +145,6 @@ export default {
         },
          course: {
           required,
-          maxLength: maxLength(3)
         },
          section: {
           required,
