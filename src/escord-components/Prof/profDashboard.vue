@@ -631,7 +631,7 @@ export default {
       },
 
       set(val){
-          console.log(val)
+       //     console.log(val)
       }
     }
   },
@@ -657,7 +657,7 @@ async cardshowpage(page=1){
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+             //         console.error(response)
                 })
            
 },
@@ -674,7 +674,7 @@ async cardshowpage(page=1){
     showGS_info(gsID) {
       this.selectedGS_infoShow === gsID ? this.selectedGS_infoShow = null: this.selectedGS_infoShow = gsID
 
-      console.log('gsID: '+ this.selectedGS_infoShow)
+       // console.log('gsID: '+ this.selectedGS_infoShow)
     },
 
      /*modal function*/
@@ -690,7 +690,7 @@ async cardshowpage(page=1){
 
     /*get subject desc from `subjects` array*/
     getSubjectOptions(searchterm) {
-      console.log("getSubjects", searchterm);
+      //  console.log("getSubjects", searchterm);
       this.subjectOptions = new Promise((resolve) => {
         if (!searchterm) {
           resolve(this.subjects.map((x) => x.desc));
@@ -762,10 +762,10 @@ async cardshowpage(page=1){
 
         if (!this.$v.$invalid) {
           this.addGradesheet()
-          console.log("Gradesheet saved and added successfully.")
+       //     console.log("Gradesheet saved and added successfully.")
         }
         else {
-          console.log("Failed to add and save gradesheet. Fill out required fields.");
+          //  console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
     pageofArchieve(){

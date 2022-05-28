@@ -262,10 +262,10 @@ import axios from "axios"
 
         if (!this.$v.$invalid) {
           this.saveUser()
-          console.log("okay");
+        //    console.log("okay");
         }
         else {
-          console.log("no");
+         //   console.log("no");
         }
       },
 
@@ -288,7 +288,7 @@ import axios from "axios"
         
 
 
-            console.log('update student accounts' , response.data);
+         //     console.log('update student accounts' , response.data);
 
 
             

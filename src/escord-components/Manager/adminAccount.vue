@@ -157,7 +157,7 @@ import axios from 'axios'
                }).then((response)=>{
         
 
-            console.log('update Admin Account' , response.data);
+            // console.log('update Admin Account' , response.data);
 
             
              }).catch((errors)=>{

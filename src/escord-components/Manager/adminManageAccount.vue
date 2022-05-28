@@ -153,10 +153,10 @@ export default {
              this.addNewStaff = false;
              
              if(this.addNewStudent == true) {
-                 console.log("Add new student div is displayed.");
+             //    console.log("Add new student div is displayed.");
              }
              else {
-                 console.log("Add new student div is not displayed.");
+               //  console.log("Add new student div is not displayed.");
              }
          },
 
@@ -165,10 +165,10 @@ export default {
              this.addNewStudent = false;
              
              if(this.addNewStaff == true) {
-                 console.log("Add new staff div is displayed.");
+               //  console.log("Add new staff div is displayed.");
              }
              else {
-                 console.log("Add new staff div is not displayed.");
+                 //console.log("Add new staff div is not displayed.");
              }
              
          },
@@ -184,7 +184,7 @@ export default {
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                  //  console.error(response)
                 })
 
            

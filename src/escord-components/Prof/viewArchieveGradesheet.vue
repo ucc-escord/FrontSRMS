@@ -283,11 +283,11 @@ export default {
  axios.put('/api/unarchieveGS/'+this.$route.params.archievegs).then(response => {
         //   this.currentUser = response.data
    
-    console.log("Archieve Succesfully")
+   //   console.log("Archieve Succesfully")
         //    console.log(response.data[0]);
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+         //    console.log("Error in getting the user")
        }) 
     
 
@@ -344,10 +344,10 @@ export default {
   
           this.addStudent()
             
-          console.log("Student is added successfully.")
+         //   console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+         //   console.log("Cannot add student to the gradesheet.");
         }
     },
 

@@ -270,10 +270,10 @@ import { mapActions, mapGetters} from "vuex";
 
         if (!this.$v.$invalid) {
           this.saveUser()
-          console.log("okay");
+       //     console.log("okay");
         }
         else {
-          console.log("no");
+         //   console.log("no");
         }
       },
 
@@ -292,7 +292,7 @@ import { mapActions, mapGetters} from "vuex";
                }).then((response)=>{
         
 
-            console.log('update staff accounts' , response.data);
+         //     console.log('update staff accounts' , response.data);
 
             
              }).catch((errors)=>{

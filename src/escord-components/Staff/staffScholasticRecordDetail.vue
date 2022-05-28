@@ -697,9 +697,9 @@ this.getStudentPerProg()
 
     /* download button in row is clicked */
     downloadIndividualSR(studentInfo) {
-      console.log("Row is selected. \nDownloading specific SR.\n\n" + 
+    /*   console.log("Row is selected. \nDownloading specific SR.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN); */
     },
 
     /* archive button in row is clicked */
@@ -753,11 +753,11 @@ this.getStudentPerProg()
 
         if (!this.$v.$invalid) {
           this.editStudent()
-          console.log("Student info is updated successfully.")
+         //   console.log("Student info is updated successfully.")
         }
         else {
           this.studNotEditted = true
-          console.log("Cannot update student info.");
+         //   console.log("Cannot update student info.");
         }
     },
 
@@ -787,7 +787,7 @@ this.getStudentPerProg()
          axios.put('/api/scholupdate/'+this.srms_id, this.modalInfo).then((response)=>{
         
 
-            console.log('update srms details' , response.data);
+          //    console.log('update srms details' , response.data);
 
             
              }).catch((errors)=>{
@@ -808,7 +808,7 @@ this.getStudentPerProg()
             status_archieve: '1', }).then((response)=>{
           
        
-                  console.log('archieve successfull');
+                //    console.log('archieve successfull');
                   
                 //add notification time out here 
 
@@ -816,7 +816,7 @@ this.getStudentPerProg()
     
     }).catch((errors)=>{
           
-                 console.log(errors);
+               //    console.log(errors);
     
           
        

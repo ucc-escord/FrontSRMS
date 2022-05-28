@@ -194,10 +194,10 @@ export default {
   
           this.rowUpdated()
             
-          console.log("Student is added successfully.")
+          //  console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+          //  console.log("Cannot add student to the gradesheet.");
         }
     },
 

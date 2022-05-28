@@ -139,7 +139,7 @@ export default {
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+             //       console.error(response)
                 })
            
 },
@@ -162,7 +162,7 @@ export default {
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                   // console.error(response)
                 })
            
 },

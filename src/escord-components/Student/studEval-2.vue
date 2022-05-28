@@ -213,7 +213,7 @@ this.topview()
  // ...mapMutations(['setspeciGS']),
     sendArrayofData(index){
 
-        console.log(index);
+         // console.log(index);
 
    // this.updateGradesheetData({route:index.id}, this.index);
 
@@ -282,10 +282,10 @@ this.topview()
   
           this.addStudent()
             
-          console.log("Student is added successfully.")
+      //      console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+          //  console.log("Cannot add student to the gradesheet.");
         }
     },
 
@@ -293,7 +293,7 @@ this.topview()
            await axios.get('/api/evalTopView/100001').then(({data})=>{
                     this.topviewdata = data[0]
                 }).catch(({ response })=>{
-                    console.error(response)
+                    //  console.error(response)
                 })
            
 },
@@ -306,7 +306,7 @@ this.topview()
             status_archieve: '1', }).then((response)=>{
           
        
-                  console.log('archieve successfull');
+                //    console.log('archieve successfull');
                   
                 //add notification time out here 
 
@@ -314,7 +314,7 @@ this.topview()
     
     }).catch((errors)=>{
           
-                 console.log('error in archeiveing');
+                 //  console.log('error in archeiveing');
     
           
        

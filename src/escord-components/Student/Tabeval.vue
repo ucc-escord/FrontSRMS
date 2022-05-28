@@ -88,7 +88,7 @@ name:'tabeval',
            await axios.get('/api/evalPerevalID/'+this.$route.params.evalid).then(({data})=>{
                     this.studentList = data
                 }).catch(({ response })=>{
-                    console.error(response)
+                   //   console.error(response)
                 })
            
 },

@@ -685,16 +685,16 @@ this.getStudentPerProg()
 
     /* download button in row is clicked */
     downloadIndividualSR(studentInfo) {
-      console.log("Row is selected. \nDownloading specific SR.\n\n" + 
+     /*  console.log("Row is selected. \nDownloading specific SR.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN); */
     },
 
     /* archive button in row is clicked */
     archiveStudent(studentInfo) {
-      console.log("Row is selected. \nArchiving Student.\n\n" + 
+    /*   console.log("Row is selected. \nArchiving Student.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN); */
     },
 
     /* modal methods && validations */
@@ -741,11 +741,11 @@ this.getStudentPerProg()
 
         if (!this.$v.$invalid) {
           this.editStudent()
-          console.log("Student info is updated successfully.")
+         //   console.log("Student info is updated successfully.")
         }
         else {
           this.studNotEditted = true
-          console.log("Cannot update student info.");
+          //  console.log("Cannot update student info.");
         }
     },
 
@@ -775,7 +775,7 @@ this.getStudentPerProg()
          axios.put('/api/scholupdate/'+this.srms_id, this.modalInfo).then((response)=>{
         
 
-            console.log('update srms details' , response.data);
+        //      console.log('update srms details' , response.data);
 
             
              }).catch((errors)=>{

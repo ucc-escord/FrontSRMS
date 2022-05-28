@@ -73,7 +73,7 @@ export default {
            await axios.get('/api/evalTableStudent/'+this.$route.params.srms_id).then(({data})=>{
                     this.studentList = data
                 }).catch(({ response })=>{
-                    console.error(response)
+                  //    console.error(response)
                 })
            
 },

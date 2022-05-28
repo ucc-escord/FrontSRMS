@@ -213,7 +213,7 @@ export default {
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                   //   console.error(response)
                 })
 
            
@@ -229,7 +229,7 @@ export default {
               //     this.currentpage = page
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                 //     console.error(response)
                 })
 
 

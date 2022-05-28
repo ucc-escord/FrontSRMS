@@ -192,9 +192,9 @@ export default {
            await axios.get('/api/getsrmsid/'+this.$route.params.student_number).then(({data})=>{
                     this.srms_id = data[0].srms_id
 
-                    console.log(this.srms_id)
+                    //  console.log(this.srms_id)
                 }).catch(({ response })=>{
-                    console.error(response)
+                    //  console.error(response)
         })
            
 },
