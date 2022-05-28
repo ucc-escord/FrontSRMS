@@ -23,8 +23,8 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}}, {{getcurrentUser.middleinitial}}</h3>
-                  <h5>{{getcurrentUser.faculty_rank}}</h5>
+                    <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
+                  <h5>{{getCurrentUser.facultyRank}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -624,7 +624,7 @@ export default {
   
     ...mapGetters({getCard: 'getCard'}),
    
-    ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+    ...mapGetters({getCurrentUser: 'getCurrentUser'}),
     getcurrentpage : {
       get(){
           return 3;

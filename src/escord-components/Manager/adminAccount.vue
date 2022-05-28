@@ -1,66 +1,144 @@
 <template>
-<div>
- <form @submit.prevent="UpdateAdmin">
-          <md-card-content>
-          <div class="md-layout md-gutter">
-              <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('firstName')">
-                <label for="first-name">Name</label> <!---this is not edited-->
-                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="getcurrentUser.name" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.firstName.required">The first name is required</span>
-                <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name</span>
-              </md-field>
-            </div>
+<transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container" v-click-outside="closeModal">
 
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">New Password</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.password" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
-              </md-field>
-            </div>
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">Confirm New Password</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="form.confirmpass" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.lastName.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name</span>
-              </md-field>
-            </div>
+          <div class="modal-header">
+            <h3 class="title text-esc-accent">Update Account</h3>
           </div>
-      
 
-          <md-field :class="getValidationClass('email')">
-            <label for="email">Email</label>
-            <md-input type="email" name="email" id="email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
-          </md-field>
-        </md-card-content>
+          <div class="modal-body text-center">
+            
+            <form @submit.prevent="UpdateAdmin" novalidate class="md-layout md-gutter md-alignment-center-left">
 
-                <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Update Manager</md-button>
-        </md-card-actions>
-      
+              <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
 
-   <!--    <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>-->
-        </form> 
+                <!-- NAME -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+
+                  <md-field
+                  :class="getValidationClass('firstName')"
+                  class="has-esc-accent md-layout-item md-size-40">
+                    <label>First Name</label>
+                    <md-input 
+                    id="first-name" 
+                    v-model="getCurrentUser.firstName" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.getCurrentUser.firstName.required">First name is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.firstName.minLength">Must be at least 3 characters.</span>
+                  </md-field>
+
+                  <md-field
+                  :class="getValidationClass('_MI')"
+                  class="has-esc-accent md-layout-item md-size-10">
+                    <label>MI</label>
+                    <md-input 
+                    id="middle-initial" 
+                    v-model="getCurrentUser._MI" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.getCurrentUser._MI.maxLength">Invalid.</span>
+                  </md-field>
+
+                  <md-field
+                  :class="getValidationClass('lastName')"
+                  class="has-esc-accent md-layout-item md-size-40">
+                    <label>Last Name</label>
+                    <md-input
+                    id="last-name" 
+                    v-model="getCurrentUser.lastName" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.getCurrentUser.lastName.required">Last name is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.lastName.minLength">Must be at least 3 characters.</span>
+                  </md-field>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('email')"
+                  class="has-esc-accent">
+                    <label>Email</label>
+                    <md-input
+                    id="update-email" 
+                    v-model="getCurrentUser.email" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.getCurrentUser.email.required">Email is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.email.email">Invalid email.</span>
+                  </md-field>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('password')"
+                  class="has-esc-accent">
+                    <label>New Password</label>
+                    <md-input
+                    id="update-password" 
+                    v-model="admin_createNewPass.password" 
+                    type="password"
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.admin_createNewPass.password.required">Password is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.admin_createNewPass.password.minLength">Must be at least 8 characters.</span>
+                  </md-field>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('confirmpass')"
+                  class="has-esc-accent">
+                    <label>Confirm New Password</label>
+                    <md-input
+                    id="update-confirmpass" 
+                    v-model="admin_createNewPass.confirmpass"
+                    type="password" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.admin_createNewPass.confirmpass.required">Confirm password is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.admin_createNewPass.confirmpass.sameAsPassword">Password must match.</span>
+                  </md-field>
+                </div>
+
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                  <md-button type="submit" class="__modal-buttons md-esc-accent md-round" :disabled="sending">Update</md-button>
+                </div>
+
+              </div>
+
+            </form>
+
+          </div>
+
+            <md-snackbar md-position="left" :md-active.sync="userUpdated">The account has been updated successfully!</md-snackbar>
+
+            <md-snackbar md-position="left" :md-active.sync="userNotUpdated">The account can not be updated.</md-snackbar>
         </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 
 <script>
- import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 import axios from 'axios'
-
-  import {
-    required,
-    email,
-    minLength,
-    maxLength
-  } from 'vuelidate/lib/validators'
+import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/validators'
 
   export default {
     name: 'FormValidation',
@@ -70,48 +148,71 @@ import axios from 'axios'
          this.$store.dispatch('displayuser');
     },
     data: () => ({
-      form: {
-        firstName: null,
-        lastName: null,
-        gender: null,
-        age: null,
-        email: null,
+      // getCurrentUser: {
+      //   id: null,
+      //   firstName: null,
+      //   _MI: null,
+      //   lastName: null,
+      //   email: null,
+      // },
+      admin_createNewPass: {
         password:null,
         confirmpass:null,
       },
-      userSaved: false,
+      gender: null, //para saan 'to?
+      age: null, //para saan 'to?
+
+      userUpdated: false,
+      userNotUpdated: false,
       sending: false,
       lastUser: null
     }),
     validations: {
-      form: {
+      getCurrentUser: {
         firstName: {
           required,
           minLength: minLength(3)
+        },
+        _MI: {
+          maxLength: maxLength(3)
         },
         lastName: {
           required,
           minLength: minLength(3)
         },
-        age: {
-          required,
-          maxLength: maxLength(3)
-        },
-        gender: {
-          required
-        },
+        // age: {
+        //   required,
+        //   maxLength: maxLength(3)
+        // },
+        // gender: {
+        //   required
+        // },
         email: {
           required,
           email
         }
+      },
+      admin_createNewPass: {
+        password: {
+          required, 
+          minLength: minLength(8)
+        },
+        confirmpass: {
+          required, 
+          sameAsPassword: sameAs('password')
+        }
       }
     },
     computed:{
-...mapGetters({getcurrentUser: 'getCurrentUser'}),
+...mapGetters({getCurrentUser: 'getCurrentUser'}),
     },
     methods: {
+      closeModal: function() {
+      this.$emit("close");
+      },
       getValidationClass (fieldName) {
-        const field = this.$v.form[fieldName]
+        const field = this.$v.getCurrentUser[fieldName] || this.$v.admin_createNewPass[fieldName]
+        //const field_2 = this.$v.admin_createNewPass[fieldName]
 
         if (field) {
           return {
@@ -119,40 +220,46 @@ import axios from 'axios'
           }
         }
       },
-      clearForm () {
+      clearForm() {
         this.$v.$reset()
-        this.form.firstName = null
-        this.form.lastName = null
-        this.form.age = null
-        this.form.gender = null
-        this.form.email = null
+        this.admin_createNewPass.password = null
+        this.admin_createNewPass.confirmpass = null
       },
-      saveUser () {
+      saveUser() {
         this.sending = true
 
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
-          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-          this.userSaved = true
+          this.lastUser = `${this.getCurrentUser.firstName} ${this.getCurrentUser.lastName}`
           this.sending = false
           this.clearForm()
         }, 1500)
       },
-      validateUser () {
+      confirmPassChange() {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
           this.saveUser()
+          this.userUpdated = true
+          console.log("Admin account updated.")
+        }
+        else {
+          this.userNotUpdated = true
+          console.log("Admin account NOT updated.")
         }
       },
 
        UpdateAdmin(){
 
-              axios.put('/api/updateManager/'+this.getcurrentUser.id, {
-              password : this.form.password,
-              confirmpass: this.form.confirmpass,
-              name : this.getcurrentUser.name,
-              email: this.getcurrentUser.email,
+         this.confirmPassChange();
+
+              axios.put('/api/updateManager/'+this.getCurrentUser.id, {
+              password : this.admin_createNewPass.password,
+              confirmpass: this.admin_createNewPass.confirmpass,
+              firstName : this.getCurrentUser.firstName,
+              lastName: this.getCurrentUser.lastName,
+              _MI: this.getCurrentUser._MI,
+              email: this.getCurrentUser.email,
 
                }).then((response)=>{
         
@@ -178,4 +285,46 @@ import axios from 'axios'
     right: 0;
     left: 0;
   }
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.modal-container {
+  margin-top: 4em !important;
+  max-width: 25em !important;
+}
+
+.md-input {
+  width: 0.05rem;
+  max-width: 100%;
+}
+
+.md-error {
+  position: absolute !important;
+  top: 3.07em !important;
+  left: 0 !important;
+  line-height: 0.95em !important;
+  text-align: left;
+  font-size: .777rem !important;
+}
+
+h3, .h3 {
+  font-size: 1.5em !important;
+  line-height: 1em !important;
+  margin-bottom: 0px !important;
+}
+.__modal-buttons {
+  margin-top: 1em;
+}
 </style>

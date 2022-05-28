@@ -11,7 +11,7 @@
             <div class="md-layout md-gutter md-alignment-center-center">
 
                 <div class="__name md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                    <h3 class="title">{{ getcurrentUser.name }}</h3>
+                    <h3 class="title">{{ getCurrentUser.firstName }} {{ getCurrentUser._MI }} {{ getCurrentUser.lastName }}</h3>
                 </div>
 
                 <div class="__desc md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
@@ -44,9 +44,9 @@
                             <admin-manage-account/>
                         </md-tab>
 
-                        <!-- AUDIT TRAIL -->
-                        <md-tab id="tab-audit-trail" md-label="Audit Trail">
-                            <admin-audit-trail/>
+                        <!-- ADD NEW USER -->
+                        <md-tab id="tab-add-new-user" md-label="Add User">
+                            <admin-add-user/>
                         </md-tab>
                         
                     </md-tabs>
@@ -84,7 +84,7 @@ export default {
     NavTabsCard,
     "admin-overview": admOverview,
     "admin-manage-account": AccountMan, //admin Manage Account
-    "admin-audit-trail": admManageAccount //change this to audit trail
+    "admin-add-user": admManageAccount //change this to audit trail
    },
 
    mounted(){
@@ -115,9 +115,16 @@ export default {
       };
     },
 
- ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+ ...mapGetters({getCurrentUser: 'getCurrentUser'}),
 
   },
+
+  methods: {
+    /*update modal function*/
+    updateModalHide() {
+      this.updateModal = false;
+    },
+  }
 
 };
 </script>

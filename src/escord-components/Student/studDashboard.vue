@@ -23,8 +23,8 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getcurrentUser.name}}</h3>
-                  <h5>{{getcurrentUser.student_number}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
+                    <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
+                  <h5>{{getCurrentUser.studentNum}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -49,18 +49,7 @@
             <div class="md-layout-item md-size-66">
               <h2 class="md-display-1">YOUR FILES</h2>
             </div>
-            <!-- <div class="md-layout-item md-size-33 md-layout">
-              <md-button
-              class="md-esc-darkgrey md-dense"
-              @click="updateModal = true">
-                UPDATE ACCOUNT
-              </md-button>
-            </div> -->
           </div>
-          
-           <!-- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
-                    <md-icon>logout</md-icon>logout
-            </md-button> -->
 
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
@@ -88,34 +77,22 @@
         
       </div>
 
-    <div> <stud-scol/> </div>
-      
-     <updateModal v-if="updateModal" @close="updateModalHide"/>
-    
-  
-  <!--<div> <acc-stud/> </div> -->
-  
-   <div>
-      <stud-eval/>   
-  </div>
-
-
-   <!--<div> <acc-management/> </div>--> 
+      <updateModal v-if="updateModal" @close="updateModalHide"/>
+    <!-- <div> <stud-scol/> </div> -->
+   <!--  <div> <stud-eval/> </div> -->
 
 
     </div>
+    
     <vue-headful title="Dashboard | STUDENT"/>
   </div>
 </template>
 
 <script>
-
-
 import { mapActions, mapGetters} from "vuex";
 
-import studScol from './studScholastic.vue'
-import studEval from './studEvaluation.vue'
-
+//import studScol from './studScholastic.vue'
+//import studEval from './studEvaluation.vue'
 
 // modal import
 import updateModal from './AccountStudent.vue'
@@ -124,8 +101,8 @@ import updateModal from './AccountStudent.vue'
 export default {
   bodyClass: "profile-page",
  components: {
-    studScol,
-    studEval,
+    //studScol,
+    //studEval,
      updateModal
   },
   mounted(){
@@ -137,9 +114,9 @@ export default {
       /*modal default value on load*/
       updateModal: false,
 
-      studLN: "DELA CRUZ",
-      studFN: "JUAN",
-      studMN: "GONZALES",
+      // studLN: "DELA CRUZ",
+      // studFN: "JUAN",
+      // studMN: "GONZALES",
       studProg: "Bachelor of Science in Computer Science",
       studYr: "3",
       studSec:"A",
@@ -163,7 +140,7 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
-      ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+      ...mapGetters({getCurrentUser: 'getCurrentUser'}),
 
   },
   methods: {

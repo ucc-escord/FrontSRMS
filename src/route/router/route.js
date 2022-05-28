@@ -112,7 +112,7 @@ const routes = [
     path: "/admin-dashboard",
     name: "Admin Dashboard",
     components: {default: escAdminDash, header: escHeader, footer: escFooter},
-    meta: { requiresAuth: true, authorize: 'superadmin' } ,
+    //meta: { requiresAuth: true, authorize: 'superadmin' } ,
   },
   {
     path: "/staff-dashboard",
@@ -125,7 +125,7 @@ const routes = [
     path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
     components: {default: escStudDash, header: escHeader, footer: escFooter},
-    meta: { requiresAuth: true, authorize: 'student' } ,
+    //meta: { requiresAuth: true, authorize: 'student' } ,
 
   },
  
@@ -220,7 +220,7 @@ const routes = [
         path: "/prof-dashboard/:userid",
         name: "Professor Dashboard",
         components: {default: escProfDash, header: escHeader, footer: escFooter},   
-         meta: { requiresAuth: true, authorize: 'professor' } ,
+         //meta: { requiresAuth: true, authorize: 'professor' } ,
       //uncomment this to have a login validation
       },
 
