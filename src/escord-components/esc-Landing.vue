@@ -37,13 +37,29 @@
 
 <script>
 
+import { mapGetters} from "vuex";
+
 export default {
   bodyClass: "escord-landing-page",
+  
   data() {
     return {
-        
+        showlanding:false,
     };
-  }
+
+    },
+      methods:{
+          aunth(){
+
+      var auth = this.$store.getters.loadingStatus
+          if(auth ===true){
+
+              this.showlanding = true;
+          }
+
+          }
+    }
+
 };
 </script>
 

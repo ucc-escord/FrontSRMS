@@ -3,7 +3,7 @@
     <div class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
-          <div
+          <div v-if="showlogin === false"
             class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
           >
             
@@ -139,8 +139,12 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   bodyClass: "escord-login-page",
+  mounted(){
+    this.auth()
+  },
   data() {
     return {
+      showlogin:false,
         /* form data */
       loginData: {
           userStudNum: null,
@@ -205,6 +209,7 @@ export default {
           }
         }
       },
+      
       loginValidate () {
         this.$v.$touch()
 
@@ -241,7 +246,15 @@ export default {
         this.loginData.userPassword = null;
         console.log(this.showStudNumInput)
       }
-    }
+    },
+        auth(){
+
+      var auth = this.$store.getters.isAuthenticated
+          if(auth === true){
+
+              this.showlogin = true;
+          }
+        }
   }
 };
 </script>

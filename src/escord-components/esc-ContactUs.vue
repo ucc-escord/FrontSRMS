@@ -10,6 +10,7 @@
             <md-card>
                 <md-card-header>
                     <h3 class="title">Leave us a message!</h3>
+                <!--    <p>  {{successnotif}}</p> -->
                     <p class="description">For suggestions or inquiries, please fill out the required fields below.</p>
                 </md-card-header>
                 <md-card-content>
@@ -24,7 +25,7 @@
                             v-model="msgData.senderName"></md-input>
                         </md-field>
 
-                        <md-field
+                   <md-field
                         :class="getValidationClass('senderEmail')"
                         class="md-form-group has-esc-accent">
                             <md-icon>email</md-icon>
@@ -97,10 +98,12 @@ export default {
   data() {
     return {
         /* form data */
+          successnotif:'',
       msgData: {
           senderName: null,
           senderEmail: null,
-          senderMsg: null
+          senderMsg: null,
+        
       },
       sending: false
     };
@@ -160,14 +163,14 @@ export default {
 
     sendingConcern(){
 
-              
+            
            
             axios.post('api/sendemail', this.msgData).then(response => {
 
-                    
+                    this.successnotif = 'Concern Send';
         
 
-              console.log(response)
+         //     console.log(response)
 
             
              }).catch((errors)=>{
