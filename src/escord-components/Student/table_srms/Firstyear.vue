@@ -142,7 +142,7 @@ async tablefirstyear(){
                     this.firstsem = data.first;
                       this.secondsem = data.firstSecondSem;
                 }).catch(({ response })=>{
-                    console.error(response)
+                   // console.error(response)
                 })
            
 },

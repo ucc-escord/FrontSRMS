@@ -149,7 +149,7 @@ async tablefourthyear(){
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                   // console.error(response)
                 })
            
 },

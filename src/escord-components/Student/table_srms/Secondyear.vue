@@ -149,7 +149,7 @@ async tablesecondyear(){
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    //console.error(response)
                 })
            
 },

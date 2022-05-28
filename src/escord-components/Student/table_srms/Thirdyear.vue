@@ -149,7 +149,7 @@ async tablethirdyear(){
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    //console.error(response)
                 })
            
 },
