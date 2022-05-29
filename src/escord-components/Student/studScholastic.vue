@@ -1,184 +1,180 @@
 <template>
+  <md-card class="md-layout-item">
+    
+    <md-card-content>
 
-    <div class="cards md-layout md-alignment-center">
-
-      <md-card class="md-layout-item md-size-50 md-small-size-100 ">
-        <md-card-header class="">
-          <div class="md-title">SCHOLASTIC RECORD</div>
-        </md-card-header>
-
-        <md-card-content>
-
-                <div class="md-layout md-gutter">
-
-                    <!--STUDENT NUMBER-->
-         
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Student Number </label>
-                <md-input type="number" id="age" name="age" autocomplete="age" v-model="getScholRecord.student_number" :disabled="sending" readonly  />
-              
-              </md-field>
-            </div>
-                    <!--COURSE-->
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Course</label>
-                <md-input id="age" name="age" autocomplete="age"  v-model="getScholRecord.course" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-
-                    <!--SECTION-->
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Section</label>
-                <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.section" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-          </div>
-
-                    <!--FIRSTNAME-->
-
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('firstName')">
-                <label for="first-name">First Name</label>
-                <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="getScholRecord.firstname" :disabled="sending" readonly />
-              </md-field>
-            </div>
-                    <!--MIDDLENAME-->
-
-
-               <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">Middle Name</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.middlename" :disabled="sending" readonly  />
-              </md-field>
-            </div>
-
-                    <!--LASTNAME-->
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastName')">
-                <label for="last-name">Last Name</label>
-                <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.surname" :disabled="sending" readonly  />
-              </md-field>
-            </div>
-          </div>
-
-          <div class="md-layout md-gutter">
-
-                    <!--ADDRESS-->
-
-         
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Address</label>
-                <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.address" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-          </div>
-
-            <div class="md-layout md-gutter">
-         
-                    <!--ELEM SCHOOL-->
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Elementary School</label>
-                <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elementary" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-
-                    <!--ELEM YEART GRADSCHOOL-->
-
-             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Elementary Year Graduation</label>
-                <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elemyeargrad" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-          </div>
-
-          <div class="md-layout md-gutter">
-         
-                    <!--HIGH SCHOOL-->
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Highschool</label>
-                <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.highschool" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-
-                    <!--HIGH SCHOOL YEAR GRAD-->
-
-             <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('age')">
-                <label for="age">Highschool Year Graduation</label>
-                <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.hsyeargrad" :disabled="sending" readonly />
-              
-              </md-field>
-            </div>
-          </div>
-        </md-card-content>
- <md-card-actions>
-                        
-                    <!--TABLESSS---->
-                    <!--FIRST YEAR---->
-
-                      <div>
-                        <first/>
-                      </div>
-
-                       </md-card-actions>
-
-  <!--SECOND YEAR---->
-
-  <md-card-actions>
-                       <div>
-                        <second/>
-                      </div>
-<!--THIRD YEAR---->
-
- </md-card-actions>
- <md-card-actions>
-                      <div>
-                        <third/>
-                      </div>
-<!--FOURTH YEAR---->
-    </md-card-actions>
-
-      <md-card-actions>
-                       <div>
-                        <four/>
-                      </div>
-
-
-                </md-card-actions>
-        <md-card-actions>
+      <h3 class="title text-center">Scholastic Record Form</h3>
       
-                    <md-button class=" md-simple md-esc-accent">Download</md-button>
-        </md-card-actions>
-      </md-card>
-  </div>
+      <div class="md-layout md-gutter">
+        <!--STUDENT NUMBER-->
+      
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Student Number </label>
+            <md-input type="number" id="age" name="age" autocomplete="age" v-model="getScholRecord.student_number" :disabled="sending" readonly  />
+          
+          </md-field>
+        </div>
+                <!--COURSE-->
+
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Course</label>
+            <md-input id="age" name="age" autocomplete="age"  v-model="getScholRecord.course" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+
+                <!--SECTION-->
+
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Section</label>
+            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.section" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+      </div>
+
+                <!--FIRSTNAME-->
+
+      <div class="md-layout md-gutter">
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('firstName')">
+            <label for="first-name">First Name</label>
+            <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="getScholRecord.firstname" :disabled="sending" readonly />
+          </md-field>
+        </div>
+                <!--MIDDLENAME-->
+
+
+            <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('lastName')">
+            <label for="last-name">Middle Name</label>
+            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.middlename" :disabled="sending" readonly  />
+          </md-field>
+        </div>
+
+                <!--LASTNAME-->
+
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('lastName')">
+            <label for="last-name">Last Name</label>
+            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.surname" :disabled="sending" readonly  />
+          </md-field>
+        </div>
+      </div>
+
+      <div class="md-layout md-gutter">
+
+                <!--ADDRESS-->
+
+      
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Address</label>
+            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.address" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+      </div>
+
+        <div class="md-layout md-gutter">
+      
+                <!--ELEM SCHOOL-->
+
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Elementary School</label>
+            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elementary" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+
+                <!--ELEM YEART GRADSCHOOL-->
+
+          <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Elementary Year Graduation</label>
+            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elemyeargrad" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+      </div>
+
+      <div class="md-layout md-gutter">
+      
+                <!--HIGH SCHOOL-->
+
+        <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Highschool</label>
+            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.highschool" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+
+                <!--HIGH SCHOOL YEAR GRAD-->
+
+          <div class="md-layout-item md-small-size-100">
+          <md-field :class="getValidationClass('age')">
+            <label for="age">Highschool Year Graduation</label>
+            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.hsyeargrad" :disabled="sending" readonly />
+          
+          </md-field>
+        </div>
+      </div>
+    </md-card-content>
+
+  <!-- <md-card-actions>
+                          
+                      TABLESSS--
+                      FIRST YEAR--
+
+                        <div>
+                          <first/>
+                        </div>
+
+                        </md-card-actions>
+
+    SECOND YEAR--
+
+    <md-card-actions>
+                        <div>
+                          <second/>
+                        </div>
+  THIRD YEAR--
+
+  </md-card-actions>
+  <md-card-actions>
+                        <div>
+                          <third/>
+                        </div>
+  FOURTH YEAR--
+      </md-card-actions>
+
+        <md-card-actions>
+                        <div>
+                          <four/>
+                        </div>
+
+
+                  </md-card-actions>
+          <md-card-actions>
+        
+                      <md-button class=" md-simple md-esc-accent">Download</md-button>
+          </md-card-actions> -->
+
+  </md-card>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
-import first from './table_srms/Firstyear.vue'
-import second from './table_srms/Secondyear.vue'
-import third from './table_srms/Thirdyear.vue'
-import four from './table_srms/Fouryear.vue'
+//import first from './table_srms/Firstyear.vue'
+//import second from './table_srms/Secondyear.vue'
+//import third from './table_srms/Thirdyear.vue'
+//import four from './table_srms/Fouryear.vue'
 
 
 
@@ -196,10 +192,10 @@ import four from './table_srms/Fouryear.vue'
     name: 'ScholasticForm',
     mixins: [validationMixin],
     components:{
-      first,
-      second,
-      third,
-      four
+      //first,
+      //second,
+      //third,
+      //four
   
     },
     mounted(){
@@ -294,5 +290,9 @@ import four from './table_srms/Fouryear.vue'
     top: 0;
     right: 0;
     left: 0;
+  }
+
+  .md-card {
+    max-width: 35em !important;
   }
 </style>
