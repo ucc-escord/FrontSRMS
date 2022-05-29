@@ -63,6 +63,10 @@
                         <md-tab id="tab-srms" md-label="Scholastic Record Management">
                             <tab-srms/>
                         </md-tab>
+
+                         <md-tab id="tab-con" md-label="Concern">
+                            <tab-con/>
+                        </md-tab>
                         <!-- EVALUATION FORM -->
                         <!-- ARCHIVE -->
                         <md-tab id="tab-archive" md-label="ARCHIVE">
@@ -96,6 +100,7 @@ import updateModal from '../Staff/AccountStaff.vue'
 import tabSRMS from '../Staff/tab_scholasticRecord.vue';
 import tabEFMS from '../Staff/tab_evaluationForm.vue';
 import tabArchTable from '../Staff/staffArchieveTable'
+import tabConcern from '../Staff/tab_concern.vue'
 
 export default {
   bodyClass: "profile-page",
@@ -105,6 +110,7 @@ export default {
     NavTabsCard,
     "tab-srms": tabSRMS,
     "tab-arch":tabArchTable,
+    "tab-con": tabConcern,
    },
    mounted(){
    this.$store.dispatch('displayuser');

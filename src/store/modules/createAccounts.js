@@ -5,6 +5,10 @@ const state = {
     student : {},
     professor : {},
     staff: {},
+    duplistud:'',
+    dupliprof:'',
+    duplistaff:'',
+
 
 }
 const getters = {
@@ -17,6 +21,15 @@ const getters = {
     getstaff : state => {
         return state.staff
     },
+    getdupliStud : state =>{
+        return state.duplistud
+    },
+    getdupliProf : state =>{
+        return state.dupliprof
+    },
+    getdupliStaff : state =>{
+        return state. duplistaff
+    }
  
       
 }
@@ -26,6 +39,7 @@ const actions = {
         
 
             // console.log('create professor accounts' , response.data);
+            commit('setDupliProf',response.data)
 
             
              }).catch((errors)=>{
@@ -40,7 +54,7 @@ const actions = {
         
 
             // console.log('create student accounts' , response.data);
-
+            commit('setDupliStud',response.data)
             
              }).catch((errors)=>{
   
@@ -56,6 +70,7 @@ const actions = {
           
             // console.log('create staff accounts' , response.data);
 
+            commit('setDupliStaff',response.data)
             
              }).catch((errors)=>{
   
@@ -151,6 +166,18 @@ const mutations = {
      },
      setStaff(state,data){
         return state.staff = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliStud(state,data){
+        return state.duplistud = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliStaff(state,data){
+        return state.duplistaff = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliProf(state,data){
+        return state.dupliprof = data;
        //  state.isAuthenticated = true;
      },
 

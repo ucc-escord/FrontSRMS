@@ -165,12 +165,12 @@ export default {
 
             
            
-            axios.post('api/sendemail', this.msgData).then(response => {
+            axios.post('api/insertconcern', this.msgData).then(response => {
 
                     this.successnotif = 'Concern Send';
         
-
-         //     console.log(response)
+              
+          
 
             
              }).catch((errors)=>{

@@ -4,8 +4,10 @@
         
         <div class="modal-header">
         <H3 class="title text-esc-accent">Add New Student</H3>
-        </div>
 
+             
+        </div>
+ <H6 class="title ">{{getdupliStud.message}}</H6>
         <div class="modal-body text-center">
             <form novalidate class="md-layout mx-auto" @submit.prevent="validateUser">
         
@@ -100,7 +102,7 @@
 <script>
 //student 
 import { validationMixin } from 'vuelidate'
-import { mapActions} from "vuex";
+import { mapActions, mapGetters} from "vuex";
 
   import {
     required,
@@ -156,6 +158,10 @@ export default {
         }
       }
     },
+    computed:{
+     ...mapGetters({getdupliStud: 'getdupliStud'}),
+
+    },
   methods: {
 
      ...mapActions({createStudent: 'createStudent'}),
@@ -179,7 +185,7 @@ export default {
       },
       saveUser () {
         this.sending = true
-
+        
           this.createStudent(this.form);
 
         // Instead of this timeout, here you can call your API
