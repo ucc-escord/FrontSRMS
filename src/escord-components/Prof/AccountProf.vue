@@ -1,6 +1,4 @@
 <template>
-
-
 <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
@@ -11,333 +9,272 @@
           </div>
 
           <div class="modal-body text-center">
-             <form @submit.prevent="saveUser" novalidate class="md-layout md-gutter md-alignment-center-left">
 
-               <!-- INPUTS -->
-                  <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
+             <form @submit.prevent="UpdateProf" novalidate class="md-layout md-gutter md-alignment-center-left">
 
-                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
-                       <md-field
-                      class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('firstname')">
-                          <label for="std-name">First Name </label>
-                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
-                      </md-field>
+              <!-- INPUTS -->
+              <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
 
-                      <md-field
-                      class="has-esc-accent md-layout-item md-size-10" 
-                      :class="getValidationClass('middleinitial')">
-                          <label for="std-name">MI </label>
-                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.middleinitial" :disabled="sending" />
-                      </md-field>
+                <!-- NAME -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-                      <md-field
-                      class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('lastname')">
-                          <label for="std-name">Last Name  </label>
-                          <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
-                      </md-field>
-                    </div>
+                    <md-field
+                  class="has-esc-accent md-layout-item md-size-40" 
+                  :class="getValidationClass('firstName')">
+                      <label>First Name </label>
+                      <md-input
+                      id="first-name"
+                      v-model="getCurrentUser.firstName" 
+                      :disabled="sending" />
 
-                    <div class="md-layout-item md-size-100 md-layout md-gutter">
-                      <md-field
-                      class="has-esc-accent" 
-                      :class="getValidationClass('faculty_rank')">
-                        <label for="student-number">Faculty Rank</label> 
-                        <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.faculty_rank" :disabled="sending" />
-                      </md-field>
-                    </div>
+                      <span class="md-error" v-if="!$v.getCurrentUser.firstName.required">First name is required.</span>
 
-                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
-                       <md-field
-                       class="has-esc-accent md-layout-item md-size-45" 
-                       :class="getValidationClass('stdPassword')">
-                        <label for="std-password">New Password</label>
-                        <md-input name="std-password" id="std-password" autocomplete="family-name" v-model="profAcc.stdPassword" :disabled="sending" />
+                      <span class="md-error" v-else-if="!$v.getCurrentUser.firstName.minLength">Must be at least 3 characters.</span>
+                  </md-field>
 
-                        <span class="md-error" v-if="!$v.profAcc.stdPassword.required">Password is required.</span>
-                        <span class="md-error" v-if="!$v.profAcc.stdPassword.minLength">Password must be at least 8 characters.</span>
-                      </md-field>
+                  <md-field
+                  :class="getValidationClass('_MI')"
+                  class="has-esc-accent md-layout-item md-size-10">
+                    <label>MI</label>
+                    <md-input 
+                    id="middle-initial" 
+                    v-model="getCurrentUser._MI" 
+                    :disabled="sending"></md-input>
 
-                      <md-field
-                      class="has-esc-accent md-layout-item md-size-45" 
-                      :class="getValidationClass('stdConfirmPass')">
-                        <label for="confirm-pass">Confirm Password</label>
-                        <md-input name="confirm-pass" id="confirm-pass" autocomplete="family-name" v-model="profAcc.stdConfirmPass" :disabled="sending" />
+                    <span class="md-error" v-if="!$v.getCurrentUser._MI.maxLength">Invalid.</span>
+                  </md-field>
 
-                        <span class="md-error" v-if="!$v.profAcc.stdConfirmPass.required">Confirm password is required.</span>
-                        <span class="md-error" v-if="!$v.profAcc.stdConfirmPass.sameAsPassword">Password must match.</span>
-                      </md-field>
-                    </div>
+                  <md-field
+                  :class="getValidationClass('lastName')"
+                  class="has-esc-accent md-layout-item md-size-40">
+                    <label>Last Name</label>
+                    <md-input
+                    id="last-name" 
+                    v-model="getCurrentUser.lastName" 
+                    :disabled="sending"></md-input>
 
-                    <div class="md-layout-item md-size-100 md-layout md-gutter">
-                      <md-field 
-                      class="has-esc-accent"
-                      :class="getValidationClass('email')">
-                        <label for="std-email">Email</label>
-                        <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
-                      </md-field>
-                    </div>
+                    <span class="md-error" v-if="!$v.getCurrentUser.lastName.required">Last name is required.</span>
 
-                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                    <md-button type="submit" class="__modal-buttons md-esc-accent md-round" :disabled="sending">Update Account</md-button>
-                  </div>
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.lastName.minLength">Must be at least 3 characters.</span>
+                  </md-field>
+                </div>
+
+                <!-- RANK -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+                  <md-field
+                  class="has-esc-accent" 
+                  :class="getValidationClass('facultyRank')">
+                    <label>Faculty Rank</label> 
+                    <md-input 
+                    id="faculty-rank"  
+                    v-model="getCurrentUser.facultyRank" 
+                    :disabled="sending" />
+
+                    <span class="md-error" v-if="!$v.getCurrentUser.facultyRank.required">Rank is required.</span>
+                  </md-field>
+                </div>
+                
+                <!-- EMAIL -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('email')"
+                  class="has-esc-accent">
+                    <label>Email</label>
+                    <md-input
+                    id="update-email" 
+                    v-model="getCurrentUser.email" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.getCurrentUser.email.required">Email is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.email.email">Invalid email.</span>
+                  </md-field>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('password')"
+                  class="has-esc-accent">
+                    <label>New Password</label>
+                    <md-input
+                    id="update-password" 
+                    v-model="prof_createNewPass.password" 
+                    type="password"
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.prof_createNewPass.password.required">Password is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.password.minLength">Must be at least 8 characters.</span>
+                  </md-field>
+                </div>
+
+                <!-- CONFIRM PASSWORD -->
+                <div class="md-layout-item md-size-100 md-layout md-gutter">
+
+                  <md-field
+                  :class="getValidationClass('confirmpass')"
+                  class="has-esc-accent">
+                    <label>Confirm New Password</label>
+                    <md-input
+                    id="update-confirmpass" 
+                    v-model="prof_createNewPass.confirmpass"
+                    type="password" 
+                    :disabled="sending"></md-input>
+
+                    <span class="md-error" v-if="!$v.prof_createNewPass.confirmpass.required">Confirm password is required.</span>
+
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.confirmpass.sameAsPassword">Password must match.</span>
+                  </md-field>
+                </div>
+
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                  <md-button type="submit" class="__modal-buttons md-esc-accent md-round" :disabled="sending">Update</md-button>
+                </div>
                     
-                  </div>
-             </form>
-          </div>
+              </div>
+          </form>
 
-          
-        </div>
+           <md-snackbar md-position="left" :md-active.sync="userUpdated">The account has been updated successfully!</md-snackbar>
+
+           <md-snackbar md-position="left" :md-active.sync="userNotUpdated">The account can not be updated.</md-snackbar>
       </div>
-     <md-snackbar :md-active.sync="userSaved">The account {{ lastUser }} was saved with success!</md-snackbar> 
+    </div>
+  </div>
     </div>
   </transition>
-
-  
-<!--<div>
- <form   @submit.prevent="UpdateProf">
-        <md-card-content>
-            <div class="md-layout md-gutter">
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('stdNum')">
-                <label for="student-number">Faculty Rank</label> -this is not edited
-                <md-input name="student-number" id="student-number"  autocomplete="given-name" v-model="getcurrentUser.faculty_rank" :disabled="sending" />
-           
-             -    <span class="md-error" v-else-if="!$v.profAcc.stdNum.minlength">Invalid first name</span>
-
-              </md-field>
-            </div>
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('firstname')">
-                <label for="std-name">Firstname </label>
-                <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.firstname" :disabled="sending" />
-         
-
-               <span class="md-error" v-if="!$v.getcurrentUser.firstname.required">Invalid first name</span>
-
-             </md-field>
-            </div>
-
-              <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('middleinitial')">
-                <label for="std-name">Middle Initial </label>
-                <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.middleinitial" :disabled="sending" />
-
-                        <span class="md-error" v-if="!$v.getcurrentUser.middleinitial.required">Invalid middleinitial</span>
-
-           </md-field>
-           
-            </div>
-
-               <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('lastname')">
-                <label for="std-name">Lastname  </label>
-                <md-input name="std-name" id="std-name"  autocomplete="family-name" v-model="getcurrentUser.lastname" :disabled="sending" />
-         
-
-                    <span class="md-error" v-if="!$v.getcurrentUser.lastname.required">Invalid lastname</span>
-             </md-field>
-
-            </div>
-
-
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('stdPassword')">
-                <label for="std-password">New Password</label>
-                <md-input name="std-password" id="std-password" autocomplete="family-name" v-model="profAcc.stdPassword" :disabled="sending" />
-                <span class="md-error" v-if="!$v.profAcc.stdPassword.required">This field is required</span>
-                <span class="md-error" v-else-if="!$v.profAcc.stdPassword.minlength">This password is invalid</span>
-              </md-field>
-            </div>
-            <div class="md-layout-item md-small-size-100">
-              <md-field :class="getValidationClass('stdConfirmPass')">
-                <label for="confirm-pass">Confirm Password</label>
-                <md-input name="confirm-pass" id="confirm-pass" autocomplete="family-name" v-model="profAcc.stdConfirmPass" :disabled="sending" />
-                <span class="md-error" v-if="!$v.profAcc.stdConfirmPass.required">The field is required</span>
-                <span class="md-error" v-else-if="!$v.profAcc.stdConfirmPass.minlength">Check length and Same as Password</span>
-              </md-field>
-            </div>
-          </div>
-
-          <md-field :class="getValidationClass('email')">
-            <label for="std-email">Email</label>
-            <md-input type="email" name="std-email" id="std-email" autocomplete="email" v-model="getcurrentUser.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.getcurrentUser.email.required">The email is required</span>
-            <span class="md-error" v-else-if="!$v.getcurrentUser.email.email ">Invalid email</span>
-
-          </md-field>
-        </md-card-content>
-
-                <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Update Student Account</md-button>
-        </md-card-actions>
-      
-      
-
-
-     <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar> 
-
-        </form>
-        </div>-->
 </template>
 
 
 <script>
- import { validationMixin } from 'vuelidate'
-
- import axios from "axios"
+import { validationMixin } from 'vuelidate'
+import axios from "axios"
 import { mapActions, mapGetters} from "vuex";
+import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/validators'
 
-  import {
-    required,
-    email,
-    minLength,
-    maxLength,
-    sameAs
-  } from 'vuelidate/lib/validators'
+export default {
+  name: 'FormValidation',
+  mixins: [validationMixin],
 
-  export default {
-    name: 'FormValidation',
-    mixins: [validationMixin],
-
-         mounted(){
-   //this.$store.dispatch('displayuser');
-
-   
+  mounted(){
+   this.$store.dispatch('displayuser');
     },
 
-    data: () => ({
-    
+  data: () => ({
+    prof_createNewPass: {
+        password:null,
+        confirmpass:null,
+      },
+    userUpdated: false,
+    userNotUpdated: false,
+    sending: false,
+    lastUser: null
+  }),
 
-      profAcc: {
-     
-        stdPassword:null,
-        stdConfirmPass:null,
-    
-      },
-      userSaved: false,
-      sending: false,
-      lastUser: null
-    }),
-    validations: {
-  
-
-      getcurrentUser:{
-    faculty_rank:{
+  validations: {
+    getCurrentUser: {
+          firstName: {
+            required,
+            minLength: minLength(3)
+          },
+          _MI: {
+            maxLength: maxLength(3)
+          },
+          lastName: {
+            required,
+            minLength: minLength(3)
+          },
+          facultyRank: {
+            required
+          },
+          email: {
           required,
-      },
-      firstname:{
-          required,
-      },
-      middleinitial:{
-          required,
-        
-      },
-
-       lastname:{
-          required,
-        
-      },
-       email:{
-          required,
-        email
-      },
+          email
+        }
       },
 
-        profAcc: {
-        stdPassword:{
-          required,
-               minLength: minLength(8)
+      prof_createNewPass: {
+        password: {
+          required, 
+          minLength: minLength(8)
         },
-        stdConfirmPass:{
-          required,
-
-               minLength: minLength(8),
-                sameAs: sameAs(function () { return this.profAcc.stdPassword })
-
-        },
+        confirmpass: {
+          required, 
+          sameAsPassword: sameAs('password')
+        }
       }
-    },
-      computed:{
- ...mapGetters({getcurrentUser: 'getCurrentUser'}),
-  
-    },
+  },
+  computed:{
+...mapGetters({getCurrentUser: 'getCurrentUser'}),
 
-    methods: {
-      getValidationClass (fieldName) {
-        const field = this.$v.getcurrentUser[fieldName]
-        const field2 = this.$v.profAcc[fieldName]
+},
 
+methods: {
+  getValidationClass (fieldName) {
+    const field = this.$v.getCurrentUser[fieldName] || this.$v.prof_createNewPass[fieldName]
 
-        if (field) {
-          return {
-            'md-invalid': field.$invalid && field.$dirty
-          }
-        }
-         if (field2) {
-          return {
-            'md-invalid': field2.$invalid && field2.$dirty
-          }
-        }
-      },
-      clearForm () {
-        this.$v.$reset()
-         this.profAcc.stdPassword = null
-        this.profAcc.stdConfirmPass = null
-      },
-      saveUser () {
-        this.sending = true
-        this.UpdateProf(); //FUNCTION OF UPDATE PROF
-        // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
-          this.lastUser = `${this.getcurrentUser.firstname} ${this.getcurrentUser.lastname} ${this.getcurrentUser.email}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
-      },
-      validateUser () {
-        this.$v.$touch()
-
-       if (!this.$v.$invalid) {
-          this.saveUser()
-       //   console.log("okay");
-        }
-        else {
-         //   console.log("no");
-        }
-      },
-      UpdateProf(){
-
-       // this.validateUser();
-
-              axios.put('/api/updateProf/'+this.getcurrentUser.id, {
-              password : this.profAcc.stdPassword,
-              confirmpass: this.profAcc.stdConfirmPass,
-              faculty_rank : this.getcurrentUser.faculty_rank,
-              firstname : this.getcurrentUser.firstname,
-              lastname : this.getcurrentUser.lastname,
-              middleinitial: this.getcurrentUser.middleinitial,
-              email: this.getcurrentUser.email,
-
-               }).then((response)=>{
-        
-
-           //   console.log('update prof accounts' , response.data);
-
-            
-             }).catch((errors)=>{
-  
-             this.error =  errors.response.data;
-   
-             })
-      },
-
-      closeModal: function() {
-      this.$emit("close");
+    if (field) {
+      return {
+        'md-invalid': field.$invalid && field.$dirty
+      }
+    }
+    
+  },
+  clearForm () {
+    this.$v.$reset()
+    this.prof_createNewPass.password = null
+    this.prof_createNewPass.confirmpass = null
+  },
+  saveUser () {
+    this.sending = true
+    
+    // Instead of this timeout, here you can call your API
+    window.setTimeout(() => {
+      this.lastUser = `${this.getCurrentUser.firstName} ${this.getCurrentUser.lastName} ${this.getCurrentUser.email}`
+      this.sending = false
       this.clearForm()
+    }, 1500)
+  },
+  confirmPassChange () {
+    this.$v.$touch()
+
+    if (!this.$v.$invalid) {
+      this.saveUser()
+      this.userUpdated = true;
+      console.log("Prof account updated.")
+      }
+    else {
+      this.userNotUpdated = true;
+      console.log("Prof account NOT updated.")
+    }
+  },
+  UpdateProf(){
+
+     this.confirmPassChange();
+
+          axios.put('/api/updateProf/'+this.getCurrentUser.id, {
+          password : this.prof_createNewPass.password,
+          confirmpass: this.prof_createNewPass.confirmpass,
+          firstName : this.getCurrentUser.firstName,
+          lastName: this.getCurrentUser.lastName,
+          _MI: this.getCurrentUser._MI,
+          email: this.getCurrentUser.email,
+            }).then((response)=>{
+    
+        console.log('update prof accounts' , response.data);
+
+          }).catch((errors)=>{
+
+          this.error =  errors.response.data;
+
+          })
+
+  },
+
+  closeModal: function() {
+  this.$emit("close");
     }
     }
   }
@@ -367,6 +304,7 @@ import { mapActions, mapGetters} from "vuex";
 
 .modal-container {
   margin-top: 4em !important;
+  max-width: 25em !important;
 }
 
 .md-input {
@@ -379,7 +317,7 @@ import { mapActions, mapGetters} from "vuex";
   top: 3.07em !important;
   left: 0 !important;
   line-height: 0.95em !important;
-  text-align: justify;
+  text-align: left;
   font-size: .777rem !important;
 }
 

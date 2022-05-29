@@ -24,7 +24,7 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getcurrentUser.lastname}}, {{getcurrentUser.firstname}} </h3>
+                   <h3 class="title">{{getCurrentUser.firstname}} {{getCurrentUser.middlename}} {{getCurrentUser.lastname}}</h3>
                     <h5>MIS Staff</h5>
                   </div>
 
@@ -140,7 +140,7 @@ export default {
       };
     },
 
- ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+ ...mapGetters({getCurrentUser: 'getCurrentUser'}),
 
 
   },

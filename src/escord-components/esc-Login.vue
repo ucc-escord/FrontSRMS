@@ -6,6 +6,7 @@
           <div v-if="showlogin === false"
             class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
           >
+          <div class="mx-auto">
             
             <md-card>
                 <md-card-content>
@@ -101,12 +102,13 @@
 
                         <div class="__card-buttons md-layout md-gutter md-alignment-center-space-between">
                             <md-button
-                            class="md-layout-item md-size-45 md-simple md-dense md-round md-info">
-                                Reset Password
+                            @click="sendResetPassCodeShow"
+                            class="md-layout-item md-size-50 md-simple md-dense md-round md-danger">
+                                Forgot Password
                             </md-button>
 
                             <md-button
-                            class="md-layout-item md-size-45 md-dense md-round md-esc-accent"
+                            class="md-layout-item md-size-40 md-dense md-round md-esc-accent md-wd"
                             type="submit"
                             :disabled="sending">
                                 Login
@@ -124,11 +126,14 @@
         </div>
       </div>
     </div>
+    <send-reset-code v-if="sendResetPassCode" @close="sendResetPassCodeHide"/>
     <vue-headful title="Login | ESCORD"/>
+  </div>
   </div>
 </template>
 
 <script>
+import sendResetPassCode from './ForgotPassword/modal_sendCode.vue';
 
 //validation imports
 import { validationMixin } from 'vuelidate'
@@ -142,9 +147,14 @@ export default {
   mounted(){
     this.auth()
   },
+
+  components: {
+    "send-reset-code": sendResetPassCode
+  },
   data() {
     return {
-      showlogin:false,
+         showlogin:false,
+      sendResetPassCode: false,
         /* form data */
       loginData: {
           userStudNum: null,
@@ -196,6 +206,16 @@ export default {
   },
 
   methods: {
+
+    sendResetPassCodeShow() {
+      this.sendResetPassCode = true;
+    },
+
+    sendResetPassCodeHide() {
+      this.sendResetPassCode = false;
+    },
+
+
     /* validation methods */
        ...mapActions({ loginUser: "loginUser" }),
        ...mapActions({ AnotherUser: "AnotherUser" }),
@@ -211,7 +231,7 @@ export default {
       },
       
       loginValidate () {
-        this.$v.$touch()
+       this.$v.$touch()
 
      
 
@@ -262,7 +282,9 @@ export default {
 <style lang="scss" scoped>
 
 h3.title {
-    margin-bottom: 2rem !important;
+    font-size: 1.85em !important;
+    line-height: 1em !important;
+    margin: .5rem 0 !important;
 }
 
 .__card-buttons, .__register-btn {

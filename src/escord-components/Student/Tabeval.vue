@@ -85,7 +85,7 @@ name:'tabeval',
 
 
    async peridofEvalStud(){ 
-           await axios.get('/api/evalPerevalID/'+this.$route.params.evalid).then(({data})=>{
+           await axios.get('/api/evalPerevalID/LTJqmMEukaxAGEB4WjSn7KeD6khzHvq3CYwC57k2').then(({data})=>{
                     this.studentList = data
                 }).catch(({ response })=>{
                    //   console.error(response)

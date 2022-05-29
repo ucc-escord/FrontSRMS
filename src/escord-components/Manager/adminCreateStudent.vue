@@ -205,7 +205,7 @@ export default {
   transform: scale(1.1);
 }
 .modal-container {
-  margin-top: 4em !important;
+  margin-top: 0 !important;
 }
 .buttons
 {

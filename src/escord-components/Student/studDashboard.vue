@@ -23,8 +23,8 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getcurrentUser.name}}</h3>
-                  <h5>{{getcurrentUser.student_number}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
+                    <h3 class="title"> {{getCurrentUser.name}}</h3>
+                  <h5>{{getScholRecord.student_number}}  {{getScholRecord.course}} | {{getScholRecord.section}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -49,36 +49,22 @@
             <div class="md-layout-item md-size-66">
               <h2 class="md-display-1">YOUR FILES</h2>
             </div>
-            <!-- <div class="md-layout-item md-size-33 md-layout">
-              <md-button
-              class="md-esc-darkgrey md-dense"
-              @click="updateModal = true">
-                UPDATE ACCOUNT
-              </md-button>
-            </div> -->
           </div>
-          
-           <!-- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="loggingout">
-                    <md-icon>logout</md-icon>logout
-            </md-button> -->
 
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
               
-              <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100">
-                  <router-link :to="{ name: 'Scholastic RecordStudent' }">
-                 
+              <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100" @click="showSR_prev">
                   <md-card class="md-with-hover">
                       <md-card-content>
                         <p class="md-title title text-center">Scholastic Record</p>
                         <p class="text-center">Click to view your scholastic record form</p>
                       </md-card-content>
                   </md-card>
-                     </router-link>
+                   
                 </div>
                 
-                <div class="md-layout-item md-medium-size-50   md-small-size-75 md-xsmall-size-100">
-                  <router-link :to="{ name: 'EscTableEval', params:{srms_id: srms_id} }">
+                <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100"  @click="showEF_prev">
                   <md-card  class="md-with-hover">
                      
                       <md-card-content>
@@ -88,36 +74,48 @@
                        
 
                   </md-card>
-                     </router-link>
+                
                 </div>
+
+                <!-- PREVIEW -->
+                <div v-if="showSR" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                 
+                  <stud-scol/>
+                  
+                </div>
+
+                <div v-else-if="showEF" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                  <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                    <md-button @click="printEF">Download</md-button>
+                  </div>
+                  <stud-eval/>
+
+                  <vue-to-pdf
+                  :manual-pagination = "true"
+                  :enable-download= "true"
+                  ref = "downloadEF_content">
+                    <section slot="pdf-content">
+                      <stud-eval/>
+                    </section>
+                  </vue-to-pdf>
+                </div>
+
             </div>
           </div>
         </div>
         
       </div>
-
-    
       
-     <updateModal v-if="updateModal" @close="updateModalHide"/>
+
+      <updateModal v-if="updateModal" @close="updateModalHide"/>
     
-  
-  <!--<div> <acc-stud/> </div> -->
-  
-   
-  
-
-
-   <!--<div> <acc-management/> </div>--> 
-
-
     </div>
+    
     <vue-headful title="Dashboard | STUDENT"/>
   </div>
 </template>
 
 <script>
-
-
 import { mapActions, mapGetters} from "vuex";
 
 import studScol from './studScholastic.vue'
@@ -125,19 +123,29 @@ import studEval from './studEvaluation.vue'
 import studTableEval from './studEvalTable.vue'
 
 
-
 // modal import
 import updateModal from './AccountStudent.vue'
 import axios from 'axios'
 import router from '../../route'
 
+//import vuehtml2pdf
+import VueHtml2pdf from 'vue-html2pdf'
+
+
 export default {
   bodyClass: "profile-page",
  components: {
      updateModal,
+    studScol,
+    studEval,
+    updateModal,
+
+    "vue-to-pdf": VueHtml2pdf
   },
   mounted(){
   this.$store.dispatch('displayuser');
+            this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
+
   this.getsrms_id()
   },
   data() {
@@ -145,12 +153,20 @@ export default {
       /*modal default value on load*/
       updateModal: false,
       srms_id:'',
-      studLN: "DELA CRUZ",
+     /*  studLN: "DELA CRUZ",
       studFN: "JUAN",
-      studMN: "GONZALES",
+      studMN: "GONZALES", */
+
+      // studLN: "DELA CRUZ",
+      // studFN: "JUAN",
+      // studMN: "GONZALES",
       studProg: "Bachelor of Science in Computer Science",
       studYr: "3",
       studSec:"A",
+
+      //showForm
+      showSR: false,
+      showEF: false
     
     };
   },
@@ -171,19 +187,23 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
-      ...mapGetters({getcurrentUser: 'getCurrentUser'}),
+      ...mapGetters({getCurrentUser: 'getCurrentUser'}),
+  ...mapGetters({getScholRecord: 'getScholRecord'}),
 
   },
   methods: {
-
-    clickEvalCard(){
-        var srms = this.srms_id
-       
-    
+    /* show SR */
+    showSR_prev () {
+      this.showSR = !this.showSR;
+      this.showEF = false;
     },
-    clickSRMSCard(){
 
+    /* show EF */
+    showEF_prev () {
+      this.showEF = !this.showEF;
+      this.showSR = false;
     },
+
      /*modal function*/
     updateModalHide() {
       this.updateModal = false;
@@ -199,6 +219,11 @@ export default {
            
 },
     
+
+    /* DOWNLOAD EF */
+    printEF() {
+      this.$refs.downloadEF_content.generatePdf()
+    },
   }
 };
 </script>

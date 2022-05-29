@@ -482,7 +482,6 @@ import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import {Pagination} from '@/components'
 
-
 export default {
   bodyClass: "profile-page",
    components: {
