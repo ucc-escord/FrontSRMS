@@ -63,6 +63,32 @@
                   </md-card>
                    
                 </div>
+
+                <!-- PREVIEW -->
+                <div v-if="showSR" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                  
+                  <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                    <md-button @click="printSR" class="md-raised md-esc-darkgrey md-round md-dense">Download</md-button>
+                  </div>
+
+                  <stud-scol/>
+
+                  <vue-to-pdf
+                  filename = "ScholasticRecord"
+                  pdf-format="letter"
+                  :preview-modal = "true"
+                  :manual-pagination = "true"
+                  :pdf-quality = "2"
+                  :enable-download= "true"
+                  ref = "downloadSR_content">
+                    <section slot="pdf-content">
+                      <div class="md-layout md-alignment-center-center">
+                        <stud-scol class="md-layout-item md-size-85"/>  
+                      </div> 
+                    </section>
+                  </vue-to-pdf>
+                  
+                </div>
                 
                 <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100"  @click="showEF_prev">
                   <md-card  class="md-with-hover">
@@ -78,24 +104,24 @@
                 </div>
 
                 <!-- PREVIEW -->
-                <div v-if="showSR" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                 
-                  <stud-scol/>
-                  
-                </div>
-
-                <div v-else-if="showEF" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <div v-if="showEF" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                    <md-button @click="printEF">Download</md-button>
+                    <md-button @click="printEF" class="md-raised md-esc-darkgrey md-round md-dense">Download</md-button>
                   </div>
                   <stud-eval/>
 
                   <vue-to-pdf
+                  filename = "SummaryOfGrades"
+                  pdf-format="a4"
+                  :preview-modal = "true"
+                  :pdf-quality = "2"
                   :manual-pagination = "true"
                   :enable-download= "true"
                   ref = "downloadEF_content">
                     <section slot="pdf-content">
-                      <stud-eval/>
+                      <div class="md-layout md-alignment-center-center">
+                        <stud-eval class="md-layout-item md-size-85"/>  
+                      </div> 
                     </section>
                   </vue-to-pdf>
                 </div>
@@ -223,6 +249,11 @@ export default {
     /* DOWNLOAD EF */
     printEF() {
       this.$refs.downloadEF_content.generatePdf()
+    },
+
+    /* DOWNLOAD SR  */
+    printSR() {
+      this.$refs.downloadSR_content.generatePdf()
     },
   }
 };
