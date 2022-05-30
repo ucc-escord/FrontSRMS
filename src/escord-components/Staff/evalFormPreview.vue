@@ -194,7 +194,7 @@
 
                 <md-divider></md-divider>
 
-                <div class="_wrapDiv mx-auto md-layout md-gutter md-alignment-center-center">
+                <div class="_wrapDiv _tbl mx-auto md-layout md-gutter md-alignment-center-center">
                     <eval-form class="md-layout-item md-size-100"/>
                 </div>
 
@@ -219,8 +219,8 @@ import axios from "axios"
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import  EvalFormtab from './tab_evaluationForm'
-import { required, minLength, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
+import  EvalFormtab from './evalFormTable.vue'
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
@@ -438,5 +438,9 @@ h3, .h3 {
 
 ._frmBtn {
     margin-bottom: 0.75em !important;
+}
+
+._tbl {
+    margin-top: 0.75em !important;
 }
 </style>

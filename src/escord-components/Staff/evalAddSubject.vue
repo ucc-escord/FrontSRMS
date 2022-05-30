@@ -172,7 +172,7 @@ export default {
     requestResetPassword() {
             
             this.$v.$touch()
-            if (!this.$v.$invalid) {
+            if (!this.$v.$$eachinvalid) {
               //disable the "send code to email" form above
               this.sending = true 
             }
