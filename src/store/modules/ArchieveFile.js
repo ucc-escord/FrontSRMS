@@ -9,6 +9,7 @@ const state = {
     eval: {},
     schol: {},
     gradesh: {},
+    loadingEval: false,
  
 
 }
@@ -25,6 +26,9 @@ const getters = {
     getarch_gradesh: state => {
       return state.gradesh
     },
+    getloadingEval: state => {
+        return state.loadingEval
+    }
       
 }
 const actions = {
@@ -113,6 +117,22 @@ const actions = {
     
      },
 
+     addStudEvaluation({commit},addEvalStud){
+
+        commit('setLoading',true)
+     
+        return  axios.post('api/evalCreate/', addEvalStud).then((response)=>{
+          //   this.currentUser = response.data
+          commit('setLoading',false)
+          console.log('adding successful' , response.data);
+            
+  
+         }).catch(()=>{
+          //   console.log("Error in getting the user")
+         })  
+     
+       },
+
     
     
     
@@ -136,6 +156,9 @@ const mutations = {
         return state.gradesh = data;
        //  state.isAuthenticated = true;
      },
+     setLoading(state,data){
+        return state.loadingEval = data;
+      }
 
 }
 

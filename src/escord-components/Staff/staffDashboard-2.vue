@@ -69,7 +69,7 @@
                         </md-tab>
                         <!-- EVALUATION FORM -->
                         <!-- ARCHIVE -->
-                        <md-tab id="tab-archive" md-label="ARCHIVE">
+                        <md-tab id="tab-archive" md-label="Archieve Scholastic Record">
                             <tab-arch/>
                         </md-tab>
                         

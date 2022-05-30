@@ -4,28 +4,7 @@
     
         <div>
 
-
-
-
-     <div class = "md-layout escord md-gutter md-alignment-center-center">
-         <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
-
-  <md-button class="md-esc-accent" @click="showscholtable">Archieve Scholastic</md-button>
-
-   </div>
-         <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
-  <md-button class="md-esc-accent" @click="showevaltable">Archieve Evaluation</md-button>
-      </div>
-  </div>
-
-<!---gradesheet-->
-  
-
-  <!---gradesheet-->
-
-
-<!---scholastic-->
-  <div  v-if="defaultvalbutton ==='schol'">
+  <div  >
   
      <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
 
@@ -61,6 +40,7 @@
     
    <!-- <h1 class="md-title text-center">Scholastic</h1> -->
        <md-table-row class="title">
+                 <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Scholastic ID</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Fullname</md-table-head>
@@ -71,7 +51,16 @@
       <md-table-row   v-for="(_, index) in getarchschol.data"
               :key="index">
 
-            
+               <md-table-cell class="text-center">
+                  <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button @click="unArchieveGS(getarchschol.data[index].srms_id)" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                        <md-icon class="md-size-4x">inventory</md-icon>
+                          <md-tooltip md-direction="bottom">Unarchive SRMS</md-tooltip>
+                    </md-button>
+                </div>
+                
+                </md-table-cell>
+
 
                   <md-table-cell class="text-center">
                       {{getarchschol.data[index].srms_id}}
@@ -103,7 +92,7 @@
 
 
    <!---evaluation-->
-   <div v-else>
+   <div v-if="defaultvalbutton ==='scholsss'">
     <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
 
                
@@ -274,8 +263,8 @@ headerStyle() {
 
        
 
-     scholshowarchieve(page=1) {
-        axios.get('/api/archieveschol?page='+page+'&search='+this.search).then(({data})=>{
+    async scholshowarchieve(page=1) {
+       await axios.get('/api/archieveschol/?page='+page+'&search='+this.search).then(({data})=>{
         
             this.getarchschol = data
      
@@ -286,6 +275,22 @@ headerStyle() {
      
              })
      },
+
+      unArchieveGS(index){
+
+       
+ axios.put('/api/unarchieveSchol/'+index).then(response => {
+        //   this.currentUser = response.data
+   
+   //   console.log("Archieve Succesfully")
+        //    console.log(response.data[0]);
+
+       }).catch(()=>{
+         //    console.log("Error in getting the user")
+       }) 
+    
+
+    },
 
 
 

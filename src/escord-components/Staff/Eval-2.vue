@@ -219,7 +219,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="Gradesheet Detail"/>
+    <vue-headful title="Evaluation Form Detail"/>
   </div>
 </template>
 

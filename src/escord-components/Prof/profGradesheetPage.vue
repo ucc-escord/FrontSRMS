@@ -46,14 +46,14 @@
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+             <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button @click="sendArrayofData"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>save</md-icon>
                         <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
                     </md-button>
                 </div>
-
+ -->
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="archievebtn"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
@@ -441,7 +441,7 @@ export default {
 
  // ...mapMutations(['setspeciGS']),
     sendArrayofData(index){
-
+        //UPDATE 
         //  console.log(index);
 
    // this.updateGradesheetData({route:index.id}, this.index);

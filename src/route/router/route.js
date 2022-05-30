@@ -55,19 +55,28 @@ const escStaff_SRTab   = () => import("../../escord-components/Staff/ScholasticR
 const escStaff_ArchTable   = () => import("../../escord-components/Staff/staffArchieveTable")
 
 const escAdminDash2  = () => import('../../escord-components/Manager/adminDashboard-2.vue')
-
-/* ADMIN TABS */
-
-/* import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
-import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
-import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue'; */
 const escEval  = () => import('../../escord-components/Staff/Eval-2.vue')
 const escEvalstud =  () => import('../../escord-components/Student/studEval-2.vue')
 const escTableEval = () =>  import('../../escord-components/Student/studEvalTable.vue')
 const escScholasticStud = () =>  import('../../escord-components/Student/studScholastic.vue')
 
 
+/* EVAL FORM PREVIEW */
+import evalprev from '../../escord-components/Staff/Eval-2.vue';
+import evalprev1 from '../../escord-components/Staff/evalFormPreview.vue';
+
 const routes = [
+  {
+    path: "/prev",
+    name: "EvalPrev",
+    component: evalprev
+  },
+
+  {
+    path: "/prev1/:studnum",
+    name: "EvalPrev1",
+    component: evalprev1
+  },
 
   /*---| ESCORD ROUTES |----*/
 

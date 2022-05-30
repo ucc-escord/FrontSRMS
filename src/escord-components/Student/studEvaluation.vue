@@ -98,7 +98,7 @@
         <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-top-space-between">
           <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
             <p class="md-body-2 md-layout-item md-size-50">
-              MIDDLE NAME:
+              MIDDLE INITIAL:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
               {{getScholRecord.middlename}}
@@ -154,22 +154,22 @@
           
           <md-table-cell 
           class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-            {{grade.subjCode}}
+            {{grade.subjectcode}}
           </md-table-cell>
 
           <md-table-cell 
           class="md-body-1 md-layout-item md-size-30 md-layout md-gutter md-alignment-center-left">
-            {{grade.subjDesc}}
+            {{grade.subjectdesc}}
           </md-table-cell>
 
           <md-table-cell 
           class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-            {{grade.subjUnit}}
+            {{grade.units}}
           </md-table-cell>
 
           <md-table-cell 
           class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-            {{grade.subjFG}}
+            {{grade.grade}}
           </md-table-cell>
 
           <md-table-cell 
@@ -227,7 +227,7 @@
         </div>
         <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
           <p class="md-layout-item md-size-100 text-center md-body-2 _sign">
-            <u>TRIZHALYN L. MAGLANGIT</u>
+            <u>  {{getScholRecord.firstname}}   {{getScholRecord.middlename}}   {{getScholRecord.surname}}</u>
           </p>
           <p class="md-layout-item md-size-100 text-center caption">
             Student's Signature
@@ -242,6 +242,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 
@@ -253,31 +254,13 @@ export default {
     },
     mounted(){
           //  this.$store.dispatch('displayuser');
-
+            this.showEvalRow();
             this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
     },
     data () {
       return {
         /* TEST DISPLAY --> GRADES */
         grades: [
-          {
-            subjCode: "CCS 123",
-            subjDesc: "SUBJECT 1: MORE SUBJECT NAME",
-            subjUnit: 3,
-            subjFG: 3,
-          },
-          {
-            subjCode: "CCS 121",
-            subjDesc: "SUBJECT 2",
-            subjUnit: 3,
-            subjFG: 1.54,
-          },
-          {
-            subjCode: "CCS 113",
-            subjDesc: "SUBJECT 3",
-            subjUnit: 5,
-            subjFG: 1.20,
-          }
         ],
         semester: "1st Semester",
         schoolyr: "2021-2022"
@@ -288,11 +271,11 @@ export default {
 
   totalUnits() {
     return this.grades.reduce((sum, grade) => 
-    sum + grade.subjUnit, 0);
+    sum + grade.units, 0);
   },
   total() {
     return this.grades.reduce((acc, item) =>
-    acc + (item.subjUnit * item.subjFG), 0);
+    acc + (item.units * item.grade), 0);
   },
   gwa() {
     return (this.total/ this.totalUnits).toFixed(2);
@@ -301,8 +284,20 @@ export default {
 
   methods: {
     FGxUnitsResult(grade) {
-      return grade.subjUnit * grade.subjFG
-    }
+      return grade.units * grade.grade
+    },
+     async  showEvalRow(){
+           
+ await axios.get('/api/evalTableStudent/'+this.$route.params.student_number).then(({data})=>{
+        this.grades = data
+
+   console.log(this.grades)
+ 
+       }).catch(()=>{
+         //  console.log("Error in getting the user")
+       }) 
+            
+    },
   }
   }
 </script>
