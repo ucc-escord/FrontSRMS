@@ -21,7 +21,7 @@
                         <!-- -this is not edited -->
                         <md-input readonly 
                         id="student-number" 
-                        v-model="getCurrentUser.studentNum" 
+                        v-model="getCurrentUser.student_number" 
                         :disabled="sending" />
                       </md-field>
                     </div>
@@ -31,42 +31,42 @@
 
                       <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('firstName')">
+                      :class="getValidationClass('firstname')">
                         <label>First Name</label>
                         <md-input 
                         id="first-name" 
-                        v-model="getCurrentUser.firstName" 
+                        v-model="getCurrentUser.firstname" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser.firstName.required">First name is required.</span>
+                        <span class="md-error" v-if="!$v.getCurrentUser.firstname.required">First name is required.</span>
 
-                        <span class="md-error" v-else-if="!$v.getCurrentUser.firstName.minLength">Must be at least 3 characters.</span>
+                        <span class="md-error" v-else-if="!$v.getCurrentUser.firstname.minLength">Must be at least 3 characters.</span>
                      </md-field>
 
                      <md-field
                       class="has-esc-accent md-layout-item md-size-10" 
-                      :class="getValidationClass('_MI')">
+                      :class="getValidationClass('middlename')">
                         <label>MI</label>
                         <md-input 
                         id="middle-initial" 
-                        v-model="getCurrentUser._MI" 
+                        v-model="getCurrentUser.middlename" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser._MI.maxLength">Invalid.</span>
+                        <span class="md-error" v-if="!$v.getCurrentUser.middlename.maxLength">Invalid.</span>
                      </md-field>
 
                      <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('lastName')">
+                      :class="getValidationClass('lastname')">
                         <label>Last Name</label>
                         <md-input 
                         id="last-name" 
-                        v-model="getCurrentUser.lastName" 
+                        v-model="getCurrentUser.lastname" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser.lastName.required">Last name is required.</span>
+                        <span class="md-error" v-if="!$v.getCurrentUser.lastname.required">Last name is required.</span>
 
-                        <span class="md-error" v-else-if="!$v.getCurrentUser.lastName.minLength">Must be at least 3 characters.</span>
+                        <span class="md-error" v-else-if="!$v.getCurrentUser.lastname.minLength">Must be at least 3 characters.</span>
                      </md-field>
                     </div>
 
@@ -174,17 +174,17 @@ export default {
   }),
   validations: {
     getCurrentUser:{
-    studentNum:{
+    student_number:{
           required
       },
-      firstName:{
+      firstname:{
           required,
           minLength: minLength(3)
       },
-      _MI: {
+      middlename: {
         maxLength: maxLength(3)
       },
-      lastName: {
+      lastname: {
         required,
         minLength: minLength(3)
       },
@@ -228,7 +228,7 @@ export default {
 
       // Instead of this timeout, here you can call your API
       window.setTimeout(() => {
-        this.lastUser = `${this.getCurrentUser.firstName} ${this.getCurrentUser.lastName}`
+        this.lastUser = `${this.getCurrentUser.firstname} ${this.getCurrentUser.lastname}`
         this.sending = false
         this.clearForm()
       }, 1500)
@@ -254,10 +254,10 @@ export default {
             axios.put('/api/updateAdmin/'+this.getCurrentUser.id, {
              password : this.staff_createNewPass.password,
              confirmpass: this.staff_createNewPass.confirmpass,
-             studentNum : this.getCurrentUser.studentNum,
-             firstName : this.getCurrentUser.firstName,
-             lastName: this.getCurrentUser.lastName,
-             _MI: this.getCurrentUser._MI,
+             student_number : this.getCurrentUser.student_number,
+             firstname : this.getCurrentUser.firstname,
+             lastname: this.getCurrentUser.lastname,
+             middlename: this.getCurrentUser.middlename,
              email: this.getCurrentUser.email,
 
               }).then((response)=>{
