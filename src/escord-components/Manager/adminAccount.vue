@@ -10,7 +10,7 @@
 
           <div class="modal-body text-center">
             
-            <form @submit.prevent="UpdateAdmin" novalidate class="md-layout md-gutter md-alignment-center-left">
+            <form @submit.prevent="confirmPassChange" novalidate class="md-layout md-gutter md-alignment-center-left">
 
               <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between">
 
@@ -18,43 +18,43 @@
                 <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
                   <md-field
-                  :class="getValidationClass('firstName')"
+                  :class="getValidationClass('firstname')"
                   class="has-esc-accent md-layout-item md-size-40">
                     <label>First Name</label>
                     <md-input 
                     id="first-name" 
-                    v-model="getCurrentUser.firstName" 
+                    v-model="getCurrentUser.firstname" 
                     :disabled="sending"></md-input>
 
-                    <span class="md-error" v-if="!$v.getCurrentUser.firstName.required">First name is required.</span>
+                    <span class="md-error" v-if="!$v.getCurrentUser.firstname.required">First name is required.</span>
 
-                    <span class="md-error" v-else-if="!$v.getCurrentUser.firstName.minLength">Must be at least 3 characters.</span>
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.firstname.minLength">Must be at least 3 characters.</span>
                   </md-field>
 
                   <md-field
-                  :class="getValidationClass('_MI')"
+                  :class="getValidationClass('middleinitial')"
                   class="has-esc-accent md-layout-item md-size-10">
                     <label>MI</label>
                     <md-input 
                     id="middle-initial" 
-                    v-model="getCurrentUser._MI" 
+                    v-model="getCurrentUser.middleinitial" 
                     :disabled="sending"></md-input>
 
-                    <span class="md-error" v-if="!$v.getCurrentUser._MI.maxLength">Invalid.</span>
+                    <span class="md-error" v-if="!$v.getCurrentUser.middleinitial.maxLength">Invalid.</span>
                   </md-field>
 
                   <md-field
-                  :class="getValidationClass('lastName')"
+                  :class="getValidationClass('lastname')"
                   class="has-esc-accent md-layout-item md-size-40">
                     <label>Last Name</label>
                     <md-input
                     id="last-name" 
-                    v-model="getCurrentUser.lastName" 
+                    v-model="getCurrentUser.lastname" 
                     :disabled="sending"></md-input>
 
-                    <span class="md-error" v-if="!$v.getCurrentUser.lastName.required">Last name is required.</span>
+                    <span class="md-error" v-if="!$v.getCurrentUser.lastname.required">Last name is required.</span>
 
-                    <span class="md-error" v-else-if="!$v.getCurrentUser.lastName.minLength">Must be at least 3 characters.</span>
+                    <span class="md-error" v-else-if="!$v.getCurrentUser.lastname.minLength">Must be at least 3 characters.</span>
                   </md-field>
                 </div>
 
@@ -150,9 +150,9 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
     data: () => ({
       // getCurrentUser: {
       //   id: null,
-      //   firstName: null,
-      //   _MI: null,
-      //   lastName: null,
+      //   firstname: null,
+      //   middleinitial: null,
+      //   lastname: null,
       //   email: null,
       // },
       admin_createNewPass: {
@@ -169,14 +169,14 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
     }),
     validations: {
       getCurrentUser: {
-        firstName: {
+        firstname: {
           required,
           minLength: minLength(3)
         },
-        _MI: {
+        middleinitial: {
           maxLength: maxLength(3)
         },
-        lastName: {
+        lastname: {
           required,
           minLength: minLength(3)
         },
@@ -226,11 +226,13 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
         this.admin_createNewPass.confirmpass = null
       },
       saveUser() {
-        this.sending = true
+         this.UpdateAdmin()
 
+        this.sending = true
+       
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
-          this.lastUser = `${this.getCurrentUser.firstName} ${this.getCurrentUser.lastName}`
+          this.lastUser = `${this.getCurrentUser.firstname} ${this.getCurrentUser.lastname}`
           this.sending = false
           this.clearForm()
         }, 1500)
@@ -251,24 +253,27 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
 
        UpdateAdmin(){
 
-         this.confirmPassChange();
+        // this.confirmPassChange();
 
-              axios.put('/api/updateManager/'+this.getCurrentUser.id, {
-              password : this.admin_createNewPass.password,
-              confirmpass: this.admin_createNewPass.confirmpass,
-              firstName : this.getCurrentUser.firstName,
-              lastName: this.getCurrentUser.lastName,
-              _MI: this.getCurrentUser._MI,
-              email: this.getCurrentUser.email,
+     
+
+       axios.put('/api/updateManager/'+this.getCurrentUser.id, {
+              password :this.admin_createNewPass.password,
+              confirmpass:this.admin_createNewPass.confirmpass,
+              firstname :this.getCurrentUser.firstname,
+              lastname:this.getCurrentUser.lastname,
+              middleinitial:this.getCurrentUser.middleinitial,
+              email:this.getCurrentUser.email,
 
                }).then((response)=>{
-        
+
+                  console.log(response)
 
             // console.log('update Admin Account' , response.data);
 
             
              }).catch((errors)=>{
-  
+                console.log(errors)
              this.error =  errors.response.data;
    
              })

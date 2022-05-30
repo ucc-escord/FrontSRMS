@@ -129,7 +129,7 @@ const actions = {
         axios.put('/api/addgs/'+route, formData).then((response)=>{
         
 
-          //  console.log('create professor accounts' , response.data);
+          console.log('create professor accounts' , response.data);
 
             
              }).catch((errors)=>{

@@ -3,148 +3,241 @@
 
     <md-card-content>
 
-      <h3 class="title text-center">Summary of Grades</h3>
+      <!-- HEADER -->
+      <p class="_top md-headline text-esc-darkgrey text-center">
+        <strong>UNIVERSITY OF CALOOCAN CITY</strong>
+      </p>
 
-      <div class="md-layout md-gutter">
+      <p class="md-subheading text-esc-darkgrey text-center">
+        Computer Studies Department
+      </p><br>
 
-        <!--STUDENT NUMBER-->
-      
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Student Number </label>
-            <md-input type="number" id="age" name="age" autocomplete="age" v-model="getScholRecord.student_number" :disabled="sending" readonly  />
-          
-          </md-field>
+      <p class="md-subheading title text-center text-esc-darkgrey _formName">
+        <strong>SUMMARY OF GRADES</strong>
+      </p>
+
+      <p class="md-body-2 text-center text-esc-darkgrey">
+        {{semester}}, SY. {{schoolyr}}
+      </p><br><br>
+
+      <!-- STUDENT INFO -->
+      <div class="md-layout md-gutter md-alignment-center-center">
+
+        <!-- FIRST ROW -->
+        <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-top-space-between">
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              STUDENT NO.:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              20191172
+            </p>
+          </div>
+
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              COURSE:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              BSCS
+            </p>
+          </div>
         </div>
-                <!--COURSE-->
 
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Course</label>
-            <md-input id="age" name="age" autocomplete="age"  v-model="getScholRecord.course" :disabled="sending" readonly />
-          
-          </md-field>
+        <!-- SECOND ROW -->
+        <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-top-space-between">
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              LAST NAME:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              Maglangit
+            </p>
+          </div>
+
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              YEAR:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              3
+            </p>
+          </div>
         </div>
 
-                <!--SECTION-->
+        <!-- THIRD ROW -->
+        <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-top-space-between">
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              FIRST NAME:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              Trizhalyn
+            </p>
+          </div>
 
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Section</label>
-            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.section" :disabled="sending" readonly />
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              SECTION:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              A
+            </p>
+          </div>
+        </div>
+
+        <!-- FOURTH ROW -->
+        <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-top-space-between">
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              MIDDLE NAME:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              Lucas
+            </p>
+          </div>
+
+          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
+              STATUS:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              REGULAR
+            </p>
+          </div>
+        </div>
+      </div> <br><br>
+
+      <!-- GRADES -->
+      <md-table
+      md-sort="subjCode"
+      md-sort-by="asc"
+      v-model="grades"
+      class="mx-auto">
+
+        <md-table-row 
+        class="md-layout md-gutter md-alignment-center-space-between">
+          <md-table-cell
+          class="_tableHead md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center text-center">
+            SUBJECT CODE
+          </md-table-cell>
+          <md-table-cell
+          class="_tableHead md-layout-item md-size-30 md-layout md-gutter md-alignment-center-left">
+            SUBJECT DESCRIPTION
+          </md-table-cell>
+          <md-table-cell
+          class="_tableHead md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center text-center">
+            UNITS
+          </md-table-cell>
+          <md-table-cell
+          class="_tableHead md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center text-center">
+            FINAL GRADE
+          </md-table-cell>
+          <md-table-cell
+          class="_tableHead md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center text-center">
+            FG x UNITS
+          </md-table-cell>
+        </md-table-row>
+
+        <md-table-row
+        class=" _subjDesc md-layout md-gutter md-alignment-center-space-between"
+        v-for="(grade,index) in grades"
+        :key="index">
           
-          </md-field>
+          <md-table-cell 
+          class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+            {{grade.subjCode}}
+          </md-table-cell>
+
+          <md-table-cell 
+          class="md-body-1 md-layout-item md-size-30 md-layout md-gutter md-alignment-center-left">
+            {{grade.subjDesc}}
+          </md-table-cell>
+
+          <md-table-cell 
+          class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+            {{grade.subjUnit}}
+          </md-table-cell>
+
+          <md-table-cell 
+          class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+            {{grade.subjFG}}
+          </md-table-cell>
+
+          <md-table-cell 
+          class="md-body-1 md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+            {{FGxUnitsResult(grade)}}
+          </md-table-cell>
+        </md-table-row>
+      </md-table>
+      <br>
+
+      <div class="md-layout md-gutter md-alignment-center-right">
+        <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-left">
+          <p 
+          class="md-body-2 md-layout-item md-size-50">
+            Total Units:
+          </p>
+          <p 
+          class="md-body-1 md-layout-item md-size-50">
+            {{totalUnits}}
+          </p>
         </div>
       </div>
-
-                <!--FIRSTNAME-->
-
-      <div class="md-layout md-gutter">
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('firstName')">
-            <label for="first-name">First Name</label>
-            <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="getScholRecord.firstname" :disabled="sending" readonly />
-          </md-field>
-        </div>
-                <!--MIDDLENAME-->
-
-
-            <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('lastName')">
-            <label for="last-name">Middle Name</label>
-            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.middlename" :disabled="sending" readonly  />
-          </md-field>
-        </div>
-
-                <!--LASTNAME-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('lastName')">
-            <label for="last-name">Last Name</label>
-            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.surname" :disabled="sending" readonly  />
-          </md-field>
+      <div class="md-layout md-gutter md-alignment-center-right">
+        <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-left">
+          <p 
+          class="md-body-2 md-layout-item md-size-50">
+            Total FGxUnits:
+          </p>
+          <p 
+          class="md-body-1 md-layout-item md-size-50">
+            {{total}}
+          </p>
         </div>
       </div>
-
-      <div class="md-layout md-gutter">
-
-                <!--ADDRESS-->
-
-      
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Address</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.address" :disabled="sending" readonly />
-          
-          </md-field>
+      <md-divider></md-divider>
+      <div class="md-layout md-gutter md-alignment-center-right">
+        <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-left">
+          <p 
+          class="md-body-2 md-layout-item md-size-50">
+            GWA:
+          </p>
+          <p 
+          class="md-body-1 md-layout-item md-size-50">
+            {{gwa}}
+          </p>
         </div>
       </div>
+      <br><br><br>
 
-        <div class="md-layout md-gutter">
-      
-                <!--ELEM SCHOOL-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Elementary School</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elementary" :disabled="sending" readonly />
-          
-          </md-field>
+      <div class="md-layout md-gutter md-alignment-bottom-space-between">
+        <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+          <p class="md-body-2">
+            Verified by: _______________________________
+          </p>
         </div>
-
-                <!--ELEM YEART GRADSCHOOL-->
-
-          <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Elementary Year Graduation</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elemyeargrad" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
-      </div>
-
-      <div class="md-layout md-gutter">
-      
-                <!--HIGH SCHOOL-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Highschool</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.highschool" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
-
-                <!--HIGH SCHOOL YEAR GRAD-->
-
-          <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Highschool Year Graduation</label>
-            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.hsyeargrad" :disabled="sending" readonly />
-          
-          </md-field>
+        <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+          <p class="md-layout-item md-size-100 text-center md-body-2 _sign">
+            <u>TRIZHALYN L. MAGLANGIT</u>
+          </p>
+          <p class="md-layout-item md-size-100 text-center caption">
+            Student's Signature
+          </p>
         </div>
 
 
       </div>
     </md-card-content>
-    
+
   </md-card>
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
+import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 
-
-  import {
-    required,
-    email,
-    minLength,
-    maxLength
-  } from 'vuelidate/lib/validators'
-
-  export default {
+export default {
     name: 'EvaluationForm',
     mixins: [validationMixin],
     components:{
@@ -153,86 +246,56 @@ import { mapActions, mapGetters} from "vuex";
     mounted(){
           //  this.$store.dispatch('displayuser');
 
-
-            
             this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
-         
     },
-    data: () => ({
-      form: {
-        firstName: null,
-        lastName: null,
-        gender: null,
-        age: null,
-        email: null,
-      },
-      userSaved: false,
-      sending: false,
-      lastUser: null
-    }),
-    validations: {
-      form: {
-        firstName: {
-          required,
-          minLength: minLength(3)
-        },
-        lastName: {
-          required,
-          minLength: minLength(3)
-        },
-        age: {
-          required,
-          maxLength: maxLength(3)
-        },
-        gender: {
-          required
-        },
-        email: {
-          required,
-          email
-        }
-      }
+    data () {
+      return {
+        /* TEST DISPLAY --> GRADES */
+        grades: [
+          {
+            subjCode: "CCS 123",
+            subjDesc: "SUBJECT 1: MORE SUBJECT NAME",
+            subjUnit: 3,
+            subjFG: 3,
+          },
+          {
+            subjCode: "CCS 121",
+            subjDesc: "SUBJECT 2",
+            subjUnit: 3,
+            subjFG: 1.54,
+          },
+          {
+            subjCode: "CCS 113",
+            subjDesc: "SUBJECT 3",
+            subjUnit: 5,
+            subjFG: 1.20,
+          }
+        ],
+        semester: "1st Semester",
+        schoolyr: "2021-2022"
+      };
     },
     computed:{
   ...mapGetters({getScholRecord: 'getScholRecord'}),
-    },
-    methods: {
-      getValidationClass (fieldName) {
-        const field = this.$v.form[fieldName]
 
-        if (field) {
-          return {
-            'md-invalid': field.$invalid && field.$dirty
-          }
-        }
-      },
-      clearForm () {
-        this.$v.$reset()
-        this.form.firstName = null
-        this.form.lastName = null
-        this.form.age = null
-        this.form.gender = null
-        this.form.email = null
-      },
-      saveUser () {
-        this.sending = true
+  totalUnits() {
+    return this.grades.reduce((sum, grade) => 
+    sum + grade.subjUnit, 0);
+  },
+  total() {
+    return this.grades.reduce((acc, item) =>
+    acc + (item.subjUnit * item.subjFG), 0);
+  },
+  gwa() {
+    return (this.total/ this.totalUnits).toFixed(2);
+  }
+  },
 
-        // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
-          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
-      },
-      validateUser () {
-        this.$v.$touch()
-
-        if (!this.$v.$invalid) {
-          this.saveUser()
-        }
-      }
+  methods: {
+    FGxUnitsResult(grade) {
+      return grade.subjUnit * grade.subjFG
     }
+  }
   }
 </script>
 
@@ -244,7 +307,34 @@ import { mapActions, mapGetters} from "vuex";
     left: 0;
   }
 
+  .md-divider {
+    margin-bottom: 0.75em !important;
+  }
+
   .md-card {
-    max-width: 35em !important;
+    max-width: 37em !important;
+  }
+
+  ._top {
+    margin-top: 1.5em !important;
+  }
+
+  ._formName, ._sign {
+    margin-bottom: 0 !important;
+  }
+
+  ._tableHead {
+    margin-top: 0 !important;
+    font-size: 1.05em !important;
+    font-weight: bold !important;
+    margin-bottom: 1.12em !important;
+  }
+
+  ._subjDesc {
+    margin-bottom: 0.75em !important;  
+  }
+
+  ._desc {
+    margin-top: 0 !important;
   }
 </style>

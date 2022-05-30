@@ -320,7 +320,7 @@
                         :class="getValidationClass('studBirthday')">
                             <label>Birthday (readonly)</label>
                             <md-input v-model="modalInfo.studBirthday"
-                            readonly
+                        
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studBirthday.required">Birthday is required.</span>

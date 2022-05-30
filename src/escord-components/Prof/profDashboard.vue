@@ -23,8 +23,8 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
-                  <h5>{{getCurrentUser.facultyRank}}</h5>
+                    <h3 class="title">{{getCurrentUser.firstname}} {{getCurrentUser.middleinitial}} {{getCurrentUser.lastname}}</h3>
+                  <h5>{{getCurrentUser.faculty_rank}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -571,24 +571,6 @@ export default {
     },
 
 
-    form: {
-        firstName: {
-          required,
-          minLength: minLength(3)
-        },
-        lastName: {
-          required,
-          minLength: minLength(3)
-        },
-        age: {
-          required,
-          maxLength: maxLength(3)
-        },
-        gender: {
-          required
-        },
-        
-      },
         profAcc: {
         stdPassword:{
           required,
@@ -760,12 +742,13 @@ async cardshowpage(page=1){
       addValidate () {
         this.$v.$touch()
 
-        if (!this.$v.$invalid) {
+        if (!this.$v.formData.$invalid) {
           this.addGradesheet()
-       //     console.log("Gradesheet saved and added successfully.")
+        console.log("Gradesheet saved and added successfully.")
         }
         else {
-          //  console.log("Failed to add and save gradesheet. Fill out required fields.");
+          console.log(this.$v)
+       console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
     pageofArchieve(){
