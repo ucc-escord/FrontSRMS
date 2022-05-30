@@ -174,9 +174,9 @@ export default {
   }),
   validations: {
     getCurrentUser:{
-    // studentNum:{
-    //       required
-    //   },
+    studentNum:{
+          required
+      },
       firstName:{
           required,
           minLength: minLength(3)
@@ -203,27 +203,6 @@ export default {
         sameAsPassword: sameAs('password')
       },
     },
-      saveUser () {
-        this.sending = true
-
-        // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
-          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
-      },
-      validateUser () {
-        this.$v.$touch()
-
-        if (!this.$v.$invalid) {
-          this.saveUser()
-       //     console.log("okay");
-        }
-        else {
-         //   console.log("no");
-    }
   },
     computed:{
 ...mapGetters({getCurrentUser: 'getCurrentUser'}),
@@ -297,7 +276,7 @@ export default {
       closeModal: function() {
     this.$emit("close");
   }
-    }
+    
   }
 }
 </script>
