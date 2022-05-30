@@ -3,127 +3,128 @@
     
     <md-card-content>
 
-      <h3 class="title text-center">Scholastic Record Form</h3>
-      
-      <div class="md-layout md-gutter">
-        <!--STUDENT NUMBER-->
-      
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Student Number </label>
-            <md-input type="number" id="age" name="age" autocomplete="age" v-model="getScholRecord.student_number" :disabled="sending" readonly  />
-          
-          </md-field>
+      <!-- HEADER -->
+      <div class="_top md-layout md-gutter md-alignment-center-space-between">
+
+        <!-- TITLE -->
+        <div class="md-layout-item md-size-66 md-layout md-gutter md-alignment-center-center">
+          <p class="md-layout-item md-size-100 md-headline text-esc-darkgrey text-center">
+            <strong>UNIVERSITY OF CALOOCAN CITY</strong>
+          </p>
+
+          <p class="md-layout-item md-size-100 text-center text-esc-darkgrey _schAddress">
+            Gen. San Miguel St. Sangandaan Caloocan City
+          </p>
+
+          <p class="md-layout-item md-size-100 md-subheading text-esc-darkgrey text-center">
+            <strong>Computer Studies Department</strong>
+          </p>
+
+          <p class="md-layout-item md-size-100 text-center">
+            <strong>{{student_info.courseLong}}</strong>
+          </p>
         </div>
-                <!--COURSE-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Course</label>
-            <md-input id="age" name="age" autocomplete="age"  v-model="getScholRecord.course" :disabled="sending" readonly />
+        <div class="md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
           
-          </md-field>
-        </div>
+          <!-- FOR SHIFTER -->
+          <table class="_forShifter">
+            <tr class="text-center">
+              <th colspan="2">For Shifter</th>
+            </tr>
 
-                <!--SECTION-->
+            <tr class="text-center">
+              <th>A.Y.:</th>
+              <th>Course</th>
+            </tr>
 
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Section</label>
-            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.section" :disabled="sending" readonly />
-          
-          </md-field>
+            <tr class="text-center">
+              <th>From:</th>
+              <td>20XX</td>
+            </tr>
+
+            <tr class="text-center">
+              <th>To:</th>
+              <td>20XX</td>
+            </tr>
+          </table>
         </div>
       </div>
 
-                <!--FIRSTNAME-->
+      <!-- STUDENT INFO -->
+      <div class="md-layout md-gutter md-alignment-center-center">
 
-      <div class="md-layout md-gutter">
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('firstName')">
-            <label for="first-name">First Name</label>
-            <md-input name="first-name" id="first-name" autocomplete="given-name" v-model="getScholRecord.firstname" :disabled="sending" readonly />
-          </md-field>
-        </div>
-                <!--MIDDLENAME-->
+        <table class="_studInfo">
 
+          <tr>
+            <th colspan="2">NAME:</th>
+            <td colspan="3">
+              {{student_info.lastName}}, {{student_info.firstName}} {{student_info._MI}}.
+            </td>
 
-            <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('lastName')">
-            <label for="last-name">Middle Name</label>
-            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.middlename" :disabled="sending" readonly  />
-          </md-field>
-        </div>
+            <th colspan="2">COURSE/YR/SEC:</th>
+            <td colspan="1">
+              {{student_info.courseShort}}{{student_info.year}}{{student_info.section}}
+            </td>
+            
+            <th colspan="2">CONTACT NO:</th>
+            <td colspan="2">{{student_info.contactNum}}</td>
+          </tr>
 
-                <!--LASTNAME-->
+          <tr>
+            <th colspan="2">ADDRESS:</th>
+            <td colspan="6">{{student_info.address}}</td>
 
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('lastName')">
-            <label for="last-name">Last Name</label>
-            <md-input name="last-name" id="last-name" autocomplete="family-name" v-model="getScholRecord.surname" :disabled="sending" readonly  />
-          </md-field>
-        </div>
+            <th colspan="2">STUDENT NO:</th>
+            <td colspan="2">{{student_info.studNum}}</td>
+          </tr>
+
+           <tr>
+            <th colspan="2">BIRTHDAY:</th>
+            <td colspan="3">{{student_info.birthday}}</td>
+
+            <th colspan="2">BIRTHPLACE:</th>
+            <td colspan="5">{{student_info.birthplace}}</td>
+          </tr>
+
+          <tr>
+            <th colspan="3">ELEMENTARY SCHOOL:</th>
+            <td colspan="5">{{student_info.elemschool}}</td>
+
+            <th colspan="2">GRAD. YR:</th>
+            <td colspan="2">{{student_info.elemgradyr}}</td>
+          </tr>
+
+          <tr>
+            <th colspan="3">HIGH SCHOOL:</th>
+            <td colspan="5">{{student_info.highschool}}</td>
+
+            <th colspan="2">GRAD. YR:</th>
+            <td colspan="2">{{student_info.hsgradyear}}</td>
+          </tr>
+        </table>
       </div>
-
-      <div class="md-layout md-gutter">
-
-                <!--ADDRESS-->
-
       
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Address</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.address" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
+      <!-- FIRST YEAR GRADES -->
+      <div class="_gradeTbl">
+        <first/>
       </div>
 
-        <div class="md-layout md-gutter">
-      
-                <!--ELEM SCHOOL-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Elementary School</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elementary" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
-
-                <!--ELEM YEART GRADSCHOOL-->
-
-          <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Elementary Year Graduation</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.elemyeargrad" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
+      <!-- SECOND YEAR GRADES -->
+      <div class="_gradeTbl html2pdf__page-break">
+        <first/>
       </div>
 
-      <div class="md-layout md-gutter">
-      
-                <!--HIGH SCHOOL-->
-
-        <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Highschool</label>
-            <md-input  id="age" name="age" autocomplete="age" v-model="getScholRecord.highschool" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
-
-                <!--HIGH SCHOOL YEAR GRAD-->
-
-          <div class="md-layout-item md-small-size-100">
-          <md-field :class="getValidationClass('age')">
-            <label for="age">Highschool Year Graduation</label>
-            <md-input id="age" name="age" autocomplete="age" v-model="getScholRecord.hsyeargrad" :disabled="sending" readonly />
-          
-          </md-field>
-        </div>
+      <!-- THIRD YEAR GRADES -->
+      <div class="_gradeTbl">
+        <first/>
       </div>
+
+      <!-- FOURTH YEAR GRADES -->
+      <div class="_gradeTbl">
+        <first/>
+      </div>
+
+
     </md-card-content>
 
   <!-- <md-card-actions>
@@ -171,28 +172,16 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
-//import first from './table_srms/Firstyear.vue'
+import first from './table_srms/Firstyear.vue'
 //import second from './table_srms/Secondyear.vue'
 //import third from './table_srms/Thirdyear.vue'
 //import four from './table_srms/Fouryear.vue'
-
-
-
-
-
-
-  import {
-    required,
-    email,
-    minLength,
-    maxLength
-  } from 'vuelidate/lib/validators'
 
   export default {
     name: 'ScholasticForm',
     mixins: [validationMixin],
     components:{
-      //first,
+      first,
       //second,
       //third,
       //four
@@ -207,80 +196,33 @@ import { mapActions, mapGetters} from "vuex";
          
     },
     data: () => ({
-      form: {
-        firstName: null,
-        lastName: null,
-        gender: null,
-        age: null,
-        email: null,
-      },
-      userSaved: false,
-      sending: false,
-      lastUser: null
-    }),
-    validations: {
-      form: {
-        firstName: {
-          required,
-          minLength: minLength(3)
-        },
-        lastName: {
-          required,
-          minLength: minLength(3)
-        },
-        age: {
-          required,
-          maxLength: maxLength(3)
-        },
-        gender: {
-          required
-        },
-        email: {
-          required,
-          email
-        }
+      
+      student_info : {
+        studNum: "20191172",
+        firstName: "TRIZHALYN",
+        lastName: "MAGLANGIT",
+        _MI: "L",
+        courseLong: "BACHELOR OF SCIENCE IN COMPUTER SCIENCE",
+        courseShort: "BSCS",
+        year: "3",
+        section: "A",
+        address: "2325 CAMARIN RD. CAMARIN, BRGDY, 178, CAMARIN, CALOOCAN CITY",
+        contactNum: "092715217764",
+        birthday: "JANUARY 3, 2001",
+        birthplace: "QUEZON CITY",
+        elemschool: "CAMARIN D ELEMENTARY SCHOOL",
+        elemgradyr: "2013",
+        highschool: "STI COLLEGE - FAIRVIEW",
+        hsgradyear: "2019"
       }
-    },
+      }
+    ),
+
     computed:{
   ...mapGetters({getScholRecord: 'getScholRecord'}),
     },
-    methods: {
-      getValidationClass (fieldName) {
-        const field = this.$v.form[fieldName]
-
-        if (field) {
-          return {
-            'md-invalid': field.$invalid && field.$dirty
-          }
-        }
-      },
-      clearForm () {
-        this.$v.$reset()
-        this.form.firstName = null
-        this.form.lastName = null
-        this.form.age = null
-        this.form.gender = null
-        this.form.email = null
-      },
-      saveUser () {
-        this.sending = true
-
-        // Instead of this timeout, here you can call your API
-        window.setTimeout(() => {
-          this.lastUser = `${this.form.firstName} ${this.form.lastName}`
-          this.userSaved = true
-          this.sending = false
-          this.clearForm()
-        }, 1500)
-      },
-      validateUser () {
-        this.$v.$touch()
-
-        if (!this.$v.$invalid) {
-          this.saveUser()
-        }
-      }
-    }
+    
+    
   }
 </script>
 
@@ -293,6 +235,43 @@ import { mapActions, mapGetters} from "vuex";
   }
 
   .md-card {
-    max-width: 35em !important;
+    max-width: 37em !important;
   }
+
+  ._top {
+    margin: 1.5em 0 0 0 !important;
+  }
+
+  ._schAddress {
+    font-weight: 500 !important;
+  }
+
+  ._forShifter, ._studInfo {
+    border-collapse: collapse;
+    border: 1px solid #545454;
+    width: 100% !important;
+  }
+
+  ._forShifter th, ._forShifter td, ._studInfo th, ._studInfo td {
+    border: 1px solid #545454;
+    //padding: 2px !important;
+  }
+
+  ._studInfo th {
+    font-size: .95em !important;
+    text-align: left !important;
+    padding: 0.25em 0.25em 0.25em 0.75em!important;
+    font-weight: 600 !important;
+  }
+
+  ._studInfo td {
+    padding: 0.25em 1em !important;
+    font-weight: 500 !important;
+    font-size: .856em !important;
+  }
+
+  ._gradeTbl {
+    margin-top: 0.75em !important;
+  }
+  
 </style>

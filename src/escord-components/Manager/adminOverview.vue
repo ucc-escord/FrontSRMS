@@ -20,7 +20,7 @@
 
                     <div class="md-layout-item md-size-50 md-small-size-100 md-layout">
                         <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                            <h3 class="__total" v-if="cardInfo.total==0">{{totalStudents}}</h3>
+                            <h3 class="__total" v-if="cardInfo.category=='Student'">{{totalStudents}}</h3>
 
                             <h3 class="__total" v-else>{{cardInfo.total}}</h3>
                         </div>
