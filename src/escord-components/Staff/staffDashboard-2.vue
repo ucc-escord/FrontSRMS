@@ -98,7 +98,7 @@ import updateModal from '../Staff/AccountStaff.vue'
 
 //tab content import
 import tabSRMS from '../Staff/tab_scholasticRecord.vue';
-import tabEFMS from '../Staff/tab_evaluationForm.vue';
+//import tabEFMS from '../Staff/tab_evaluationForm.vue';
 import tabArchTable from '../Staff/staffArchieveTable'
 import tabConcern from '../Staff/tab_concern.vue'
 
