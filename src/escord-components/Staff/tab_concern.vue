@@ -127,7 +127,7 @@ export default {
    async   concernGet(page=1){
 
 
- await     axios.get('/api/showconcern/?page='+page+'&search='+this.search).then(({data})=>{
+ await     axios.get('/api/showconcern?page='+page+'&search='+this.search).then(({data})=>{
                 this.concern = data;
 
                 console.log(this.concern)

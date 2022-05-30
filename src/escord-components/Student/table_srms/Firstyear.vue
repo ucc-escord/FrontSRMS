@@ -116,14 +116,14 @@ export default {
     methods:{
     gwa_1st() {
         const gwa = this.grades_1st.reduce((acc, item) =>
-        acc + (item.grades / item.units), 0);
+        acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
     },
 
     gwa_2nd() {
         const gwa = this.grades_2nd.reduce((acc, item) =>
-        acc + (item.grades / item.units), 0);
+        acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
     },

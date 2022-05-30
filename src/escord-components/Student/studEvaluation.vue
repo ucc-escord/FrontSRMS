@@ -16,9 +16,17 @@
         <strong>SUMMARY OF GRADES</strong>
       </p>
 
+      <div v-if="getScholRecord.semester === 1">
       <p class="md-body-2 text-center text-esc-darkgrey">
-        {{semester}}, SY. {{schoolyr}}
+        {{getScholRecord.semester}}ST SEMESTER, SY. {{getScholRecord.sem_startyear}} -  {{getScholRecord.sem_endyeaer}}
       </p><br><br>
+      </div>
+
+       <div v-if="getScholRecord.semester === 2">
+      <p class="md-body-2 text-center text-esc-darkgrey">
+        {{getScholRecord.semester}}ND SEMESTER, SY. {{getScholRecord.sem_startyear}} -  {{getScholRecord.sem_endyeaer}}
+      </p><br><br>
+      </div>
 
       <!-- STUDENT INFO -->
       <div class="md-layout md-gutter md-alignment-center-center">
@@ -30,7 +38,7 @@
               STUDENT NO.:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              20191172
+             {{getScholRecord.student_number}}
             </p>
           </div>
 
@@ -39,7 +47,7 @@
               COURSE:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              BSCS
+              {{getScholRecord.course}}
             </p>
           </div>
         </div>
@@ -51,7 +59,7 @@
               LAST NAME:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              Maglangit
+                 {{getScholRecord.surname}}
             </p>
           </div>
 
@@ -60,7 +68,7 @@
               YEAR:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              3
+               {{getScholRecord.section}}
             </p>
           </div>
         </div>
@@ -72,7 +80,7 @@
               FIRST NAME:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              Trizhalyn
+               {{getScholRecord.firstname}}
             </p>
           </div>
 
@@ -93,7 +101,7 @@
               MIDDLE NAME:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              Lucas
+              {{getScholRecord.middlename}}
             </p>
           </div>
 

@@ -206,7 +206,7 @@ export default {
         async scholmis(scholpage=1){
            
  
-           await    axios.get('/api/showscolmis/?page='+scholpage+'&search='+this.search).then(({data})=>{
+           await    axios.get('/api/showscolmis?page='+scholpage+'&search='+this.search).then(({data})=>{
             
                    this.users = data
               //     this.currentpage = page
@@ -223,7 +223,7 @@ export default {
   async evalmis(page=1){
            
  
-           await    axios.get('/api/evalform/?page='+page+'&search='+this.search).then(({data})=>{
+           await    axios.get('/api/evalform?page='+page+'&search='+this.search).then(({data})=>{
             
                    this.eval = data
               //     this.currentpage = page
