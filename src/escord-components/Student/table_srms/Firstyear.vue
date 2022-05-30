@@ -114,7 +114,6 @@ export default {
     },
 
     methods:{
-
     gwa_1st() {
         const gwa = this.grades_1st.reduce((acc, item) =>
         acc + (item.grades / item.units), 0);
