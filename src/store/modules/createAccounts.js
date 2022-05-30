@@ -5,6 +5,10 @@ const state = {
     student : {},
     professor : {},
     staff: {},
+    duplistud:'',
+    dupliprof:'',
+    duplistaff:'',
+
 
 }
 const getters = {
@@ -17,6 +21,15 @@ const getters = {
     getstaff : state => {
         return state.staff
     },
+    getdupliStud : state =>{
+        return state.duplistud
+    },
+    getdupliProf : state =>{
+        return state.dupliprof
+    },
+    getdupliStaff : state =>{
+        return state. duplistaff
+    }
  
       
 }
@@ -25,7 +38,8 @@ const actions = {
         axios.post('/api/createaccprof', formData).then((response)=>{
         
 
-            console.log('create professor accounts' , response.data);
+            // console.log('create professor accounts' , response.data);
+            commit('setDupliProf',response.data)
 
             
              }).catch((errors)=>{
@@ -39,8 +53,8 @@ const actions = {
         axios.post('/api/createaccstud', formData).then((response)=>{
         
 
-            console.log('create student accounts' , response.data);
-
+            // console.log('create student accounts' , response.data);
+            commit('setDupliStud',response.data)
             
              }).catch((errors)=>{
   
@@ -53,8 +67,10 @@ const actions = {
         axios.post('/api/createaccadm', formData).then((response)=>{
         
 
-            console.log('create staff accounts' , response.data);
+          
+            // console.log('create staff accounts' , response.data);
 
+            commit('setDupliStaff',response.data)
             
              }).catch((errors)=>{
   
@@ -79,7 +95,7 @@ const actions = {
                         axios.put('/api/updateManager/'+route, formData).then((response)=>{
                         
                 
-                            console.log('create professor accounts' , response.data);
+                            // console.log('create professor accounts' , response.data);
                 
                             
                              }).catch((errors)=>{
@@ -99,7 +115,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
                             },
 
@@ -112,7 +128,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
 
 
@@ -127,7 +143,7 @@ const actions = {
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
-                                       console.log("Error in getting the user")
+                                    //    console.log("Error in getting the user")
                                    }) 
 
 
@@ -150,6 +166,18 @@ const mutations = {
      },
      setStaff(state,data){
         return state.staff = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliStud(state,data){
+        return state.duplistud = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliStaff(state,data){
+        return state.duplistaff = data;
+       //  state.isAuthenticated = true;
+     },
+     setDupliProf(state,data){
+        return state.dupliprof = data;
        //  state.isAuthenticated = true;
      },
 

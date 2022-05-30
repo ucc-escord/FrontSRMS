@@ -5,6 +5,7 @@
         <div class="modal-header">
         <H3 class="title text-esc-accent">Add New Staff</H3>
         </div>
+ <H6 class="title ">{{getdupliStaff.message}}</H6>
 
         <div class="modal-body text-center">
             <form novalidate class="md-layout mx-auto" @submit.prevent="validateUser">
@@ -58,6 +59,8 @@
             <!-- <md-field :class="getValidationClass('DefaultPassword')">-->
                 <p class="Default"> <strong>Default Password:</strong> StudentNumber</p>
             <p class="md-subheader">ex: 2019****</p>
+            <p class="md-subheader">Note: Add 101 at the first digit of your student number to access staff</p>
+
             
         </div>
 
@@ -81,7 +84,7 @@
 
 <script>
 import { validationMixin } from 'vuelidate'
-import { mapActions} from "vuex";
+import { mapActions, mapGetters} from "vuex";
 
   import {
     required,
@@ -128,6 +131,10 @@ export default {
         }
       }
     },
+     computed:{
+     ...mapGetters({getdupliStaff: 'getdupliStaff'}),
+
+    },
   methods: {
 
      ...mapActions({createStaff: 'createStaff'}),
@@ -153,7 +160,8 @@ export default {
         this.sending = true
 
           this.createStaff(this.form);
-
+          
+          
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
           this.lastUser = `${this.form.firstName} ${this.form.lastName}`
@@ -161,6 +169,8 @@ export default {
           this.sending = false
           this.clearForm()
         }, 1500)
+         
+       
       },
       validateUser () {
         this.$v.$touch()

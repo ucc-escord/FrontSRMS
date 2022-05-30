@@ -225,6 +225,8 @@
             Student's Signature
           </p>
         </div>
+
+
       </div>
     </md-card-content>
 
@@ -235,9 +237,11 @@
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 
-export default {
     name: 'EvaluationForm',
     mixins: [validationMixin],
+    components:{
+
+    },
     mounted(){
           //  this.$store.dispatch('displayuser');
 

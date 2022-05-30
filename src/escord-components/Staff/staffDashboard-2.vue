@@ -24,7 +24,7 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                   <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
+                   <h3 class="title">{{getCurrentUser.firstname}} {{getCurrentUser.middlename}} {{getCurrentUser.lastname}}</h3>
                     <h5>MIS Staff</h5>
                   </div>
 
@@ -64,14 +64,13 @@
                             <tab-srms/>
                         </md-tab>
 
-                        <!-- EVALUATION FORM -->
-                        <md-tab id="tab-efms" md-label="Evaluation Form Management">
-                            <tab-efms/>
+                         <md-tab id="tab-con" md-label="Concern">
+                            <tab-con/>
                         </md-tab>
-
+                        <!-- EVALUATION FORM -->
                         <!-- ARCHIVE -->
                         <md-tab id="tab-archive" md-label="ARCHIVE">
-                            
+                            <tab-arch/>
                         </md-tab>
                         
                     </md-tabs>
@@ -100,6 +99,8 @@ import updateModal from '../Staff/AccountStaff.vue'
 //tab content import
 import tabSRMS from '../Staff/tab_scholasticRecord.vue';
 import tabEFMS from '../Staff/tab_evaluationForm.vue';
+import tabArchTable from '../Staff/staffArchieveTable'
+import tabConcern from '../Staff/tab_concern.vue'
 
 export default {
   bodyClass: "profile-page",
@@ -108,7 +109,8 @@ export default {
     updateModal, 
     NavTabsCard,
     "tab-srms": tabSRMS,
-    "tab-efms": tabEFMS
+    "tab-arch":tabArchTable,
+    "tab-con": tabConcern,
    },
    mounted(){
    this.$store.dispatch('displayuser');

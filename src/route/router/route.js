@@ -13,6 +13,7 @@ import escFooter from "@/escord-components/esc-Footer.vue";
 import Professor from "@/escord-components/Prof/Professor.vue"
 import ForgotPassword from "@/escord-components/ForgotPassword/esc-Forgot.vue"
 import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.vue"
+//import downloadArch from "@/escord-components/Prof/ProfDownload.vue"
 
 //const escHeader = () => import("@/escord-components/esc-Header.vue");
 
@@ -24,6 +25,7 @@ import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.
 //import escProfDash from "../../escord-components/Prof/profDashboard.vue";
 
 //import escProf_GSPage from "../../escord-components/Prof/profGradesheetPage.vue";
+//const downloadArch = () => import("../../escord-components/Prof/ProfDownload.vue");
 
 
 
@@ -59,6 +61,10 @@ const escAdminDash2  = () => import('../../escord-components/Manager/adminDashbo
 /* import escAdminOverview from '../../escord-components/Manager/adminOverview.vue';
 import escAdminManageAccount from '../../escord-components/Manager/adminManageAccount.vue';
 import escAdminAuditTrail from '../../escord-components/Manager/adminAuditTrail.vue'; */
+const escEval  = () => import('../../escord-components/Staff/Eval-2.vue')
+const escEvalstud =  () => import('../../escord-components/Student/studEval-2.vue')
+const escTableEval = () =>  import('../../escord-components/Student/studEvalTable.vue')
+const escScholasticStud = () =>  import('../../escord-components/Student/studScholastic.vue')
 
 
 const routes = [
@@ -230,6 +236,13 @@ const routes = [
         components: {default: escProf_GSPage, header: escHeader, footer: escFooter},
         meta: { requiresAuth: true, authorize: 'professor' } ,
       },
+      {
+        path: "/archievegradesheet/:archievegs",
+        name: "GradesheetArchieve",
+        components: {default: escViewArchieveGrade, header: escHeader, footer: escFooter},
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+     
+      },
 
       {
         path: "/archievetableprof/:userid",
@@ -237,6 +250,8 @@ const routes = [
         component:  escProf_ArchTable,
         //meta: { requiresAuth: true, authorize: 'professor' } ,
       },
+
+      
   
   ],
     meta: { requiresAuth: true, authorize: 'professor' } ,
@@ -257,10 +272,44 @@ const routes = [
     name: 'reset-password-form', 
     component: ResetPasswordForm, 
    
-  }
+  },
+
+//staff
+  { 
+    path: '/eval/:studnum', 
+    name: 'EscEval', 
+    component: escEval, 
+   
+  },
 
 
+  //student
 
+  { 
+    path: '/evalstud/:student_number/:srms_id', 
+    name: 'EscTableEval', 
+    component: escTableEval, 
+   
+  },
+
+  { 
+    path: '/evalstud/:student_number/:evalid', 
+    name: 'EscEvalstud', 
+    component: escEvalstud, 
+   
+  },
+
+  { 
+    path: '/scholastic/:student_number', 
+    name: 'Scholastic RecordStudent', 
+    component:  escScholasticStud, 
+   
+  },
+
+ 
+  
+
+  
 ]
 
 

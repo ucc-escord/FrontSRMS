@@ -54,13 +54,14 @@
       <!-- LOG IN/ LOG OUT -->
 
               <!-- isLoggedOut -->
-              <md-list-item
+              <div v-if="showlogin === false">
+              <md-list-item 
                 to="/login"
                 v-if="!showMenu"
               >
                 <p class="__login">Log In</p>
               </md-list-item>
-
+              </div>
               <!-- isLoggedIn removed to="/" replace with = @click-->
               <md-list-item
                 class="__no-bg"
@@ -116,10 +117,12 @@ export default {
       }
     }
   },
+ 
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
+      showlogin:false,
     };
   },
   computed: {
@@ -134,6 +137,14 @@ export default {
 loggingout(){
               this.loggingOut()
       },
+       auth(){
+
+      var auth = this.$store.getters.isAuthenticated
+          if(auth === true){
+
+              this.showlogin = true;
+          }
+        },
 
      /* COMPONENT METHODS */
     bodyClick() {
@@ -174,7 +185,9 @@ loggingout(){
   },
   mounted() {
     document.addEventListener("scroll", this.scrollListener);
+    this.auth()
   },
+  
   beforeDestroy() {
     document.removeEventListener("scroll", this.scrollListener);
   }

@@ -22,7 +22,7 @@
                         <!-- -this is not edited -->
                         <md-input readonly 
                         id="student-number" 
-                        v-model="getCurrentUser.studentNum" 
+                        v-model="getCurrentUser.student_number" 
                         :disabled="sending" />
                       </md-field>
                     </div>
@@ -32,42 +32,42 @@
 
                       <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('firstName')">
+                      :class="getValidationClass('firstname')">
                         <label>First Name</label>
                         <md-input 
                         id="first-name" 
-                        v-model="getCurrentUser.firstName" 
+                        v-model="getScholRecord.firstname" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser.firstName.required">First name is required.</span>
+                        <span class="md-error" v-if="!$v.getScholRecord.firstname.required">First name is required.</span>
 
-                        <span class="md-error" v-else-if="!$v.getCurrentUser.firstName.minLength">Must be at least 3 characters.</span>
+                        <span class="md-error" v-else-if="!$v.getScholRecord.firstname.minLength">Must be at least 3 characters.</span>
                      </md-field>
 
                      <md-field
                       class="has-esc-accent md-layout-item md-size-10" 
-                      :class="getValidationClass('_MI')">
+                      :class="getValidationClass('middlename')">
                         <label>MI</label>
                         <md-input 
                         id="middle-initial" 
-                        v-model="getCurrentUser._MI" 
+                        v-model="getScholRecord.middlename" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser._MI.maxLength">Invalid.</span>
+                        <span class="md-error" v-if="!$v.getScholRecord.middlename.maxLength">Invalid.</span>
                      </md-field>
 
                      <md-field
                       class="has-esc-accent md-layout-item md-size-40" 
-                      :class="getValidationClass('lastName')">
+                      :class="getValidationClass('surname')">
                         <label>Last Name</label>
                         <md-input 
                         id="last-name" 
-                        v-model="getCurrentUser.lastName" 
+                        v-model="getScholRecord.surname" 
                         :disabled="sending" />
 
-                        <span class="md-error" v-if="!$v.getCurrentUser.lastName.required">Last name is required.</span>
+                        <span class="md-error" v-if="!$v.getScholRecord.surname.required">Last name is required.</span>
 
-                        <span class="md-error" v-else-if="!$v.getCurrentUser.lastName.minLength">Must be at least 3 characters.</span>
+                        <span class="md-error" v-else-if="!$v.getScholRecord.surname.minLength">Must be at least 3 characters.</span>
                      </md-field>
                     </div>
 
@@ -162,39 +162,47 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
 
     mounted(){
    this.$store.dispatch('displayuser');
+            this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
+
     },
 
     data: () => ({
       student_createNewPass: {
         password:null,
         confirmpass:null,
+
      
       },
       userUpdated: false,
       userNotUpdated: false,
       sending: false,
-      lastUser: null
+      lastUser: null,
+
     }),
     validations: {
       getCurrentUser:{
-        // studentNum:{
-        //       required
-        //   },
-          firstName:{
-              required,
-              minLength: minLength(3)
-          },
-          _MI: {
-            maxLength: maxLength(3)
-          },
-          lastName: {
-            required,
-            minLength: minLength(3)
-          },
+       student_number:{
+              required
+         },
+        
           email:{
               required,
               email
           },
+          },
+          getScholRecord : {
+        firstname:{
+              required,
+              minLength: minLength(3)
+          },
+          middlename: {
+            maxLength: maxLength(3)
+          },
+          surname: {
+            required,
+            minLength: minLength(3)
+          },
+
           },
           student_createNewPass: {
             password:{
@@ -207,15 +215,18 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
               sameAsPassword: sameAs('password')
               //sameAs: sameAs(function () { return this.student_createNewPass.password })
         },
+        
       }
     },
     computed:{
  ...mapGetters({getCurrentUser: 'getCurrentUser'}),
+  ...mapGetters({getScholRecord: 'getScholRecord'}),
+
   
     },
     methods: {
       getValidationClass (fieldName) {
-        const field = this.$v.getCurrentUser[fieldName] || this.$v.student_createNewPass[fieldName]
+        const field = this.$v.getCurrentUser[fieldName] || this.$v.student_createNewPass[fieldName] || this.$v.getScholRecord[fieldName]
 
         if (field) {
           return {
@@ -267,10 +278,10 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
         axios.put('/api/updateStudent/'+this.getCurrentUser.id, {
              password : this.student_createNewPass.password,
              confirmpass: this.student_createNewPass.confirmpass,
-             studentNum : this.getCurrentUser.studentNum,
-             firstName : this.getCurrentUser.firstName,
-             lastName: this.getCurrentUser.lastName,
-             _MI: this.getCurrentUser._MI,
+             student_number : this.getCurrentUser.student_number,
+             firstName : this.getScholRecord.firstname,
+             surname: this.getScholRecord.surname,
+             middlename: this.getScholRecord.middlename,
              email: this.getCurrentUser.email,
 
         }).then((response)=>{

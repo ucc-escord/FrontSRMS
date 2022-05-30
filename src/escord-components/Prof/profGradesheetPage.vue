@@ -6,7 +6,7 @@
     ></parallax>
    
 
-    <div class="main main-raised">
+    <div class="main main-raised" ref="DownloadComp">
       <div class="section profile-content">
         <div class="container">
        
@@ -69,7 +69,7 @@
                         <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
                     </md-button>
                 </div>
-
+       
               <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="refreshGradesheet"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
@@ -173,7 +173,7 @@
                 <md-table-cell>
                   <md-field class="has-esc-accent">
                   <md-input 
-                    v-model="getrow[index].finalterm"></md-input> <!---edit this var--->
+                    v-model="getrow[index].finalgrade"></md-input> <!---edit this var--->
                   </md-field>
                 </md-table-cell>                
                 
@@ -309,14 +309,18 @@ import { Modal } from "@/components";
 import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
 
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
+  name:'Gradesheetpage',
   components: {
-      Modal
+      Modal,
+    
+ 
   },
   mounted() {
           this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
@@ -438,7 +442,7 @@ export default {
  // ...mapMutations(['setspeciGS']),
     sendArrayofData(index){
 
-        console.log(index);
+        //  console.log(index);
 
    // this.updateGradesheetData({route:index.id}, this.index);
 
@@ -446,7 +450,7 @@ export default {
         axios.put('/api/addgs/'+index.id, index).then((response)=>{
         
 
-            console.log('create professor accounts' , response.data);
+         //     console.log('create professor accounts' , response.data);
 
             
              }).catch((errors)=>{
@@ -507,10 +511,10 @@ export default {
   
           this.addStudent()
             
-          console.log("Student is added successfully.")
+        //    console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+         //   console.log("Cannot add student to the gradesheet.");
         }
     },
 
@@ -521,7 +525,7 @@ export default {
             status_archieve: '1', }).then((response)=>{
           
        
-                  console.log('archieve successfull');
+                //    console.log('archieve successfull');
                   
                 //add notification time out here 
 
@@ -529,13 +533,17 @@ export default {
     
     }).catch((errors)=>{
           
-                 console.log('error in archeiveing');
+                 //  console.log('error in archeiveing');
     
           
        
                  })  
  
            },
+
+        
+
+     
   }
 };
 </script>

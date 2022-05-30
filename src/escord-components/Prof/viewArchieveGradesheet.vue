@@ -127,9 +127,8 @@
               </md-table-row>
 
             </md-table>
-
+      
           </div>
-
           <div class="__addStudentModal">
             <!-- modal -->
           </div>
@@ -147,6 +146,7 @@
 import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
 
+
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
@@ -154,13 +154,16 @@ import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validator
 export default {
   bodyClass: "profile-page",
   components: {
-     
-  },
-  mounted() {
-          this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
-          let studentrow = this.$store.getters.getrow;
+    
 
-        //  studentrow.forEach(student => this.studentList = student);
+  },
+ mounted() {
+       this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
+          //let studentrow = this.$store.getters.getrow;
+            
+            // this.showgsinfo({ route: this.$route.params.archievegs}); */
+   
+        // // studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
           
       },
@@ -280,11 +283,11 @@ export default {
  axios.put('/api/unarchieveGS/'+this.$route.params.archievegs).then(response => {
         //   this.currentUser = response.data
    
-    console.log("Archieve Succesfully")
+   //   console.log("Archieve Succesfully")
         //    console.log(response.data[0]);
 
        }).catch(()=>{
-           console.log("Error in getting the user")
+         //    console.log("Error in getting the user")
        }) 
     
 
@@ -341,12 +344,16 @@ export default {
   
           this.addStudent()
             
-          console.log("Student is added successfully.")
+         //   console.log("Student is added successfully.")
         }
         else {
-          console.log("Cannot add student to the gradesheet.");
+         //   console.log("Cannot add student to the gradesheet.");
         }
     },
+
+    download(){
+      
+    }
 
   }
 };

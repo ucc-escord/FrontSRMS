@@ -27,7 +27,7 @@ const actions = {
           
   
          }).catch(()=>{
-             console.log("Error in getting the user")
+            // console.log("Error in getting the user")
          }) 
      
        },

@@ -31,7 +31,7 @@
                 </md-table-cell>
 
                 <md-table-cell class="manAcc">
-                    {{activity.finalgrade}} <!--- change into units-->
+                    {{activity.units}} <!--- change into units-->
                 </md-table-cell>
 
             </md-table-row>
@@ -149,7 +149,7 @@ async tablesecondyear(){
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    //console.error(response)
                 })
            
 },

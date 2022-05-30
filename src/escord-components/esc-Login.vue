@@ -3,6 +3,9 @@
     <div class="section page-header header-filter" :style="headerStyle">
       <div class="container">
         <div class="md-layout">
+          <div v-if="showlogin === false"
+            class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
+          >
           <div class="mx-auto">
             
             <md-card>
@@ -126,6 +129,7 @@
     <send-reset-code v-if="sendResetPassCode" @close="sendResetPassCodeHide"/>
     <vue-headful title="Login | ESCORD"/>
   </div>
+  </div>
 </template>
 
 <script>
@@ -140,11 +144,16 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   bodyClass: "escord-login-page",
+  mounted(){
+    this.auth()
+  },
+
   components: {
     "send-reset-code": sendResetPassCode
   },
   data() {
     return {
+         showlogin:false,
       sendResetPassCode: false,
         /* form data */
       loginData: {
@@ -220,6 +229,7 @@ export default {
           }
         }
       },
+      
       loginValidate () {
        this.$v.$touch()
 
@@ -256,7 +266,15 @@ export default {
         this.loginData.userPassword = null;
         console.log(this.showStudNumInput)
       }
-    }
+    },
+        auth(){
+
+      var auth = this.$store.getters.isAuthenticated
+          if(auth === true){
+
+              this.showlogin = true;
+          }
+        }
   }
 };
 </script>
