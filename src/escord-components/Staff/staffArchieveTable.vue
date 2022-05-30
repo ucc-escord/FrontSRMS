@@ -1,24 +1,20 @@
 <template>
-  <div class="wrapper">
-    <parallax
-      class="section page-header header-filter"
-      :style="headerStyle"
-    ></parallax>
-    <div class="main main-raised">
-      <div class="section profile-content">
-        <div class="container">
-</div>
+  
+    <div >
+    
+        <div>
+
 
 
 
      <div class = "md-layout escord md-gutter md-alignment-center-center">
          <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
 
-  <md-button @click="showscholtable">Archieve Scholastic</md-button>
+  <md-button class="md-esc-accent" @click="showscholtable">Archieve Scholastic</md-button>
 
    </div>
          <div class = "md-layout-item md-size-33 md-layout md-gutter md-alignment-center-center">
-  <md-button @click="showevaltable">Archieve Evaluation</md-button>
+  <md-button class="md-esc-accent" @click="showevaltable">Archieve Evaluation</md-button>
       </div>
   </div>
 
@@ -31,21 +27,40 @@
 <!---scholastic-->
   <div  v-if="defaultvalbutton ==='schol'">
   
+     <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-   <md-field>
+                <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
+                    <md-field
+                    class="has-esc-darkgrey">
+                        <label>Search..</label>
+                        <md-input  v-model="search"></md-input>
+                    </md-field>
+                </div>
+
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button @click="scholshowarchieve" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                        <md-icon class="md-size-4x">search</md-icon>
+                    </md-button>
+                </div>
+
+            </div>
+
+
+   <!-- <md-field>
             <label>SEARCH BAR</label>
             <md-input v-model="search"></md-input>
             <span class="md-helper-text">search your data</span>
             <md-button class="md-esc-accent" @click="scholshowarchieve">
               Search
             </md-button>
-          </md-field>
+          </md-field> -->
+
+
 
  <md-table v-model="getarchschol.data" md-sort="name" md-sort-order="asc" >
     
-   <h1 class="md-title text-center">Scholastic</h1>
+   <!-- <h1 class="md-title text-center">Scholastic</h1> -->
        <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Scholastic ID</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Fullname</md-table-head>
@@ -56,9 +71,7 @@
       <md-table-row   v-for="(_, index) in getarchschol.data"
               :key="index">
 
-              <md-table-cell class="text-center">
-                                <label class="text-center">VIEW</label>
-              </md-table-cell>
+            
 
                   <md-table-cell class="text-center">
                       {{getarchschol.data[index].srms_id}}
@@ -91,34 +104,52 @@
 
    <!---evaluation-->
    <div v-else>
+    <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-     <md-field>
+               
+
+         <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
+                    <md-field
+                    class="has-esc-darkgrey">
+                        <label>Search..</label>
+                        <md-input  v-model="search"></md-input>
+                    </md-field>
+                </div>
+
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                    <md-button @click="evalformshowarchieve" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                        <md-icon class="md-size-4x">search</md-icon>
+                    </md-button>
+                </div>
+
+           </div>
+
+
+    <!--  <md-field>
             <label>SEARCH BAR</label>
             <md-input v-model="search"></md-input>
             <span class="md-helper-text">search your data</span>
             <md-button class="md-esc-accent" @click="evalformshowarchieve">
               Search
             </md-button>
-          </md-field>
+          </md-field> -->
 
 
  <md-table v-model="getarcheval" md-sort="name" md-sort-order="asc" >
 
- <h1 class="md-title text-center">Evaluation</h1>
+ <!-- <h1 class="md-title text-center">Evaluation</h1> -->
         <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
+              
                 <md-table-head class="text-center">Evaluation ID</md-table-head>
                 <md-table-head class="text-center">SRMS ID</md-table-head>
                 <md-table-head class="text-center">STATUS</md-table-head>
                 
               </md-table-row>
 
-  <md-table-row
+        <md-table-row
                v-for="(_, index) in getarcheval.data"
               :key="index">
-              <md-table-cell class="text-center">
-                                <label class="text-center">VIEW</label>
-              </md-table-cell>
+            
 
                 <md-table-cell class="text-center">
                       {{getarcheval.data[index].evalform_id}}
@@ -146,7 +177,7 @@
 
   
         </div>
-      </div>
+      
     
  <vue-headful title="SR Detail"/>
   </div>

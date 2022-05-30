@@ -12,20 +12,20 @@
               <form @submit.prevent="requestResetPassword" novalidate>
 <!-- form-control  -->
                 <md-field 
-                :class="getValidationClass('email_sendcode')"
+                :class="getValidationClass('email')"
                 class="md-layout has-esc-accent">
                   <label>Email</label>
                   <md-input  
                   :disabled="disableFirst" 
                   class="form-control"
                   type="email" 
-                  id="email_sendcode" 
+                  id="email" 
                   placeholder="user@example.com" 
-                  v-model="email_sendcode"></md-input>
+                  v-model="email"></md-input>
 
-                  <span class="md-error" v-if="!$v.email_sendcode.required">Email is required.</span>
+                  <span class="md-error" v-if="!$v.email.required">Email is required.</span>
 
-                  <span class="md-error" v-else-if="!$v.email_sendcode.email">Invalid email.</span>
+                  <span class="md-error" v-else-if="!$v.email.email">Invalid email.</span>
 
                 </md-field>
                 
@@ -76,12 +76,12 @@ export default {
         forgotPassModal: false,
         disableFirst: false,
 
-        email_sendcode: null,
+        email: null,
         has_error: false,
       };
   },
   validations: {
-    email_sendcode: {required, email}
+    email: {required, email}
   },
   methods: {
     closeModal: function() {
@@ -111,6 +111,15 @@ export default {
               //disable the "send code to email" form above
               this.disableFirst = true 
 
+
+          axios.post('/api/SendCode', {email: this.email}).then(response => {
+
+                console.log(response)
+               }).catch((errors)=>{
+  
+                   console.log(errors)
+   
+             });
               //show next step (setting new password) when there is no error
               this.createNewPass = true; 
 
@@ -120,15 +129,7 @@ export default {
               console.log("Code not sent.")
             }
             
-            axios.post('/api/SendCode', {email: this.email_sendCode}).then(response => {
-            
-
-                console.log(response)
-               }).catch((errors)=>{
-  
-                   console.log(errors)
-   
-             });
+          
 
              
         }

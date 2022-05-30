@@ -24,7 +24,7 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
+                    <h3 class="title">{{getCurrentUser.firstname}} {{getCurrentUser.middlename}} {{getCurrentUser.lastname}}</h3>
                     <h5>MIS Staff</h5>
                   </div>
 
@@ -115,10 +115,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters} from "vuex";
-
 // modal import
 import updateModal from '../Staff/AccountStaff.vue'
+import mapGetters from 'vuex'
 
 export default {
   bodyClass: "profile-page",

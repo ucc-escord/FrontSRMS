@@ -264,7 +264,7 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
                }).then((response)=>{
         
 
-            console.log('update Admin Account' , response.data);
+            // console.log('update Admin Account' , response.data);
 
             
              }).catch((errors)=>{

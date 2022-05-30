@@ -269,7 +269,7 @@ this.$store.dispatch('showProf');  */
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    // console.error(response)
                 })
 
            
@@ -285,7 +285,7 @@ this.$store.dispatch('showProf');  */
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    // console.error(response)
                 })
 
            
@@ -301,7 +301,7 @@ this.$store.dispatch('showProf');  */
 
                 
                 }).catch(({ response })=>{
-                    console.error(response)
+                    // console.error(response)
                 })
 
            

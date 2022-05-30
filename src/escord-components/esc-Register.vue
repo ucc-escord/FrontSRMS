@@ -6,6 +6,7 @@
           <div
             class="md-layout-item md-size-50 md-small-size-80 md-xsmall-size-90 md-medium-size-70 mx-auto"
           >
+ <H6 class="title ">{{getdupliProf.message}}</H6>
             
             <md-card>
                 <md-card-content>
@@ -161,7 +162,7 @@
 //validation imports
 import { validationMixin } from 'vuelidate'
 import { required, email, sameAs, minLength } from 'vuelidate/lib/validators'
-import { mapActions} from "vuex";
+import { mapActions, mapGetters} from "vuex";
 
 export default {
   bodyClass: "escord-login-page",
@@ -197,6 +198,10 @@ export default {
     }
     
   },
+   computed:{
+     ...mapGetters({getdupliProf: 'getdupliProf'}),
+
+    },
 
  methods: {
     /* validation methods */

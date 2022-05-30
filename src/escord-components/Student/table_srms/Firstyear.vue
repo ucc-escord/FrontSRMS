@@ -161,7 +161,6 @@ export default {
     },
 
     methods:{
-
     gwa_1st() {
         const gwa = this.grades_1st.reduce((acc, item) =>
         acc + (item.grades / item.units), 0);
@@ -179,18 +178,11 @@ export default {
     
     
     async tablefirstyear(){
-           
- 
            await axios.get('/api/perstudentschol/'+this.$route.params.student_number).then(({data})=>{
-        
                     this.firstsem = data.first;
                       this.secondsem = data.firstSecondSem;
-              
-              
-
-                
                 }).catch(({ response })=>{
-                    console.error(response)
+                   // console.error(response)
                 })
            
 },

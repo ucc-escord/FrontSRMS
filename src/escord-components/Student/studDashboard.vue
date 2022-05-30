@@ -23,8 +23,8 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title">{{getCurrentUser.firstName}} {{getCurrentUser._MI}} {{getCurrentUser.lastName}}</h3>
-                  <h5>{{getCurrentUser.studentNum}}  {{studProg}} | {{studYr}}{{studSec}}</h5>
+                    <h3 class="title"> {{getCurrentUser.name}}</h3>
+                  <h5>{{getScholRecord.student_number}}  {{getScholRecord.course}} | {{getScholRecord.section}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -61,6 +61,7 @@
                         <p class="text-center">Click to view your scholastic record form</p>
                       </md-card-content>
                   </md-card>
+                   
                 </div>
 
                 <!-- PREVIEW -->
@@ -91,11 +92,15 @@
                 
                 <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100"  @click="showEF_prev">
                   <md-card  class="md-with-hover">
+                     
                       <md-card-content>
                         <p class="md-title title text-center">Summary of Grades</p>
-                        <p class="text-center">Click to view and download your evaluation form</p>
+                        <p class="text-center">Click to view and download your evaluation form </p>
                       </md-card-content>
+                       
+
                   </md-card>
+                
                 </div>
 
                 <!-- PREVIEW -->
@@ -141,9 +146,13 @@ import { mapActions, mapGetters} from "vuex";
 
 import studScol from './studScholastic.vue'
 import studEval from './studEvaluation.vue'
+import studTableEval from './studEvalTable.vue'
+
 
 // modal import
 import updateModal from './AccountStudent.vue'
+import axios from 'axios'
+import router from '../../route'
 
 //import vuehtml2pdf
 import VueHtml2pdf from 'vue-html2pdf'
@@ -152,6 +161,7 @@ import VueHtml2pdf from 'vue-html2pdf'
 export default {
   bodyClass: "profile-page",
  components: {
+     updateModal,
     studScol,
     studEval,
     updateModal,
@@ -160,12 +170,18 @@ export default {
   },
   mounted(){
   this.$store.dispatch('displayuser');
+            this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
 
+  this.getsrms_id()
   },
   data() {
     return {
       /*modal default value on load*/
       updateModal: false,
+      srms_id:'',
+     /*  studLN: "DELA CRUZ",
+      studFN: "JUAN",
+      studMN: "GONZALES", */
 
       // studLN: "DELA CRUZ",
       // studFN: "JUAN",
@@ -198,6 +214,7 @@ export default {
       };
     },
       ...mapGetters({getCurrentUser: 'getCurrentUser'}),
+  ...mapGetters({getScholRecord: 'getScholRecord'}),
 
   },
   methods: {
@@ -217,6 +234,17 @@ export default {
     updateModalHide() {
       this.updateModal = false;
     },
+    async getsrms_id(){ 
+           await axios.get('/api/getsrmsid/'+this.$route.params.student_number).then(({data})=>{
+                    this.srms_id = data[0].srms_id
+
+                    //  console.log(this.srms_id)
+                }).catch(({ response })=>{
+                    //  console.error(response)
+        })
+           
+},
+    
 
     /* DOWNLOAD EF */
     printEF() {

@@ -13,9 +13,15 @@
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
+                
+                    <h5 class="md-subheading">
+                   SEMESTER SY: YEARSEM (CHANGE THIS AS AN INPUT FIELD)
+                   
+                    </h5>
+                
                 <h4>
-                    <strong>{{getGS.subjectcode}}</strong>
-                   {{getGS.subjectdesc}}
+                    <strong>STUDENT NUMBER (CHANGE THIS AS AN INPUT FIELD)</strong>
+                SURNAME
  
                 
                 </h4>
@@ -24,13 +30,22 @@
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
                     <h5 class="md-subheading">
-                        {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}}
+                   FIRST NAME (CHANGE THIS AS AN INPUT FIELD)
                     </h5>
                     <p class="md-caption __top-md-caption">
-                        {{getGS.day}} , {{getGS.time}}
+                    MIDDLE NAME (CHANGE THIS AS AN INPUT FIELD)
                     </p>
                     <p class="md-caption">
-                        {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}}
+                   COURSE  (CHANGE THIS AS AN INPUT FIELD)
+                    </p>
+                    
+                    <p class="md-caption">
+                   YEAR (CHANGE THIS AS AN INPUT FIELD)
+                    </p>
+
+                    
+                    <p class="md-caption">
+                   SECTION  (CHANGE THIS AS AN INPUT FIELD)
                     </p>
 
             </div>
@@ -47,18 +62,10 @@
                 </div>
 
                 <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button @click="sendArrayofData"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>save</md-icon>
-                        <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
-                    </md-button>
-                </div>
-
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="archievebtn"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>inventory</md-icon>
-                        <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
+                        <md-tooltip md-direction="bottom">Archive EVALUATION</md-tooltip>
                     </md-button>
                 </div>
 
@@ -84,120 +91,32 @@
 
           <md-divider></md-divider>
 
-           <div v-if='loadingStatus'>
+<!--            <div v-if="Loading">
             <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
           
+          </div> -->
+
+          <div  class="__gradesheet-table">
+
+              <eval-form/>
+            
           </div>
 
-          <div  v-else  class="__gradesheet-table">
-
-            <md-table 
-              v-model="studentList"
-              md-sort="studLN"
-              md-sort-order="asc">
-
-              <md-table-row class="title">
-                <md-table-head class="text-center">Actions</md-table-head>
-                <md-table-head class="text-center">Student Number</md-table-head>
-                <md-table-head class="text-center">Name</md-table-head>
-                <md-table-head class="text-center">Midterm</md-table-head>
-                <md-table-head class="text-center">Final Term</md-table-head>
-                <md-table-head class="text-center">Remarks</md-table-head>
-                
-              </md-table-row>
-
-              <md-table-row
-              v-for="(_, index) in getrow"
-              :key="index">
-
-               <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button @click.prevent="sendArrayofData(getrow[index])"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>save</md-icon>
-                        <md-tooltip md-direction="bottom">save</md-tooltip>
-                    </md-button>
-                </div>
-
-                
-                <md-table-cell class="text-center">
-                  {{getrow[index].student_number}}
-                </md-table-cell>
-
-
-
-                <md-table-cell>
-               {{getrow[index].studentname}}
-                </md-table-cell>
-
-               <md-table-cell>
-              
-                 <md-vuelidated
-                  :key="index"
-                  :messages="{
-                    required: 'Field cannot be blank.',
-                    maxLength: 'Input cannot be more than 4 characters.',
-                    minValue: 'Field only accepts value from `1.00` to `5.00`.',
-                    maxValue: 'Field only accepts value from `1.00` to `5.00`.'
-                  }" 
-                  field="md-field" 
-                  class="has-esc-accent">
-                   <md-input 
-                    type="number"
-                    class="text-center"
-                     v-model="getrow[index].midterm"
-                   ></md-input> 
-                  </md-vuelidated> 
-               
-                </md-table-cell>
-
-                <md-table-cell>
-                
-                 <md-vuelidated
-                  :key="index"
-                  :messages="{
-                    required: 'Field cannot be blank.',
-                    maxLength: 'Input cannot be more than 4 characters.',
-                    minValue: 'Field only accepts value from `1.00` to `5.00`.',
-                    maxValue: 'Field only accepts value from `1.00` to `5.00`.'
-                  }" 
-                  field="md-field" 
-                  class="has-esc-accent">
-                    <md-input 
-                    type="number"
-                    class="text-center"
-                    v-model="getrow[index].finalterm"></md-input>
-                  </md-vuelidated> 
-                 
-                </md-table-cell>
-
-                <md-table-cell>
-                  <md-field class="has-esc-accent">
-                  <md-input 
-                    v-model="getrow[index].finalgrade"></md-input> <!---edit this var--->
-                  </md-field>
-                </md-table-cell>                
-                
-              </md-table-row>
-
-            </md-table>
-
-          </div>
-
-          <div class="__addStudentModal">
-            <!-- modal -->
+        <!--   <div class="__addStudentModal">
+           
             <modal v-if="classicModal" @close="classicModalHide">
 
-              <!-- modal header -->
+             
               <template slot="header">
                   <h3 class="title text-esc-accent">Add Student</h3>
               </template>
 
-              <!-- modal body -->
+            
               <template slot="body">
                 <form @submit.prevent="addValidate" novalidate class="md-layout md-gutter md-alignment-center-left">
 
 
-                  <!-- addStud modal inputs -->
+               
                   <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
 
                     <md-field class="has-esc-accent"
@@ -264,7 +183,7 @@
                   </div>
 
                   
-                  <!-- modal footer -->
+                 
                   <div class="md-layout md-gutter md-alignment-center-space-between __modal-buttons">
 
                     <div class="md-layout-item md-layout md-alignment-center-center">
@@ -294,7 +213,8 @@
 
               <template slot="footer"></template>
             </modal>
-          </div>
+          </div> 
+          -->
 
         </div>
       </div>
@@ -312,18 +232,22 @@ import axios from "axios"
 
 //validation imports
 import { validationMixin } from 'vuelidate'
+import  EvalFormtab from './tab_evaluationForm'
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
   name:'Gradesheetpage',
   components: {
-      Modal,
-    
+   
+      "eval-form":EvalFormtab,
  
   },
   mounted() {
-          this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
+
+            this.$store.dispatch('getScholasticRecord',this.$route.params.studnum);
+
+       //   this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
          // let studentrow = this.$store.getters.getrow;
 
         //  studentrow.forEach(student => this.studentList = student);
@@ -331,7 +255,7 @@ export default {
           
       },
       created(){
-          this.studentGrade = this.$store.getters.getrow;
+        //  this.studentGrade = this.$store.getters.getrow;
       },
   data() {
     return {
@@ -425,39 +349,41 @@ export default {
     loadingStatus(){
       return this.$store.getters.loadingStatus
     },
-       ...mapGetters({getrow : 'getrow'}),
-     ...mapGetters({getGS : 'getGS'}),
+  ...mapGetters({getScholRecord: 'getScholRecord'}),
+
+    /*    ...mapGetters({getrow : 'getrow'}),
+     ...mapGetters({getGS : 'getGS'}), */
 
   
   },
 
   methods: {
     /*modal function*/
-          ...mapActions({ archgradesheet: "archgradesheet" }),
+          /* ...mapActions({ archgradesheet: "archgradesheet" }),
           ...mapActions({ refreshGS: "showgsinfo" }),
 
           ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
-          ...mapActions({ updateGradesheetData: "updateGradesheetData" }),
+          ...mapActions({ updateGradesheetData: "updateGradesheetData" }), */
 
  // ...mapMutations(['setspeciGS']),
     sendArrayofData(index){
 
-        //  console.log(index);
+      //    console.log(index);
 
    // this.updateGradesheetData({route:index.id}, this.index);
 
   
-        axios.put('/api/addgs/'+index.id, index).then((response)=>{
+      /*   axios.put('/api/addgs/'+index.id, index).then((response)=>{
         
 
-         //     console.log('create professor accounts' , response.data);
+            console.log('create professor accounts' , response.data);
 
             
              }).catch((errors)=>{
   
              this.error =  errors.response.data;
    
-             })
+             }) */
     },
 
     classicModalHide() {
@@ -465,7 +391,7 @@ export default {
     },
 
     refreshGradesheet(){
-        this.refreshGS({ route: this.$route.params.gradeshid })
+     //   this.refreshGS({ route: this.$route.params.gradeshid })
     },
 
     /* add student modal validation methods */
@@ -490,7 +416,7 @@ export default {
       addStudent () {
         this.sending = true
      
-       this.addStudGradesheet(this.addStud)
+     //  this.addStudGradesheet(this.addStud)
        
    
       
@@ -511,10 +437,10 @@ export default {
   
           this.addStudent()
             
-        //    console.log("Student is added successfully.")
+         //   console.log("Student is added successfully.")
         }
         else {
-         //   console.log("Cannot add student to the gradesheet.");
+          //  console.log("Cannot add student to the gradesheet.");
         }
     },
 
@@ -525,7 +451,7 @@ export default {
             status_archieve: '1', }).then((response)=>{
           
        
-                //    console.log('archieve successfull');
+               //     console.log('archieve successfull');
                   
                 //add notification time out here 
 

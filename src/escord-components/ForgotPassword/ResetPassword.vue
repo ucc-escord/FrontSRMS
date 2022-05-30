@@ -59,7 +59,7 @@ export default {
                 // console.log(result.data);
                 this.$router.push({name: 'Landing'})
             }, error => {
-                console.error(error);
+             // console.error(error);
             });
         }
     }

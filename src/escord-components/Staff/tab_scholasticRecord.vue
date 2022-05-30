@@ -120,23 +120,6 @@
 
             </div> -->
 
-            <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
-
-                <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
-                    <md-field
-                    class="has-esc-darkgrey">
-                        <label>Search..</label>
-                        <md-input></md-input>
-                    </md-field>
-                </div>
-
-                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button class="md-just-icon md-round md-esc-darkgrey md-raised">
-                        <md-icon class="md-size-4x">search</md-icon>
-                    </md-button>
-                </div>
-
-            </div>
             </div>
             <!-- END OF BUTTON AND SEARCH BAR -->
 
@@ -211,6 +194,10 @@
                 class="md-simple md-danger md-just-icon md-round">
                     <md-icon>close</md-icon>
                 </md-button>
+
+                           <router-link :to="{ name: 'EscEval', params:{studnum: student.student_number } }">VIEW</router-link>
+
+           
                 </md-table-cell>
 
             </md-table-row>
@@ -495,7 +482,6 @@ import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
 import {Pagination} from '@/components'
 
-
 export default {
   bodyClass: "profile-page",
    components: {
@@ -698,16 +684,16 @@ this.getStudentPerProg()
 
     /* download button in row is clicked */
     downloadIndividualSR(studentInfo) {
-      console.log("Row is selected. \nDownloading specific SR.\n\n" + 
+     /*  console.log("Row is selected. \nDownloading specific SR.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN); */
     },
 
     /* archive button in row is clicked */
     archiveStudent(studentInfo) {
-      console.log("Row is selected. \nArchiving Student.\n\n" + 
+    /*   console.log("Row is selected. \nArchiving Student.\n\n" + 
       "Student Number: " + studentInfo.studNum + 
-      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN);
+      "\nStudent Name: " + studentInfo.studFN + " " + studentInfo.studMN + " " + studentInfo.studLN); */
     },
 
     /* modal methods && validations */
@@ -754,11 +740,11 @@ this.getStudentPerProg()
 
         if (!this.$v.$invalid) {
           this.editStudent()
-          console.log("Student info is updated successfully.")
+         //   console.log("Student info is updated successfully.")
         }
         else {
           this.studNotEditted = true
-          console.log("Cannot update student info.");
+          //  console.log("Cannot update student info.");
         }
     },
 
@@ -788,7 +774,7 @@ this.getStudentPerProg()
          axios.put('/api/scholupdate/'+this.srms_id, this.modalInfo).then((response)=>{
         
 
-            console.log('update srms details' , response.data);
+        //      console.log('update srms details' , response.data);
 
             
              }).catch((errors)=>{

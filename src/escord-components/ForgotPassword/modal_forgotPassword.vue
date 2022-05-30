@@ -108,13 +108,7 @@ export default {
             this.$v.$touch()
             if (!this.$v.$invalid) {
               this.sending = true; 
-              console.log("Password created.")
-            }
-            else {
-              console.log("Password not created.")
-            }
-
-            axios.post('/api/updatePassword', {
+         axios.post('/api/updatePassword', {
                 code: this.code,
                 email: this.email_newpass,
                 password: this.password,
@@ -126,6 +120,14 @@ export default {
             }, error => {
                 console.error(error);
             });
+
+
+            }
+            else {
+              console.log("Password not created.")
+            }
+
+         
         }
   },
 };

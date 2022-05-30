@@ -6,16 +6,21 @@
     ></parallax>
    
 
-    <div class="main main-raised">
+    <div class="main main-raised" ref="DownloadComp">
       <div class="section profile-content">
         <div class="container">
        
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
+                
+                    <h5 class="md-subheading">
+                   SEMESTER : {{topviewdata.semester }}SY: {{topviewdata.sem_startyear}} - {{topviewdata.sem_endyeaer}}
+                    </h5>
+                
                 <h4>
-                    <strong> {{getGS.subjectcode}} </strong>
-                  {{getGS.subjectdesc}}
+                    <strong>STUDENT NUMBER : {{topviewdata.student_number }} </strong>
+                SURNAME : {{topviewdata.surname }} 
  
                 
                 </h4>
@@ -24,151 +29,78 @@
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
                     <h5 class="md-subheading">
-                        {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}} 
+                   FIRST NAME :  {{topviewdata.firstname }} 
                     </h5>
                     <p class="md-caption __top-md-caption">
-                       {{getGS.day}} , {{getGS.time}} 
+                    MIDDLE NAME : {{topviewdata.middlename }} 
                     </p>
                     <p class="md-caption">
-                 {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}} 
+                   COURSE  : {{topviewdata.course }} 
+                    </p>
+                    
+                    <p class="md-caption">
+                   YEAR : {{topviewdata.section }} 
                     </p>
 
             </div>
             
-            <div class="__gradesheet-buttons md-layout-item md-xsmall-size-100 md-size-30 md-layout md-gutter md-alignment-center-space-between">
-
-            
-
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button  @click="unArchieveGS"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>inventory</md-icon>
-                        <md-tooltip md-direction="bottom">Unarchieve Gradesheet</md-tooltip>
-                    </md-button>
-                </div>
-
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>download</md-icon>
-                        <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
-                    </md-button>
-                </div>
-
-              <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button  @click="refreshGradesheet"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>refresh</md-icon>
-                        <md-tooltip md-direction="bottom">Refresh Gradesheet</md-tooltip>
-                    </md-button>
-                </div> -->
-
-            </div>
+           
 
           </div>
 
           <md-divider></md-divider>
 
-           <div v-if='loadingStatus'>
+<!--            <div v-if="Loading">
             <md-progress-spinner class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between" md-mode="indeterminate"></md-progress-spinner>
           
-          </div>
+          </div> -->
 
-          <div  v-else  class="__gradesheet-table">
+          <div  class="__gradesheet-table">
 
-            <md-table 
-              v-model="studentList"
-              md-sort="studLN"
-              md-sort-order="asc">
-
-              <md-table-row class="title">
-                <md-table-head class="text-center">Student Number</md-table-head>
-                <md-table-head class="text-center">Name</md-table-head>
-                <md-table-head class="text-center">Midterm</md-table-head>
-                <md-table-head class="text-center">Final Term</md-table-head>
-                <md-table-head class="text-center">Remarks</md-table-head>
-                
-              </md-table-row>
-
-              <md-table-row
-              v-for="(_, index) in getrow"
-              :key="index">
-
-                
-                <md-table-cell class="text-center">
-                  {{getrow[index].student_number}}
-                </md-table-cell>
-
-
-
-                <md-table-cell>
-               {{getrow[index].studentname}}
-                </md-table-cell>
-
-             
-              
-                    <md-table-cell>
-                     {{getrow[index].midterm}}
-                </md-table-cell>
-               
-
-                  <md-table-cell>
-                     {{getrow[index].finalterm}}
-                </md-table-cell>
-               
-              
-                  <md-table-cell>
-                     {{getrow[index].finalgrade}}
-                </md-table-cell>
-              
-              
-                
-                
-              </md-table-row>
-
-            </md-table>
-      
-          </div>
-          <div class="__addStudentModal">
-            <!-- modal -->
+              <eval-form/>
+            
           </div>
 
         </div>
       </div>
     </div>
-    <vue-headful title="View Archieve Gradesheet"/>
+    <vue-headful title="Gradesheet Detail"/>
   </div>
 </template>
 
 <script>
 // modal import
-
+import { Modal } from "@/components";
 import { mapActions, mapGetters, mapMutations} from "vuex";
 import axios from "axios"
-
+import tabeval from './Tabeval.vue'
 
 //validation imports
 import { validationMixin } from 'vuelidate'
+
+
 import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
+  name:'Gradesheetpage',
   components: {
-    
-
-  },
- mounted() {
-       this.$store.dispatch('showgsinfo',{ route: this.$route.params.archievegs});
-          //let studentrow = this.$store.getters.getrow;
-            
-            // this.showgsinfo({ route: this.$route.params.archievegs}); */
    
-        // // studentrow.forEach(student => this.studentList = student);
+      "eval-form":tabeval,
+ 
+  },
+  mounted() {
+this.topview()
+    
+       //   this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
+         // let studentrow = this.$store.getters.getrow;
+
+        //  studentrow.forEach(student => this.studentList = student);
      // console.log(this.studentList)
           
       },
       created(){
-          this.studentGrade = this.$store.getters.getrow;
+        //  this.studentGrade = this.$store.getters.getrow;
       },
   data() {
     return {
@@ -192,6 +124,8 @@ export default {
     
       ],
       studentGrade: [],
+
+      topviewdata:[],
 
        /*modal default value on load*/
       classicModal: false,
@@ -262,35 +196,39 @@ export default {
     loadingStatus(){
       return this.$store.getters.loadingStatus
     },
-       ...mapGetters({getrow : 'getrow'}),
-     ...mapGetters({getGS : 'getGS'}),
+    /*    ...mapGetters({getrow : 'getrow'}),
+     ...mapGetters({getGS : 'getGS'}), */
 
   
   },
 
   methods: {
     /*modal function*/
-          ...mapActions({ archgradesheet: "archgradesheet" }),
+          /* ...mapActions({ archgradesheet: "archgradesheet" }),
           ...mapActions({ refreshGS: "showgsinfo" }),
 
           ...mapActions({ addStudGradesheet: "addStudGradesheet" }),
-          ...mapActions({ updateGradesheetData: "updateGradesheetData" }),
+          ...mapActions({ updateGradesheetData: "updateGradesheetData" }), */
 
  // ...mapMutations(['setspeciGS']),
-    unArchieveGS(){
+    sendArrayofData(index){
 
-       
- axios.put('/api/unarchieveGS/'+this.$route.params.archievegs).then(response => {
-        //   this.currentUser = response.data
+         // console.log(index);
+
+   // this.updateGradesheetData({route:index.id}, this.index);
+
+  
+      /*   axios.put('/api/addgs/'+index.id, index).then((response)=>{
+        
+
+            console.log('create professor accounts' , response.data);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
    
-   //   console.log("Archieve Succesfully")
-        //    console.log(response.data[0]);
-
-       }).catch(()=>{
-         //    console.log("Error in getting the user")
-       }) 
-    
-
+             }) */
     },
 
     classicModalHide() {
@@ -298,7 +236,7 @@ export default {
     },
 
     refreshGradesheet(){
-        this.refreshGS({ route: this.$route.params.gradeshid })
+     //   this.refreshGS({ route: this.$route.params.gradeshid })
     },
 
     /* add student modal validation methods */
@@ -323,7 +261,7 @@ export default {
       addStudent () {
         this.sending = true
      
-       this.addStudGradesheet(this.addStud)
+     //  this.addStudGradesheet(this.addStud)
        
    
       
@@ -344,17 +282,49 @@ export default {
   
           this.addStudent()
             
-         //   console.log("Student is added successfully.")
+      //      console.log("Student is added successfully.")
         }
         else {
-         //   console.log("Cannot add student to the gradesheet.");
+          //  console.log("Cannot add student to the gradesheet.");
         }
     },
 
-    download(){
-      
-    }
+    async topview(){ 
+           await axios.get('/api/evalTopView/100001').then(({data})=>{
+                    this.topviewdata = data[0]
+                }).catch(({ response })=>{
+                    //  console.error(response)
+                })
+           
+},
 
+
+      archievebtn(){
+       
+        
+      axios.put('api/archievegs/'+ this.$route.params.gradeshid, { 
+            status_archieve: '1', }).then((response)=>{
+          
+       
+                //    console.log('archieve successfull');
+                  
+                //add notification time out here 
+
+       
+    
+    }).catch((errors)=>{
+          
+                 //  console.log('error in archeiveing');
+    
+          
+       
+                 })  
+ 
+           },
+
+        
+
+     
   }
 };
 </script>
