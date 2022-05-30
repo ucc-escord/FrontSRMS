@@ -237,6 +237,7 @@
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 
+export default {
     name: 'EvaluationForm',
     mixins: [validationMixin],
     components:{

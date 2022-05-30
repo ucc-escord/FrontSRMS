@@ -4,7 +4,7 @@
       <div class="container">
         <div class="md-layout">
           <div v-if="showlogin === false"
-            class="md-layout-item md-size-35 md-small-size-65 md-xsmall-size-70 md-medium-size-40 mx-auto"
+            class="md-layout-item mx-auto _loginWrap"
           >
           <div class="mx-auto">
             
@@ -314,5 +314,9 @@ h3.title {
 
 .__link {
   margin-left: 0.5rem !important;
+}
+
+._loginWrap {
+  max-width: 25em !important;
 }
 </style>
