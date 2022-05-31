@@ -134,7 +134,7 @@ export default {
            
  
            await axios.get('/api/perstudentschol/'+this.$route.params.student_number).then(({data})=>{
-                    console.log(data)
+              //      console.log(data)
                this.firstsem = data.first;
                  this.secondsem = data.firstSecondSem;
 

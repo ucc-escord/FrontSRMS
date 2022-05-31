@@ -2,7 +2,7 @@
     <div class="md-layout md-gutter md-alignment-center-space-between">
         <table class="_header">
             <tr>
-                <th>FOURTH YEAR | SY: {{firstYearSY.startYr}} - {{firstYearSY.endYr}}</th> 
+                <th>FOURTH YEAR | SY: {{four.startYr}} - {{four.endYr}}</th> 
             </tr>
         </table>
         
@@ -87,6 +87,11 @@ export default {
     },
     data(){
         return{
+
+              four: {
+                startYr: '',
+                endYr: ''
+            },
 
             firstsem: {
                 type:Object,
@@ -185,7 +190,8 @@ export default {
                     this.firstsem = data.fourth;
                       this.secondsem = data.fourthSecondSem;
               
-              
+               this.four.startYr = data.fourth[0].sem_startyear
+                 this.four.endYr = data.fourth[0].sem_endyear
 
                 
                 }).catch(({ response })=>{

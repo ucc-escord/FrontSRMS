@@ -2,7 +2,7 @@
     <div class="md-layout md-gutter md-alignment-center-space-between">
         <table class="_header">
             <tr>
-                <th>THIRD YEAR | SY: {{firstYearSY.startYr}} - {{firstYearSY.endYr}}</th> 
+                <th>THIRD YEAR | SY: {{thirdYr.startYr}} - {{thirdYr.endYr}}</th> 
             </tr>
         </table>
         
@@ -98,9 +98,9 @@ export default {
             },
             semester:'',
 
-            firstYearSY: {
-                startYr: "2019",
-                endYr: "2020"
+            thirdYr: {
+                startYr:'',
+                endYr: ''
             },
 
             // grades_1st: [
@@ -185,7 +185,8 @@ export default {
                 this.firstsem = data.third;
                     this.secondsem = data.thirdSecondSem;
             
-            
+              this.thirdYr.startYr = data.third[0].sem_startyear
+                 this.thirdYr.endYr = data.third[0].sem_endyear
 
             
             }).catch(({ response })=>{

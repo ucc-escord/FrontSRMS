@@ -2,7 +2,7 @@
     <div class="md-layout md-gutter md-alignment-center-space-between">
         <table class="_header">
             <tr>
-                <th>SECOND YEAR | SY: {{firstYearSY.startYr}} - {{firstYearSY.endYr}}</th> 
+                <th>SECOND YEAR | SY: {{secondyr.startYr}} - {{secondyr.endYr}}</th> 
             </tr>
         </table>
         
@@ -98,9 +98,9 @@ export default {
             },
             semester:'',
 
-            firstYearSY: {
-                startYr: "2019",
-                endYr: "2020"
+            secondyr: {
+                startYr:'',
+                endYr: '',
             },
 
             // grades_1st: [
@@ -185,8 +185,9 @@ export default {
                 this.firstsem = data.second;
                     this.secondsem = data.secondSecondSem;
             
-                    console.log(data + 'data')
-
+            this.secondyr.startYr = data.second[0].sem_startyear
+                 this.secondyr.endYr = data.second[0].sem_endyear
+                
             
             }).catch(({ response })=>{
                 //console.error(response)

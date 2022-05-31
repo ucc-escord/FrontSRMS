@@ -105,24 +105,25 @@
       </div>
       
       <!-- FIRST YEAR GRADES -->
-      <div class="_gradeTbl">
+       <div class="_gradeTbl">
         <first/>
       </div>
 
       <!-- SECOND YEAR GRADES -->
       <div class="_gradeTbl html2pdf__page-break">
-        <first/>
+        <second/>
       </div>
 
       <!-- THIRD YEAR GRADES -->
       <div class="_gradeTbl">
-        <first/>
+        <third/>
       </div>
 
       <!-- FOURTH YEAR GRADES -->
       <div class="_gradeTbl">
-        <first/>
+        <four/>
       </div>
+
 
 
     </md-card-content>
@@ -173,18 +174,18 @@
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 import first from '../Student/table_srms/Firstyear.vue'
-//import second from './table_srms/Secondyear.vue'
-//import third from './table_srms/Thirdyear.vue'
-//import four from './table_srms/Fouryear.vue'
+import second from '../Student/table_srms/Secondyear.vue'
+import third from '../Student/table_srms/Thirdyear.vue'
+import four from '../Student/table_srms/Fouryear.vue'
 
   export default {
     name: 'ScholasticForm',
     mixins: [validationMixin],
     components:{
       first,
-      //second,
-      //third,
-      //four
+      second,
+      third,
+      four
   
     },
     mounted(){
