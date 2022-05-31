@@ -7,7 +7,7 @@
 
             <div class="__addButtons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-25 md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
                     @click="addNewStudentShow">
@@ -18,7 +18,7 @@
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-25 md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
                     @click="addNewStaffShow">
@@ -29,7 +29,7 @@
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-25 md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
                     @click="addNewProfShow">

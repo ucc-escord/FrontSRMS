@@ -18,9 +18,9 @@
                         <th colspan=1>UNITS</th>
                         <th colspan=1>GRADE</th>
                     </tr>
-                    <tr v-for="(_firstSem, index) in grades_1st" :key="index">
+                    <tr v-for="(_firstSem, index) in firstsem" :key="index">
                         <td colspan=1>{{_firstSem.subjectcode}}</td>
-                        <td colspan=2>{{_firstSem.subjectdesc}}</td>
+                        <td colspan=2>{{_firstSem.subjectcode}}</td>
                         <td colspan=1 class="text-center">{{_firstSem.units}}</td>
                         <td colspan=1 class="text-center">{{_firstSem.finalgrade}}</td>
                     </tr>
@@ -51,7 +51,7 @@
                         <th colspan=1>UNITS</th>
                         <th colspan=1>GRADE</th>
                     </tr>
-                    <tr v-for="(_secondSem, index) in grades_2nd" :key="index">
+                    <tr v-for="(_secondSem, index) in secondsem" :key="index">
                         <td colspan=1>{{_secondSem.subjectcode}}</td>
                         <td colspan=2>{{_secondSem.subjectdesc}}</td>
                         <td colspan=1 class="text-center">{{_secondSem.units}}</td>
@@ -94,35 +94,35 @@ export default {
                 endYr: ''
             },
 
-            grades_1st: [                
+            firstsem: [                
             ],
 
-            grades_2nd: [
+            secondsem: [
             ]
         }
     },
     computed: {
         totalUnits_1st() {
-            return this.grades_1st.reduce((acc, item) =>
+            return this.firstsem.reduce((acc, item) =>
             acc + item.units, 0);
         },
 
         totalUnits_2nd() {
-            return this.grades_2nd.reduce((acc, item) =>
+            return this.secondsem.reduce((acc, item) =>
             acc + item.units, 0);
         },
     },
 
     methods:{
     gwa_1st() {
-        const gwa = this.grades_1st.reduce((acc, item) =>
+        const gwa = this.firstsem.reduce((acc, item) =>
         acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
     },
 
     gwa_2nd() {
-        const gwa = this.grades_2nd.reduce((acc, item) =>
+        const gwa = this.secondsem.reduce((acc, item) =>
         acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
@@ -135,8 +135,8 @@ export default {
  
            await axios.get('/api/perstudentschol/'+this.$route.params.student_number).then(({data})=>{
                     console.log(data)
-               this.grades_1st = data.first;
-                 this.grades_2nd = data.firstSecondSem;
+               this.firstsem = data.first;
+                 this.secondsem = data.firstSecondSem;
 
                this.firstYearSY.startYr = data.first[0].sem_startyear
                  this.firstYearSY.endYr = data.first[0].sem_endyear

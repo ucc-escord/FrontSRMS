@@ -16,7 +16,7 @@
                     <div class="md-layout-item">
                         <md-autocomplete
                         :class="getValidationClass('selectedSubject')"
-                        :disabled="sending"
+                        
                         class="has-esc-accent"
                         v-model="formData.selectedSubject"
                         :md-options="subjOptions"
@@ -80,7 +80,7 @@
                     <md-button 
                     type="submit" 
                     class="__modal-buttons md-esc-accent md-round md-dense" 
-                    :disabled="sending">
+                    >
                         ADD
                     </md-button>
                 </div>
@@ -190,17 +190,20 @@ export default {
             
            
             this.$v.$touch()
-
-        
-            
+            if (!this.$v.$invalid) {
             this.addStudEvaluation(this.formData)
-     
-            if (!this.$v.$$eachinvalid) {
 
-            
               this.sending = true 
+              this.clearForm();
             }
              
+    },
+    clearForm () {
+      this.$v.$reset()
+        this.selectedSubject = ""
+        this.selectedSubjUnit = ""
+        this.selectedSubjCode = ""
+        this.subjFG = null
     },
 
     /* SELECT SUBJECT */

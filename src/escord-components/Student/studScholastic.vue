@@ -111,17 +111,17 @@
 
       <!-- SECOND YEAR GRADES -->
       <div class="_gradeTbl html2pdf__page-break">
-        <first/>
+        <second/>
       </div>
 
       <!-- THIRD YEAR GRADES -->
       <div class="_gradeTbl">
-        <first/>
+        <third/>
       </div>
 
       <!-- FOURTH YEAR GRADES -->
       <div class="_gradeTbl">
-        <first/>
+        <four/>
       </div>
 
 
@@ -173,24 +173,22 @@
 import { validationMixin } from 'vuelidate'
 import { mapActions, mapGetters} from "vuex";
 import first from './table_srms/Firstyear.vue'
-//import second from './table_srms/Secondyear.vue'
-//import third from './table_srms/Thirdyear.vue'
-//import four from './table_srms/Fouryear.vue'
+import second from './table_srms/Secondyear.vue'
+import third from './table_srms/Thirdyear.vue'
+import four from './table_srms/Fouryear.vue'
 
   export default {
     name: 'ScholasticForm',
     mixins: [validationMixin],
     components:{
       first,
-      //second,
-      //third,
-      //four
+      second,
+      third,
+      four
   
     },
     mounted(){
           //  this.$store.dispatch('displayuser');
-
-           
             
             this.$store.dispatch('getScholasticRecord',this.$route.params.student_number);
          
