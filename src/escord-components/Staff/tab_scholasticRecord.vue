@@ -239,7 +239,7 @@
                     md-layout-item md-size-33"
                     :class="getValidationClass('studNum')"
                     :disabled="sending">
-                        <label>Student Number (readonly)</label>
+                        <label>Student # (readonly)</label>
                         <md-input v-model="modalInfo.studNum"
                         readonly></md-input>
                     </md-field>
@@ -322,12 +322,20 @@
                             <md-input v-model="modalInfo.studBirthday"
                             readonly
                             :disabled="sending"></md-input>
-
-                            <span class="md-error" v-if="!$v.modalInfo.studBirthday.required">Birthday is required.</span>
                         </md-field>
                         </div>
 
                         <div class="md-layout-item md-size-50">
+                        <md-field class="has-esc-accent"
+                        :class="getValidationClass('studBirthPlace')">
+                            <label>Birth Place (readonly)</label>
+                            <md-input v-model="modalInfo.studBirthPlace"
+                            readonly
+                            :disabled="sending"></md-input>
+                        </md-field>
+                        </div>
+
+                        <div class="md-layout-item md-size-100">
                         <md-field class="has-esc-accent"
                         :class="getValidationClass('studContactNum')">
                             <label>Contact Number</label>
@@ -533,6 +541,7 @@ this.getStudentPerProg()
           studFN: "TRIZHALYN",
           studMN: "LUCAS",
           studBirthday: "05-01-01",
+          studBirthPlace: "QUEZON CITY",
           studAddress: "CALOOCAN CITY",
           studContactNum: "0999 777 8888",
           studElemSchool: "CAMARIN D ELEMENTARY SCHOOL",
@@ -550,6 +559,7 @@ this.getStudentPerProg()
           studFN: "TRIZHA",
           studMN: "FRANCISCO",
           studBirthday: "05-01-00",
+          studBirthPlace: "QUEZON CITY",
           studAddress: "CALOOCAN CITY",
           studContactNum: "0999 777 8888",
           studElemSchool: "CAMARIN D ELEMENTARY SCHOOL",
@@ -567,6 +577,7 @@ this.getStudentPerProg()
           studFN: "TRIZH",
           studMN: "MAGLANGIT",
           studBirthday: "05-03-01",
+          studBirthPlace: "QUEZON CITY",
           studAddress: "CALOOCAN CITY",
           studContactNum: "0999 777 8888",
           studElemSchool: "CAMARIN D ELEMENTARY SCHOOL",
@@ -619,7 +630,6 @@ this.getStudentPerProg()
       studLN: {required},
       studFN: {required},
       studMN: {required},
-      studBirthday: {required},
       studAddress: {required},
       studContactNum: {required},
       studElemSchool: {required},
@@ -673,6 +683,7 @@ this.getStudentPerProg()
       this.modalInfo.studSection = studentInfo.section
 
       this.modalInfo.studBirthday = studentInfo.birthday
+      // this.modalInfo.studBirthPlace = studentInfo.birthplace
       this.modalInfo.studContactNum = studentInfo.contact
       this.modalInfo.studAddress = studentInfo.address
 
@@ -716,6 +727,7 @@ this.getStudentPerProg()
       this.modalInfo.studProgram = null
       this.modalInfo.studSection = null
       this.modalInfo.studBirthday = null
+      this.modalInfo.studBirthPlace = null
       this.modalInfo.studContactNum = null
       this.modalInfo.studAddress = null
       this.modalInfo.studElemSchool= null
