@@ -62,13 +62,13 @@
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+              <!--   <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>download</md-icon>
                         <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
                     </md-button>
-                </div>
+                </div> -->
        
               <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="refreshGradesheet"
@@ -116,6 +116,14 @@
                         <md-icon>save</md-icon>
                         <md-tooltip md-direction="bottom">save</md-tooltip>
                     </md-button>
+
+                    
+                    <md-button
+                    @click="deletedrowStudent(getrow[index])"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>error</md-icon>
+                    </md-button>
+               
                 </div>
 
                 
@@ -368,7 +376,7 @@ export default {
         studMG: null,
         studFG: null,
         gradesheetid: this.$route.params.gradeshid,
-        finalgrade: 1, //this is for testing only
+        finalgrade: 0, //this is for testing only
       },
       studAdded: false,
       sending: false,
@@ -468,6 +476,12 @@ export default {
         this.refreshGS({ route: this.$route.params.gradeshid })
     },
 
+     fgxunit_prod(subj) {
+        return (subj.units * subj.grade).toFixed(2);
+    },
+
+
+
     /* add student modal validation methods */
     getValidationClass (fieldName) {
       const field = this.$v.addStud[fieldName]
@@ -540,6 +554,22 @@ export default {
                  })  
  
            },
+
+             deletedrowStudent(index){
+
+  axios.delete('/api/deleteRowGradesheet/'+index.id).then((response)=>{
+        
+
+           console.log(response);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+    }
 
         
 
