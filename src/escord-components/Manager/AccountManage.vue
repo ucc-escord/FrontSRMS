@@ -160,7 +160,7 @@
 
  <h1 class="md-title">Student</h1>
         <md-table-row class="title">
-             
+                <md-table-head class="text-center">Actions</md-table-head>
                 <md-table-head class="text-center">Student Number</md-table-head>
                 <md-table-head class="text-center">Email</md-table-head>
                 
@@ -169,6 +169,11 @@
   <md-table-row
                v-for="(_, index) in student.data"
               :key="index">
+             <md-table-cell class="text-center">
+                   
+              <router-link :to="{ name: 'DownloadSRMS', params: {student_number: student.data[index].student_number} }">SCHOLASTIC RECORD</router-link>
+
+                </md-table-cell>
 
 
                    <md-table-cell class="text-center">

@@ -59,13 +59,19 @@ const escEval  = () => import('../../escord-components/Staff/Eval-2.vue')
 const escEvalstud =  () => import('../../escord-components/Student/studEval-2.vue')
 const escTableEval = () =>  import('../../escord-components/Student/studEvalTable.vue')
 const escScholasticStud = () =>  import('../../escord-components/Student/studScholastic.vue')
-
+const adminSRMSDashboard = () =>  import('../../escord-components/Manager/adminSRMSDashboard.vue')
 
 /* EVAL FORM PREVIEW */
 import evalprev from '../../escord-components/Staff/Eval-2.vue';
 import evalprev1 from '../../escord-components/Staff/evalFormPreview.vue';
 
 const routes = [
+
+  {
+    path: "/adminDownloadSRMS/:student_number",
+    name: "DownloadSRMS",
+    component: adminSRMSDashboard
+  },
   {
     path: "/prev",
     name: "EvalPrev",
@@ -271,7 +277,7 @@ const routes = [
   //expirement
 
 
-  { 
+  /* { 
     path: '/sendemail-forget', 
     name: 'reset-password', 
     component: ForgotPassword, 
@@ -282,7 +288,7 @@ const routes = [
     name: 'reset-password-form', 
     component: ResetPasswordForm, 
    
-  },
+  }, */
 
 //staff
   { 

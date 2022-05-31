@@ -79,6 +79,12 @@
                     </md-field>
                 </div>
                 
+                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">
+            <!-- <md-field :class="getValidationClass('DefaultPassword')">-->
+                  <p class="Default"> <strong>Default Password:</strong> Professor Name + UCCescord@SRMS2020</p>
+                     <p class="md-subheader">ex: JERWINUCCescord@SRMS2020</p>
+            
+             </div>
 
                 <div class="buttons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button 
@@ -86,6 +92,8 @@
                     class="md-esc-accent md-round md-wd" 
                     :disabled="sending">ADD</md-button>
                 </div>
+
+               
             </form>
         </div>
 
