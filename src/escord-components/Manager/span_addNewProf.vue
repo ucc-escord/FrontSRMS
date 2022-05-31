@@ -22,6 +22,7 @@
                             v-model="registerData.profFN"></md-input>
 
                             <span class="md-error" v-if="!$v.registerData.profFN.required">First name is required.</span>
+                            <span class="md-error" v-else-if="!$v.registerData.profFN.minLength">Minimum of 3 characters.</span>
                         </md-field>
                     </div>
 
@@ -44,6 +45,7 @@
                             v-model="registerData.profLN"></md-input>
 
                             <span class="md-error" v-if="!$v.registerData.profLN.required">Last name is required.</span>
+                            <span class="md-error" v-else-if="!$v.registerData.profLN.minLength">Minimum of 3 characters.</span>
                         </md-field>
                     </div>
 
@@ -96,7 +98,7 @@
 <script>
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email, sameAs, minLength } from 'vuelidate/lib/validators'
+import { required, email, minLength } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters} from "vuex";
 
 export default {
@@ -119,8 +121,8 @@ export default {
   validations: {
       
     registerData: {
-        profFN: {required},
-        profLN: {required},
+        profFN: {required, minLength: minLength(3)},
+        profLN: {required, minLength: minLength(3)},
         profRank: {required},
         profEmail: {required, email}
     }
@@ -146,11 +148,19 @@ export default {
           }
         }
       },
+      clearForm () {
+        this.$v.$reset()
+        this.registerData.profFN = null
+        this.registerData.profMI = null
+        this.registerData.profLN = null
+        this.registerData.profRank = null
+        this.registerData.profEmail = null
+      },
       registerValidate () {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
-
+          this.clearForm();
           this.createProfessor(this.registerData);
           console.log("Logged in successfully.")
         }

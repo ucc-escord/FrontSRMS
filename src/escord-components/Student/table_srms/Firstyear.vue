@@ -18,11 +18,11 @@
                         <th colspan=1>UNITS</th>
                         <th colspan=1>GRADE</th>
                     </tr>
-                    <tr v-for="(_firstSem, index) in grades_1st" :key="index">
-                        <td colspan=1>{{_firstSem.subjCode}}</td>
-                        <td colspan=2>{{_firstSem.subjDesc}}</td>
+                    <tr v-for="(_firstSem, index) in firstsem" :key="index">
+                        <td colspan=1>{{_firstSem.subjectcode}}</td>
+                        <td colspan=2>{{_firstSem.subjectcode}}</td>
                         <td colspan=1 class="text-center">{{_firstSem.units}}</td>
-                        <td colspan=1 class="text-center">{{_firstSem.grades}}</td>
+                        <td colspan=1 class="text-center">{{_firstSem.finalgrade}}</td>
                     </tr>
 
                     <tr class="_total">
@@ -51,11 +51,11 @@
                         <th colspan=1>UNITS</th>
                         <th colspan=1>GRADE</th>
                     </tr>
-                    <tr v-for="(_secondSem, index) in grades_2nd" :key="index">
-                        <td colspan=1>{{_secondSem.subjCode}}</td>
-                        <td colspan=2>{{_secondSem.subjDesc}}</td>
+                    <tr v-for="(_secondSem, index) in secondsem" :key="index">
+                        <td colspan=1>{{_secondSem.subjectcode}}</td>
+                        <td colspan=2>{{_secondSem.subjectdesc}}</td>
                         <td colspan=1 class="text-center">{{_secondSem.units}}</td>
-                        <td colspan=1 class="text-center">{{_secondSem.grades}}</td>
+                        <td colspan=1 class="text-center">{{_secondSem.finalgrade}}</td>
                     </tr>
                     <tr class="_total">
                         <th colspan="3" class="text-center">TOTAL</th>
@@ -103,74 +103,74 @@ export default {
                 endYr: "2020"
             },
 
-            grades_1st: [
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 1,
-                    units: 3,
-                },
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 2,
-                    units: 5,
-                },
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 1,
-                    units: 3,
-                },
+            // grades_1st: [
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 1,
+            //         units: 3,
+            //     },
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 2,
+            //         units: 5,
+            //     },
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 1,
+            //         units: 3,
+            //     },
                 
-            ],
+            // ],
 
-            grades_2nd: [
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 1,
-                    units: 3,
-                },
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 2,
-                    units: 5,
-                },
-                {
-                    subjCode: "CSE 110",
-                    subjDesc: "SOFTWARE ENGINEERING",
-                    grades: 1,
-                    units: 3,
-                },
+            // grades_2nd: [
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 1,
+            //         units: 3,
+            //     },
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 2,
+            //         units: 5,
+            //     },
+            //     {
+            //         subjCode: "CSE 110",
+            //         subjDesc: "SOFTWARE ENGINEERING",
+            //         grades: 1,
+            //         units: 3,
+            //     },
                 
-            ]
+            // ]
         }
     },
     computed: {
         totalUnits_1st() {
-            return this.grades_1st.reduce((acc, item) =>
+            return this.firstsem.reduce((acc, item) =>
             acc + item.units, 0);
         },
 
         totalUnits_2nd() {
-            return this.grades_1st.reduce((acc, item) =>
+            return this.secondsem.reduce((acc, item) =>
             acc + item.units, 0);
         },
     },
 
     methods:{
     gwa_1st() {
-        const gwa = this.grades_1st.reduce((acc, item) =>
-        acc + (item.grades / item.units), 0);
+        const gwa = this.firstsem.reduce((acc, item) =>
+        acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
     },
 
     gwa_2nd() {
-        const gwa = this.grades_1st.reduce((acc, item) =>
-        acc + (item.grades / item.units), 0);
+        const gwa = this.secondsem.reduce((acc, item) =>
+        acc + (item.finalgrade / item.units), 0);
 
         return gwa.toFixed(2);
     },
