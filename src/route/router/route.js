@@ -67,23 +67,14 @@ import evalprev1 from '../../escord-components/Staff/evalFormPreview.vue';
 
 const routes = [
 
-  {
-    path: "/adminDownloadSRMS/:student_number",
-    name: "DownloadSRMS",
-    component: adminSRMSDashboard
-  },
+
   /* {
     path: "/test1",
     name: "Test",
     component: test1
   }, */
 
-  {
-    path: "/prev1/:studnum/:srmsid",
-    name: "EvalPrev1",
-    component: evalprev1,
-    props: true
-  },
+  
 
   /*---| ESCORD ROUTES |----*/
 
@@ -130,25 +121,50 @@ const routes = [
    * -------------------------------------------------------------------------- 
    *
    * DASHBOARDS */
-  {
-    path: "/admin-dashboard",
-    name: "Admin Dashboard",
-    components: {default: escAdminDash, header: escHeader, footer: escFooter},
-    //meta: { requiresAuth: true, authorize: 'superadmin' } ,
-  },
-  {
-    path: "/staff-dashboard",
-    name: "Staff Dashboard",
-    components: {default: escStaffDash, header: escHeader, footer: escFooter},
-    //meta: { requiresAuth: true, authorize: 'staff' } ,
-
-  },
+ 
+ 
   {
     path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
     components: {default: escStudDash, header: escHeader, footer: escFooter},
-    //meta: { requiresAuth: true, authorize: 'student' } ,
+    meta: { requiresAuth: true, authorize: 'student' } ,
 
+  },
+
+//STAFF
+
+  {
+  path: "/staff-dashboard",
+  name: "Staff Dashboard",
+  components: {default: escStaffDash, header: escHeader, footer: escFooter},
+  meta: { requiresAuth: true, authorize: 'staff' } ,
+
+  },
+
+  {
+    path: "/prev1/:studnum/:srmsid",
+    name: "EvalPrev1",
+    component: evalprev1,
+    props: true,
+    meta: { requiresAuth: true, authorize: 'staff' } ,
+
+  },
+
+  //ADMIN
+
+  {
+    path: "/admin-dashboard",
+    name: "Admin Dashboard",
+    components: {default: escAdminDash, header: escHeader, footer: escFooter},
+    meta: { requiresAuth: true, authorize: 'superadmin' } ,
+  },
+
+
+  {
+    path: "/adminDownloadSRMS/:student_number",
+    name: "DownloadSRMS",
+    component: adminSRMSDashboard,
+    meta: { requiresAuth: true, authorize: 'superadmin' } ,
   },
  
   /* END OF DASHBOARDS 
@@ -191,7 +207,9 @@ const routes = [
    * -------------------------------------------------------------------------- 
    *
    * PAGES FOR STAFF */
-  {
+
+
+ /*  {
     path: "/Staff-scholastic-record",
     name: "Staff Scholastic-record",
     components: {default: escStaffScholasticRecord, header: escHeader, footer: escFooter}
@@ -210,7 +228,9 @@ const routes = [
     path: "/staffArchieve",
     name: "StaffArchieve",
     components: {default:  escStaff_ArchTable,  footer: escFooter}
-  },
+  }, */
+
+
   /* END OF PAGES FOR STAFF 
    *
    * -------------------------------------------------------------------------- 

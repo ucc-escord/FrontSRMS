@@ -67,10 +67,10 @@
                 <!-- PREVIEW -->
                 <div v-if="showSR" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                   
-                  <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+               <!--    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button @click="printSR" class="md-raised md-esc-darkgrey md-round md-dense">Download</md-button>
                   </div>
-
+ -->
                   <stud-scol/>
 
                   <vue-to-pdf
