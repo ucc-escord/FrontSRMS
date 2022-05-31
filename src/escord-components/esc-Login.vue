@@ -124,6 +124,12 @@
 
           </div>
         </div>
+
+        <div v-else>
+          You were Logged in and accessing other public routes, For the mean time Logout first
+          <md-button @click="loggingout"> LOGOUT</md-button> 
+        </div>
+
       </div>
     </div>
     <send-reset-code v-if="sendResetPassCode" @close="sendResetPassCodeHide"/>
@@ -210,6 +216,10 @@ export default {
     sendResetPassCodeShow() {
       this.sendResetPassCode = true;
     },
+     ...mapActions({ loggingOut: "loggingOut" }),
+    loggingout(){
+              this.loggingOut()
+      },
 
     sendResetPassCodeHide() {
       this.sendResetPassCode = false;
@@ -274,7 +284,8 @@ export default {
 
               this.showlogin = true;
           }
-        }
+        },
+    
   }
 };
 </script>

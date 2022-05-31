@@ -7,6 +7,7 @@ import Profile from "@/views/Profile.vue";
 import MainNavbar from "@/layout/MainNavbar.vue";
 import MainFooter from "@/layout/MainFooter.vue";
 
+
 import NotFound from "@/layout/NotFoundPage.vue";
 import escHeader from "@/escord-components/esc-Header.vue";
 import escFooter from "@/escord-components/esc-Footer.vue";
@@ -14,6 +15,9 @@ import Professor from "@/escord-components/Prof/Professor.vue"
 import ForgotPassword from "@/escord-components/ForgotPassword/esc-Forgot.vue"
 import ResetPasswordForm from "@/escord-components/ForgotPassword/ResetPassword.vue"
 //import downloadArch from "@/escord-components/Prof/ProfDownload.vue"
+import Manager from "@/escord-components/Manager/Manager.vue"
+import Staff from "@/escord-components/Staff/Staff.vue"
+
 
 //const escHeader = () => import("@/escord-components/esc-Header.vue");
 
@@ -78,6 +82,9 @@ const routes = [
 
   /*---| ESCORD ROUTES |----*/
 
+
+  //PUBLIC PATH
+
   /* GENERAL PAGES */
   {
     path: "*",
@@ -89,6 +96,10 @@ const routes = [
     name: "Landing",
     //component: escLanding,
     components: {default: escLanding, header: escHeader, footer: escFooter},
+   // meta: {requiresAuth: true, authorize: 'visitor'}
+  
+
+  
   },
   {
     path: "/contact-escord",
@@ -96,12 +107,13 @@ const routes = [
     components: {default: escContactUs, header: escHeader, footer: escFooter}
   },
 
-  //suggest imodal to
+  
   {
     path: "/login",
     name: "Login",
     //component: escLogin,
     components: {default: escLogin, header: escHeader, footer: escFooter},
+  //  meta:{requiresAuth: true, authorize: 'visitor'},
    
   },
 
@@ -116,13 +128,10 @@ const routes = [
     name: "About",
     components: {default: escAbout, header: escHeader, footer: escFooter}
   },
-  /* END OF GENERAL PAGES 
-   *
-   * -------------------------------------------------------------------------- 
-   *
-   * DASHBOARDS */
+
  
  
+  //student
   {
     path: "/student-dashboard/:student_number",
     name: "Student Dashboard",
@@ -131,7 +140,15 @@ const routes = [
 
   },
 
+
+
 //STAFF
+
+{
+  path: '/staff',
+  redirect: { name: 'Staff Dashboard' },
+  components: {default: Staff,header: escHeader, footer: escFooter },
+  children : [
 
   {
   path: "/staff-dashboard",
@@ -150,8 +167,21 @@ const routes = [
 
   },
 
+  ],
+
+  meta: { requiresAuth: true, authorize: 'staff' } ,
+
+},
+
+  
+
   //ADMIN
 
+  {
+    path: '/manager',
+    redirect: { name: 'Admin Dashboard' },
+    components: {default: Manager,header: escHeader, footer: escFooter },
+    children : [
   {
     path: "/admin-dashboard",
     name: "Admin Dashboard",
@@ -166,8 +196,104 @@ const routes = [
     component: adminSRMSDashboard,
     meta: { requiresAuth: true, authorize: 'superadmin' } ,
   },
+
+],
+      meta: { requiresAuth: true, authorize: 'superadmin' } ,
+},
  
-  /* END OF DASHBOARDS 
+ 
+  //DONE PROF
+  {
+    path: '/professor',
+    redirect: { name: 'Professor Dashboard' },
+    components: {default: Professor,header: escHeader, footer: escFooter },
+    children : [
+      {
+        path: "/prof-dashboard/:userid",
+        name: "Professor Dashboard",
+        components: {default: escProfDash, header: escHeader, footer: escFooter},   
+         //meta: { requiresAuth: true, authorize: 'professor' } ,
+      //uncomment this to have a login validation
+      },
+
+      {
+        path: "/gradesheet-detail/:userid/:gradeshid",
+        name: "Gradesheet Detail",
+        components: {default: escProf_GSPage, header: escHeader, footer: escFooter},
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+      },
+      {
+        path: "/archievegradesheet/:archievegs",
+        name: "GradesheetArchieve",
+        components: {default: escViewArchieveGrade, header: escHeader, footer: escFooter},
+        //meta: { requiresAuth: true, authorize: 'professor' } ,
+     
+      },
+
+      {
+        path: "/archievetableprof/:userid",
+        name: "ProfessorArchieve Table",
+        component:  escProf_ArchTable,
+        meta: { requiresAuth: true, authorize: 'professor' } ,
+      },
+
+      
+  
+  ],
+    meta: { requiresAuth: true, authorize: 'professor' } ,
+   
+  },
+
+  //expirement
+
+
+  /* { 
+    path: '/sendemail-forget', 
+    name: 'reset-password', 
+    component: ForgotPassword, 
+    
+  },
+  { 
+    path: '/resetpassword', 
+    name: 'reset-password-form', 
+    component: ResetPasswordForm, 
+   
+  }, */
+
+//staff
+ /*  { 
+    path: '/eval/:studnum', 
+    name: 'EscEval', 
+    component: escEval, 
+   
+  }, */
+
+
+  //student
+
+ /*  { 
+    path: '/evalstud/:student_number/:srms_id', 
+    name: 'EscTableEval', 
+    component: escTableEval, 
+   
+  },
+
+  { 
+    path: '/evalstud/:student_number/:evalid', 
+    name: 'EscEvalstud', 
+    component: escEvalstud, 
+   
+  },
+
+  { 
+    path: '/scholastic/:student_number', 
+    name: 'Scholastic RecordStudent', 
+    component:  escScholasticStud, 
+   
+  }, */
+
+
+   /* END OF DASHBOARDS 
    *
    * -------------------------------------------------------------------------- 
    *
@@ -252,95 +378,6 @@ const routes = [
     component: escAdminAuditTrail
   }, */
   
-  //DONE PROF
-  {
-    path: '/professor',
-    redirect: { name: 'Professor Dashboard' },
-    components: {default: Professor,header: escHeader, footer: escFooter },
-    children : [
-      {
-        path: "/prof-dashboard/:userid",
-        name: "Professor Dashboard",
-        components: {default: escProfDash, header: escHeader, footer: escFooter},   
-         //meta: { requiresAuth: true, authorize: 'professor' } ,
-      //uncomment this to have a login validation
-      },
-
-      {
-        path: "/gradesheet-detail/:userid/:gradeshid",
-        name: "Gradesheet Detail",
-        components: {default: escProf_GSPage, header: escHeader, footer: escFooter},
-        meta: { requiresAuth: true, authorize: 'professor' } ,
-      },
-      {
-        path: "/archievegradesheet/:archievegs",
-        name: "GradesheetArchieve",
-        components: {default: escViewArchieveGrade, header: escHeader, footer: escFooter},
-        meta: { requiresAuth: true, authorize: 'professor' } ,
-     
-      },
-
-      {
-        path: "/archievetableprof/:userid",
-        name: "ProfessorArchieve Table",
-        component:  escProf_ArchTable,
-        //meta: { requiresAuth: true, authorize: 'professor' } ,
-      },
-
-      
-  
-  ],
-    meta: { requiresAuth: true, authorize: 'professor' } ,
-   
-  },
-
-  //expirement
-
-
-  /* { 
-    path: '/sendemail-forget', 
-    name: 'reset-password', 
-    component: ForgotPassword, 
-    
-  },
-  { 
-    path: '/resetpassword', 
-    name: 'reset-password-form', 
-    component: ResetPasswordForm, 
-   
-  }, */
-
-//staff
-  { 
-    path: '/eval/:studnum', 
-    name: 'EscEval', 
-    component: escEval, 
-   
-  },
-
-
-  //student
-
-  { 
-    path: '/evalstud/:student_number/:srms_id', 
-    name: 'EscTableEval', 
-    component: escTableEval, 
-   
-  },
-
-  { 
-    path: '/evalstud/:student_number/:evalid', 
-    name: 'EscEvalstud', 
-    component: escEvalstud, 
-   
-  },
-
-  { 
-    path: '/scholastic/:student_number', 
-    name: 'Scholastic RecordStudent', 
-    component:  escScholasticStud, 
-   
-  },
 
  
   

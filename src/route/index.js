@@ -31,18 +31,23 @@ function loggedIn(){
   const currentUser = localStorage.getItem('role');
 
   const isAuthenticated = store.state.currentUser.isAuthenticated;
-    if (requiresAuth) {
+
+ 
+  
+  
+  if (requiresAuth) {
         if (!loggedIn()) {
             // not logged in so redirect to login page with the return url
-            return next({ path: '/'});
+            return next({  name: "Login"});
         }
+      
      
 
         // check if route is restricted by role
         if (authorize.length && !authorize.includes(currentUser)) {
             // role not authorised so redirect to home page
             
-            if(currentUser === 'superadmin'){
+          if(currentUser === 'superadmin'){
             return next({  name: "Admin Dashboard" });
           }
           if(currentUser === 'student'){
@@ -58,6 +63,8 @@ function loggedIn(){
 
         }
     }
+
+  
 
     next();
 
