@@ -318,20 +318,22 @@
                         <div class="md-layout-item md-size-50">
                         <md-field class="has-esc-accent"
                         :class="getValidationClass('studBirthday')">
-                            <label>Birthday (readonly)</label>
+                            <label>Birthday</label>
                             <md-input v-model="modalInfo.studBirthday"
-                            readonly
                             :disabled="sending"></md-input>
+
+                            <span class="md-error" v-if="!$v.modalInfo.studBirthday.required">Birthday is required.</span>
                         </md-field>
                         </div>
 
                         <div class="md-layout-item md-size-50">
                         <md-field class="has-esc-accent"
                         :class="getValidationClass('studBirthPlace')">
-                            <label>Birth Place (readonly)</label>
+                            <label>Birth Place)</label>
                             <md-input v-model="modalInfo.studBirthPlace"
-                            readonly
                             :disabled="sending"></md-input>
+
+                            <span class="md-error" v-if="!$v.modalInfo.studBirthPlace.required">Birth place is required.</span>
                         </md-field>
                         </div>
 
@@ -598,6 +600,7 @@ this.getStudentPerProg()
        studFN: null,
        studMN: null,
        studBirthday: null,
+       studBirthPlace: null,
        studAddress: null,
        studContactNum: null,
        studElemSchool: null,
@@ -630,6 +633,8 @@ this.getStudentPerProg()
       studLN: {required},
       studFN: {required},
       studMN: {required},
+      studBirthday: {required},
+      studBirthPlace: {required},
       studAddress: {required},
       studContactNum: {required},
       studElemSchool: {required},
