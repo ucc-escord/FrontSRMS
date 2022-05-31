@@ -35,7 +35,17 @@
                         <md-icon>save</md-icon>
                     </md-button>
                 </div>
+
+                  <div class="md-layout md-gutter md-alignment-center-center">
+                    <md-button
+                    @click="deletedrowStudent(subjectList[index])"
+                    class="md-success md-just-icon md-round md-simple">
+                        <md-icon>error</md-icon>
+                    </md-button>
+                </div>
             </md-table-cell>
+
+          
 
             <md-table-cell>
                 <md-field
@@ -190,7 +200,7 @@ export default {
  await axios.get('/api/evalTableStudent/'+this.$route.params.studnum).then(({data})=>{
         this.subjectList = data
 
-        console.log(this.subjectList)
+     //   console.log(this.subjectList)
  
        }).catch(()=>{
          //  console.log("Error in getting the user")
@@ -202,6 +212,22 @@ export default {
     saveupdateStudent(index){
 
   axios.put('/api/updateEval/'+index.id,index).then((response)=>{
+        
+
+           console.log(response);
+
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+    },
+
+     deletedrowStudent(index){
+
+  axios.delete('/api/deleteRow/'+index.id).then((response)=>{
         
 
            console.log(response);

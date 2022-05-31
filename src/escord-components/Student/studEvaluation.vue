@@ -270,9 +270,11 @@ export default {
   ...mapGetters({getScholRecord: 'getScholRecord'}),
 
   totalUnits() {
+   
     return this.grades.reduce((sum, grade) => 
-    sum + grade.units, 0);
+    parseFloat(sum) + parseFloat(grade.units), 0); 
   },
+
   total() {
     return this.grades.reduce((acc, item) =>
     acc + (item.units * item.grade), 0);
@@ -291,7 +293,7 @@ export default {
  await axios.get('/api/evalTableStudent/'+this.$route.params.student_number).then(({data})=>{
         this.grades = data
 
-   console.log(this.grades)
+  // console.log(this.grades)
  
        }).catch(()=>{
          //  console.log("Error in getting the user")
