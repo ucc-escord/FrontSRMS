@@ -16,7 +16,7 @@
                     <div class="md-layout-item">
                         <md-autocomplete
                         :class="getValidationClass('selectedSubject')"
-                        :disabled="sending"
+                        
                         class="has-esc-accent"
                         v-model="selectedSubject"
                         :md-options="subjOptions"
@@ -38,7 +38,7 @@
                         class="has-esc-accent">
                             <label>Code</label>
                             <md-input
-                            :disabled="sending"
+                            
                             v-model="selectedSubjCode"></md-input>
 
                             <span class="md-error" v-if="!$v.selectedSubjCode.required">Field is required.</span>
@@ -51,7 +51,7 @@
                             <label>Units</label>
                             <md-input
                             type="number"
-                            :disabled="sending"
+                            
                             v-model="selectedSubjUnit"></md-input>
 
                             <span class="md-error" v-if="!$v.selectedSubjUnit.required">Field is required.</span>
@@ -64,7 +64,7 @@
                             <label>Grade</label>
                             <md-input
                             type="number"
-                            :disabled="sending"
+                            
                             v-model="subjFG"></md-input>
 
                             <span class="md-error" v-if="!$v.subjFG.required">Field is required.</span>
@@ -79,7 +79,7 @@
                     <md-button 
                     type="submit" 
                     class="__modal-buttons md-esc-accent md-round md-dense" 
-                    :disabled="sending">
+                    >
                         ADD
                     </md-button>
                 </div>
@@ -172,11 +172,18 @@ export default {
     requestResetPassword() {
             
             this.$v.$touch()
-            if (!this.$v.$$eachinvalid) {
-              //disable the "send code to email" form above
+            if (!this.$v.$invalid) {
               this.sending = true 
+              this.clearForm();
             }
              
+    },
+    clearForm () {
+      this.$v.$reset()
+        this.selectedSubject = ""
+        this.selectedSubjUnit = ""
+        this.selectedSubjCode = ""
+        this.subjFG = null
     },
 
     /* SELECT SUBJECT */

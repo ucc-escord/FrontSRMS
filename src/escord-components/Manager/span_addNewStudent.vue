@@ -67,6 +67,7 @@
                 <label>Yr & Sec</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.section.required">Field is required.</span>
+                <span class="md-helper-text">Input format: `<strong>1A</strong>`</span>
               </md-field>
             </div>
         
@@ -75,7 +76,6 @@
             <!-- <md-field :class="getValidationClass('DefaultPassword')">-->
             <p class="Default"> <strong>Default Password:</strong> StudentNumber</p>
             <p class="md-subheader">ex: 2019****</p>
-            
         </div>
 
     <md-progress-bar md-mode="indeterminate" v-if="sending" />
