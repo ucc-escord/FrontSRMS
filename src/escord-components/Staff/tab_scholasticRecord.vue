@@ -327,7 +327,7 @@
                         <div class="md-layout-item md-size-50">
                         <md-field class="has-esc-accent"
                         :class="getValidationClass('studBirthPlace')">
-                            <label>Birth Place)</label>
+                            <label>Birth Place</label>
                             <md-input v-model="modalInfo.studBirthPlace"
                             :disabled="sending"></md-input>
 
@@ -687,6 +687,7 @@ this.getStudentPerProg()
       // this.modalInfo.studBirthPlace = studentInfo.birthplace
       this.modalInfo.studContactNum = studentInfo.contact
       this.modalInfo.studAddress = studentInfo.address
+      this.modalInfo.studBirthPlace = studentInfo.birthplace
 
       this.modalInfo.studElemSchool = studentInfo.elementary
       this.modalInfo.studElemGradYr = studentInfo.elemyeargrad

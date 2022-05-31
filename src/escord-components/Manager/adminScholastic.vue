@@ -83,7 +83,7 @@
             <td colspan="3">{{getScholRecord.birthday}}</td>
 
             <th colspan="2">BIRTHPLACE:</th>
-         <!--    <td colspan="5">{{getScholRecord.birthplace}}</td> -->
+        <td colspan="5">{{getScholRecord.birthplace}}</td>
           </tr>
 
           <tr>
