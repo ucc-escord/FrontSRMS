@@ -62,15 +62,15 @@ const escScholasticStud = () =>  import('../../escord-components/Student/studSch
 
 
 /* EVAL FORM PREVIEW */
-import test1 from "../../escord-components/Staff/test.vue";
+// import test1 from "../../escord-components/Staff/test.vue";
 import evalprev1 from '../../escord-components/Staff/evalFormPreview.vue';
 
 const routes = [
-  {
-    path: "/test1",
-    name: "Test",
-    component: test1
-  },
+  // {
+  //   path: "/test1",
+  //   name: "Test",
+  //   component: test1
+  // },
 
   {
     path: "/prev1",
@@ -249,7 +249,7 @@ const routes = [
         path: "/archievegradesheet/:archievegs",
         name: "GradesheetArchieve",
         components: {default: escViewArchieveGrade, header: escHeader, footer: escFooter},
-        meta: { requiresAuth: true, authorize: 'professor' } ,
+        //meta: { requiresAuth: true, authorize: 'professor' } ,
      
       },
 
