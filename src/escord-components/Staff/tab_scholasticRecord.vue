@@ -195,7 +195,7 @@
                     <md-icon>close</md-icon>
                 </md-button>
 
-                <router-link :to="{ name: 'EvalPrev1', params:{studnum: student.student_number } }"> <md-icon>close</md-icon></router-link>
+                <router-link :to="{ name: 'EvalPrev1', params:{srmsid: student.srms_id , studnum: student.student_number } }"> <md-icon>close</md-icon></router-link>
                 </md-table-cell>
 
             </md-table-row>

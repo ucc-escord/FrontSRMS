@@ -12,7 +12,7 @@
 
                 <div class="_wrapDiv mx-auto md-layout md-gutter md-alignment-center-space-between">
             
-                <md-subheader><strong>STUDENT INFO</strong></md-subheader>
+                <md-subheader><strong>STUDENT INFO </strong></md-subheader>
 
                     <!-- FIRST ROW -->
                     <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
@@ -229,10 +229,11 @@ export default {
       "eval-form":EvalFormtab,
       addSubjModal
   },
+
   mounted() {
 
             this.$store.dispatch('getScholasticRecord',this.$route.params.studnum);
-
+           // this.getEvalID();
        //   this.$store.dispatch('showgsinfo',{ route: this.$route.params.gradeshid });
          // let studentrow = this.$store.getters.getrow;
 
@@ -246,6 +247,7 @@ export default {
   data() {
     return {
       /* TITLE/ STUDENT DATA */
+      TopInfo:[],
       studNum: "20191172",
       studFN: "TRIZHALYN",
       studMI: "L",
@@ -391,9 +393,9 @@ export default {
            },
            updateEvalTopPreview(){
              
-         axios.put('/api/evalupdate/'+this.getScholRecord.srms_id,
+         axios.put('/api/evalupdate/'+this.$route.params.srmsid,
          { 
-             student_number: this.getScholRecord.student_number,
+            student_number: this.getScholRecord.student_number,
             course: this.getScholRecord.course,
             section:this.getScholRecord.section,
             surname:this.getScholRecord.surname,
@@ -406,7 +408,7 @@ export default {
 
          }).then((response)=>{
         
-                console.log(this.getScholRecord.srms_id)
+                console.log(this.getScholRecord)
      
 
             
@@ -415,7 +417,21 @@ export default {
              this.error =  errors.response.data;
    
              }) 
-           }
+           },
+
+       /*  async getEvalID(){
+            
+            await    axios.get('/api/studentschol/'+this.$route.params.studnum).then(({data})=>{
+              
+              this.TopInfo = data;
+
+            
+             }).catch((errors)=>{
+      
+             this.error =  errors.response.data;
+             })
+
+           } */
     
     
 

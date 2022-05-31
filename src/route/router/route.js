@@ -73,9 +73,10 @@ const routes = [
   },
 
   {
-    path: "/prev1/:studnum",
+    path: "/prev1/:studnum/:srmsid",
     name: "EvalPrev1",
-    component: evalprev1
+    component: evalprev1,
+    props: true
   },
 
   /*---| ESCORD ROUTES |----*/
