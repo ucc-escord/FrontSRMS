@@ -22,28 +22,28 @@
             <span class="md-error" v-else-if="!$v.form.userNo.minlength">Invalid student number.</span>
             </md-field>
         </div>
-            <!--LAST NAME-->
             <div class="input md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
-            <md-field  class ="has-esc-accent md-layout-item md-size-30" :class="getValidationClass('lastName')">
-            <label for="last-name">Last Name</label>
-            <md-input name="last-name" id="last-name" v-model="form.lastName" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.lastName.required">Last name is required.</span>
-            <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name.</span>
-            </md-field>
             <!--FIRST NAME-->
-            <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('firstName')">
+            <md-field  class ="has-esc-accent md-layout-item md-size-40"  :class="getValidationClass('firstName')">
             <label for="first-name">First Name</label>
             <md-input name="first-name" id="first-name" v-model="form.firstName" :disabled="sending" />
             <span class="md-error" v-if="!$v.form.firstName.required">First name is required.</span>
             <span class="md-error" v-else-if="!$v.form.firstName.minlength">Invalid first name.</span>
             </md-field>
             <!--MIDDLE NAME-->
-            <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('middleName')">
-            <label for="middle-name">Middle Name</label>
+            <md-field  class ="has-esc-accent md-layout-item md-size-15"  :class="getValidationClass('middleName')">
+            <label for="middle-name">MI</label>
             <md-input name="middle-name" id="middle-name" v-model="form.middleName" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.middleName.required">Middle name is required.</span>
-            <span class="md-error" v-else-if="!$v.form.middleName.minlength">Invalid middle name.</span>
+            <span class="md-error" v-if="!$v.form.middleName.maxLength">Invalid.</span>
             </md-field>
+            <!--LAST NAME-->
+            <md-field  class ="has-esc-accent md-layout-item md-size-40" :class="getValidationClass('lastName')">
+            <label for="last-name">Last Name</label>
+            <md-input name="last-name" id="last-name" v-model="form.lastName" :disabled="sending" />
+            <span class="md-error" v-if="!$v.form.lastName.required">Last name is required.</span>
+            <span class="md-error" v-else-if="!$v.form.lastName.minlength">Invalid last name.</span>
+            </md-field>
+            
             </div>
             <!--EMAIL ADDRESS-->
         <div class="input md-layout-item md-small-size-100">
@@ -56,19 +56,17 @@
         </div>
 
         
-             <div class="input md-layout-item md-small-size-100">
-               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('course')">
-                <label for="middle-name">Course</label>
+             <div class="input md-layout-item md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
+               <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('course')">
+                <label>Course</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.course" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.course.required">Middle name is required.</span>
-                <span class="md-error" v-else-if="!$v.form.course.minlength">Invalid middle name.</span>
+                <span class="md-error" v-if="!$v.form.course.required">Course is required.</span>
               </md-field>
 
-               <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('section')">
-                <label for="middle-name">Section</label>
+               <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('section')">
+                <label>Yr & Sec</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.section.required">Middle name is required.</span>
-                <span class="md-error" v-else-if="!$v.form.section.minlength">Invalid middle name.</span>
+                <span class="md-error" v-if="!$v.form.section.required">Field is required.</span>
               </md-field>
             </div>
         
@@ -142,7 +140,6 @@ export default {
           minLength: minLength(3)
         },
         middleName: {
-          required,
           maxLength: maxLength(3)
         },
          course: {
@@ -224,7 +221,7 @@ font-size: 90% !important;
   top: 3.07em !important;
   left: 0 !important;
   line-height: 0.95em !important;
-  text-align: justify;
+  text-align: left;
   font-size: .777rem !important;
 }
 h3, .h3 {

@@ -7,19 +7,36 @@
 
             <div class="__addButtons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
                     @click="addNewStudentShow">
-                        ADD STUDENT
+                        STUDENT
+                        <md-tooltip md-direction="bottom">
+                            Add Student
+                        </md-tooltip>
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     class="md-round md-raised md-dense md-wd md-esc-darkgrey"
                     @click="addNewStaffShow">
-                        ADD STAFF
+                        STAFF
+                        <md-tooltip md-direction="bottom">
+                            Add Staff
+                        </md-tooltip>
+                    </md-button>
+                </div>
+
+                <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+                    <md-button
+                    class="md-round md-raised md-dense md-wd md-esc-darkgrey"
+                    @click="addNewProfShow">
+                        PROFESSOR
+                        <md-tooltip md-direction="bottom">
+                            Add Professor
+                        </md-tooltip>
                     </md-button>
                 </div>
 
@@ -34,6 +51,14 @@
                 v-else-if="addNewStaff">
 
                         <add-staff/>
+                        <hr class="hr">
+                    
+                </div>
+
+                <div class="md-layout-item md-size-100"
+                v-else-if="addNewProf">
+
+                        <add-prof/>
                         <hr class="hr">
                     
                 </div>
@@ -118,6 +143,7 @@ import axios from 'axios'
 
 import addNewStudentSpan from "./span_addNewStudent.vue";
 import addNewStaffSpan from "./span_addNewStaff.vue";
+import addNewProfSpan from "./span_addNewProf.vue";
 
 export default {
     components: {
@@ -125,7 +151,8 @@ export default {
         //addNewStudentModal,
         //addNewStaffModal,
         "add-student": addNewStudentSpan,
-        "add-staff": addNewStaffSpan
+        "add-staff": addNewStaffSpan,
+        "add-prof": addNewProfSpan
     },
     mounted(){
         this.studentInEnrollment()
@@ -136,6 +163,7 @@ export default {
             //default modal state
             addNewStudent: false,
             addNewStaff: false,
+            addNewProf: false,
             search: '',
             
             manageAccountDefaultPagination: 1,
@@ -151,6 +179,7 @@ export default {
          addNewStudentShow() {
              this.addNewStudent = !this.addNewStudent;
              this.addNewStaff = false;
+             this.addNewProf = false;
              
              if(this.addNewStudent == true) {
              //    console.log("Add new student div is displayed.");
@@ -163,6 +192,21 @@ export default {
          addNewStaffShow() {
              this.addNewStaff = !this.addNewStaff;
              this.addNewStudent = false;
+             this.addNewProf = false;
+             
+             if(this.addNewStaff == true) {
+               //  console.log("Add new staff div is displayed.");
+             }
+             else {
+                 //console.log("Add new staff div is not displayed.");
+             }
+             
+         },
+
+         addNewProfShow() {
+             this.addNewProf    = !this.addNewProf;
+             this.addNewStudent = false;
+             this.addNewStaff = false;
              
              if(this.addNewStaff == true) {
                //  console.log("Add new staff div is displayed.");
