@@ -62,7 +62,7 @@ const escScholasticStud = () =>  import('../../escord-components/Student/studSch
 const adminSRMSDashboard = () =>  import('../../escord-components/Manager/adminSRMSDashboard.vue')
 
 /* EVAL FORM PREVIEW */
-import evalprev from '../../escord-components/Staff/Eval-2.vue';
+import test1 from "../../escord-components/Staff/test.vue";
 import evalprev1 from '../../escord-components/Staff/evalFormPreview.vue';
 
 const routes = [
@@ -73,9 +73,9 @@ const routes = [
     component: adminSRMSDashboard
   },
   {
-    path: "/prev",
-    name: "EvalPrev",
-    component: evalprev
+    path: "/test1",
+    name: "Test",
+    component: test1
   },
 
   {
