@@ -47,11 +47,11 @@
             <i class="fab fa-twitter"></i>
           </md-button>
 
-          <md-button
+          <!-- <md-button
           href="https://www.instagram.com/"
           class="md-just-icon md-round md-insta text-center">
             <i class="fab fa-instagram"></i>
-          </md-button>
+          </md-button> -->
           
         </div>
 

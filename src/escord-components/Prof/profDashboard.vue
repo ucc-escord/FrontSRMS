@@ -39,32 +39,41 @@
               </div>
             </div>
           </div>
-          <div class="md-layout md-gutter md-alignment-center">
+          <div class="md-layout md-gutter md-alignment-center-left">
             <h2 class="md-display-1 md-layout-item">GRADESHEETS</h2>
-
           </div>
 
-          <div class="buttons">
-            <!-- open modal button -->
-            <md-button class="md-esc-accent md-wd md-round" @click="classicModal = true">
-                    <md-icon>add</md-icon> Add Gradesheet
-            </md-button>
-
-           
- <md-button class="md-esc-accent md-wd md-round"   type="submit" @click="cardshowpage">
-                    <md-icon>show</md-icon>Refresh Card 
-            </md-button>
-
-                <md-button class="md-esc-accent md-wd md-round">
-                
-
-                   <router-link :to="{ name: 'ProfessorArchieve Table'}">Show Archieve..</router-link>
-
-            </md-button>
-
-
-
-
+          <div class="__buttons md-layout md-gutter md-alignment-center-center">
+            <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+              <!-- open modal button -->
+              <md-button class="md-esc-accent md-wd md-round md-just-icon" 
+              @click="classicModal = true">
+                <md-icon>add</md-icon>
+                <!-- Add Gradesheet -->
+                <md-tooltip md-direction="bottom">Add Gradesheet</md-tooltip>
+              </md-button>
+            </div>
+            <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+              <md-button class="md-esc-darkgrey md-wd md-round md-just-icon"   
+              type="submit" 
+              @click="cardshowpage">
+                <md-icon>refresh</md-icon>
+                <!-- Refresh Card  -->
+                <md-tooltip md-direction="bottom">Refresh Card Display</md-tooltip>
+              </md-button>
+            </div>
+            <div class="md-layout-item md-size-30 md-layout md-gutter md-alignment-center-center">
+              <md-button 
+              :to="{ name: 'ProfessorArchieve Table'}"
+              class="md-esc-darkgrey md-wd md-round md-just-icon">
+                <md-icon>inventory_2</md-icon> 
+                <!-- Go to Archive -->
+                <md-tooltip md-direction="bottom">View Gradehsheet Archive</md-tooltip>
+              </md-button>
+            </div>
+          </div>
+          
+          <div>
             <!-- add gradesheet modal -->
 
             <modal v-if="classicModal" @close="classicModalHide">
@@ -135,40 +144,7 @@
                     :class="getValidationClass('subjDay')">
                     <label>Day</label>
                       <md-input v-model="formData.subjDay" required :disabled="sending"></md-input>
-
                        <span class="md-error" v-if="!$v.formData.subjDay.required">Set subject day/s.</span>
-                      <!-- <label for="schedDay">Day</label>
-                      
-                      <md-select
-                      v-model="selectedDay"
-                      name="schedDay"
-                      id="schedDay"
-                      multiple
-                      md-dense>
-
-                        <md-option value="Monday">
-                          MON
-                        </md-option>
-                        <md-option value="Tuesday">
-                          Tuesday
-                        </md-option>
-                        <md-option value="Wednesday">
-                          Wednesday
-                        </md-option>
-                        <md-option value="Thursday">
-                          Thursday
-                        </md-option>
-                        <md-option value="Friday">
-                          Friday
-                        </md-option>
-                        <md-option value="Saturday">
-                          Saturday
-                        </md-option>
-                        <md-option value="Sunday">
-                          Sunday
-                        </md-option>
-
-                      </md-select> -->
                     </md-field>
 
                     <md-field
@@ -358,20 +334,35 @@
 
           <div v-else class="profile-content"> 
 
-            <md-field>
-            <label>SEARCH BAR</label>
-            <md-input v-model="search"></md-input>
-            <span class="md-helper-text">search your card</span>
-            <md-button class="md-esc-accent" @click="cardshowpage">
-              Search
-            </md-button>
-          </md-field>
+            <div class="md-layout md-gutter md-alignment-center-center">
+              <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-65 md-layout-md-gutter md-alignment-center-right">
+                  <md-field class="has-esc-accent">
+                    <label>Search</label>
+                    <md-input v-model="search"></md-input>
+                    <span class="md-helper-text">Search for gradesheet card</span>
+                  </md-field>
+                </div>
+                <div class="md-layout-item md-size-15 md-layout-md-gutter md-alignment-center-center">
+                  <md-button class="md-esc-accent md-just-icon md-round" 
+                  @click="cardshowpage">
+                    <md-icon>search</md-icon>
+                  </md-button>
+                </div>
+              </div>
+            </div>
 
+            <div class="md-layout md-gutter md-alignment-center-center __paginate">
+              <pagination
+              class="mx-auto"
+              type="esc-accent" 
+              no-arrows   
+              :page-count="gradesheet.last_page" 
+              :value="gradesheet.current_page" 
+              :total="gradesheet.total" 
+              @input="cardshowpage" />
+            </div>
 
-    <pagination no-arrows   :page-count="gradesheet.last_page" :value="gradesheet.current_page" :total="gradesheet.total" @input="cardshowpage" />
-
-   
- 
 
             <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
 
@@ -812,5 +803,17 @@ h3, .h3 {
 
 .md-with-hover {
   cursor: context-menu !important;
+}
+
+.__buttons {
+  margin: 0.85em 0 0.97em 0 !important;
+}
+
+.__paginate {
+  margin: 0.85em 0 1.2em 0 !important;
+}
+
+img {
+  border: 0.25em solid #fff !important;
 }
 </style>

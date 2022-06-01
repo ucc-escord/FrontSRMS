@@ -63,7 +63,7 @@
 
             <th colspan="2">COURSE/YR/SEC:</th>
             <td colspan="1">
-              {{getScholRecord.course}}{{getScholRecord.section}}
+              {{getScholRecord.course}} {{getScholRecord.section}}
             </td>
             
             <th colspan="2">CONTACT NO:</th>

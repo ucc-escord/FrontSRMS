@@ -65,7 +65,7 @@
 
           <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
             <p class="md-body-2 md-layout-item md-size-50">
-              YEAR:
+              YEAR/ SEC:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
                {{getScholRecord.section}}
@@ -86,12 +86,21 @@
 
           <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
             <p class="md-body-2 md-layout-item md-size-50">
+              STATUS:
+            </p>
+            <p class="md-body-1 md-layout-item md-size-50">
+              REGULAR
+            </p>
+          </div>
+
+          <!-- <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+            <p class="md-body-2 md-layout-item md-size-50">
               SECTION:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
               A
             </p>
-          </div>
+          </div> -->
         </div>
 
         <!-- FOURTH ROW -->
@@ -105,14 +114,14 @@
             </p>
           </div>
 
-          <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
+          <!-- <div class="md-layout-item md-size-50 md-layout md-gutter md-alignment-top-left">
             <p class="md-body-2 md-layout-item md-size-50">
               STATUS:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
               REGULAR
             </p>
-          </div>
+          </div> -->
         </div>
       </div> <br><br>
 

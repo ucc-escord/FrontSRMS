@@ -14,6 +14,11 @@
                 <md-content>
                   <h4 class="text-center md-headline">{{feature.name}}</h4>
 
+                  <p v-if="feature.name == 'INTEROPERABLE'" class="text-center text-info md-body-2">
+                    TO BE INTEGRATED SOON!
+                  </p>
+                  <p v-else><br></p>
+
                   <span v-if="isShown === feature.showID">
                     <div class="__feature-detail mx-auto">
                       <p class="__shortDesc md-subheading">
@@ -81,7 +86,7 @@ export default {
     return {
         team: [
         {
-          pic: require("@/assets/img/escord-team-pictures/stud.png"),
+          pic: require("@/assets/img/escord-team-pictures/maglangit.png"),
           name: "TRIZHALYN L. MAGLANGIT",
           position: "Software Engineer",
         },
@@ -126,7 +131,7 @@ export default {
       features: [
         {
           icon: "",
-          name: "INTEROPERABLE",
+          name: 'INTEROPERABLE',
           shortDesc:
             "Avoids the redundant process of creating and account an filling out forms by intergrating the UCC-EMS.",
           longDescTitle: "IN COLLABORATION WITH UCC-EMS",

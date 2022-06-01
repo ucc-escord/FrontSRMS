@@ -263,4 +263,8 @@ export default {
 .section {
   padding: 0;
 }
+
+img {
+  border: 0.25em solid #fff !important;
+}
 </style>

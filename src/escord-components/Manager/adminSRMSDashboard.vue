@@ -15,7 +15,7 @@
                   <md-card class="md-with-hover">
                       <md-card-content>
                         <p class="md-title title text-center">Scholastic Record</p>
-                        <p class="text-center">Click to view your scholastic record form</p>
+                        <p class="text-center">Click to view the student's scholastic record form</p>
                       </md-card-content>
                   </md-card>
                    

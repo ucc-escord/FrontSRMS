@@ -171,4 +171,8 @@ export default {
     padding: 2.75em 0.75em 0.75em 0.75em !important;
     min-height: 60em !important;
 }
+
+img {
+  border: 0.25em solid #fff !important;
+}
 </style>

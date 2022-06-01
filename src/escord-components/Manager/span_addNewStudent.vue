@@ -57,13 +57,25 @@
 
         
              <div class="input md-layout-item md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
-               <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('course')">
-                <label>Course</label>
-                <md-input name="middle-name" id="middle-name" v-model="form.course" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.course.required">Course is required.</span>
-              </md-field>
+               <md-autocomplete
+                md-dense
+                v-model="form.course"
+                :md-options="programs"
+                :md-fuzzy-search="false"
+                class="has-esc-accent md-layout-item md-size-45"
+                :class="getValidationClass('course')"
+                :disabled="sending">
+                <label>Program</label>
 
-               <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('section')">
+                <template slot="md-autocomplete-empty"
+                slot-scope="{ term }">
+                    {{term}} is not available in the options.
+                </template>
+
+                <span class="md-error" v-if="!$v.form.course.required">Course is required.</span>
+              </md-autocomplete>
+
+              <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('section')">
                 <label>Yr & Sec</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.section.required">Field is required.</span>
@@ -123,7 +135,14 @@ export default {
       },
       userSaved: false,
       sending: false,
-      lastUser: null
+      lastUser: null,
+
+      programs: [
+                  "BS Computer Science", 
+                  "BS Information Systems",
+                  "BS Information Technology",
+                  "BS Entertainment and Multimedia Computing"
+                ],
     }),
     validations: {
       form: {
