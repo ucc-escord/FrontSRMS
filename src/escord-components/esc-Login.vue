@@ -344,7 +344,7 @@ h3.title {
 
 .__elseBtn {
   font-size: 1em !important;
-  font-weight: bolder !important;
+  font-weight: 600 !important;
   color: #2d2d2d !important;
 }
 
