@@ -104,12 +104,12 @@ export default {
     computed: {
         totalUnits_1st() {
             return this.firstsem.reduce((acc, item) =>
-            acc + item.units, 0);
+            acc + parseInt(item.units) , 0);
         },
 
         totalUnits_2nd() {
             return this.secondsem.reduce((acc, item) =>
-            acc + item.units, 0);
+            acc + parseInt(item.units), 0);
         },
     },
 
