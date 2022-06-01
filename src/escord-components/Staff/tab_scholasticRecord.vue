@@ -179,6 +179,7 @@
                 @click="editStudentInfo(getscholperProg.data[index])"
                 class="md-simple md-info md-just-icon md-round">
                     <md-icon>edit</md-icon>
+                    <md-tooltip md-direction="bottom">Edit Student Info</md-tooltip>
                 </md-button>
 
                 <!-- DOWNLOAD BUTTON -->
@@ -193,9 +194,21 @@
                 @click="archiveStudent(getscholperProg.data[index])"
                 class="md-simple md-danger md-just-icon md-round">
                     <md-icon>close</md-icon>
+                    <md-tooltip md-direction="bottom">Archive Student</md-tooltip>
                 </md-button>
 
-                <router-link :to="{ name: 'EvalPrev1', params:{srmsid: student.srms_id , studnum: student.student_number } }"> <md-icon>close</md-icon></router-link>
+                <!-- VIEW BUTTON -->
+                <md-button
+                :to="{ name: 'EvalPrev1', params:{srmsid: student.srms_id , studnum: student.student_number } }"
+                class="md-simple md-success md-just-icon md-round">
+                    <md-icon>visibility</md-icon>
+                    <md-tooltip md-direction="bottom">View Evaluation Form</md-tooltip>
+                </md-button>
+
+
+
+                <!-- <router-link :to="{ name: 'EvalPrev1', params:{srmsid: student.srms_id , studnum: student.student_number } }"> <md-icon>close</md-icon></router-link> -->
+
                 </md-table-cell>
 
             </md-table-row>
