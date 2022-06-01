@@ -168,7 +168,7 @@
                 <div class="_wrapDiv _frmBtn mx-auto md-layout md-gutter md-alignment-center-center">
             
                 <md-subheader class="md-layout-item md-size-100">
-                    <strong>FORM ACTIONS</strong>
+                    <strong>FORM ACTION</strong>
                 </md-subheader>
                 
                     <div class="md-layout-item md-size-60 md-layout md-gutter md-alignment-center-center">

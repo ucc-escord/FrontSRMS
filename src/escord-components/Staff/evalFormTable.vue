@@ -1,13 +1,14 @@
 <template>
   <div class="md-layout md-gutter md-alignment-center-center">
-        <div class="md-layout-item md-size-45 md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
-                            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                                <md-button @click="addEvalRow"
-                                class="_archive md-round md-esc-darkgrey md-wd md-dense md-simple">
-                                    REFRESH TABLE
-                                </md-button>
-                            </div>
-                        </div>
+
+        <div class="md-layout md-gutter md-alignment-center-center _refresh">
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <md-button @click="addEvalRow"
+                class="md-round md-esc-darkgrey md-wd md-dense md-simple _refreshbtn">
+                    <md-icon>refresh</md-icon> REFRESH TABLE
+                </md-button>
+            </div>
+        </div>
 
       <md-table
       v-model="subjectList"
@@ -27,22 +28,26 @@
         v-for="(subj, index) in subjectList"
         :key="index">
 
-            <md-table-cell>
-                <div class="md-layout md-gutter md-alignment-center-center">
+            <md-table-cell class="md-layout md-gutter md-alignment-center-space-between">
+
+                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     @click="saveupdateStudent(subjectList[index])"
                     class="md-success md-just-icon md-round md-simple">
                         <md-icon>save</md-icon>
+                        <md-tooltip md-direction="bottom">Save changes</md-tooltip>
                     </md-button>
                 </div>
 
-                  <div class="md-layout md-gutter md-alignment-center-center">
+                  <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
                     <md-button
                     @click="deletedrowStudent(subjectList[index])"
-                    class="md-success md-just-icon md-round md-simple">
-                        <md-icon>error</md-icon>
+                    class="md-danger md-just-icon md-round md-simple">
+                        <md-icon>delete</md-icon>
+                        <md-tooltip md-direction="bottom">Remove row</md-tooltip>
                     </md-button>
                 </div>
+
             </md-table-cell>
 
           
@@ -258,5 +263,14 @@ export default {
 
 .md-input {
     width: 100% !important;
+}
+
+._refresh {
+    margin: .85em 0 1.25em 0 !important;
+}
+
+._refreshbtn {
+    font-size: 1em !important;
+    font-weight: 500 !important;
 }
 </style>
