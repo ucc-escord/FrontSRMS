@@ -89,28 +89,31 @@
 
                 
                   <!-- subj desc -->
-                  <md-autocomplete
-                  md-dense
-                  v-model="formData.subjDesc"
-                  :md-options="subjectOptions"
-                  :md-fuzzy-search="false"
-                  @md-changed="getSubjectOptions"
-                  @md-opened="getSubjectOptions"
-                  @md-selected="getSelected"
-                  class="has-esc-accent md-layout-item md-size-100"
-                  required
-                  :class="getValidationClass('subjDesc')"
-                  :disabled="sending"
-                  >
-                    <label class="__label">Subject Description</label>
+                  <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+                    <md-autocomplete
+                    md-dense
+                    v-model="formData.subjDesc"
+                    :md-options="subjectOptions"
+                    :md-fuzzy-search="false"
+                    @md-changed="getSubjectOptions"
+                    @md-opened="getSubjectOptions"
+                    @md-selected="getSelected"
+                    class="has-esc-accent md-layout-item md-size-100"
+                    required
+                    :class="getValidationClass('subjDesc')"
+                    :disabled="sending"
+                    >
+                      <label class="__label">Subject Description</label>
 
-                    <template slot="md-autocomplete-empty"
-                    slot-scope="{ term }">
-                      {{term}} does not match any registered subjects.
-                    </template>
+                      <template slot="md-autocomplete-empty"
+                      slot-scope="{ term }">
+                        {{term}} does not match any registered subjects.
+                      </template>
 
-                    <span class="md-error" v-if="!$v.formData.subjDesc.required">Subject description is required.</span>
-                  </md-autocomplete>
+                      <span class="md-error" v-if="!$v.formData.subjDesc.required">Subject description is required.</span>
+                    </md-autocomplete>
+                  </div>
+                  
 
                   <!-- subj code and unit -->
                   <div class="md-layout-item md-layout md-gutter md-alignment-center-space-between md-size-100">
@@ -118,7 +121,7 @@
                     :md-counter="false" :class="getValidationClass('subjCode')"
                     >
                       <label class="__label">Subject Code</label>
-                      <md-input v-model="formData.subjCode" maxlength="10" readonly required :disabled="sending"></md-input>
+                      <md-input v-model="formData.subjCode" maxlength="10" required :disabled="sending"></md-input>
 
                       <span class="md-error" v-if="!$v.formData.subjCode.required">Subject code is required.</span>
                     </md-field>
@@ -135,26 +138,25 @@
                   </div>
 
                   <!-- subj schedule -->
-                  <md-subheader>Schedule</md-subheader>
-
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
                     
-                    <md-field
-                    class="has-esc-accent md-layout-item md-size-45"
-                    :class="getValidationClass('subjDay')">
-                    <label>Day</label>
-                      <md-input v-model="formData.subjDay" required :disabled="sending"></md-input>
-                       <span class="md-error" v-if="!$v.formData.subjDay.required">Set subject day/s.</span>
-                    </md-field>
+                    <md-subheader class="md-layout-item md-size-100">Schedule</md-subheader>
+                      <md-field
+                      class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('subjDay')">
+                      <label>Day</label>
+                        <md-input v-model="formData.subjDay" required :disabled="sending"></md-input>
+                        <span class="md-error" v-if="!$v.formData.subjDay.required">Set subject day/s.</span>
+                      </md-field>
 
-                    <md-field
-                    class="has-esc-accent md-layout-item md-size-45"
-                    :class="getValidationClass('subjTime')">
-                      <label>Time</label>
-                      <md-input v-model="formData.subjTime" required :disabled="sending"></md-input>
+                      <md-field
+                      class="has-esc-accent md-layout-item md-size-45"
+                      :class="getValidationClass('subjTime')">
+                        <label>Time</label>
+                        <md-input v-model="formData.subjTime" required :disabled="sending"></md-input>
 
-                      <span class="md-error" v-if="!$v.formData.subjTime.required">Set subject time/s.</span>
-                    </md-field>
+                        <span class="md-error" v-if="!$v.formData.subjTime.required">Set subject time/s.</span>
+                      </md-field>
                   </div>
 
                   <!-- subj SY -->
@@ -207,9 +209,9 @@
                   </div>
 
                   <!-- class info -->
-                  <md-subheader>Class</md-subheader>
-
+                  
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+                    <md-subheader class="md-layout-item md-size-100">Class</md-subheader>
                     
                     <md-autocomplete
                     md-dense
