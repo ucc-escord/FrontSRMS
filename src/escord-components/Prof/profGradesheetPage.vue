@@ -560,7 +560,7 @@ export default {
   axios.delete('/api/deleteRowGradesheet/'+index.id).then((response)=>{
         
 
-           console.log(response);
+        //   console.log(response);
 
             
              }).catch((errors)=>{
