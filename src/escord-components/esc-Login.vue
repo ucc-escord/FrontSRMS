@@ -126,14 +126,14 @@
         </div>
 
         <div v-else class="mx-auto">
-          <p class="text-center title md-display-1">
+          <p class="text-center title _text">
             You were <strong>LOGGED IN</strong> and accessing other public routes. 
           </p>
-          <p class="text-center title md-display-1">
+          <p class="text-center title _text">
             For the mean time, <strong>LOG OUT</strong> first.
           </p>
           <br>
-          <div class="mx-auto">
+          <div class="md-layout md-gutter md-alignment-center-center">
             <md-button
             class="md-dense md-esc-accent __elseBtn" 
             @click="loggingout">LOG OUT</md-button> 
@@ -346,5 +346,10 @@ h3.title {
   font-size: 1em !important;
   font-weight: bolder !important;
   color: #2d2d2d !important;
+}
+
+._text {
+  font-size: 1.2em !important;
+  text-align: center !important;
 }
 </style>
