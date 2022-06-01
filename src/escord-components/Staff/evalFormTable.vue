@@ -28,7 +28,7 @@
         v-for="(subj, index) in subjectList"
         :key="index">
 
-            <md-table-cell class="md-layout md-gutter md-alignment-center-space-between">
+            <md-table-cell class="md-layout md-gutter md-alignment-center-center">
 
                 <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
                     <md-button
