@@ -121,7 +121,7 @@ const actions = {
 
         commit('setLoading',true)
      
-        return  axios.post('api/evalCreate/', addEvalStud).then((response)=>{
+        return  axios.post('api/evalCreate', addEvalStud).then((response)=>{
           //   this.currentUser = response.data
           commit('setLoading',false)
         //  console.log('adding successful' , response.data);
