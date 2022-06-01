@@ -264,7 +264,7 @@ headerStyle() {
        
 
     async scholshowarchieve(page=1) {
-       await axios.get('/api/archieveschol/?page='+page+'&search='+this.search).then(({data})=>{
+       await axios.get('/api/archieveschol?page='+page+'&search='+this.search).then(({data})=>{
         
             this.getarchschol = data
      
