@@ -243,11 +243,11 @@ methods: {
     if (!this.$v.$invalid) {
       this.saveUser()
       this.userUpdated = true;
-      console.log("Prof account updated.")
+  //    console.log("Prof account updated.")
       }
     else {
       this.userNotUpdated = true;
-      console.log("Prof account NOT updated.")
+    //  console.log("Prof account NOT updated.")
     }
   },
   UpdateProf(){

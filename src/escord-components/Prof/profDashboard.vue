@@ -747,7 +747,7 @@ async cardshowpage(page=1){
        // console.log("Gradesheet saved and added successfully.")
         }
         else {
-          console.log(this.$v)
+        //  console.log(this.$v)
       // console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
