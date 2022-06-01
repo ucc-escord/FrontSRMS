@@ -250,7 +250,7 @@ Our Service and its contents are provided "as is" and "as available" without any
                   Don't hesitate to contact us if you have any questions.
                   <ul>
                       <li>
-                          Via this Link: https://frontsrms.vercel.app/#/ or</li>
+                          Via this Link: https://front-srms.vercel.app/#/ or</li>
                         <li>
                             Email us at: ucc.escord@gmail.com
                         </li>
