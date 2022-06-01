@@ -38,8 +38,8 @@ Vue.config.productionTip = false;
 const token = localStorage.getItem('token');
 
 //axios.defaults.baseURL = 'http://20.24.144.51/laravelbackend-main/public/'; //PROTOCOL ON LIVE SERVER
-axios.defaults.baseURL = 'http://127.0.0.1:8000'; //PROTOCOL LOCAL HOST
-//axios.defaults.baseURL = 'https://laravelapi.fiply.tech/' //SECURED PROTOCOL ON HOSTING
+//axios.defaults.baseURL = 'http://127.0.0.1:8000'; //PROTOCOL LOCAL HOST
+axios.defaults.baseURL = 'https://laravelapi.fiply.tech/' //SECURED PROTOCOL ON HOSTING
 axios.defaults.withCredentials = true
 axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
