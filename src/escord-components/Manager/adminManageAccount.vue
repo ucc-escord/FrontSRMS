@@ -69,7 +69,7 @@
             <div class="md-layout-item md-size-33
             md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
                 <pagination 
-                type = "esc-accent"
+                type = "esc-darkgrey"
                no-arrows :page-count="userList.last_page" :value="userList.current_page" :total="userList.total" @input="studentInEnrollment" >
                 </pagination>
             </div>
@@ -77,14 +77,14 @@
             <div class="md-layout-item md-size-66 md-xsmall-size-100 md-layout md-gutter md-alignment-center-space-between">
                 <div class="md-layout-item md-size-85">
                     <md-field
-                    class="has-esc-accent">
+                    class="has-esc-darkgrey">
                         <label>Search..</label>
                         <md-input v-model="search"></md-input>
                     </md-field>
                 </div>
 
                 <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button @click="studentInEnrollment" class="md-just-icon md-round md-esc-accent md-raised">
+                    <md-button @click="studentInEnrollment" class="md-just-icon md-round md-esc-darkgrey md-raised">
                         <md-icon>search</md-icon>
                     </md-button>
                 </div>

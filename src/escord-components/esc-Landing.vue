@@ -19,7 +19,7 @@
               <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                 <md-button
                 class="md-esc-accent md-round md-raised"
-                to="/login">
+                to="/about-escord">
                   Learn More <md-icon>arrow_forward</md-icon>
                 </md-button>
 

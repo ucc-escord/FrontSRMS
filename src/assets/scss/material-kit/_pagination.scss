@@ -135,4 +135,19 @@
             }
         }
     }
+
+        &.pagination-esc-darkgrey {
+    
+            >.page-item.active>a,
+            >.page-item.active>span {
+    
+                &,
+                &:focus,
+                &:hover {
+                    background-color: $esc-darkgrey;
+                    border-color: $esc-darkgrey;
+                    @include shadow-4dp-color($esc-darkgrey);
+                }
+            }
+        }
 }

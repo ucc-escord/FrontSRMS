@@ -125,9 +125,20 @@
           </div>
         </div>
 
-        <div v-else>
-          You were Logged in and accessing other public routes, For the mean time Logout first
-          <md-button @click="loggingout"> LOGOUT</md-button> 
+        <div v-else class="mx-auto">
+          <p class="text-center title md-display-1">
+            You were <strong>LOGGED IN</strong> and accessing other public routes. 
+          </p>
+          <p class="text-center title md-display-1">
+            For the mean time, <strong>LOG OUT</strong> first.
+          </p>
+          <br>
+          <div class="mx-auto">
+            <md-button
+            class="md-dense md-esc-accent __elseBtn" 
+            @click="loggingout">LOG OUT</md-button> 
+          </div>
+          
         </div>
 
       </div>
@@ -311,7 +322,7 @@ h3.title {
   top: 3.07em !important;
   left: 2.25rem !important;
   line-height: 0.95em !important;
-  text-align: justify;
+  text-align: left;
   font-size: .777rem !important;
 }
 
@@ -329,5 +340,11 @@ h3.title {
 
 ._loginWrap {
   max-width: 25em !important;
+}
+
+.__elseBtn {
+  font-size: 1em !important;
+  font-weight: bolder !important;
+  color: #2d2d2d !important;
 }
 </style>
