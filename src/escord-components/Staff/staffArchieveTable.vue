@@ -1,28 +1,31 @@
 <template>
-  
-    <div >
-    
-        <div>
+    <div class="md-layout md-gutter md-alignment-center-center">
 
-  <div  >
-  
-     <div class="md-layout-item md-size-80 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
+      <div class="md-layout md-gutter md-alignment-center-center __paginate">
+        <pagination 
+        type="esc-accent" no-arrows  
+        :page-count="getarchschol.last_page" 
+        :value="getarchschol.current_page" 
+        :total="getarchschol.total" @input="scholshowarchieve" />
+      </div>
+      
+      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
-                <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
-                    <md-field
-                    class="has-esc-darkgrey">
-                        <label>Search..</label>
-                        <md-input  v-model="search"></md-input>
-                    </md-field>
-                </div>
+        <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
+            <md-field
+            class="has-esc-darkgrey">
+                <label>Search..</label>
+                <md-input  v-model="search"></md-input>
+            </md-field>
+        </div>
 
-                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button @click="scholshowarchieve" class="md-just-icon md-round md-esc-darkgrey md-raised">
-                        <md-icon class="md-size-4x">search</md-icon>
-                    </md-button>
-                </div>
+        <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+            <md-button @click="scholshowarchieve" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                <md-icon class="md-size-4x">search</md-icon>
+            </md-button>
+        </div>
 
-            </div>
+      </div>
 
 
    <!-- <md-field>
@@ -35,58 +38,50 @@
           </md-field> -->
 
 
-
- <md-table v-model="getarchschol.data" md-sort="name" md-sort-order="asc" >
-    
-   <!-- <h1 class="md-title text-center">Scholastic</h1> -->
-       <md-table-row class="title">
-                 <md-table-head class="text-center">Actions</md-table-head>
-                <md-table-head class="text-center">Scholastic ID</md-table-head>
-                <md-table-head class="text-center">Student Number</md-table-head>
-                <md-table-head class="text-center">Fullname</md-table-head>
-                <md-table-head class="text-center">Course, Year and Section</md-table-head>
-                
-              </md-table-row>
-
-      <md-table-row   v-for="(_, index) in getarchschol.data"
-              :key="index">
-
-               <md-table-cell class="text-center">
-                  <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                    <md-button @click="unArchieveGS(getarchschol.data[index].srms_id)" class="md-just-icon md-round md-esc-darkgrey md-raised">
-                        <md-icon class="md-size-4x">inventory</md-icon>
-                          <md-tooltip md-direction="bottom">Unarchive SRMS</md-tooltip>
-                    </md-button>
-                </div>
-                
-                </md-table-cell>
-
-
-                  <md-table-cell class="text-center">
-                      {{getarchschol.data[index].srms_id}}
-                </md-table-cell>
-
-                   <md-table-cell class="text-center">
-                      {{getarchschol.data[index].student_number}}
-                </md-table-cell>
-
-                <md-table-cell class="text-center">
-                      {{getarchschol.data[index].firstname}} ,  {{getarchschol.data[index].surname}} {{getarchschol.data[index].middlename}}
-                </md-table-cell>
-              <md-table-cell class="text-center">
-                      {{getarchschol.data[index].course}}
-                      {{getarchschol.data[index].section}} 
-                </md-table-cell>
-                 
-
+        <div class="__table md-layout-item md-size-100">
+          <md-table v-model="getarchschol.data" md-sort="name" md-sort-order="asc" >
               
-      
-      </md-table-row>
+            <!-- <h1 class="md-title text-center">Scholastic</h1> -->
+            <md-table-row class="title">
+              <md-table-head class="text-center">Actions</md-table-head>
+              <md-table-head class="text-center">Scholastic ID</md-table-head>
+              <md-table-head class="text-center">Student Number</md-table-head>
+              <md-table-head class="text-center">Full Name</md-table-head>
+              <md-table-head class="text-center">Course, Year and Section</md-table-head>
+            </md-table-row>
 
-    <pagination no-arrows  :page-count="getarchschol.last_page" :value="getarchschol.current_page" :total="getarchschol.total" @input="scholshowarchieve" />
+            <md-table-row   v-for="(_, index) in getarchschol.data"
+            :key="index">
 
-    </md-table>
-  </div>
+              <md-table-cell class="text-center">
+                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                  <md-button @click="unArchieveGS(getarchschol.data[index].srms_id)" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                      <md-icon class="md-size-4x">inventory</md-icon>
+                        <md-tooltip md-direction="bottom">Unarchive SRMS</md-tooltip>
+                  </md-button>
+                </div>
+              </md-table-cell>
+
+              <md-table-cell class="text-center">
+                {{getarchschol.data[index].srms_id}}
+              </md-table-cell>
+
+              <md-table-cell class="text-center">
+                {{getarchschol.data[index].student_number}}
+              </md-table-cell>
+
+              <md-table-cell class="text-center">
+                {{getarchschol.data[index].firstname}} ,  {{getarchschol.data[index].surname}} {{getarchschol.data[index].middlename}}
+              </md-table-cell>
+
+              <md-table-cell class="text-center">
+                {{getarchschol.data[index].course}}
+                {{getarchschol.data[index].section}} 
+              </md-table-cell>
+                
+            </md-table-row>
+          </md-table>
+        </div>
 
 <!---scholastic-->
 
@@ -162,13 +157,8 @@
   </div>
   
    <!---evaluation-->
-
-
   
-        </div>
-      
-    
- <vue-headful title="SR Detail"/>
+ <vue-headful title="SR Archive"/>
   </div>
 </template>
 
@@ -302,7 +292,8 @@ headerStyle() {
 .section {
   padding: 0;
 }
-.escord{
-    margin: 1.5em 0 !important;
+
+.__table {
+    margin-top: 1.5em !important;
 }
 </style>

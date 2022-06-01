@@ -69,7 +69,7 @@
                         </md-tab>
                         <!-- EVALUATION FORM -->
                         <!-- ARCHIVE -->
-                        <md-tab id="tab-archive" md-label="Archieve Scholastic Record">
+                        <md-tab id="tab-archive" md-label="Scholastic Record Archive">
                             <tab-arch/>
                         </md-tab>
                         
@@ -167,7 +167,8 @@ export default {
   margin-bottom: 1.5em !important;
 }
 
-#tab-srms,  #tab-efms {
+#tab-srms,  #tab-archive, #tab-con{
     padding: 2.75em 0.75em 0.75em 0.75em !important;
+    min-height: 60em !important;
 }
 </style>
