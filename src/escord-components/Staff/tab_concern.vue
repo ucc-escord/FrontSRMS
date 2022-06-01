@@ -1,49 +1,52 @@
 <template>
-    <div class="md-layout md-gutter md-alignment-center-center">
+    <div class="">
+      <!-- pagination -->
+          <div class="md-layout md-gutter md-alignment-center-center __paginate">
+            <pagination 
+            class="mx-auto"
+            type="esc-accent"
+            no-arrows  :page-count="concern.last_page" :value="concern.current_page" :total="concern.total" @input="concernGet" />
+          </div>
 
-      <div class="md-layout md-gutter md-alignment-center-center __paginate">
-        <pagination
-        type="esc-accent"
-        no-arrows  :page-count="concern.last_page" :value="concern.current_page" :total="concern.total" @input="concernGet" />
-      </div>
+      <div class="md-layout md-gutter md-alignment-center-center">
+        <div class="__table md-layout-item md-size-100">
+          <md-table
+            v-model="concern"
+            md-sort="studLN"
+            md-sort-order="asc">
 
-      <div class="__table md-layout-item md-size-100">
-        <md-table
-          v-model="concern"
-          md-sort="studLN"
-          md-sort-order="asc">
+            <md-table-row class="title">
+                <md-table-head class="text-center">Created Date Concern</md-table-head>
+                <md-table-head class="text-center">Email </md-table-head>
+                <md-table-head class="text-center">Name</md-table-head>
+                <md-table-head class="text-center">Concern</md-table-head>
+            </md-table-row>
 
-          <md-table-row class="title">
-              <md-table-head class="text-center">Created Date Concern</md-table-head>
-              <md-table-head class="text-center">Email </md-table-head>
-              <md-table-head class="text-center">Name</md-table-head>
-              <md-table-head class="text-center">Concern</md-table-head>
-          </md-table-row>
+            <md-table-row v-for="(con, index) in concern.data" :key="index">
 
-          <md-table-row v-for="(con, index) in concern.data" :key="index">
+                <md-table-cell class="text-center">
+                  {{concern.data[index].created_at}}
+                </md-table-cell>
 
-              <md-table-cell class="text-center">
-                {{concern.data[index].created_at}}
-              </md-table-cell>
+                <md-table-cell class="text-left">
+                  {{concern.data[index].email}}
+                </md-table-cell>
 
-              <md-table-cell class="text-left">
-                {{concern.data[index].email}}
-              </md-table-cell>
+                <md-table-cell>
+                  {{concern.data[index].name}}
+                </md-table-cell>
 
-              <md-table-cell>
-                {{concern.data[index].name}}
-              </md-table-cell>
+                <md-table-cell>
+                  <md-field>
+                    <md-textarea v-model="concern.data[index].message" readonly></md-textarea >
+                  </md-field>
+                </md-table-cell>
 
-              <md-table-cell>
-                <md-field>
-                  <md-textarea v-model="concern.data[index].message" readonly></md-textarea >
-                </md-field>
-              </md-table-cell>
+            </md-table-row>
 
-          </md-table-row>
-
-        </md-table>
-      
+          </md-table>
+        
+        </div>
       </div>
     </div>
 </template>

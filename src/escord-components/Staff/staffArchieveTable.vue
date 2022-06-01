@@ -1,13 +1,5 @@
 <template>
     <div class="md-layout md-gutter md-alignment-center-center">
-
-      <div class="md-layout md-gutter md-alignment-center-center __paginate">
-        <pagination 
-        type="esc-accent" no-arrows  
-        :page-count="getarchschol.last_page" 
-        :value="getarchschol.current_page" 
-        :total="getarchschol.total" @input="scholshowarchieve" />
-      </div>
       
       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
@@ -25,6 +17,14 @@
             </md-button>
         </div>
 
+      </div>
+
+      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center __paginate">
+        <pagination 
+        type="esc-accent" no-arrows  
+        :page-count="getarchschol.last_page" 
+        :value="getarchschol.current_page" 
+        :total="getarchschol.total" @input="scholshowarchieve" />
       </div>
 
 

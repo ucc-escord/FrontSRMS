@@ -90,50 +90,27 @@
 
         <!-- MIDDLE SECTION -->  
         <div class="__mid">
-            <!-- DISPLAY OF SELECTED INFO -->
-            <div class="__name md-layout-item md-size-100">
+          <!-- DISPLAY OF SELECTED INFO -->
+          <div class="__name md-layout-item md-size-100">
             <h4 class="md-display-1 text-center text-esc-darkgrey">
-                <strong>{{classProg}}</strong> | {{classYr}}{{classSec}}
+              <strong>{{classProg}}</strong> | {{classYr}}{{classSec}}
             </h4>
-            </div>
-            <!-- END OF DISPLAY OF SELECTED INFO -->
+          </div>
+          <!-- END OF DISPLAY OF SELECTED INFO -->
 
-            <!-- BUTTON AND SEARCH BAR -->
-            <div class="__name md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+          <!-- pagination -->
+          <div class="md-layout md-gutter md-alignment-center-center __paginate">
+            <pagination
+            class="mx-auto"
+            type="esc-accent"
+            no-arrows  :page-count="getscholperProg.last_page" :value="getscholperProg.current_page" :total="getscholperProg.total" @input="getStudentPerProg" />
+          </div>
             
-            <!-- <div class="md-layout-item md-size-45 md-xsmall-size-100 md-small-size-100 md-layout md-gutter md-alignment-center-center">
-
-                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
-                <md-button
-                class="md-success md-round md-dense md-raised md-simple">
-                    Download All
-                </md-button>
-                </div>
-                
-                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
-                <md-button
-                class="md-danger md-round md-dense md-raised md-simple">
-                    Archive All
-                </md-button>
-
-                </div>
-
-            </div> -->
-
-            </div>
-            <!-- END OF BUTTON AND SEARCH BAR -->
 
         </div>
 
         <!-- BOTTOM SECTION >> TABLE -->
         <div class="__bottom __table">
-            
-            <!-- pagination -->
-            <div class="md-layout md-gutter md-alignment-center-center __paginate">
-            <pagination
-            type="esc-accent"
-            no-arrows  :page-count="getscholperProg.last_page" :value="getscholperProg.current_page" :total="getscholperProg.total" @input="getStudentPerProg" />
-            </div>
 
             <!-- table display -->
             <md-table
