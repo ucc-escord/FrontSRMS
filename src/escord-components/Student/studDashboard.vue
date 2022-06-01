@@ -137,7 +137,7 @@
     
     </div>
     
-    <vue-headful title="Dashboard | STUDENT"/>
+    <vue-headful title="Student | Dashboard"/>
   </div>
 </template>
 

@@ -205,7 +205,7 @@
             </div>
         </div>    
     </div>
-    <vue-headful title="Evaluation Form Detail"/>
+    <vue-headful title="Staff | Evaluation Form Detail"/>
 </div>
 </template>
 

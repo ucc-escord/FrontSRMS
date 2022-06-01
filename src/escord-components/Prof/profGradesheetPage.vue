@@ -307,7 +307,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="Gradesheet Detail"/>
+    <vue-headful title="Professor | Gradesheet Detail"/>
   </div>
 </template>
 

@@ -60,7 +60,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="Dashboard | MANAGER"/>
+    <vue-headful title="Manager | Dashboard"/>
   </div>
 </template>
 

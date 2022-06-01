@@ -57,7 +57,7 @@
     
     </div>
     
-    <vue-headful title="SRMS | ADMIN"/>
+    <vue-headful title="Manager | Scholastic Record Detail"/>
   </div>
 </template>
 

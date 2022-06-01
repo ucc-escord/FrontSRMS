@@ -395,19 +395,27 @@
                       {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}
                     </p> 
                     
-                    <span v-if="selectedGS_infoShow === gs.gradesheetid"
+                    <!-- <span v-if="selectedGS_infoShow === gs.gradesheetid"
                     class="text-info">
                       You have selected the card for {{gs.subjectdesc}} with gradesheet ID of: {{gs.gradesheetid}}.
-                    </span>
+                    </span> -->
                   </md-card-content>
 
                   <md-card-actions>
-                    <md-button
+                    <!-- <md-button
                     class="md-simple md-esc-accent"
                     @click="showGS_info(gs.gradesheetid)">
                     SHOW DETAILS
+                    </md-button> -->
+
+                    <md-button
+                    class="md-simple md-esc-accent"
+                    :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">
+                    EDIT GRADESHEET
                     </md-button>
-                   <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link>
+
+
+                   <!-- <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link> -->
                   </md-card-actions>
               </md-card>
 
@@ -421,7 +429,7 @@
       </div>
     </div>
 
-    <vue-headful title="Dashboard | PROF"/>
+    <vue-headful title="Professor | Dashboard"/>
   </div>
 
   

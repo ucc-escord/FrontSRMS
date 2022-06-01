@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="Gradesheet Archive List "/>
+    <vue-headful title="Professor | Gradesheet Archive List "/>
   </div>
 </template>
 
