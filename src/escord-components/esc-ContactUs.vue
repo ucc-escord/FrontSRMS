@@ -145,9 +145,9 @@ export default {
       msgValidate () {
         this.$v.$touch()
 
-        this.sendingConcern();
-
         if (!this.$v.$invalid) {
+          this.sendingConcern();
+          this.clearInput();
       //    console.log("Message sent successfully.")
         }
         else {
@@ -162,8 +162,6 @@ export default {
     },
 
     sendingConcern(){
-
-            
            
             axios.post('api/insertconcern', this.msgData).then(response => {
 
