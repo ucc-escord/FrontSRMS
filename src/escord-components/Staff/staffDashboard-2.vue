@@ -85,7 +85,7 @@
 
     <updateModal v-if="updateModal" @close="updateModalHide"/>
     
-    <vue-headful title="Staff | Dashboard/>
+    <vue-headful title="Staff | Dashboard"/>
   </div>
 </template>
 
