@@ -168,8 +168,9 @@ export default {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
-          this.clearForm();
+       
           this.createProfessor(this.registerData);
+             this.clearForm();
        //   console.log("Logged in successfully.")
         }
         else {
