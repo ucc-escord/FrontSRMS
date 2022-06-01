@@ -28,9 +28,9 @@
         v-for="(subj, index) in subjectList"
         :key="index">
 
-            <md-table-cell class="md-layout md-gutter md-alignment-center-center">
+            <md-table-cell>
 
-                <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout md-gutter md-alignment-center-center">
                     <md-button
                     @click="saveupdateStudent(subjectList[index])"
                     class="md-success md-just-icon md-round md-simple">
@@ -39,7 +39,7 @@
                     </md-button>
                 </div>
 
-                  <div class="md-layout-item md-size-45 md-layout md-gutter md-alignment-center-center">
+                  <div class="md-layout md-gutter md-alignment-center-center">
                     <md-button
                     @click="deletedrowStudent(subjectList[index])"
                     class="md-danger md-just-icon md-round md-simple">
