@@ -46,6 +46,7 @@ const escStudDash  = () => import('../../escord-components/Student/studDashboard
 const escAbout  = () => import('../../escord-components/esc-About.vue')
 const escContactUs  = () => import('../../escord-components/esc-ContactUs.vue')
 const escStaffScholasticRecord  = () => import('../../escord-components/Staff/StaffScholasticRecord.vue')
+const escTnC  = () => import('../../escord-components/esc-Terms&Condition.vue')
 
 const escRegister  = () => import('../../escord-components/esc-Register.vue')
 
@@ -90,6 +91,11 @@ const routes = [
     path: "*",
     name: "NotFound",
     component: NotFound
+  },
+   {
+    path: "/escord-terms-and-conditions",
+    name: "Terms and Condition",
+    components: {default: escTnC, header: escHeader, footer: escFooter}
   },
   {
     path: "/",
