@@ -63,7 +63,7 @@
 
         <div class="md-layout-item
         md-xsmall-size-100 md-small-size-50">
-          <a href="" class="md-body-2 text-esc-darkgrey">Terms & Condition</a>
+          <router-link to="/escord-terms-and-conditions"  class="md-body-2 text-esc-darkgrey">Terms & Condition</router-link>
         </div>
 
         <div class="md-layout-item

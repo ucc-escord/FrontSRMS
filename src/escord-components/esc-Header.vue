@@ -127,7 +127,7 @@ export default {
   },
   computed: {
     showMenu() {
-      const excludedRoutes = ["Landing", "About", "Contact Us", "Login", "Register"];
+      const excludedRoutes = ["Landing", "About", "Contact Us", "Login", "Register", "Terms and Condition"];
       return excludedRoutes.every(r => r !== this.$route.name);
     }
   },
