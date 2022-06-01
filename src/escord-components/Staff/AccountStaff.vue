@@ -239,11 +239,11 @@ export default {
       if (!this.$v.$invalid) {
         this.saveUser()
         this.userUpdated = true;
-        console.log("Staff account updated.")
+      //  console.log("Staff account updated.")
       }
       else {
         this.userNotUpdated = true;
-        console.log("Staff account NOT updated.");
+      //  console.log("Staff account NOT updated.");
       }
     },
 
@@ -263,7 +263,7 @@ export default {
               }).then((response)=>{
       
 
-          console.log('update staff accounts' , response.data);
+       //   console.log('update staff accounts' , response.data);
 
           
             }).catch((errors)=>{

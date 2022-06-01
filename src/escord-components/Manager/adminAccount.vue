@@ -243,11 +243,11 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
         if (!this.$v.$invalid) {
           this.saveUser()
           this.userUpdated = true
-          console.log("Admin account updated.")
+      //    console.log("Admin account updated.")
         }
         else {
           this.userNotUpdated = true
-          console.log("Admin account NOT updated.")
+         // console.log("Admin account NOT updated.")
         }
       },
 
@@ -267,13 +267,13 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
 
                }).then((response)=>{
 
-                  console.log(response)
+//                  console.log(response)
 
             // console.log('update Admin Account' , response.data);
 
             
              }).catch((errors)=>{
-                console.log(errors)
+  //              console.log(errors)
              this.error =  errors.response.data;
    
              })

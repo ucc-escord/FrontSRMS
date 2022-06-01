@@ -130,7 +130,7 @@ export default {
  await     axios.get('/api/showconcern?page='+page+'&search='+this.search).then(({data})=>{
                 this.concern = data;
 
-                console.log(this.concern)
+                // console.log(this.concern)
              }).catch((errors)=>{
       
              this.error =  errors.response.data;

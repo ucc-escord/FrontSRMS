@@ -118,13 +118,13 @@ export default {
                 // console.log(result.data);
                 this.$router.push({name: 'Landing'})
             }, error => {
-                console.error(error);
+          //      console.error(error);
             });
 
 
             }
             else {
-              console.log("Password not created.")
+            //  console.log("Password not created.")
             }
 
          

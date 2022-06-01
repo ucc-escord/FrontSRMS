@@ -170,10 +170,10 @@ export default {
         if (!this.$v.$invalid) {
           this.clearForm();
           this.createProfessor(this.registerData);
-          console.log("Logged in successfully.")
+       //   console.log("Logged in successfully.")
         }
         else {
-          console.log("Failed to log in.");
+       //   console.log("Failed to log in.");
         }
     },
   },

@@ -744,11 +744,11 @@ async cardshowpage(page=1){
 
         if (!this.$v.formData.$invalid) {
           this.addGradesheet()
-        console.log("Gradesheet saved and added successfully.")
+       // console.log("Gradesheet saved and added successfully.")
         }
         else {
           console.log(this.$v)
-       console.log("Failed to add and save gradesheet. Fill out required fields.");
+      // console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
     },
     pageofArchieve(){

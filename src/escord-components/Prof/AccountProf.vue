@@ -264,7 +264,7 @@ methods: {
           email: this.getCurrentUser.email,
             }).then((response)=>{
     
-        console.log('update prof accounts' , response.data);
+       // console.log('update prof accounts' , response.data);
 
           }).catch((errors)=>{
 

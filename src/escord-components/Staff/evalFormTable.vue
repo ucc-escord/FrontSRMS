@@ -187,7 +187,7 @@ export default {
             this.sending = true 
         }
         else {
-            console.log("not updated");
+     //       console.log("not updated");
         }
     },
 
@@ -214,7 +214,7 @@ export default {
   axios.put('/api/updateEval/'+index.id,index).then((response)=>{
         
 
-           console.log(response);
+        //   console.log(response);
 
             
              }).catch((errors)=>{
@@ -230,7 +230,7 @@ export default {
   axios.delete('/api/deleteRow/'+index.id).then((response)=>{
         
 
-           console.log(response);
+        //    console.log(response);
 
             
              }).catch((errors)=>{

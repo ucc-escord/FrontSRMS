@@ -362,10 +362,10 @@ export default {
         if (!this.$v.$invalid) {
             this.validateEval()
             this.updateEvalTopPreview()
-            console.log("Field can be updated successfully.")
+            // console.log("Field can be updated successfully.")
         }
         else {
-            console.log("Field can not be updated.");
+            // console.log("Field can not be updated.");
         }
     },
 
@@ -408,7 +408,7 @@ export default {
 
          }).then((response)=>{
         
-                console.log(this.getScholRecord)
+                // console.log(this.getScholRecord)
      
 
             

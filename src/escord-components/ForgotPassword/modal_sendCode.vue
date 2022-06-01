@@ -114,19 +114,19 @@ export default {
 
           axios.post('/api/SendCode', {email: this.email}).then(response => {
 
-                console.log(response.data.message)
+           //     console.log(response.data.message) (respone ng message galing backend)
                }).catch((errors)=>{
   
-                   console.log(errors)
+                 //  console.log(errors)
    
              });
               //show next step (setting new password) when there is no error
               this.createNewPass = true; 
 
-              console.log("Code sent.")
+         //     console.log("Code sent.")
             }
             else {
-              console.log("Code not sent.")
+          //    console.log("Code not sent.")
             }
             
           

@@ -259,7 +259,7 @@ export default {
      
         }
         else {
-          console.log("Failed to log in.");
+      //    console.log("Failed to log in.");
         }
     },
     clearUnusedInput() {
@@ -269,12 +269,12 @@ export default {
    
         this.loginData.userEmail = null;
         this.loginData.userPassword = null;
-        console.log(this.showStudNumInput)
+     //   console.log(this.showStudNumInput)
       }
       else {
         this.loginData.userStudNum = null;
         this.loginData.userPassword = null;
-        console.log(this.showStudNumInput)
+     //   console.log(this.showStudNumInput)
       }
     },
         auth(){

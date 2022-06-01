@@ -124,7 +124,7 @@ const actions = {
         return  axios.post('api/evalCreate/', addEvalStud).then((response)=>{
           //   this.currentUser = response.data
           commit('setLoading',false)
-          console.log('adding successful' , response.data);
+        //  console.log('adding successful' , response.data);
             
   
          }).catch(()=>{

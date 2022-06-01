@@ -259,11 +259,11 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
         if (!this.$v.$invalid) {
           this.saveUser()
           this.userUpdated = true;
-          console.log("Student account updated.")
+          // console.log("Student account updated.")
         }
         else {
           this.userNotUpdated = true;
-          console.log("Student account NOT updated.")
+          // console.log("Student account NOT updated.")
         }
       },
 
@@ -285,7 +285,7 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
              email: this.getCurrentUser.email,
 
         }).then((response)=>{
-            console.log('update student accounts' , response.data);
+            // console.log('update student accounts' , response.data);
              }).catch((errors)=>{
   
              this.error =  errors.response.data;
