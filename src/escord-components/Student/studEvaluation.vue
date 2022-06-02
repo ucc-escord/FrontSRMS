@@ -89,7 +89,7 @@
               STATUS:
             </p>
             <p class="md-body-1 md-layout-item md-size-50">
-              REGULAR
+              {{studStatus()}}
             </p>
           </div>
 
@@ -297,6 +297,25 @@ export default {
     FGxUnitsResult(grade) {
       return grade.units * grade.grade
     },
+
+    studStatus() {
+      const average = this.gwa;
+
+      if (average > 0 && average <= 2.25){
+        return "REGULAR";
+      }
+      else if (average <= 0) {
+        return "THERE IS NOTHING TO COMPUTE"
+      }
+      else if (average >= 2.26 && average <= 5.00) {
+        return "IRREGULAR"
+      }
+      else if (average > 5.00) {
+        return "NOT APPLICABLE"
+      }
+
+    },
+
      async  showEvalRow(){
            
  await axios.get('/api/evalTableStudent/'+this.$route.params.student_number).then(({data})=>{

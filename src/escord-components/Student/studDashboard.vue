@@ -23,8 +23,9 @@
                 <div class="md-layout md-alignment-center-center">
 
                   <div class="md-layout-item md-size-100  name">
-                    <h3 class="title"> {{getCurrentUser.name}}</h3>
-                  <h5>{{getScholRecord.student_number}}  {{getScholRecord.course}} | {{getScholRecord.section}}</h5>
+                    <h3 class="title text-center"> {{getCurrentUser.name}}</h3>
+                  <h5 class="text-center __studnum">{{getScholRecord.student_number}}</h5>
+                  <h5 class="text-center __studcourse">{{getScholRecord.course}} | {{getScholRecord.section}}</h5>
                   </div>
 
                   <div class="md-layout-item md-size-100 ">
@@ -73,7 +74,7 @@
  -->
                   <stud-scol/>
 
-                  <vue-to-pdf
+                  <!-- <vue-to-pdf
                   filename = "ScholasticRecord"
                   pdf-format="letter"
                   :preview-modal = "false"
@@ -86,7 +87,7 @@
                         <stud-scol class="md-layout-item md-size-85"/>  
                       </div> 
                     </section>
-                  </vue-to-pdf>
+                  </vue-to-pdf> -->
                   
                 </div>
                 
@@ -113,7 +114,6 @@
                   <vue-to-pdf
                   filename = "SummaryOfGrades"
                   pdf-format="a4"
-                  :preview-modal = "true"
                   :pdf-quality = "2"
                   :manual-pagination = "true"
                   :enable-download= "true"
@@ -252,9 +252,9 @@ export default {
     },
 
     /* DOWNLOAD SR  */
-    printSR() {
-      this.$refs.downloadSR_content.generatePdf()
-    },
+    // printSR() {
+    //   this.$refs.downloadSR_content.generatePdf()
+    // },
   }
 };
 </script>
@@ -266,5 +266,10 @@ export default {
 
 img {
   border: 0.25em solid #fff !important;
+}
+
+.__studnum, .__studcourse {
+  font-weight: 500 !important;
+  font-size:  1em !important;
 }
 </style>
