@@ -4,136 +4,200 @@
       class="section page-header header-filter"
       :style="headerStyle"
     ></parallax>
-   
-
+  
     <div class="main main-raised" ref="DownloadComp">
       <div class="section profile-content">
         <div class="container">
+
+          <div class="md-layout md-gutter md-alignment-center-center">
+            <p class="title text-center md-display-1 text-esc-darkgrey">Gradesheet Detail</p>
+          </div>
        
-          <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
+          <div class="__gradesheet-header md-layout md-gutter md-alignment-center-center">
 
-            <div class="__gradesheet-subject md-layout-item md-size-100">
-            
-                    <strong>
-                 
-                      <md-field>
-                       <md-input
-                                    v-model="getGS.subjectcode"></md-input>
-                      </md-field>
-                                   </strong>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('subjectcode')">
+                <label>Code</label>
+                  <md-input 
+                  class="text-center"
+                  v-model="getGS.subjectcode"></md-input>
 
-                                <div>
-                                   <md-field>
-                                      <md-input v-model="getGS.subjectdesc"> </md-input>
-                                   </md-field>
-              
- 
-                                </div>
-              
+                  <span class="md-error" v-if="!$v.getGS.subjectcode.required">Required.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-75 md-layout md-gutter md-alignment-center-left">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('subjectdesc')">
+                <label>Description</label>
+                  <md-input 
+                  class=""
+                  v-model="getGS.subjectdesc"></md-input>
+
+                  <span class="md-error" v-if="!$v.getGS.subjectdesc.required">Required.</span>
+                </md-field>
+              </div>
             </div>
-            
-            <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
-                    <div class="md-subheading">
-                       <md-field>
-           
-                          <md-input v-model="getGS.course_year"/>
-                         </md-field>
-                          <md-field>
-           
-                          <md-input v-model="getGS.course_section"/>
-                         </md-field>
-                          <md-field>
-           
-                          <md-input v-model="getGS.course_short"/>
-                         </md-field>
-                      
-                    </div>
-                    <div class="md-caption __top-md-caption">
-                        <md-field>
-                           <md-input v-model="getGS.day"/>
-                       
-                          </md-field>
-                             <md-field>
-                           <md-input v-model="getGS.time"/>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+              <div class="md-layout-item md-size-70 md-layout md-gutter md-alignment-center-center">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('course_short')">
+                <label>Program</label>
+                  <md-input 
+                  class="text-left"
+                  v-model="getGS.course_short"></md-input>
 
-                          </md-field>
-                    </div>
-                    <div class="md-caption">
-                        <md-field>
-                     
-                          <md-input v-model="getGS.semester"/>
-                          </md-field>
-                         
-                              <md-field>
-                                    <md-input v-model="getGS.sem_startyear"/>
+                  <span class="md-error" v-if="!$v.getGS.course_short.required">Required.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('course_year')">
+                <label>Year</label>
+                  <md-input 
+                  class="text-center"
+                  type="number"
+                  v-model="getGS.course_year"></md-input>
 
-                                  </md-field>
-                                      <md-field>
-                                         <md-input v-model="getGS.sem_endyear"/>
-                                          </md-field>
-                    </div>
+                  <span class="md-error" v-if="!$v.getGS.course_year.required">Required.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.course_year.minValue">Minimum is 1.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.course_year.maxValue">Maximum is 4.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.course_year.maxLength">Invalid</span>
+                  <span class="md-error" v-else-if="!$v.getGS.course_year.integer">Invalid.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-left">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('course_section')">
+                <label>Section</label>
+                  <md-input 
+                  class="text-center"
+                  v-model="getGS.course_section"></md-input>
 
+                  <span class="md-error" v-if="!$v.getGS.course_section.required">Required.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.course_section.maxLength">Invalid.</span>
+                </md-field>
+                
+              </div>
             </div>
-            
-            <div class="__gradesheet-buttons md-layout-item md-xsmall-size-100 md-size-30 md-layout md-gutter md-alignment-center-space-between">
 
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button 
-                    class="md-esc-accent md-raised md-round md-just-icon"
-                    @click="classicModal = true">
-                        <md-icon>person_add</md-icon>
-                        <md-tooltip md-direction="bottom">Add Student</md-tooltip>
-                    </md-button>
-                </div>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('day')">
+                <label>Day</label>
+                  <md-input 
+                  class="text-left"
+                  v-model="getGS.day"></md-input>
 
-             <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button @click="sendArrayofData"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>save</md-icon>
-                        <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
-                    </md-button>
-                </div>
- -->
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button  @click="archievebtn"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>inventory</md-icon>
-                        <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
-                    </md-button>
+                  <span class="md-error" v-if="!$v.getGS.day.required">Required.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('time')">
+                <label>Time</label>
+                  <md-input 
+                  class="text-left"
+                  v-model="getGS.time"></md-input>
 
+                  <span class="md-error" v-if="!$v.getGS.time.required">Required.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-10 md-layout md-gutter md-alignment-center-left">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('semester')">
+                <label>Sem</label>
+                  <md-input 
+                  class="text-center"
+                  v-model="getGS.semester"></md-input>
 
-                    <md-button @click="updateGradesheetInfo"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>save</md-icon>
-                        <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
-                    </md-button>
-                </div>
+                  <span class="md-error" v-if="!$v.getGS.semester.required">Required.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.semester.maxLength">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.semester.minValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.semester.maxValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.semester.integer">Invalid.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-20 md-layout md-gutter md-alignment-center-left">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('sem_startyear')">
+                <label>SY (start)</label>
+                  <md-input 
+                  class="text-center"
+                  v-model="getGS.sem_startyear"></md-input>
 
-              <!--   <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>download</md-icon>
-                        <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
-                    </md-button>
-                </div> -->
-       
-              <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
-                    <md-button  @click="refreshGradesheet"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>refresh</md-icon>
-                        <md-tooltip md-direction="bottom">Refresh Gradesheet</md-tooltip>
-                    </md-button>
-                </div> -->
+                  <span class="md-error" v-if="!$v.getGS.sem_startyear.required">Required.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_startyear.minValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_startyear.maxValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_startyear.integer">Invalid.</span>
+                </md-field>
+              </div>
+              <div class="md-layout-item md-size-20 md-layout md-gutter md-alignment-center-left">
+                <md-field
+                class="has-esc-accent"
+                :class="getValidationClass('sem_endyear')">
+                <label>SY (end)</label>
+                  <md-input 
+                  class="text-center"
+                  v-model="getGS.sem_endyear"></md-input>
 
+                  <span class="md-error" v-if="!$v.getGS.sem_endyear.required">Required.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_endyear.minValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_endyear.maxValue">Invalid.</span>
+                  <span class="md-error" v-else-if="!$v.getGS.sem_endyear.integer">Invalid.</span>
+                </md-field>
+              </div>
             </div>
+
+            <div class="_btnTop  md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-button @click="updateGradesheetInfo"
+                class="md-esc-darkgrey md-raised md-round md-wd md-dense">
+                Save
+                    <md-tooltip md-direction="bottom">Update Gradesheet Info</md-tooltip>
+                </md-button>
+              </div>
+            </div>
+
+            <hr>
+            <md-divider></md-divider>
+
+            <div class="_btnTop _frmaction md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-button 
+                class="md-esc-accent md-raised md-round md-just-icon"
+                @click="classicModal = true">
+                    <md-icon>person_add</md-icon>
+                    <md-tooltip md-direction="bottom">Add Student</md-tooltip>
+                </md-button>
+              </div>
+              <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                <md-button  @click="archievebtn"
+                class="md-danger md-raised md-round md-just-icon">
+                    <md-icon>inventory</md-icon>
+                    <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
+                </md-button>
+              </div>
+            </div>
+
             <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                 <p class="md-body-2 title text-center __info">
                     <md-icon class="_tip">tips_and_updates</md-icon>
                       &nbsp;&nbsp;&nbsp; Refresh the page to see your current changes!*
                 </p>
             </div>
-
           </div>
 
           <md-divider></md-divider>
@@ -152,11 +216,11 @@
 
               <md-table-row class="title">
                 <md-table-head class="text-center">Actions</md-table-head>
-                <md-table-head class="text-center">Student Number</md-table-head>
+                <md-table-head class="text-center _col1">Student #</md-table-head>
                 <md-table-head class="text-center">Name</md-table-head>
-                <md-table-head class="text-center">Midterm</md-table-head>
-                <md-table-head class="text-center">Final Term</md-table-head>
-                <md-table-head class="text-center">Remarks</md-table-head>
+                <md-table-head class="text-center _col1">Midterm</md-table-head>
+                <md-table-head class="text-center _col1">Final Term</md-table-head>
+                <md-table-head class="text-center _col1">Remarks</md-table-head>
                 
               </md-table-row>
 
@@ -164,7 +228,25 @@
               v-for="(_, index) in getrow"
               :key="index">
 
-               <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+              <div class="md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                  <md-button @click.prevent="sendArrayofData(getrow[index])"
+                  class="md-success md-raised md-round md-just-icon md-simple">
+                      <md-icon>save</md-icon>
+                      <md-tooltip md-direction="bottom">Save Changes</md-tooltip>
+                  </md-button>
+                </div>
+                <div class="md-layout-item md-size-25 md-layout md-gutter md-alignment-center-center">
+                  <md-button
+                  @click="deletedrowStudent(getrow[index])"
+                  class="md-danger md-raised md-round md-just-icon md-simple">
+                      <md-icon>delete</md-icon>
+                      <md-tooltip md-direction="bottom">Remove Row</md-tooltip>
+                  </md-button>
+                </div>
+              </div>
+
+               <!-- <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button @click.prevent="sendArrayofData(getrow[index])"
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>save</md-icon>
@@ -178,17 +260,35 @@
                         <md-icon>error</md-icon>
                     </md-button>
                
-                </div>
+                </div> -->
 
                 
-                <md-table-cell class="text-center">
-                  {{getrow[index].student_number}}
+                <md-table-cell>
+                  <md-vuelidated
+                  :key="index"
+                  :messages="{required: 'Field cannot be blank.'}" 
+                  field="md-field" 
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-center"
+                    v-model="getrow[index].student_number"></md-input>
+                  </md-vuelidated> 
+                  <!-- {{getrow[index].student_number}} -->
                 </md-table-cell>
 
 
 
                 <md-table-cell>
-               {{getrow[index].studentname}}
+                  <md-vuelidated
+                  :key="index"
+                  :messages="{required: 'Field cannot be blank.'}" 
+                  field="md-field" 
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-left"
+                    v-model="getrow[index].studentname"></md-input>
+                  </md-vuelidated> 
+               <!-- {{getrow[index].studentname}} -->
                 </md-table-cell>
 
                <md-table-cell>
@@ -232,18 +332,30 @@
                  
                 </md-table-cell>
 
-                <!-- <md-table-cell>
-                  <md-field class="has-esc-accent">
-                  <md-input 
-                    v-model="getrow[index].finalgrade"></md-input> -edit this var-
-                  </md-field>
-                </md-table-cell>-->
                 <md-table-cell>
-                  <md-field class="has-esc-accent">
+
+                  <md-vuelidated
+                  :key="index"
+                  :messages="{
+                    required: 'Field cannot be blank.',
+                    maxLength: 'Input cannot be more than 4 characters.',
+                    minValue: 'Field only accepts value from `1.00` to `5.00`.',
+                    maxValue: 'Field only accepts value from `1.00` to `5.00`.'
+                  }" 
+                  field="md-field" 
+                  class="has-esc-accent">
+                    <md-input 
+                    type="number"
+                    class="text-center"
+                    v-model="getrow[index].finalgrade" 
+                    :value="remarkCompute(index)"></md-input>
+                  </md-vuelidated> 
+
+                  <!-- <md-field class="has-esc-accent">
                   <md-input
                   v-model="getrow[index].finalgrade" 
-                    :value="remarkCompute(index)"></md-input> <!---test display--->
-                  </md-field>
+                    :value="remarkCompute(index)"></md-input> -test display-
+                  </md-field> -->
                 </md-table-cell>
                 
               </md-table-row>
@@ -381,7 +493,7 @@ import axios from "axios"
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, maxLength, minValue, maxValue } from 'vuelidate/lib/validators'
+import { required, maxLength, minValue, maxValue, integer } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
@@ -455,6 +567,13 @@ export default {
    validations: {
        getrow: {
          $each: {
+           student_number: {required},
+           studentname: {required},
+           finalgrade: {
+             required,
+             maxLength: maxLength(4),
+             minValue: minValue(1.00),
+             maxValue: maxValue(5.00)},
            midterm: {
              required,
              maxLength: maxLength(4),
@@ -476,6 +595,36 @@ export default {
         studMG: {required},
         studFG: {required}
       },
+
+      getGS: {
+        subjectcode: {required},
+        subjectdesc: {required},
+        course_short: {required},
+        course_year: {required,
+                      minValue: minValue(1),
+                      maxValue: maxValue(4),
+                      maxLength: maxLength(1),
+                      integer},
+        course_section: {required,
+                      maxLength: maxLength(1)},
+        day: {required},
+        time: {required},
+        semester: {required,
+                  minValue: minValue(1),
+                  maxValue: maxValue(2),
+                  maxLength: maxLength(1),
+                  integer},
+        sem_startyear: {required,
+                      maxLength: maxLength(4),
+                      minValue: minValue(2000),
+                      maxValue: maxValue(2080),
+                      integer},
+        sem_endyear: {required,
+                      maxLength: maxLength(4),
+                      minValue: minValue(2000),
+                      maxValue: maxValue(2080),
+                      integer},
+      }
    },
   props: {
     header: {
@@ -509,6 +658,13 @@ export default {
 
      updateGradesheetInfo(){
 
+       this.$v.$touch()
+
+        if (!this.$v.$invalid) {
+            
+        //    console.log("Student is added successfully.")
+        
+
   axios.put('/api/updateGradesheet/'+this.$route.params.gradeshid,{
           subjectcode: this.getGS.subjectcode,
           subjectdesc: this.getGS.subjectdesc,
@@ -535,7 +691,10 @@ export default {
    
              })
 
-     
+     }
+        else {
+         //   console.log("Cannot add student to the gradesheet.");
+        }
 
     },
 
@@ -583,7 +742,7 @@ export default {
 
     /* add student modal validation methods */
     getValidationClass (fieldName) {
-      const field = this.$v.addStud[fieldName]
+      const field = this.$v.addStud[fieldName] || this.$v.getGS[fieldName]
 
       if (field) {
           return {
@@ -683,8 +842,13 @@ export default {
   padding: 0;
 }
 
-.__gradesheet-header, .__gradesheet-table {
+.__gradesheet-table {
     margin: 2rem 0 1.5rem 0 !important;
+}
+
+.__gradesheet-header {
+  max-width: 50em !important;
+  margin: auto !important;
 }
 
 h4 {
@@ -718,7 +882,7 @@ h4 {
   top: 3.07em !important;
   left: 0 !important;
   line-height: 0.95em !important;
-  text-align: justify;
+  text-align: left;
   font-size: .777rem !important;
 }
 
@@ -738,5 +902,17 @@ h3, .h3 {
 ._tip {
     color: #37c6de !important;
     font-size: 1.35em !important;
+}
+._btnTop {
+  margin-top: 1.5em !important;
+}
+._col1 {
+  width: 4em !important;
+  // max-width: 4em !important;
+}
+
+._frmaction {
+  max-width: 10em !important;
+  margin: auto !important;
 }
 </style>
