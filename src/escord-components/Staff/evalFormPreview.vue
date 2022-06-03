@@ -9,11 +9,12 @@
             <div class="container">
 
                 <p class="title md-display-1 text-esc-darkgrey text-center">Evaluation Form Detail</p>
-
+                
+                <form novalidate @submit.prevent="studEvalDetail_Validate">
                 <div class="_wrapDiv mx-auto md-layout md-gutter md-alignment-center-space-between">
             
                 <md-subheader><strong>STUDENT INFO </strong></md-subheader>
-
+                
                     <!-- FIRST ROW -->
                     <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                         <!-- STUDENT NUMBER -->
@@ -111,15 +112,13 @@
                                     <label>Semester</label>
                                     <md-input
                                     type="number"
-                                    maxlength="1"
                                     md-counter = "false"
                                     :disabled = "sending"
                                     v-model="getScholRecord.semester">{{semSuffix}} </md-input>
-                                    <span class="md-helper-text">
-                                        Accepts number only.*
-                                    </span>
 
                                     <span class="md-error" v-if="!$v.getScholRecord.semester.required">Required.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.semester.minValue">Minimum is 1.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.semester.maxValue">Maximum is 2.</span>
                                 </md-field>
                             </div>
                         </div>
@@ -137,6 +136,10 @@
                                     v-model="getScholRecord.sem_startyear"></md-input>
 
                                     <span class="md-error" v-if="!$v.getScholRecord.sem_startyear.required">Required.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_startyear.minLength">Invalid year.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_startyear.maxLength">Invalid year.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_startyear.minValue">Invalid year.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_startyear.maxValue">Invalid year.</span>
                                 </md-field>
 
                                 <md-field
@@ -151,17 +154,22 @@
                                     v-model="getScholRecord.sem_endyeaer"></md-input>
 
                                     <span class="md-error" v-if="!$v.getScholRecord.sem_endyeaer.required">Required.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_endyeaer.minLength">Invalid year.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_endyeaer.maxLength">Invalid year.</span>
+                                    <!-- <span class="md-error" v-else-if="!$v.getScholRecord.sem_endyeaer.minValue">Invalid year.</span>
+                                    <span class="md-error" v-else-if="!$v.getScholRecord.sem_endyeaer.maxValue">Invalid year.</span> -->
                                 </md-field>
                             </div>
                         </div>
 
                         <md-button 
                         class="md-dense md-round md-success md-simple _save"
-                        @click="studEvalDetail_Validate">
+                        type="submit">
                             save
                         </md-button>
                     </div>
                 </div>
+                </form>
 
                 <md-divider></md-divider>
 
@@ -189,6 +197,12 @@
                                 </md-button>
                             </div>
                         </div> -->
+                    </div>
+                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="md-body-2 title text-center __info">
+                            <md-icon>tips_and_updates</md-icon>
+                             &nbsp;&nbsp;&nbsp; Click the refresh button below to see your current changes!*
+                        </p>
                     </div>
                 </div>
 
@@ -220,7 +234,7 @@ import axios from "axios"
 //validation imports
 import { validationMixin } from 'vuelidate'
 import  EvalFormtab from './evalFormTable.vue'
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import { required, minLength, maxLength, maxValue, minValue } from 'vuelidate/lib/validators'
 
 export default {
   bodyClass: "profile-page",
@@ -289,9 +303,21 @@ export default {
             maxLength: maxLength(2)},
         course: {required},
 
-        semester: {required},
-        sem_startyear: {required},
-        sem_endyeaer: {required},
+        semester: {required,
+                  minValue: minValue(1),
+                  maxValue: maxValue(2)},
+        sem_startyear: {required,
+                  maxLength: maxLength(4),
+                  minLength: minLength(4),
+                  minValue: minValue(2000),
+                  maxValue: maxValue(2080)},
+        sem_endyeaer: {required,
+                  maxLength: maxLength(4),
+                  minLength: minLength(4),
+                //   endYr: this.endYr_val,
+                //   minValue: minValue(endYr),
+                //   maxValue: maxValue(endYr)
+                  },
 
         },
    },
@@ -311,6 +337,9 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     },
+    // endYr_val() {
+    //     return parseInt(this.getScholRecord.sem_startyear) +1
+    // },
     loadingStatus(){
       return this.$store.getters.loadingStatus
     },
@@ -338,7 +367,7 @@ export default {
 
     /* validation methods */
     getValidationClass (fieldName) {
-      const field = this.$v[fieldName]
+      const field = this.$v.getScholRecord[fieldName]
 
       if (field) {
           return {
@@ -453,7 +482,8 @@ export default {
 }
 
 .md-icon {
-    color: red !important;
+    color: #37c6de !important;
+    font-size: 1.35em !important;
 }
 
 .md-input {
@@ -490,5 +520,10 @@ h3, .h3 {
 
 ._tbl {
     margin-top: 0.75em !important;
+}
+
+.__info {
+    margin-bottom: 0 !important;
+    color: #494848 !important;
 }
 </style>

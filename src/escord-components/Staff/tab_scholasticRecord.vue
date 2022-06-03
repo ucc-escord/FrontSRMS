@@ -81,6 +81,12 @@
                 Enter
                 </md-button>
             </div>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <p class="md-body-2 title text-center __info">
+                    <md-icon class="_tip">tips_and_updates</md-icon>
+                      &nbsp;&nbsp;&nbsp; Click the enter button above to see your current changes!*
+                </p>
+            </div>
 
             </div>
         <!-- END OF SELECTOR -->
@@ -307,7 +313,8 @@
                         <md-field class="has-esc-accent"
                         :class="getValidationClass('studBirthday')">
                             <label>Birthday</label>
-                            <md-input v-model="modalInfo.studBirthday"
+                            <md-input
+                            placeholder="January 1, 2000" v-model="modalInfo.studBirthday"
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studBirthday.required">Birthday is required.</span>
@@ -902,4 +909,13 @@ h3, .h3 {
 ._close {
   color: #d9534f !important;
 }          
+.__info {
+    margin-bottom: 0 !important;
+    color: #494848 !important;
+}
+
+._tip {
+    color: #37c6de !important;
+    font-size: 1.35em !important;
+}
 </style>

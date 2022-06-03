@@ -55,6 +55,9 @@
                             v-model="formData.selectedSubjUnit"></md-input>
 
                             <span class="md-error" v-if="!$v.formData.selectedSubjUnit.required">Field is required.</span>
+                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.integer">Whole number only.</span>
+                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.minValue">Minimum of 1 unit.</span>
+                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.maxValue">Maximum of 5 units.</span>
                         </md-field>
                     </div>
                     <div class="md-layout-item md-size-35 md-xsmall-size-100 md-layout md-gutter">
@@ -97,7 +100,7 @@
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, maxValue, minValue  } from 'vuelidate/lib/validators'
+import { required, maxValue, minValue, integer  } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters} from "vuex";
 
 
@@ -156,7 +159,10 @@ export default {
             required
         },
     selectedSubjUnit: {
-            required
+            required,
+            integer,
+            minValue: minValue(1),
+            maxValue: maxValue(5)
         },
     subjFG: {
             required,
@@ -187,23 +193,20 @@ export default {
       },
 
     addEvalStud() {
-            
-           
             this.$v.$touch()
             if (!this.$v.$invalid) {
             this.addStudEvaluation(this.formData)
-
-              this.sending = true 
-              this.clearForm();
+            this.clearForm();
             }
              
     },
     clearForm () {
-      this.$v.$reset()
-        this.selectedSubject = ""
-        this.selectedSubjUnit = ""
-        this.selectedSubjCode = ""
-        this.subjFG = null
+      this.$v.$reset();
+        this.formData.selectedSubject = ""
+        this.formData.selectedSubjUnit = ""
+        this.formData.selectedSubjCode = ""
+        this.formData.subjFG = null
+        console.log("cleared")
     },
 
     /* SELECT SUBJECT */
