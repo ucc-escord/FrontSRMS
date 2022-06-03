@@ -133,11 +133,11 @@
             For the mean time, <strong>LOG OUT</strong> first.
           </p>
           <br>
-          <div class="md-layout md-gutter md-alignment-center-center">
-            <md-button
+         <!--  <div class="md-layout md-gutter md-alignment-center-center">
+         <md-button
             class="md-dense md-esc-accent __elseBtn" 
-            @click="loggingout">LOG OUT</md-button> 
-          </div>
+            @click="loggingout">LOG OUT</md-button>  
+          </div> -->
           
         </div>
 

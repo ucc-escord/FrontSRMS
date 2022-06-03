@@ -62,14 +62,23 @@
                 <p class="__login">Log In</p>
               </md-list-item>
               </div>
+
+               <div v-else>
+              <md-list-item 
+                v-if="!showMenu"
+                  @click="loggingout"
+              >
+                <p class="__login">LOG OUT</p>
+              </md-list-item>
+              </div>
               <!-- isLoggedIn removed to="/" replace with = @click-->
-              <md-list-item
+         <!--      <md-list-item
                 class="__no-bg"
                 v-if="showMenu"
                 @click="loggingout"
               >
                 <p class="__login __logout">LOG OUT</p>
-              </md-list-item>
+              </md-list-item> -->
               
             </md-list>
           </div>
