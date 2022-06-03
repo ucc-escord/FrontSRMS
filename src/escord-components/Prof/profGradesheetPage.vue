@@ -127,6 +127,12 @@
                 </div> -->
 
             </div>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <p class="md-body-2 title text-center __info">
+                    <md-icon class="_tip">tips_and_updates</md-icon>
+                      &nbsp;&nbsp;&nbsp; Refresh the page to see your current changes!*
+                </p>
+            </div>
 
           </div>
 
@@ -226,12 +232,19 @@
                  
                 </md-table-cell>
 
-                <md-table-cell>
+                <!-- <md-table-cell>
                   <md-field class="has-esc-accent">
                   <md-input 
-                    v-model="getrow[index].finalgrade"></md-input> <!---edit this var--->
+                    v-model="getrow[index].finalgrade"></md-input> -edit this var-
                   </md-field>
-                </md-table-cell>                
+                </md-table-cell>-->
+                <md-table-cell>
+                  <md-field class="has-esc-accent">
+                  <md-input
+                  v-model="getrow[index].finalgrade" 
+                    :value="remarkCompute(index)"></md-input> <!---test display--->
+                  </md-field>
+                </md-table-cell>
                 
               </md-table-row>
 
@@ -490,6 +503,9 @@ export default {
   },
 
   methods: {
+    remarkCompute(index){
+      return this.getrow[index].finalgrade = ((this.getrow[index].finalterm + this.getrow[index].midterm) / 2).toFixed(2);
+    },
 
      updateGradesheetInfo(){
 
@@ -713,5 +729,14 @@ h3, .h3 {
 }
 .__modal-buttons {
   margin-top: 1em;
+}
+.__info {
+    margin-bottom: 0 !important;
+    color: #494848 !important;
+}
+
+._tip {
+    color: #37c6de !important;
+    font-size: 1.35em !important;
 }
 </style>
