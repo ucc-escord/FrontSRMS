@@ -11,18 +11,8 @@
           <div class="profile-content">
             <div class="cards md-layout md-alignment-center">
               
-              <div class="md-layout-item md-medium-size-50 md-small-size-75 md-xsmall-size-100" @click="showSR_prev">
-                  <md-card class="md-with-hover">
-                      <md-card-content>
-                        <p class="md-title title text-center">Scholastic Record</p>
-                        <p class="text-center">Click to view the student's scholastic record form</p>
-                      </md-card-content>
-                  </md-card>
-                   
-                </div>
-
                 <!-- PREVIEW -->
-                <div v-if="showSR" class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center prev">
                   
                   <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button @click="printSR" class="md-raised md-esc-darkgrey md-round md-dense">Download</md-button>
@@ -33,7 +23,6 @@
                   <vue-to-pdf
                   filename = "ScholasticRecord"
                   pdf-format="letter"
-                  :preview-modal = "false"
                   :manual-pagination = "true"
                   :pdf-quality = "2"
                   :enable-download= "true"
@@ -183,5 +172,8 @@ export default {
 <style lang="scss" scoped>
 .section {
   padding: 0;
+}
+.prev {
+  margin-top: 2em !important;
 }
 </style>

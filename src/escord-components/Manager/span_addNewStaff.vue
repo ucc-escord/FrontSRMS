@@ -121,7 +121,7 @@ export default {
           minLength: minLength(3)
         },
         middleName: {
-          maxLength: maxLength(3)
+          maxLength: maxLength(2)
         },
         email: {
           required,

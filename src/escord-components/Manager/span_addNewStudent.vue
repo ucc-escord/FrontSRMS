@@ -45,24 +45,14 @@
             </md-field>
             
             </div>
-            <!--EMAIL ADDRESS-->
-        <div class="input md-layout-item md-small-size-100">
-            <md-field  class ="has-esc-accent"  :class="getValidationClass('email')">
-            <label for="email">Email Address</label>
-                <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
-            <span class="md-error" v-if="!$v.form.email.required">Email is required.</span>
-            <span class="md-error" v-else-if="!$v.form.email.email">Invalid email.</span>
-            </md-field>
-        </div>
-
-        
+            <!-- YR/SEC -->
              <div class="input md-layout-item md-small-size-100 md-layout md-gutter md-alignment-center-space-between">
                <md-autocomplete
                 md-dense
                 v-model="form.course"
                 :md-options="programs"
                 :md-fuzzy-search="false"
-                class="has-esc-accent md-layout-item md-size-45"
+                class="has-esc-accent md-layout-item md-size-65"
                 :class="getValidationClass('course')"
                 :disabled="sending">
                 <label>Program</label>
@@ -75,13 +65,22 @@
                 <span class="md-error" v-if="!$v.form.course.required">Course is required.</span>
               </md-autocomplete>
 
-              <md-field  class ="has-esc-accent md-layout-item md-size-45"  :class="getValidationClass('section')">
+              <md-field  class ="has-esc-accent md-layout-item md-size-30"  :class="getValidationClass('section')">
                 <label>Yr & Sec</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.section.required">Field is required.</span>
                 <span class="md-helper-text">Input format: `<strong>1A</strong>`</span>
               </md-field>
             </div>
+            <!--EMAIL ADDRESS-->
+          <div class="input md-layout-item md-size-100">
+              <md-field  class ="has-esc-accent"  :class="getValidationClass('email')">
+              <label for="email">Email Address</label>
+                  <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
+              <span class="md-error" v-if="!$v.form.email.required">Email is required.</span>
+              <span class="md-error" v-else-if="!$v.form.email.email">Invalid email.</span>
+              </md-field>
+          </div>
         
             <!--DEFAULT PASSWORD-->
         <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">
@@ -159,7 +158,7 @@ export default {
           minLength: minLength(3)
         },
         middleName: {
-          maxLength: maxLength(3)
+          maxLength: maxLength(2)
         },
          course: {
           required,

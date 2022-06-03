@@ -39,12 +39,12 @@
 
             <tr class="text-center">
               <th>From:</th>
-              <td>20XX</td>
+              <td></td>
             </tr>
 
             <tr class="text-center">
               <th>To:</th>
-              <td>20XX</td>
+              <td></td>
             </tr>
           </table>
         </div>

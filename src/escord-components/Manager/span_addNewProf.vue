@@ -10,7 +10,7 @@
             <form class="md-layout mx-auto" 
             @submit.prevent="registerValidate" novalidate>
 
-                <div class="input md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+                <!-- <div class="input md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between"> -->
                 
                     <div class="md-layout-item md-size-40">
                         <md-field
@@ -28,10 +28,13 @@
 
                     <div class="md-layout-item md-size-20">
                         <md-field
-                        class="has-esc-accent">
+                        class="has-esc-accent"
+                        :class="getValidationClass('profMI')">
                             <label>MI</label>
                             <md-input
                             v-model="registerData.profMI"></md-input>
+
+                            <span class="md-error" v-if="!$v.registerData.profMI.maxLength">Invalid.</span>
                         </md-field>
                     </div>
 
@@ -49,9 +52,9 @@
                         </md-field>
                     </div>
 
-                </div>
+                <!-- </div> -->
 
-                <div class="input md-layout-item md-small-size-100">
+                <div class="input md-layout-item md-size-100">
                     <md-field 
                     class="has-esc-accent"
                     :class="getValidationClass('profRank')">
@@ -65,7 +68,7 @@
                     </md-field>
                 </div>
 
-                <div class="input md-layout-item md-small-size-100">
+                <div class="input md-layout-item md-size-100">
                     <md-field 
                     class="has-esc-accent"
                     :class="getValidationClass('profEmail')">
@@ -83,7 +86,7 @@
                 
                    <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-left">
             <!-- <md-field :class="getValidationClass('DefaultPassword')">-->
-                  <p class="Default"> <strong>Default Password:</strong> Professor Name + UCCescord@SRMS2020</p>
+                  <p class="Default"> <strong>Default Password:</strong> FIRSTNAME + UCCescord@SRMS2020</p>
                      <p class="md-subheader">ex: JERWINUCCescord@SRMS2020</p>
             
              </div>
@@ -106,7 +109,7 @@
 <script>
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required, email, minLength } from 'vuelidate/lib/validators'
+import { required, email, minLength, maxLength } from 'vuelidate/lib/validators'
 import { mapActions, mapGetters} from "vuex";
 
 export default {
@@ -131,6 +134,7 @@ export default {
     registerData: {
         profFN: {required, minLength: minLength(3)},
         profLN: {required, minLength: minLength(3)},
+        profMI: {maxLength: maxLength(2)},
         profRank: {required},
         profEmail: {required, email}
     }

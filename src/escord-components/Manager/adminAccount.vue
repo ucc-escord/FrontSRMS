@@ -19,7 +19,7 @@
 
                   <md-field
                   :class="getValidationClass('firstname')"
-                  class="has-esc-accent md-layout-item md-size-40">
+                  class="has-esc-accent md-layout-item md-size-40 _name">
                     <label>First Name</label>
                     <md-input 
                     id="first-name" 
@@ -33,7 +33,7 @@
 
                   <md-field
                   :class="getValidationClass('middleinitial')"
-                  class="has-esc-accent md-layout-item md-size-10">
+                  class="has-esc-accent md-layout-item md-size-15 _name">
                     <label>MI</label>
                     <md-input 
                     id="middle-initial" 
@@ -45,7 +45,7 @@
 
                   <md-field
                   :class="getValidationClass('lastname')"
-                  class="has-esc-accent md-layout-item md-size-40">
+                  class="has-esc-accent md-layout-item md-size-40 _name">
                     <label>Last Name</label>
                     <md-input
                     id="last-name" 
@@ -68,7 +68,7 @@
                     <md-input
                     id="update-email" 
                     v-model="getCurrentUser.email" 
-                    :disabled="sending"></md-input>
+                    :disabled="sending" readonly></md-input>
 
                     <span class="md-error" v-if="!$v.getCurrentUser.email.required">Email is required.</span>
 
@@ -174,7 +174,7 @@ import {required, email, minLength, maxLength, sameAs} from 'vuelidate/lib/valid
           minLength: minLength(3)
         },
         middleinitial: {
-          maxLength: maxLength(3)
+          maxLength: maxLength(2)
         },
         lastname: {
           required,
@@ -331,5 +331,9 @@ h3, .h3 {
 }
 .__modal-buttons {
   margin-top: 1em;
+}
+
+._name {
+  padding-left: 0 !important;
 }
 </style>
