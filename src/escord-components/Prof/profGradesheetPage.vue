@@ -13,25 +13,66 @@
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
-                <h4>
-                    <strong>{{getGS.subjectcode}}</strong>
-                   {{getGS.subjectdesc}}
+            
+                    <strong>
+                 
+                      <md-field>
+                       <md-input
+                                    v-model="getGS.subjectcode"></md-input>
+                      </md-field>
+                                   </strong>
+
+                                <div>
+                                   <md-field>
+                                      <md-input v-model="getGS.subjectdesc"> </md-input>
+                                   </md-field>
+              
  
-                
-                </h4>
+                                </div>
+              
             </div>
             
             <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
 
-                    <h5 class="md-subheading">
-                        {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}}
-                    </h5>
-                    <p class="md-caption __top-md-caption">
-                        {{getGS.day}} , {{getGS.time}}
-                    </p>
-                    <p class="md-caption">
-                        {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}}
-                    </p>
+                    <div class="md-subheading">
+                       <md-field>
+           
+                          <md-input v-model="getGS.course_year"/>
+                         </md-field>
+                          <md-field>
+           
+                          <md-input v-model="getGS.course_section"/>
+                         </md-field>
+                          <md-field>
+           
+                          <md-input v-model="getGS.course_short"/>
+                         </md-field>
+                      
+                    </div>
+                    <div class="md-caption __top-md-caption">
+                        <md-field>
+                           <md-input v-model="getGS.day"/>
+                       
+                          </md-field>
+                             <md-field>
+                           <md-input v-model="getGS.time"/>
+
+                          </md-field>
+                    </div>
+                    <div class="md-caption">
+                        <md-field>
+                     
+                          <md-input v-model="getGS.semester"/>
+                          </md-field>
+                         
+                              <md-field>
+                                    <md-input v-model="getGS.sem_startyear"/>
+
+                                  </md-field>
+                                      <md-field>
+                                         <md-input v-model="getGS.sem_endyear"/>
+                                          </md-field>
+                    </div>
 
             </div>
             
@@ -59,6 +100,13 @@
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>inventory</md-icon>
                         <md-tooltip md-direction="bottom">Archive Gradesheet</md-tooltip>
+                    </md-button>
+
+
+                    <md-button @click="updateGradesheetInfo"
+                    class="md-esc-darkgrey md-raised md-round md-just-icon">
+                        <md-icon>save</md-icon>
+                        <md-tooltip md-direction="bottom">Save Changes </md-tooltip>
                     </md-button>
                 </div>
 
@@ -357,12 +405,14 @@ export default {
       classSec: "A",
       profName: "JOEMEN BARRIOS",
       profRank: "MASTER TEACHER III",
+      successmessage: '',
     
 
       studentList: [
     
       ],
       studentGrade: [],
+
 
        /*modal default value on load*/
       classicModal: false,
@@ -440,6 +490,39 @@ export default {
   },
 
   methods: {
+
+     updateGradesheetInfo(){
+
+  axios.put('/api/updateGradesheet/'+this.$route.params.gradeshid,{
+          subjectcode: this.getGS.subjectcode,
+          subjectdesc: this.getGS.subjectdesc,
+          course_year: this.getGS.course_year,
+          course_section: this.getGS.course_section,
+          course_short: this.getGS.course_short,
+          day: this.getGS.day,
+          time: this.getGS.time,
+          semester: this.getGS.semester,
+          sem_startyear: this.getGS.sem_startyear,
+          sem_endyear:this.getGS.sem_endyear,
+
+
+  }).then((response)=>{
+        
+
+     
+ this.successmessage = response.data.message;
+            alert(this.successmessage);
+            
+             }).catch((errors)=>{
+  
+             this.error =  errors.response.data;
+   
+             })
+
+     
+
+    },
+
     /*modal function*/
           ...mapActions({ archgradesheet: "archgradesheet" }),
           ...mapActions({ refreshGS: "showgsinfo" }),
@@ -459,7 +542,7 @@ export default {
         
 
          //     console.log('create professor accounts' , response.data);
-
+                
             
              }).catch((errors)=>{
   
@@ -569,8 +652,9 @@ export default {
    
              })
 
-    }
+    },
 
+   
         
 
      
