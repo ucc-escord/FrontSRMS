@@ -38,8 +38,11 @@
                     <md-input type="password" id="password" class="form-control" placeholder="" v-model="password"></md-input>
 
                     <span class="md-error" v-if="!$v.password.required">Password is required.</span>
-
-                    <span class="md-error" v-else-if="!$v.password.minLength">Password must be at least 8 characters.</span>
+                    <span class="md-error" v-else-if="!$v.password.minLength">Must be at least 8 characters.</span>
+                    <span class="md-error" v-else-if="!$v.password.containsUpperCase">Must contain at least one uppercase letter.</span>
+                    <span class="md-error" v-else-if="!$v.password.containsLowerCase">Must contain at least one lowercase letter.</span>
+                    <span class="md-error" v-else-if="!$v.password.containsNumber">Must contain at least one number.</span>
+                    <span class="md-error" v-else-if="!$v.password.containsSpecial">Must contain at least one special character [#?!@$%^&*-].</span>
             </md-field>
             <md-field
             class="has-esc-accent"
@@ -87,7 +90,15 @@ export default {
     validations: {
       email_newpass: {required, email},
       code: {required},
-      password: {required, minLength: minLength(8)},
+      password: {
+        required, 
+        minLength: minLength(8),
+        containsSpecial: function(value) {return /[#?!@$%^&*-]/.test(value)},
+        containsUpperCase: function(value) {return /[A-Z]/.test(value)},
+        containsLowerCase: function(value) {return /[a-z]/.test(value)},
+        containsNumber: function(value) {return /[0-9]/.test(value)},
+        //containsSpecial: function(value) {return /[#?!@$%^&*-]/.test(value)}
+        },
       password_confirmation: {required, sameAsPassword: sameAs('password')}
   },
   methods: {
@@ -150,7 +161,7 @@ export default {
   top: 3.07em !important;
   left: 0 !important;
   line-height: 0.95em !important;
-  text-align: justify;
+  text-align: left;
   font-size: .777rem !important;
 }
 

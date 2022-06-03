@@ -107,8 +107,11 @@
                     :disabled="sending"></md-input>
 
                     <span class="md-error" v-if="!$v.prof_createNewPass.password.required">Password is required.</span>
-
                     <span class="md-error" v-else-if="!$v.prof_createNewPass.password.minLength">Must be at least 8 characters.</span>
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.password.containsUpperCase">Must contain at least one uppercase letter.</span>
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.password.containsLowerCase">Must contain at least one lowercase letter.</span>
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.password.containsNumber">Must contain at least one number.</span>
+                    <span class="md-error" v-else-if="!$v.prof_createNewPass.password.containsSpecial">Must contain at least one special character [#?!@$%^&*-].</span>
                   </md-field>
                 </div>
 
@@ -199,7 +202,11 @@ export default {
       prof_createNewPass: {
         password: {
           required, 
-          minLength: minLength(8)
+          minLength: minLength(8),
+          containsSpecial: function(value) {return /[#?!@$%^&*-]/.test(value)},
+          containsUpperCase: function(value) {return /[A-Z]/.test(value)},
+          containsLowerCase: function(value) {return /[a-z]/.test(value)},
+          containsNumber: function(value) {return /[0-9]/.test(value)},
         },
         confirmpass: {
           required, 
