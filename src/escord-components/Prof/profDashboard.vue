@@ -71,6 +71,12 @@
                 <md-tooltip md-direction="bottom">View Gradehsheet Archive</md-tooltip>
               </md-button>
             </div>
+            <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                <p class="md-body-2 title text-center __info">
+                    <md-icon class="_tip">tips_and_updates</md-icon>
+                      &nbsp;&nbsp;&nbsp; Click the refresh button above to see your current changes!*
+                </p>
+            </div>
           </div>
           
           <div>
@@ -133,7 +139,9 @@
 
                       <span class="md-error" v-if="!$v.formData.subjUnit.required">Subject unit is required.</span>
 
-                       <span class="md-error" v-else-if="!$v.formData.subjUnit.maxLength">Maximum is 2 numbers.</span>
+                       <span class="md-error" v-else-if="!$v.formData.subjUnit.minValue">Minimum is 1 unit.</span>
+                       <span class="md-error" v-else-if="!$v.formData.subjUnit.maxValue">Maximum is 5 units.</span>
+                       <span class="md-error" v-else-if="!$v.formData.subjUnit.integer">Invalid.</span>
                     </md-field>
                   </div>
 
@@ -374,19 +382,17 @@
               md-with-hover
               class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
                   <md-card-content>
-                    <p>
-                      ID: {{gs.gradesheetid}}
-                    </p>
-                
-                    <p>
-                      Subject: {{gs.subjectcode}} {{gs.subjectdesc}}
-                    </p>
-                    <p>
-                      Class: {{gs.course_year}}{{gs.course_section}} | {{gs.course_short}}
-                    </p>
-                    <p class="md-caption">
-                      {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}
-                    </p> 
+                    <div class="md-layout md-gutter md-alignment-center-center">
+                      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="md-caption text-left"><strong>ID: </strong> {{gs.gradesheetid}}</p>
+                      </div>
+                      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="title _subjdesc text-center">{{gs.subjectcode}} {{gs.subjectdesc}}</p>
+                      </div>
+                      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="_subjinfo text-center md-caption"><strong>Semester: {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}</strong></p>
+                      </div>
+                    </div>
                     
                     <!-- <span v-if="selectedGS_infoShow === gs.gradesheetid"
                     class="text-info">
@@ -440,7 +446,7 @@ import updateModal from '../Prof/AccountProf.vue'
 //validation imports
 import { validationMixin } from 'vuelidate'
 
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import { required, minLength, maxLength, integer, minValue, maxValue } from 'vuelidate/lib/validators'
 import {Pagination} from '@/components'
 import axios from 'axios'
 
@@ -556,7 +562,9 @@ export default {
       subjCode:  {required},
       subjUnit: {
         required,
-        maxLength: maxLength(2)},
+        integer,
+        minValue: minValue(1),
+        maxValue: maxValue(5)},
       subjDesc: {required},
       subjTime: {required},
       subjDay: {required},
@@ -817,5 +825,25 @@ h3, .h3 {
 
 img {
   border: 0.25em solid #fff !important;
+}
+
+.__info {
+    margin-bottom: 0 !important;
+    color: #494848 !important;
+}
+
+._tip {
+    color: #37c6de !important;
+    font-size: 1.35em !important;
+}
+
+._subjdesc {
+  font-size: 1.5em !important;
+  font-weight: 500 !important;
+  margin: 0.85em 0 !important;
+}
+
+._subjinfo {
+  font-weight: 400 !important;
 }
 </style>

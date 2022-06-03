@@ -13,7 +13,7 @@
           <div class="__gradesheet-header md-layout md-gutter md-alignment-top-space-between">
 
             <div class="__gradesheet-subject md-layout-item md-size-100">
-                <h4>
+                <h4 class="text-center">
                     <strong> {{getGS.subjectcode}} </strong>
                   {{getGS.subjectdesc}}
  
@@ -21,39 +21,37 @@
                 </h4>
             </div>
             
-            <div class="__gradesheet-info md-layout-item md-xsmall-size-100 md-size-70">
+            <div class="__gradesheet-info md-layout-item md-size-100">
 
-                    <h5 class="md-subheading">
+                    <h5 class="md-subheading text-center">
                         {{getGS.course_year}}{{getGS.course_section}} | {{getGS.course_short}} 
                     </h5>
-                    <p class="md-caption __top-md-caption">
+                    <p class="md-caption __top-md-caption text-center">
                        {{getGS.day}} , {{getGS.time}} 
                     </p>
-                    <p class="md-caption">
-                 {{getGS.semester}} SEMESTER,  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}} 
+                    <p class="md-caption text-center">
+                  SEMESTER: {{getGS.semester}},  SY. {{getGS.sem_startyear}}-{{getGS.sem_endyear}} 
                     </p>
 
             </div>
             
-            <div class="__gradesheet-buttons md-layout-item md-xsmall-size-100 md-size-30 md-layout md-gutter md-alignment-center-space-between">
+            <div class="__gradesheet-buttons md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
 
-            
-
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                     <md-button  @click="unArchieveGS"
-                    class="md-esc-darkgrey md-raised md-round md-just-icon">
-                        <md-icon>inventory</md-icon>
-                        <md-tooltip md-direction="bottom">Unarchieve Gradesheet</md-tooltip>
+                    class="md-wd md-esc-darkgrey md-raised md-round md-dense">
+                    Unarchive
+                        <md-tooltip md-direction="bottom">Unarchive Gradesheet</md-tooltip>
                     </md-button>
                 </div>
 
-                <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
+                <!-- <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button
                     class="md-esc-darkgrey md-raised md-round md-just-icon">
                         <md-icon>download</md-icon>
                         <md-tooltip md-direction="bottom">Download Gradesheet</md-tooltip>
                     </md-button>
-                </div>
+                </div> -->
 
               <!--    <div class="md-layout-item md-xsmall-size-25 md-small-size-50 md-large-size-25">
                     <md-button  @click="refreshGradesheet"
@@ -136,7 +134,7 @@
         </div>
       </div>
     </div>
-    <vue-headful title="View Archieve Gradesheet"/>
+    <vue-headful title="Professor | Archived Gradesheet Detail"/>
   </div>
 </template>
 
@@ -368,10 +366,10 @@ export default {
     margin: 2rem 0 1.5rem 0 !important;
 }
 
-h4 {
-    margin: 0 !important;
-    width: max-content !important;
-}
+// h4 {
+//     margin: 0 !important;
+//     width: max-content !important;
+// }
 
 .md-subheading, .md-caption {
     margin-bottom: 0.25rem !important;

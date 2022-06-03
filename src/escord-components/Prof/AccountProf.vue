@@ -19,7 +19,7 @@
                 <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
                     <md-field
-                  class="has-esc-accent md-layout-item md-size-40" 
+                  class="has-esc-accent md-layout-item md-size-40 _name" 
                   :class="getValidationClass('firstname')">
                       <label>First Name </label>
                       <md-input
@@ -34,7 +34,7 @@
 
                   <md-field
                   :class="getValidationClass('middleinitial')"
-                  class="has-esc-accent md-layout-item md-size-10">
+                  class="has-esc-accent md-layout-item md-size-10 _name">
                     <label>MI</label>
                     <md-input 
                     id="middle-initial" 
@@ -46,7 +46,7 @@
 
                   <md-field
                   :class="getValidationClass('lastname')"
-                  class="has-esc-accent md-layout-item md-size-40">
+                  class="has-esc-accent md-layout-item md-size-40 _name">
                     <label>Last Name</label>
                     <md-input
                     id="last-name" 
@@ -83,6 +83,7 @@
                     <label>Email</label>
                     <md-input
                     id="update-email" 
+                    readonly
                     v-model="getCurrentUser.email" 
                     :disabled="sending"></md-input>
 
@@ -329,5 +330,8 @@ h3, .h3 {
 }
 .__modal-buttons {
   margin-top: 1em;
+}
+._name {
+padding-left: 0 !important;
 }
 </style>

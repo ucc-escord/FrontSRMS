@@ -206,7 +206,7 @@ export default {
         this.formData.selectedSubjUnit = ""
         this.formData.selectedSubjCode = ""
         this.formData.subjFG = null
-        console.log("cleared")
+        // console.log("cleared")
     },
 
     /* SELECT SUBJECT */
