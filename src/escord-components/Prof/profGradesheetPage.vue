@@ -542,7 +542,7 @@ export default {
         
 
          //     console.log('create professor accounts' , response.data);
-                  alert(response.data);
+                
             
              }).catch((errors)=>{
   
