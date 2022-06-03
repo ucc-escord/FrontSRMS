@@ -8,13 +8,13 @@
     <div class="md-toolbar-row md-collapse-lateral">
       <div class="md-toolbar-section-start">
         <!-- logo -->
-        <!-- <router-link to="/"> -->
+        <router-link to="/">
             <div class="__logo md-layout md-alignment-center-center">
                 <img src="../assets/img/escord-logo-max.svg" alt="escLogo" width="150rem"
                 class="logo">
                 <!-- <h3 class="md-title title">ESCORD</h3> -->
             </div>
-        <!-- </router-link> -->
+        </router-link>
       </div>
       <div class="md-toolbar-section-end">
         <!-- burger button -->
@@ -65,10 +65,16 @@
 
                <div v-else>
               <md-list-item 
-                v-if="!showMenu"
+                v-if="showMenu"
                   @click="loggingout"
               >
-                <p class="__login">LOG OUT</p>
+                <p class="__login __logout">LOG OUT</p>
+              </md-list-item>
+              <md-list-item 
+                v-else-if="!showMenu"
+                  @click="loggingout"
+              >
+                <p class="__login __logout">LOG OUT</p>
               </md-list-item>
               </div>
               <!-- isLoggedIn removed to="/" replace with = @click-->

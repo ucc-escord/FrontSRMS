@@ -99,7 +99,7 @@
         :disabled="sending">ADD</md-button>
     </div>
 
-    <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+    <!-- <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar> -->
 </form>
         </div>
 
