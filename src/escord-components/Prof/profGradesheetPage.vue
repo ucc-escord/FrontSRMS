@@ -696,7 +696,7 @@ export default {
         else {
 
           alert('Data Invalid')
-          console.log(this.$v)
+       //   console.log(this.$v)
          //   console.log("Cannot add student to the gradesheet.");
         }
 
@@ -722,7 +722,7 @@ export default {
 
          //     console.log('create professor accounts' , response.data);
           //        alert(response);
-              console.log(response);
+  //            console.log(response);
              }).catch((errors)=>{
   
              this.error =  errors.response.data;
