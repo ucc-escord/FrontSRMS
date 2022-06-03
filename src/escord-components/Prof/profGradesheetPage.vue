@@ -658,9 +658,9 @@ export default {
 
      updateGradesheetInfo(){
 
-       this.$v.$touch()
+       this.$v.getGS.$touch()
 
-        if (!this.$v.$invalid) {
+        if (!this.$v.getGS.$invalid) {
             
         //    console.log("Student is added successfully.")
         
@@ -683,7 +683,8 @@ export default {
 
      
  this.successmessage = response.data.message;
-            alert(this.successmessage);
+           
+           alert(this.successmessage);
             
              }).catch((errors)=>{
   
@@ -693,6 +694,9 @@ export default {
 
      }
         else {
+
+          alert('Data Invalid')
+       //   console.log(this.$v)
          //   console.log("Cannot add student to the gradesheet.");
         }
 
@@ -717,8 +721,8 @@ export default {
         
 
          //     console.log('create professor accounts' , response.data);
-                
-            
+          //        alert(response);
+  //            console.log(response);
              }).catch((errors)=>{
   
              this.error =  errors.response.data;
@@ -777,15 +781,17 @@ export default {
         this.refreshGradesheet();
       },
       addValidate () {
-        this.$v.$touch()
+        this.$v.addStud.$touch()
 
-        if (!this.$v.$invalid) {
+        if (!this.$v.addStud.$invalid) {
   
           this.addStudent()
             
         //    console.log("Student is added successfully.")
         }
         else {
+
+          alert('Gradesheet Cant Add');
          //   console.log("Cannot add student to the gradesheet.");
         }
     },
@@ -800,7 +806,7 @@ export default {
                 //    console.log('archieve successfull');
                   
                 //add notification time out here 
-
+              //  alert(response.data.message)
        
     
     }).catch((errors)=>{
