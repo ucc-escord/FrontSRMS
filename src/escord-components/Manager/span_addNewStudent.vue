@@ -69,6 +69,8 @@
                 <label>Yr & Sec</label>
                 <md-input name="middle-name" id="middle-name" v-model="form.section" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.section.required">Field is required.</span>
+                <span class="md-error _downEr" v-else-if="!$v.form.section.minLength">Follow given format.</span>
+                <span class="md-error _downEr" v-else-if="!$v.form.section.maxLength">Follow given format.</span>
                 <span class="md-helper-text">Input format: `<strong>1A</strong>`</span>
               </md-field>
             </div>
@@ -165,6 +167,8 @@ export default {
         },
          section: {
           required,
+          minLength: minLength(2),
+          maxLength: maxLength(2)
          },
 
         email: {
@@ -195,6 +199,8 @@ export default {
         this.form.lastName = null
         this.form.firstName = null
         this.form.middleName = null
+        this.form.course = null
+        this.form.section = null
         this.form.email = null
         //this.form.DefaultPassword= null
       },
@@ -236,11 +242,15 @@ font-size: 90% !important;
 }
 .md-error {
   position: absolute !important;
-  top: 3.07em !important;
+  top: 3.07em;
   left: 0 !important;
   line-height: 0.95em !important;
   text-align: left;
   font-size: .777rem !important;
+
+  &._downEr {
+  top: 4em !important;
+}
 }
 h3, .h3 {
   font-size: 1.5em !important;

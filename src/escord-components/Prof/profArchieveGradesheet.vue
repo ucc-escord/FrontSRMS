@@ -52,7 +52,15 @@
 
                 <md-table-row v-for="(_, index) in getarchgradesh.data" :key="index">
                   <md-table-cell class="text-center">
-                    <router-link :to="{ name: 'GradesheetArchieve', params: {archievegs: getarchgradesh.data[index].gradesheetid } }">VIEW</router-link>
+                    <!-- <router-link :to="{ name: 'GradesheetArchieve', params: {archievegs: getarchgradesh.data[index].gradesheetid } }">VIEW</router-link> -->
+
+                    <md-button 
+                    :to="{ name: 'GradesheetArchieve', params: {archievegs: getarchgradesh.data[index].gradesheetid } }"
+                    class="md-just-icon md-simple md-success md-round">
+                    <md-icon>visibility</md-icon>
+                    <md-tooltip md-direction="bottom">View Gradesheet Detail</md-tooltip>
+                    </md-button>
+
                   </md-table-cell>
                 
                   <md-table-cell class="text-center">

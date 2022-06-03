@@ -222,8 +222,15 @@
                v-for="(_, index) in student.data"
               :key="index">
              <md-table-cell class="text-center">
+
+               <md-button
+               :to="{ name: 'DownloadSRMS', params: {student_number: student.data[index].student_number} }"
+               class="md-just-icon md-success md-simple">
+               <md-icon>visibility</md-icon>
+               <md-tooltip md-direction="bottom">View Scholastic Record</md-tooltip>
+               </md-button>
                    
-              <router-link :to="{ name: 'DownloadSRMS', params: {student_number: student.data[index].student_number} }">SCHOLASTIC RECORD</router-link>
+              <!-- <router-link :to="{ name: 'DownloadSRMS', params: {student_number: student.data[index].student_number} }">SCHOLASTIC RECORD</router-link> -->
 
                 </md-table-cell>
 

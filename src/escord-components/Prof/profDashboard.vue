@@ -390,6 +390,9 @@
                         <p class="title _subjdesc text-center">{{gs.subjectcode}} {{gs.subjectdesc}}</p>
                       </div>
                       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="_subjinfo text-center">{{gs.course_year}}{{gs.course_section}} | {{gs.course_short}}</p>
+                      </div>
+                      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                         <p class="_subjinfo text-center md-caption"><strong>Semester: {{gs.semester}}, SY {{gs.sem_startyear}}-{{gs.sem_endyear}}</strong></p>
                       </div>
                     </div>

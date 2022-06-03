@@ -323,6 +323,7 @@
                     maxValue: 'Field only accepts value from `1.00` to `5.00`.'
                   }" 
                   field="md-field" 
+                  :class="getValidationClass('finalterm')"
                   class="has-esc-accent">
                     <md-input 
                     type="number"
@@ -334,7 +335,14 @@
 
                 <md-table-cell>
 
-                  <md-vuelidated
+                  <md-field
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-center"
+                    :value="remarkCompute(index)"></md-input>
+                  </md-field>
+
+                  <!-- <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -349,7 +357,7 @@
                     class="text-center"
                     v-model="getrow[index].finalgrade" 
                     :value="remarkCompute(index)"></md-input>
-                  </md-vuelidated> 
+                  </md-vuelidated>  -->
 
                   <!-- <md-field class="has-esc-accent">
                   <md-input
@@ -579,12 +587,11 @@ export default {
              maxLength: maxLength(4),
              minValue: minValue(1.00),
              maxValue: maxValue(5.00)},
-
            finalterm: {
              required,
              maxLength: maxLength(4),
              minValue: minValue(1.00),
-             maxValue: maxValue(5.00)}
+             maxValue: maxValue(3.00)},
          }
        },
 
@@ -653,7 +660,12 @@ export default {
 
   methods: {
     remarkCompute(index){
-      return this.getrow[index].finalgrade = ((this.getrow[index].finalterm + this.getrow[index].midterm) / 2).toFixed(2);
+      // return this.getrow[index].finalgrade = ((this.getrow[index].finalterm + this.getrow[index].midterm) / 2).toFixed(2);
+
+      // return this.getrow[index].finalgrade = (this.getrow[index].finalterm + this.getrow[index].midterm) / 2
+
+      const ave = ((parseFloat(this.getrow[index].finalterm) + parseFloat(this.getrow[index].midterm)) / 2).toFixed(2); 
+      return ave;
     },
 
      updateGradesheetInfo(){
@@ -692,10 +704,13 @@ export default {
    
              })
 
+             //alert("Gradesheet info has been updated successfully!");
+
      }
         else {
 
-          alert('Data Invalid')
+          alert('Data Invalid');
+          alert("Cannot update gradesheet info.");
        //   console.log(this.$v)
          //   console.log("Cannot add student to the gradesheet.");
         }
@@ -716,8 +731,13 @@ export default {
 
    // this.updateGradesheetData({route:index.id}, this.index);
 
+        // this.$v.getrow.$each[index].$touch()
+
+        // if (!this.$v.getrow.$each[index].$invalid) {
   
-        axios.put('/api/addgs/'+index.id, index).then((response)=>{
+        //   alert('row updated');
+
+          axios.put('/api/addgs/'+index.id, index).then((response)=>{
         
 
          //     console.log('create professor accounts' , response.data);
@@ -728,6 +748,19 @@ export default {
              this.error =  errors.response.data;
    
              })
+
+             alert("Row has been updated successfully!");
+            
+        //    console.log("Student is added successfully.")
+        // }
+        // else {
+
+        //   alert('row not updated');
+        //  //   console.log("Cannot add student to the gradesheet.");
+        // }
+
+  
+        
     },
 
     classicModalHide() {
@@ -746,7 +779,8 @@ export default {
 
     /* add student modal validation methods */
     getValidationClass (fieldName) {
-      const field = this.$v.addStud[fieldName] || this.$v.getGS[fieldName]
+      const field = this.$v.addStud[fieldName] || this.$v.getGS[fieldName] 
+      // || this.$v.getrow.$each[fieldName]
 
       if (field) {
           return {
@@ -816,6 +850,8 @@ export default {
           
        
                  })  
+
+                 alert("Gradesheet has been archived successfully! \nPlease return to the  dashboard.");
  
            },
 
@@ -832,6 +868,8 @@ export default {
              this.error =  errors.response.data;
    
              })
+
+             alert("Row has been deleted successfully!");
 
     },
 

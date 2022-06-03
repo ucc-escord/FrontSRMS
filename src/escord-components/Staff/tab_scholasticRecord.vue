@@ -177,7 +177,7 @@
                 @click="archiveStudent(getscholperProg.data[index])"
                 class="md-simple md-danger md-just-icon md-round">
                     <md-icon>close</md-icon>
-                    <md-tooltip md-direction="bottom">Archive Student</md-tooltip>
+                    <md-tooltip md-direction="bottom">Archive Scholastic Record</md-tooltip>
                 </md-button>
 
                 <!-- VIEW BUTTON -->
@@ -455,13 +455,13 @@
                 <md-snackbar
                     md-position="left"
                     :md-active.sync="studEditted">
-                    Student info of: {{edittedStudInfo}} is successfully updated.
+                    Student info of: {{edittedStudInfo}} is successfully updated!
                 </md-snackbar>
 
                 <md-snackbar
                     md-position="left"
                     :md-active.sync="studNotEditted">
-                    Student info cannot be updated.
+                    Student info of: {{edittedStudInfo}} cannot be updated.
                 </md-snackbar>
 
                 </form>
@@ -471,6 +471,12 @@
             <template slot="footer"></template>
             </modal>
         </div>
+        <!-- SNACKBAR -->
+         <!-- <md-snackbar
+              md-position="left"
+              :md-active.sync="studArchived">
+              {{archivedStudInfo}} is archived successfully!
+          </md-snackbar> -->
     <vue-headful title="Scholastic Record Management"/>
   </div>
 </template>
@@ -613,6 +619,8 @@ this.getStudentPerProg()
       studNotEditted: false,
       edittedStudInfo: null,
       sending: false,
+      archivedStudInfo: null,
+      studArchived: false
     };
   },
 
@@ -703,8 +711,10 @@ this.getStudentPerProg()
     archiveStudent(studentInfo) {
 
     this.srms_id =  studentInfo.srms_id
+    
 
      this.ArchieveSRMS();
+     alert("Scholastic record has been archived successfully!");
        
 
     
@@ -712,7 +722,8 @@ this.getStudentPerProg()
     },
 
      ArchieveSRMS(){
-
+this.archivedStudInfo = `${this.modalInfo.studLN}, ${this.modalInfo.studFN} ${this.modalInfo.studMN}`
+    this.studArchived = true;
 
        
 

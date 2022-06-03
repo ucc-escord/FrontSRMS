@@ -172,12 +172,14 @@ export default {
         this.$v.$touch()
 
         if (!this.$v.$invalid) {
+          //alert("Account added successfuly!");
        
           this.createProfessor(this.registerData);
              this.clearForm();
        //   console.log("Logged in successfully.")
         }
         else {
+          alert("Account cannot be added.");
        //   console.log("Failed to log in.");
         }
     },

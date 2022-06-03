@@ -19,6 +19,13 @@
 
       </div>
 
+      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+          <p class="md-body-2 title text-center __info">
+              <md-icon class="_tip">tips_and_updates</md-icon>
+                &nbsp;&nbsp;&nbsp; Click the search button above to see your current changes!*
+          </p>
+      </div>
+
       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center __paginate">
         <pagination 
         type="esc-accent" no-arrows  
@@ -54,12 +61,13 @@
             :key="index">
 
               <md-table-cell class="text-center">
-                <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
-                  <md-button @click="unArchieveGS(getarchschol.data[index].srms_id)" class="md-just-icon md-round md-esc-darkgrey md-raised">
-                      <md-icon class="md-size-4x">inventory</md-icon>
-                        <md-tooltip md-direction="bottom">Unarchive SRMS</md-tooltip>
+                <md-button @click="unArchieveGS(getarchschol.data[index].srms_id)" class="md-just-icon md-round md-esc-darkgrey md-raised md-simple">
+                      <md-icon>unarchive</md-icon>
+                        <md-tooltip md-direction="bottom">Unarchive Scholastic Record</md-tooltip>
                   </md-button>
-                </div>
+                <!-- <div class="md-layout-item md-size-15 md-layout md-gutter md-alignment-center-center">
+                  
+                </div> -->
               </md-table-cell>
 
               <md-table-cell class="text-center">
@@ -278,6 +286,8 @@ headerStyle() {
        }).catch(()=>{
          //    console.log("Error in getting the user")
        }) 
+
+       alert("Scholastic record has been unarchived successfully!");
     
 
     },
@@ -295,5 +305,15 @@ headerStyle() {
 
 .__table {
     margin-top: 1.5em !important;
+}
+
+.__info {
+    margin-bottom: 0 !important;
+    color: #494848 !important;
+}
+
+._tip {
+    color: #37c6de !important;
+    font-size: 1.35em !important;
 }
 </style>
