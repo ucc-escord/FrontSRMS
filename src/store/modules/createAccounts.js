@@ -39,7 +39,9 @@ const actions = {
         
 
             // console.log('create professor accounts' , response.data);
-            commit('setDupliProf',response.data)
+           // commit('setDupliProf',response.data)
+            alert(response.data.message);
+
 
             
              }).catch((errors)=>{
@@ -54,7 +56,11 @@ const actions = {
         
 
             // console.log('create student accounts' , response.data);
-            commit('setDupliStud',response.data)
+           // commit('setDupliStud',response.data)
+
+            alert(response.data.message);
+
+            
             
              }).catch((errors)=>{
   
@@ -70,7 +76,10 @@ const actions = {
           
             // console.log('create staff accounts' , response.data);
 
-            commit('setDupliStaff',response.data)
+//            commit('setDupliStaff',response.data)
+
+            alert(response.data.message);
+
             
              }).catch((errors)=>{
   
@@ -96,7 +105,8 @@ const actions = {
                         
                 
                             // console.log('create professor accounts' , response.data);
-                
+                                    alert(response.data.message);
+
                             
                              }).catch((errors)=>{
                   
@@ -112,6 +122,8 @@ const actions = {
                                     //   this.currentUser = response.data
                                   //    this.student = response.data
                                   commit('setStudent',response.data)
+
+
                                 //    console.log(this.student)
                             
                                    }).catch(()=>{
