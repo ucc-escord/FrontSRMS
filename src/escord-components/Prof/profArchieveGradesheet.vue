@@ -15,15 +15,14 @@
                   <p class="title text-center md-display-1 text-esc-darkgrey">Gradesheet Archive</p>
               </div>
 
-              <div class="md-layout-item md-size-33
-              md-xsmall-size-100 md-layout md-gutter md-alignment-center-center">
+              <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                   <pagination 
                   type = "esc-accent"
                   no-arrows :page-count="getarchgradesh.last_page" :value="getarchgradesh.current_page"  :total="getarchgradesh.total" @input="gradeshowarchieve" >
                   </pagination>
               </div>
 
-              <div class="md-layout-item md-size-66 md-xsmall-size-100 md-layout md-gutter md-alignment-center-space-between">
+              <!-- <div class="md-layout-item md-size-66 md-xsmall-size-100 md-layout md-gutter md-alignment-center-space-between">
                   <div class="md-layout-item md-size-85">
                       <md-field
                       class="has-esc-accent">
@@ -37,7 +36,7 @@
                           <md-icon>search</md-icon>
                       </md-button>
                   </div>
-              </div>
+              </div> -->
             </div>
 
             <md-table v-model="getarchgradesh.data" md-sort="name" md-sort-order="asc" >

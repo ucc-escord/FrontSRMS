@@ -635,7 +635,7 @@ this.getStudentPerProg()
       studSection: {required},
       studLN: {required},
       studFN: {required},
-      studMN: {required},
+      //studMN: {required},
       studBirthday: {required},
       studBirthPlace: {required},
       studAddress: {required},
