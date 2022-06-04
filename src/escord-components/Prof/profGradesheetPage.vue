@@ -368,8 +368,14 @@
                   class="has-esc-accent">
                     <md-input 
                     class="text-center"
-                    :value="remarkCompute(index)"></md-input>
+                    v-model="getrow[index].finalgrade"></md-input>
+
+                    <span class="md-helper-text">
+                      FG: <strong>{{remarkCompute(index)}}</strong>
+                    </span>
                   </md-field>
+
+                  
 
                   <!-- <md-vuelidated
                   :key="index"
@@ -695,6 +701,8 @@ export default {
 
       const ave = ((parseFloat(this.getrow[index].finalterm) + parseFloat(this.getrow[index].midterm)) / 2).toFixed(2); 
       return ave;
+
+      // return this.getrow[index].finalgrade = ((parseFloat(this.getrow[index].finalterm) + parseFloat(this.getrow[index].midterm)) / 2).toFixed(2); 
     },
 
      updateGradesheetInfo(){
@@ -777,7 +785,6 @@ export default {
              this.error =  errors.response.data;
    
              })
-
              alert("Row has been updated successfully!");
             
         //    console.log("Student is added successfully.")
