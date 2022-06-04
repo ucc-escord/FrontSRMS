@@ -20,7 +20,7 @@
                     </tr>
                     <tr v-for="(_firstSem, index) in firstsem" :key="index">
                         <td colspan=1>{{_firstSem.subjectcode}}</td>
-                        <td colspan=2>{{_firstSem.subjectcode}}</td>
+                        <td colspan=2>{{_firstSem.subjectdesc}}</td>
                         <td colspan=1 class="text-center">{{_firstSem.units}}</td>
                         <td colspan=1 class="text-center">{{_firstSem.finalgrade}}</td>
                     </tr>
