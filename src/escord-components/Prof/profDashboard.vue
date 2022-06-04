@@ -187,6 +187,10 @@
                     </template>
 
                     <span class="md-error" v-if="!$v.formData.subjSem.required">Required.</span>
+                    <span class="md-error" v-else-if="!$v.formData.subjSem.minValue">Minimum value is 1.</span>
+                    <span class="md-error" v-else-if="!$v.formData.subjSem.maxValue">Maximum value is 2.</span>
+                    <span class="md-error" v-else-if="!$v.formData.subjSem.maxLength">Maximum value is 2.</span>
+                    <span class="md-error" v-else-if="!$v.formData.subjSem.integer">Maximum value is 2.</span>
                     </md-autocomplete>
                     
                     <md-field
@@ -571,15 +575,25 @@ export default {
       subjDesc: {required},
       subjTime: {required},
       subjDay: {required},
-      subjSem: {required},
+      subjSem: {required,
+      maxLength: maxLength(1),
+      maxValue: maxValue(2),
+      minValue: minValue(1),
+      integer},
       subjSY_start:  {
         required,
         minLength: minLength(4),
-        maxLength: maxLength(4)},
+        maxLength: maxLength(4),
+        minValue: minValue(2000),
+        minLength: minLength(4),
+        maxValue: maxValue(2080)},
       subjSY_end:  {
         required, 
         minLength: minLength(4),
-        maxLength: maxLength(4)},
+        maxLength: maxLength(4),
+        minValue: minValue(2000),
+        minLength: minLength(4),
+        maxValue: maxValue(2080)},
     },
 
 

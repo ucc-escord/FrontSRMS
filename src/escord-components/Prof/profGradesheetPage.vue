@@ -261,10 +261,17 @@
                     </md-button>
                
                 </div> -->
-
                 
                 <md-table-cell>
-                  <md-vuelidated
+
+                <md-field
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-center"
+                    v-model="getrow[index].student_number"></md-input>
+                  </md-field>
+
+                  <!--<md-vuelidated
                   :key="index"
                   :messages="{required: 'Field cannot be blank.'}" 
                   field="md-field" 
@@ -272,14 +279,22 @@
                     <md-input 
                     class="text-center"
                     v-model="getrow[index].student_number"></md-input>
-                  </md-vuelidated> 
+                  </md-vuelidated> -->
                   <!-- {{getrow[index].student_number}} -->
                 </md-table-cell>
 
 
 
                 <md-table-cell>
-                  <md-vuelidated
+
+                <md-field
+                  class="has-esc-accent">
+                    <md-input 
+                    class=""
+                    v-model="getrow[index].studentname"></md-input>
+                  </md-field>
+
+                  <!--<md-vuelidated
                   :key="index"
                   :messages="{required: 'Field cannot be blank.'}" 
                   field="md-field" 
@@ -287,13 +302,20 @@
                     <md-input 
                     class="text-left"
                     v-model="getrow[index].studentname"></md-input>
-                  </md-vuelidated> 
+                  </md-vuelidated> -->
                <!-- {{getrow[index].studentname}} -->
                 </md-table-cell>
 
                <md-table-cell>
+
+                <md-field
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-center"
+                    v-model="getrow[index].midterm"></md-input>
+                  </md-field>
               
-                 <md-vuelidated
+                 <!--<md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -308,13 +330,20 @@
                     class="text-center"
                      v-model="getrow[index].midterm"
                    ></md-input> 
-                  </md-vuelidated> 
+                  </md-vuelidated> -->
                
                 </md-table-cell>
 
                 <md-table-cell>
+
+                  <md-field
+                  class="has-esc-accent">
+                    <md-input 
+                    class="text-center"
+                    v-model="getrow[index].finalterm"></md-input>
+                  </md-field>
                 
-                 <md-vuelidated
+                <!-- <md-vuelidated
                   :key="index"
                   :messages="{
                     required: 'Field cannot be blank.',
@@ -329,7 +358,7 @@
                     type="number"
                     class="text-center"
                     v-model="getrow[index].finalterm"></md-input>
-                  </md-vuelidated> 
+                  </md-vuelidated> -->
                  
                 </md-table-cell>
 

@@ -228,6 +228,8 @@ export default {
    
              })
 
+             alert("Row saved successfully!");
+
     },
 
      deletedrowStudent(index){
@@ -243,6 +245,8 @@ export default {
              this.error =  errors.response.data;
    
              })
+
+             alert("Row deleted successfully!");
 
     }
 

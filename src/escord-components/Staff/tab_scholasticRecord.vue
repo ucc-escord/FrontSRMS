@@ -268,7 +268,7 @@
                     <div class="__name
                     md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space between">
 
-                    <div class=" md-layout-item md-size-33">
+                    <div class=" md-layout-item md-size-40">
                     <md-field class="has-esc-accent"
                     :class="getValidationClass('studFN')">
                         <label>First Name</label>
@@ -279,14 +279,14 @@
                     </md-field>
                     </div>
 
-                    <div class=" md-layout-item md-size-33">
+                    <div class=" md-layout-item md-size-15">
                     <md-field class="has-esc-accent">
-                        <label>Middle Name</label>
+                        <label>MI</label>
                         <md-input v-model="modalInfo.studMN"></md-input>
                     </md-field>
                     </div>
 
-                    <div class=" md-layout-item md-size-33">
+                    <div class=" md-layout-item md-size-40">
                     <md-field class="has-esc-accent"
                     :class="getValidationClass('studLN')">
                         <label>Last Name</label>
@@ -385,12 +385,16 @@
                         <div class="md-layout-item md-size-33">
                             <md-field class="has-esc-accent"
                             :class="getValidationClass('studElemGradYr')">
-                            <label>Graduation Year</label>
+                            <label>Yr. Grad.</label>
                             <md-input
                             type="number" v-model="modalInfo.studElemGradYr"
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studElemGradYr.required">Field is required.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studElemGradYr.minLength">Format is `XXXX`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studElemGradYr.maxLength">Format is `XXXX`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studElemGradYr.minValue">Accepts from `2000`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studElemGradYr.maxValue">Accepts until `2080` yet.</span>
                             </md-field>
                         </div>
 
@@ -408,18 +412,23 @@
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studHighSchool.required">High school is required.</span>
+                            
                             </md-field>
                         </div>
 
                         <div class="md-layout-item md-size-33">
                             <md-field class="has-esc-accent"
                             :class="getValidationClass('studHighSchoolGradYr')">
-                            <label>Graduation Year</label>
+                            <label>Yr. Grad.</label>
                             <md-input
                             type="number" v-model="modalInfo.studHighSchoolGradYr"
                             :disabled="sending"></md-input>
 
                             <span class="md-error" v-if="!$v.modalInfo.studHighSchoolGradYr.required">Field is required.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studHighSchoolGradYr.minLength">Format is `XXXX`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studHighSchoolGradYr.maxLength">Format is `XXXX`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studHighSchoolGradYr.minValue">Accepts from `2000`.</span>
+                            <span class="md-error" v-else-if="!$v.modalInfo.studHighSchoolGradYr.maxValue">Accepts until `2080` yet.</span>
                             </md-field>
                         </div>
 
@@ -452,7 +461,7 @@
                     </div>
                 </div>
                 
-                <md-snackbar
+                <!-- <md-snackbar
                     md-position="left"
                     :md-active.sync="studEditted">
                     Student info of: {{edittedStudInfo}} is successfully updated!
@@ -462,7 +471,7 @@
                     md-position="left"
                     :md-active.sync="studNotEditted">
                     Student info of: {{edittedStudInfo}} cannot be updated.
-                </md-snackbar>
+                </md-snackbar> -->
 
                 </form>
 
@@ -490,7 +499,7 @@ import { Modal } from "@/components";
 
 //validation imports
 import { validationMixin } from 'vuelidate'
-import { required } from 'vuelidate/lib/validators'
+import { required, maxLength, minLength, maxValue, minValue, integer } from 'vuelidate/lib/validators'
 import {Pagination} from '@/components'
 
 export default {
@@ -641,9 +650,19 @@ this.getStudentPerProg()
       studAddress: {required},
       studContactNum: {required},
       studElemSchool: {required},
-      studElemGradYr: {required},
+      studElemGradYr: {required,
+      maxLength: maxLength(4),
+      minLength: minLength(4),
+      minValue: minValue(2000),
+      maxValue: maxValue(2080),
+      integer},
       studHighSchool: {required}, 
-      studHighSchoolGradYr: {required},
+      studHighSchoolGradYr: {required,
+      maxLength: maxLength(4),
+      minLength: minLength(4),
+      minValue: minValue(2000),
+      maxValue: maxValue(2080),
+      integer},
     }
 
    },
@@ -791,10 +810,12 @@ this.archivedStudInfo = `${this.modalInfo.studLN}, ${this.modalInfo.studFN} ${th
 
         if (!this.$v.$invalid) {
           this.editStudent()
+          alert("Student information has been updated successfully!");
          //   console.log("Student info is updated successfully.")
         }
         else {
           this.studNotEditted = true
+          alert("Student information cannot be updated.");
           //  console.log("Cannot update student info.");
         }
     },

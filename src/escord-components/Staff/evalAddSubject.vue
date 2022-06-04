@@ -55,9 +55,9 @@
                             v-model="formData.selectedSubjUnit"></md-input>
 
                             <span class="md-error" v-if="!$v.formData.selectedSubjUnit.required">Field is required.</span>
-                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.integer">Whole number only.</span>
-                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.minValue">Minimum of 1 unit.</span>
-                            <span class="md-error" v-if="!$v.formData.selectedSubjUnit.maxValue">Maximum of 5 units.</span>
+                            <span class="md-error" v-else-if="!$v.formData.selectedSubjUnit.integer">Whole number only.</span>
+                            <span class="md-error" v-else-if="!$v.formData.selectedSubjUnit.minValue">Minimum of 1 unit.</span>
+                            <span class="md-error" v-else-if="!$v.formData.selectedSubjUnit.maxValue">Maximum of 5 units.</span>
                         </md-field>
                     </div>
                     <div class="md-layout-item md-size-35 md-xsmall-size-100 md-layout md-gutter">
@@ -71,8 +71,8 @@
                             v-model="formData.subjFG"></md-input>
 
                             <span class="md-error" v-if="!$v.formData.subjFG.required">Field is required.</span>
-                            <span class="md-error" v-if="!$v.formData.subjFG.minValue">Accepts from `1.00`.</span>
-                            <span class="md-error" v-if="!$v.formData.subjFG.maxValue">Accepts up to `5.00`.</span>
+                            <span class="md-error" v-else-if="!$v.formData.subjFG.minValue">Accepts from `1.00`.</span>
+                            <span class="md-error" v-else-if="!$v.formData.subjFG.maxValue">Accepts up to `5.00`.</span>
                         </md-field>
 
                     </div>
@@ -196,7 +196,11 @@ export default {
             this.$v.$touch()
             if (!this.$v.$invalid) {
             this.addStudEvaluation(this.formData)
+            alert("Subject added successfully!");
             this.clearForm();
+            }
+            else {
+              alert("Subject cannot be added.");
             }
              
     },

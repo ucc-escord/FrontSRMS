@@ -1,7 +1,7 @@
 <template>
     <div class="md-layout md-gutter md-alignment-center-center">
       
-      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
+      <!-- <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-space-between">
 
         <div class="md-layout-item md-size-85 md-layout md-gutter md-alignment-center-center">
             <md-field
@@ -17,12 +17,17 @@
             </md-button>
         </div>
 
+      </div> -->
+      <div class="_refresh md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+           <md-button @click="scholshowarchieve" class="md-just-icon md-round md-esc-darkgrey md-raised">
+                <md-icon>refresh</md-icon>
+            </md-button>
       </div>
 
       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
           <p class="md-body-2 title text-center __info">
               <md-icon class="_tip">tips_and_updates</md-icon>
-                &nbsp;&nbsp;&nbsp; Click the search button above to see your current changes!*
+                &nbsp;&nbsp;&nbsp; Click the refresh button above to see your current changes!*
           </p>
       </div>
 
@@ -79,7 +84,7 @@
               </md-table-cell>
 
               <md-table-cell class="text-center">
-                {{getarchschol.data[index].firstname}} ,  {{getarchschol.data[index].surname}} {{getarchschol.data[index].middlename}}
+                {{getarchschol.data[index].firstname}} {{getarchschol.data[index].middlename}}  {{getarchschol.data[index].surname}}
               </md-table-cell>
 
               <md-table-cell class="text-center">
@@ -166,7 +171,7 @@
   
    <!---evaluation-->
   
- <vue-headful title="SR Archive"/>
+ <vue-headful title="Staff | Archive"/>
   </div>
 </template>
 
@@ -315,5 +320,8 @@ headerStyle() {
 ._tip {
     color: #37c6de !important;
     font-size: 1.35em !important;
+}
+._refresh {
+  margin-bottom: 1em !important;
 }
 </style>
