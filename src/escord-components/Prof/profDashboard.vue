@@ -111,10 +111,10 @@
                     >
                       <label class="__label">Subject Description</label>
 
-                      <template slot="md-autocomplete-empty"
+                      <!-- <template slot="md-autocomplete-empty"
                       slot-scope="{ term }">
                         {{term}} does not match any registered subjects.
-                      </template>
+                      </template> -->
 
                       <span class="md-error" v-if="!$v.formData.subjDesc.required">Subject description is required.</span>
                     </md-autocomplete>
@@ -181,10 +181,10 @@
                     :disabled="sending">
                       <label>Semester</label>
                       
-                      <template slot="md-autocomplete-empty"
+                      <!-- <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
-                    </template>
+                    </template> -->
 
                     <span class="md-error" v-if="!$v.formData.subjSem.required">Required.</span>
                     <span class="md-error" v-else-if="!$v.formData.subjSem.minValue">Minimum value is 1.</span>
@@ -236,10 +236,10 @@
                   :disabled="sending">
                       <label>Program</label>
 
-                      <template slot="md-autocomplete-empty"
+                      <!-- <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
-                    </template>
+                    </template> -->
 
                     <span class="md-error" v-if="!$v.formData.classProg.required">Required.</span>
                     </md-autocomplete>
@@ -255,10 +255,10 @@
                   :disabled="sending">
                       <label>Year</label>
 
-                      <template slot="md-autocomplete-empty"
+                      <!-- <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
-                    </template>
+                    </template> -->
 
                     <span class="md-error" v-if="!$v.formData.classYr.required">Required.</span>
                     </md-autocomplete>
@@ -274,10 +274,10 @@
                   :disabled="sending">
                       <label>Section</label>
 
-                      <template slot="md-autocomplete-empty"
+                      <!-- <template slot="md-autocomplete-empty"
                     slot-scope="{ term }">
                       {{term}} is not available in the options.
-                    </template>
+                    </template> -->
 
                     <span class="md-error" v-if="!$v.formData.classSec.required">Required.</span>
                     </md-autocomplete>
@@ -327,7 +327,13 @@
                   <md-snackbar
                     md-position="left"
                     :md-active.sync="gradesheetSaved">
-                    Gradesheet for {{addedGradesheetInfo}} is added.
+                    Gradesheet for {{addedGradesheetInfo}} has been added successfully!
+                  </md-snackbar>
+
+                  <md-snackbar
+                    md-position="left"
+                    :md-active.sync="gradesheetNotSaved">
+                    Gradesheet cannot be added.
                   </md-snackbar>
                 </form>
               </template>
@@ -367,31 +373,44 @@
             </div>
 
             <div class="md-layout md-gutter md-alignment-center-center __paginate">
-              <pagination
+              <!-- <pagination
               class="mx-auto"
               type="esc-accent" 
               no-arrows   
               :page-count="gradesheet.last_page" 
               :value="gradesheet.current_page" 
               :total="gradesheet.total" 
+              @input="cardshowpage" /> -->
+              <pagination
+              class="mx-auto"
+              type="esc-accent" 
+              no-arrows   
+              :page-count="gradesheet.last_page" 
+              :value="gradesheet.current_page"
+              :total="gradesheet.total" 
               @input="cardshowpage" />
             </div>
 
+            <!-- CARDS -->
+            <div class="md-layout md-gutter md-alignment-top-left">
 
-            <div class="__gs-cards md-layout md-gutter md-alignment-top-center">
-
-              <md-card
+              <div class="md-layout-item md-size-25 md-xsmall-size-100 md-small-size-50 md-medium-size-33
+               md-layout md-gutter md-alignment-top-center"
               v-for="gs in gradesheet.data"
-              :key="gs.gradesheetid" 
+              :key="gs.gradesheetid">
+              <md-card
               md-with-hover
-              class="md-layout-item md-xsmall-size-90 md-small-size-40 md-large-size-25">
+              class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                   <md-card-content>
                     <div class="md-layout md-gutter md-alignment-center-center">
                       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                         <p class="md-caption text-left"><strong>ID: </strong> {{gs.gradesheetid}}</p>
                       </div>
                       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
-                        <p class="title _subjdesc text-center">{{gs.subjectcode}} {{gs.subjectdesc}}</p>
+                        <p class="title text-center _subjcode">{{gs.subjectcode}}</p>
+                      </div>
+                      <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
+                        <p class="title _subjdesc text-center">{{gs.subjectdesc}}</p>
                       </div>
                       <div class="md-layout-item md-size-100 md-layout md-gutter md-alignment-center-center">
                         <p class="_subjinfo text-center">{{gs.course_year}}{{gs.course_section}} | {{gs.course_short}}</p>
@@ -421,9 +440,12 @@
                     </md-button>
 
 
-                   <!-- <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link> -->
+                  <!-- <router-link :to="{ name: 'Gradesheet Detail', params: {gradeshid: gs.gradesheetid } }">Edit Gradesheet..</router-link> -->
                   </md-card-actions>
-              </md-card>
+            </md-card>
+            </div>
+
+              
 
             </div>
 
@@ -509,6 +531,7 @@ export default {
     //or null
         },
         gradesheetSaved: false,
+        gradesheetNotSaved: false,
         sending: false,
         addedGradesheetInfo: '',
 
@@ -758,7 +781,6 @@ async cardshowpage(page=1){
         // Instead of this timeout, here you can call your API
         window.setTimeout(() => {
           this.addedGradesheetInfo = `${this.formData.subjCode} ${this.formData.subjDesc}`
-          this.gradesheetSaved = true
           this.sending = false
           this.clearForm()
         }, 1500)
@@ -770,9 +792,15 @@ async cardshowpage(page=1){
 
         if (!this.$v.formData.$invalid) {
           this.addGradesheet()
+          //alert ("Gradesheet added successfully!");
+          this.gradesheetSaved = true
+          this.gradesheetNotSaved = false
        // console.log("Gradesheet saved and added successfully.")
         }
         else {
+          //alert ("Gradesheet cannot be added.");
+          this.gradesheetNotSaved = true
+          this.gradesheetSaved = false
         //  console.log(this.$v)
       // console.log("Failed to add and save gradesheet. Fill out required fields.");
         }
@@ -815,17 +843,17 @@ h3, .h3 {
   margin-top: 1em;
 }
 
-.md-input {
+.md-input{
   text-transform: uppercase !important;
   max-width: 100%;
 }
 
-.md-card {
-  margin: 1rem !important;
+.md-autocomplete {
+  max-width: 100%;
 }
 
-.md-xsmall-size-100 {
-  margin-left: 1rem !important;
+.md-card {
+  margin: 1em 0;
 }
 
 .md-with-hover {
@@ -855,9 +883,14 @@ img {
 }
 
 ._subjdesc {
-  font-size: 1.5em !important;
+  font-size: 1.2em !important;
   font-weight: 500 !important;
-  margin: 0.85em 0 !important;
+}
+
+._subjcode {
+  margin: 0.85em 0 0 0 !important;
+  font-size: 1.2em !important;
+  font-weight: 600 !important;
 }
 
 ._subjinfo {
