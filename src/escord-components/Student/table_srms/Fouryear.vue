@@ -34,7 +34,7 @@
                         </td>
                         <td colspan="1" class="md-body-2 text-center">
                             <strong>
-                                {{gwa_1st()}}
+                                <!-- {{gwa_1st()}} -->
                             </strong>
                         </td>
                     </tr>
@@ -66,7 +66,7 @@
                         </td>
                         <td colspan="1" class="md-body-2 text-center">
                             <strong>
-                                {{gwa_2nd()}}
+                                <!-- {{gwa_2nd()}} -->
                             </strong>
                         </td>
                     </tr>
@@ -166,19 +166,19 @@ export default {
     },
 
     methods:{
-    gwa_1st() {
-        const gwa = this.firstsem.reduce((acc, item) =>
-        acc + (item.finalgrade / item.units), 0);
+    // gwa_1st() {
+    //     const gwa = this.firstsem.reduce((acc, item) =>
+    //     acc + (item.finalgrade / item.units), 0);
 
-        return gwa.toFixed(2);
-    },
+    //     return gwa.toFixed(2);
+    // },
 
-    gwa_2nd() {
-        const gwa = this.secondsem.reduce((acc, item) =>
-        acc + (item.finalgrade / item.units), 0);
+    // gwa_2nd() {
+    //     const gwa = this.secondsem.reduce((acc, item) =>
+    //     acc + (item.finalgrade / item.units), 0);
 
-        return gwa.toFixed(2);
-    },
+    //     return gwa.toFixed(2);
+    // },
     
     
     
