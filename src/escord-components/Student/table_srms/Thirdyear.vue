@@ -34,7 +34,7 @@
                         </td>
                         <td colspan="1" class="md-body-2 text-center">
                             <strong>
-                                <!-- {{gwa_1st()}} -->
+                                {{gwa_1st()}}
                             </strong>
                         </td>
                     </tr>
@@ -66,7 +66,7 @@
                         </td>
                         <td colspan="1" class="md-body-2 text-center">
                             <strong>
-                                <!-- {{gwa_2nd()}} -->
+                                {{gwa_2nd()}}
                             </strong>
                         </td>
                     </tr>
@@ -102,50 +102,6 @@ export default {
                 startYr:'',
                 endYr: ''
             },
-
-            // grades_1st: [
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 1,
-            //         units: 3,
-            //     },
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 2,
-            //         units: 5,
-            //     },
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 1,
-            //         units: 3,
-            //     },
-                
-            // ],
-
-            // grades_2nd: [
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 1,
-            //         units: 3,
-            //     },
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 2,
-            //         units: 5,
-            //     },
-            //     {
-            //         subjCode: "CSE 110",
-            //         subjDesc: "SOFTWARE ENGINEERING",
-            //         grades: 1,
-            //         units: 3,
-            //     },
-                
-            // ]
         }
     },
     computed: {
@@ -161,20 +117,83 @@ export default {
     },
 
     methods:{
-    // gwa_1st() {
-    //     const gwa = this.firstsem.reduce((acc, item) =>
-    //     acc + (item.finalgrade / item.units), 0);
-
-    //     return gwa.toFixed(2);
-    // },
-
-    // gwa_2nd() {
-    //     const gwa = this.secondsem.reduce((acc, item) =>
-    //     acc + (item.finalgrade / item.units), 0);
-
-    //     return gwa.toFixed(2);
-    // },
     
+    gwa_1st() {
+        /**if it has PASSED**/
+        if(this.firstsem.filter(item => item.finalgrade.toLowerCase() ===  'passed').length > 0) {
+            //if it has PASSED && UD
+            if(this.firstsem.filter(item => item.finalgrade.toLowerCase() ===  'ud').length > 0) {
+                return "UD";
+            }
+            //if it has PASSED && INC
+            else if(this.firstsem.filter(item => item.finalgrade.toLowerCase() ===  'inc').length > 0) {
+                return "INC";
+            }
+            //else; just PASSED
+            else {
+                return "PASSED";
+            }
+        }
+        /**if it has UD**/
+        else if(this.firstsem.filter(item => item.finalgrade.toLowerCase() ===  'ud').length > 0) {
+            return "UD";
+        }
+        /**if it has INC**/
+        else if(this.firstsem.filter(item => item.finalgrade.toLowerCase() ===  'inc').length > 0) {
+            return "INC";
+        }
+        /**it it has NO STRING REMARKS**/
+        else {
+            const divider = this.firstsem.reduce((acc, item) =>
+            (acc + parseFloat(item.units)), 0);;
+
+            const gwabyunits = this.firstsem.reduce((acc, item) =>
+            (acc + (parseFloat(item.finalgrade) * item.units)), 0);
+
+            const gwa = gwabyunits/ divider;
+            return gwa.toFixed(2);
+        }
+
+    },
+
+        gwa_2nd() {
+        /**if it has PASSED**/
+        if(this.secondsem.filter(item => item.finalgrade.toLowerCase() ===  'passed').length > 0) {
+            //if it has PASSED && UD
+            if(this.secondsem.filter(item => item.finalgrade.toLowerCase() ===  'ud').length > 0) {
+                return "UD";
+            }
+            //if it has PASSED && INC
+            else if(this.secondsem.filter(item => item.finalgrade.toLowerCase() ===  'inc').length > 0) {
+                return "INC";
+            }
+            //else; just PASSED
+            else {
+                return "PASSED";
+            }
+        }
+        /**if it has UD**/
+        else if(this.secondsem.filter(item => item.finalgrade.toLowerCase() ===  'ud').length > 0) {
+            return "UD";
+        }
+        /**if it has INC**/
+        else if(this.secondsem.filter(item => item.finalgrade.toLowerCase() ===  'inc').length > 0) {
+            return "INC";
+        }
+        /**it it has NO STRING REMARKS**/
+        else {
+            const divider = this.secondsem.reduce((acc, item) =>
+            (acc + parseFloat(item.units)), 0);;
+
+            const gwabyunits = this.secondsem.reduce((acc, item) =>
+            (acc + (parseFloat(item.finalgrade) * item.units)), 0);
+
+            const gwa = gwabyunits/ divider;
+            return gwa.toFixed(2);
+        }
+
+    },
+
     
     
     async tablethirdyear(){
